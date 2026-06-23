@@ -10,11 +10,11 @@ Review
 
 **Current Goal:**
 
-Check whether the new topic-based practice hub structure is good for Grade 7 math students.
+Check whether the new map-based learning game layer is structured clearly and keeps map data, question data, and student progress separate.
 
 **Current Issue:**
 
-Codex changed the website from one long question list into a topic-based practice hub. GPT should review whether the structure is clear, useful, and ready for student testing.
+Codex added a 2D map with towers, key fragments, a blacksmith, and central tower unlocking. GPT should review whether the architecture is clean and whether the game rules are clear enough for the next student testing step.
 
 **Artifact:**
 
