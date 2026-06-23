@@ -2,43 +2,91 @@
   {
     "id": "q1",
     "type": "multiple-choice",
-    "title": "Web Foundations",
-    "question": "Which language is primarily used to structure content on a web page?",
+    "topic": "Fractions",
+    "title": "Fractions",
+    "question": "What is 3/4 + 1/8?",
     "options": [
-      { "id": "A", "text": "HTML" },
-      { "id": "B", "text": "CSS" },
-      { "id": "C", "text": "JavaScript" },
-      { "id": "D", "text": "SQL" }
+      { "id": "A", "text": "4/12" },
+      { "id": "B", "text": "5/8" },
+      { "id": "C", "text": "7/8" },
+      { "id": "D", "text": "1" }
     ],
-    "answer": "A",
-    "explanation": "HTML defines the structure and meaning of web content. CSS handles presentation, while JavaScript adds behavior."
+    "answer": "C",
+    "explanation": "Convert 3/4 to eighths: 3/4 = 6/8. Then 6/8 + 1/8 = 7/8."
   },
   {
     "id": "q2",
     "type": "multiple-choice",
-    "title": "Styling the Page",
-    "question": "Which CSS property changes the color of text?",
+    "topic": "Integers",
+    "title": "Integers",
+    "question": "What is -6 + 14?",
     "options": [
-      { "id": "A", "text": "background-color" },
-      { "id": "B", "text": "font-style" },
-      { "id": "C", "text": "color" },
-      { "id": "D", "text": "text-align" }
+      { "id": "A", "text": "-20" },
+      { "id": "B", "text": "-8" },
+      { "id": "C", "text": "8" },
+      { "id": "D", "text": "20" }
     ],
     "answer": "C",
-    "explanation": "The color property sets the foreground color of an element, which controls the color of its text."
+    "explanation": "Starting at -6 and moving 14 units in the positive direction gives 8."
   },
   {
     "id": "q3",
     "type": "multiple-choice",
-    "title": "JavaScript Basics",
-    "question": "Which method converts a JSON string into a JavaScript value or object?",
+    "topic": "Percent",
+    "title": "Percent",
+    "question": "A jacket costs $80. It is on sale for 25% off. What is the sale price?",
     "options": [
-      { "id": "A", "text": "JSON.stringify()" },
-      { "id": "B", "text": "JSON.parse()" },
-      { "id": "C", "text": "JSON.convert()" },
-      { "id": "D", "text": "JSON.read()" }
+      { "id": "A", "text": "$20" },
+      { "id": "B", "text": "$55" },
+      { "id": "C", "text": "$60" },
+      { "id": "D", "text": "$75" }
+    ],
+    "answer": "C",
+    "explanation": "25% of $80 is $20. Subtract the discount: $80 - $20 = $60."
+  },
+  {
+    "id": "q4",
+    "type": "multiple-choice",
+    "topic": "Algebra",
+    "title": "Expressions",
+    "question": "If x = 5, what is the value of 3x + 7?",
+    "options": [
+      { "id": "A", "text": "15" },
+      { "id": "B", "text": "18" },
+      { "id": "C", "text": "22" },
+      { "id": "D", "text": "35" }
+    ],
+    "answer": "C",
+    "explanation": "Substitute 5 for x: 3x + 7 = 3(5) + 7 = 15 + 7 = 22."
+  },
+  {
+    "id": "q5",
+    "type": "multiple-choice",
+    "topic": "Geometry",
+    "title": "Area",
+    "question": "A triangle has a base of 10 cm and a height of 6 cm. What is its area?",
+    "options": [
+      { "id": "A", "text": "16 cm squared" },
+      { "id": "B", "text": "30 cm squared" },
+      { "id": "C", "text": "60 cm squared" },
+      { "id": "D", "text": "120 cm squared" }
     ],
     "answer": "B",
-    "explanation": "JSON.parse() reads a valid JSON string and returns the corresponding JavaScript value or object."
+    "explanation": "The area of a triangle is base times height divided by 2: 10 x 6 / 2 = 30."
+  },
+  {
+    "id": "q6",
+    "type": "multiple-choice",
+    "topic": "Ratios",
+    "title": "Ratios",
+    "question": "The ratio of blue marbles to red marbles is 3:5. If there are 15 blue marbles, how many red marbles are there?",
+    "options": [
+      { "id": "A", "text": "9" },
+      { "id": "B", "text": "15" },
+      { "id": "C", "text": "20" },
+      { "id": "D", "text": "25" }
+    ],
+    "answer": "D",
+    "explanation": "The blue part grew from 3 to 15, so the scale factor is 5. Red marbles: 5 x 5 = 25."
   }
 ]
