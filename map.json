@@ -1,0 +1,111 @@
+{
+  "mapName": "Exam Island",
+  "playerStart": {
+    "x": 50,
+    "y": 75
+  },
+  "towers": [
+    {
+      "id": "tower-fractions",
+      "type": "outer",
+      "topic": "Fractions",
+      "name": "Fractions Tower",
+      "x": 25,
+      "y": 25,
+      "reward": {
+        "type": "keyFragment",
+        "id": "fragment-fractions"
+      }
+    },
+    {
+      "id": "tower-integers",
+      "type": "outer",
+      "topic": "Integers",
+      "name": "Integers Tower",
+      "x": 75,
+      "y": 25,
+      "reward": {
+        "type": "keyFragment",
+        "id": "fragment-integers"
+      }
+    },
+    {
+      "id": "tower-percent",
+      "type": "outer",
+      "topic": "Percent",
+      "name": "Percent Tower",
+      "x": 85,
+      "y": 50,
+      "reward": {
+        "type": "keyFragment",
+        "id": "fragment-percent"
+      }
+    },
+    {
+      "id": "tower-algebra",
+      "type": "outer",
+      "topic": "Algebra",
+      "name": "Algebra Tower",
+      "x": 75,
+      "y": 75,
+      "reward": {
+        "type": "keyFragment",
+        "id": "fragment-algebra"
+      }
+    },
+    {
+      "id": "tower-geometry",
+      "type": "outer",
+      "topic": "Geometry",
+      "name": "Geometry Tower",
+      "x": 25,
+      "y": 75,
+      "reward": {
+        "type": "keyFragment",
+        "id": "fragment-geometry"
+      }
+    },
+    {
+      "id": "tower-ratios",
+      "type": "outer",
+      "topic": "Ratios",
+      "name": "Ratios Tower",
+      "x": 15,
+      "y": 50,
+      "reward": {
+        "type": "keyFragment",
+        "id": "fragment-ratios"
+      }
+    },
+    {
+      "id": "tower-central",
+      "type": "central",
+      "topic": "All Questions",
+      "name": "Central Tower",
+      "x": 50,
+      "y": 50,
+      "requires": {
+        "fullKey": true
+      }
+    }
+  ],
+  "shops": [
+    {
+      "id": "blacksmith",
+      "name": "Blacksmith",
+      "x": 90,
+      "y": 90,
+      "recipe": {
+        "input": [
+          "fragment-fractions",
+          "fragment-integers",
+          "fragment-percent",
+          "fragment-algebra",
+          "fragment-geometry",
+          "fragment-ratios"
+        ],
+        "output": "central-tower-key"
+      }
+    }
+  ]
+}
