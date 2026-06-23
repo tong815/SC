@@ -1,6 +1,23 @@
+const topicHubElement = document.querySelector("#topic-hub");
+const topicListElement = document.querySelector("#topic-list");
+const practiceViewElement = document.querySelector("#practice-view");
+const backToTopicsButton = document.querySelector("#back-to-topics");
 const questionListElement = document.querySelector("#question-list");
+const questionListTitleElement = document.querySelector("#question-list-title");
 const questionCountElement = document.querySelector("#question-count");
 const errorMessageElement = document.querySelector("#error-message");
+
+const TOPICS = [
+  "All Questions",
+  "Fractions",
+  "Integers",
+  "Percent",
+  "Algebra",
+  "Geometry",
+  "Ratios",
+];
+
+let allQuestions = [];
 
 /**
  * Data layer:
@@ -22,6 +39,49 @@ async function loadQuestions() {
  * These functions transform each JSON question into interactive HTML.
  * Keeping rendering separate from data makes other question types easier to add.
  */
+function renderTopicHub(questions) {
+  topicListElement.innerHTML = "";
+
+  TOPICS.forEach((topic) => {
+    const topicQuestions = getQuestionsForTopic(questions, topic);
+    const card = document.createElement("button");
+    card.className = "topic-card";
+    card.type = "button";
+    card.dataset.topic = topic;
+    card.innerHTML = `
+      <span class="topic-card-title">${topic}</span>
+      <span class="topic-card-count">${topicQuestions.length} questions</span>
+    `;
+
+    card.addEventListener("click", () => showPracticeTopic(topic));
+    topicListElement.append(card);
+  });
+}
+
+function getQuestionsForTopic(questions, topic) {
+  if (topic === "All Questions") {
+    return questions;
+  }
+
+  return questions.filter((question) => question.topic === topic);
+}
+
+function showPracticeTopic(topic) {
+  const questions = getQuestionsForTopic(allQuestions, topic);
+
+  topicHubElement.hidden = true;
+  practiceViewElement.hidden = false;
+  questionListTitleElement.textContent = topic;
+  renderQuestions(questions);
+}
+
+function showTopicHub() {
+  practiceViewElement.hidden = true;
+  topicHubElement.hidden = false;
+  questionListElement.innerHTML = "";
+  questionCountElement.textContent = "";
+}
+
 function renderQuestions(questions) {
   questionListElement.innerHTML = "";
   questionCountElement.textContent = `${questions.length} questions`;
@@ -55,7 +115,7 @@ function createQuestionCard(question, questionIndex) {
   card.innerHTML = `
     <div class="question-meta">
       <span class="question-number">Question ${questionIndex + 1}</span>
-      <span class="question-type">${question.type}</span>
+      <span class="question-type">${question.topic}</span>
     </div>
     <h3 class="question-title">${question.title}</h3>
     <p class="question-text">${question.question}</p>
@@ -107,6 +167,7 @@ function handleAnswer(question, card, selectedButton) {
 }
 
 function showLoadError(error) {
+  topicListElement.innerHTML = "";
   questionListElement.innerHTML = "";
   questionCountElement.textContent = "";
   errorMessageElement.hidden = false;
@@ -117,11 +178,12 @@ function showLoadError(error) {
 
 async function initializeExam() {
   try {
-    const questions = await loadQuestions();
-    renderQuestions(questions);
+    allQuestions = await loadQuestions();
+    renderTopicHub(allQuestions);
   } catch (error) {
     showLoadError(error);
   }
 }
 
+backToTopicsButton.addEventListener("click", showTopicHub);
 initializeExam();
