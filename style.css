@@ -83,6 +83,7 @@ h1 {
   padding: 42px 24px 64px;
 }
 
+.topic-hub-heading,
 .exam-overview {
   display: flex;
   align-items: flex-end;
@@ -104,6 +105,71 @@ h1 {
   margin-bottom: 4px;
   color: var(--text-muted);
   font-weight: 700;
+}
+
+.topic-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+}
+
+.topic-card {
+  display: grid;
+  gap: 8px;
+  min-height: 124px;
+  padding: 22px;
+  color: var(--text);
+  text-align: left;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    transform 160ms ease;
+}
+
+.topic-card:hover,
+.topic-card:focus-visible {
+  background: var(--primary-soft);
+  border-color: var(--primary);
+  outline: none;
+  transform: translateY(-2px);
+}
+
+.topic-card-title {
+  font-size: 1.1rem;
+  font-weight: 850;
+}
+
+.topic-card-count {
+  align-self: end;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.back-button {
+  margin-bottom: 22px;
+  padding: 10px 14px;
+  color: var(--primary);
+  font-weight: 800;
+  background: var(--primary-soft);
+  border: 1px solid #bdcafe;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease;
+}
+
+.back-button:hover,
+.back-button:focus-visible {
+  background: #dfe7ff;
+  border-color: var(--primary);
+  outline: none;
 }
 
 .question-list {
@@ -284,6 +350,7 @@ h1 {
     padding: 32px 16px 48px;
   }
 
+  .topic-hub-heading,
   .exam-overview {
     align-items: flex-start;
     flex-direction: column;
