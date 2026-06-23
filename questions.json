@@ -1,0 +1,44 @@
+[
+  {
+    "id": "q1",
+    "type": "multiple-choice",
+    "title": "Web Foundations",
+    "question": "Which language is primarily used to structure content on a web page?",
+    "options": [
+      { "id": "A", "text": "HTML" },
+      { "id": "B", "text": "CSS" },
+      { "id": "C", "text": "JavaScript" },
+      { "id": "D", "text": "SQL" }
+    ],
+    "answer": "A",
+    "explanation": "HTML defines the structure and meaning of web content. CSS handles presentation, while JavaScript adds behavior."
+  },
+  {
+    "id": "q2",
+    "type": "multiple-choice",
+    "title": "Styling the Page",
+    "question": "Which CSS property changes the color of text?",
+    "options": [
+      { "id": "A", "text": "background-color" },
+      { "id": "B", "text": "font-style" },
+      { "id": "C", "text": "color" },
+      { "id": "D", "text": "text-align" }
+    ],
+    "answer": "C",
+    "explanation": "The color property sets the foreground color of an element, which controls the color of its text."
+  },
+  {
+    "id": "q3",
+    "type": "multiple-choice",
+    "title": "JavaScript Basics",
+    "question": "Which method converts a JSON string into a JavaScript value or object?",
+    "options": [
+      { "id": "A", "text": "JSON.stringify()" },
+      { "id": "B", "text": "JSON.parse()" },
+      { "id": "C", "text": "JSON.convert()" },
+      { "id": "D", "text": "JSON.read()" }
+    ],
+    "answer": "B",
+    "explanation": "JSON.parse() reads a valid JSON string and returns the corresponding JavaScript value or object."
+  }
+]

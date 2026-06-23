@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A lightweight exam website that renders multiple-choice questions from JSON."
+    />
+    <title>Exam Visualizer</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-content">
+        <p class="eyebrow">Interactive practice</p>
+        <h1>Exam Visualizer</h1>
+        <p class="subtitle">
+          Choose one answer for each question and receive instant feedback.
+        </p>
+      </div>
+    </header>
+
+    <main class="page-content">
+      <section class="exam-overview" aria-labelledby="question-list-title">
+        <div>
+          <p class="section-label">Multiple choice</p>
+          <h2 id="question-list-title">Question set</h2>
+        </div>
+        <p id="question-count" class="question-count" aria-live="polite"></p>
+      </section>
+
+      <div id="question-list" class="question-list" aria-live="polite">
+        <p class="loading-message">Loading questions...</p>
+      </div>
+
+      <div id="error-message" class="error-message" role="alert" hidden></div>
+    </main>
+
+    <footer class="site-footer">
+      <p>Questions are loaded from the JSON data layer.</p>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
