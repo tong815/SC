@@ -6,7 +6,7 @@ Exam Visualizer
 
 **Build or Version:**
 
-Topic-Based Practice Hub
+Map-Based Learning Game Layer
 
 **Date:**
 
@@ -18,67 +18,82 @@ Topic-Based Practice Hub
 
 ## What We Built
 
-Codex updated the Grade 7 math practice website into a topic-based practice hub.
+Codex added a simple 2D map layer on top of the existing Exam Visualizer.
 
-The website now starts with entrance cards instead of immediately showing every question.
+The project now has:
 
-The file structure stayed the same for the website:
+- A map named Exam Island.
+- A movable player marker.
+- Six outer topic towers.
+- One locked central tower.
+- A blacksmith panel.
+- Key fragments earned from clearing topic towers.
+- A forge action that unlocks the central tower after all fragments are collected.
 
-- `index.html`
-- `style.css`
-- `app.js`
-- `questions.json`
+The existing topic hub, Save Progress, Load Progress, Back to Topics, answer feedback, and explanations were kept.
 
 ---
 
 ## What Was Added
 
-Codex added a topic field to each question in `questions.json`.
+Codex added a new file:
 
-The topic entrances are:
+- `map.json`
 
-- All Questions
-- Fractions
-- Integers
-- Percent
-- Algebra
-- Geometry
-- Ratios
+This file stores map layout only:
 
-When a student chooses a topic, the website shows only questions from that topic. All Questions shows every question.
+- Map name
+- Player start position
+- Tower positions
+- Tower topics
+- Tower rewards
+- Blacksmith location
+- Blacksmith recipe
 
-Codex also added a Back to Topics button so students can return to the practice hub.
+Codex also updated saved progress so `progress` now includes:
 
-The existing answer feedback still works:
+- `gameProgress.playerPosition`
+- `gameProgress.clearedTowerIds`
+- `gameProgress.keyFragments`
+- `gameProgress.hasCentralTowerKey`
+- `gameProgress.centralTowerUnlocked`
 
-- The selected answer is checked.
-- The correct answer is highlighted.
-- Incorrect answers are marked.
-- The explanation appears after the student answers.
+The map rules are:
 
-No score counter was added yet.
+- Clicking anywhere moves the player.
+- Clicking an outer tower opens that topic's questions.
+- One correct answer clears that tower.
+- Clearing a tower gives one key fragment.
+- The blacksmith shows fragment progress.
+- Forge Key is disabled until all six fragments are collected.
+- Forging the key unlocks the central tower.
+- Clicking the locked central tower shows a locked message.
+- Clicking the unlocked central tower opens All Questions.
 
 ---
 
 ## What We Tried
 
-- **Test:** Checked whether `questions.json` is valid JSON.
-- **Result:** The JSON file is valid.
+- **Test:** Checked that `questions.json` is valid JSON.
+- **Result:** The question data is valid.
 
-- **Test:** Checked that all required topics exist in the question data.
-- **Result:** Fractions, Integers, Percent, Algebra, Geometry, and Ratios are all present.
+- **Test:** Checked that `map.json` is valid JSON and contains six outer towers, one central tower, and one blacksmith.
+- **Result:** The map data is valid.
 
-- **Test:** Checked that the main files include the new topic hub, topic cards, All Questions entrance, and Back to Topics button.
-- **Result:** The topic-based structure is present in the website files.
+- **Test:** Checked that `app.js` has valid JavaScript syntax.
+- **Result:** The app script passes syntax checking.
+
+- **Test:** Checked that the served website includes the map, player, blacksmith, topic hub, Save Progress, Load Progress, and Back to Topics.
+- **Result:** The required interface pieces are present.
 
 ---
 
 ## What Still Needs Work
 
-- The live GitHub Pages version needs to be checked after pushing the update.
-- A student should test whether choosing topics feels clear.
-- GPT should review whether the topic names and screen flow are good for Grade 7 students.
-- More questions can be added later so each topic has more practice.
+- The live GitHub Pages version should be tested after pushing.
+- A student should try clearing each tower and forging the key.
+- GPT should review whether the map rules are clear and whether the save file structure is good for the future game system.
+- The current map uses placeholder graphics only.
 
 ---
 
@@ -86,11 +101,11 @@ No score counter was added yet.
 
 Possible next improvements:
 
-- Add more questions to each topic.
-- Add a short topic description on each entrance card.
-- Add difficulty levels.
-- Add a restart button for a topic.
-- Add scoring later, but not yet.
+- Add per-topic progress labels on the map.
+- Add clearer visual effects when a tower is cleared.
+- Add a reset progress button.
+- Add more questions per tower.
+- Add rewards after unlocking the central tower.
 
 ---
 
@@ -98,12 +113,18 @@ Possible next improvements:
 
 During Review, the student should try these actions:
 
-- Open the GitHub Pages website.
-- Confirm the topic hub appears first.
-- Click All Questions and check that all questions appear.
-- Click Back to Topics.
-- Click each math topic and check that only that topic's question appears.
-- Answer a question and check that feedback and explanation still work.
-- Decide whether the topic hub makes the practice easier to use.
+- Open the website.
+- Confirm the map appears.
+- Click empty places on the map and watch the player move.
+- Click each outer tower and answer its topic question.
+- Confirm one correct answer clears the tower and gives a fragment.
+- Open the blacksmith panel before all fragments are collected.
+- Confirm Forge Key is disabled before all fragments are collected.
+- Clear all six outer towers.
+- Forge the Central Tower Key.
+- Confirm the central tower unlocks.
+- Click the central tower and confirm All Questions opens.
+- Save progress and load it again.
+- Confirm tower clears, fragments, key status, unlock status, and player position are restored.
 
-GPT, please check whether the current topic-based structure is good for this project and suggest one focused improvement for the next iteration.
+GPT, please check whether this map-based learning game structure is clean and suggest one focused improvement for the next iteration.
