@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="A lightweight exam website that renders multiple-choice questions from JSON."
+      content="A Grade 7 math practice hub with topic-based multiple-choice questions."
     />
     <title>Exam Visualizer</title>
     <link rel="stylesheet" href="style.css" />
@@ -14,25 +14,45 @@
     <header class="site-header">
       <div class="header-content">
         <p class="eyebrow">Interactive practice</p>
-        <h1>Exam Visualizer</h1>
+        <h1>Grade 7 Math Practice</h1>
         <p class="subtitle">
-          Choose one answer for each question and receive instant feedback.
+          Choose a topic, answer practice questions, and read instant feedback.
         </p>
       </div>
     </header>
 
     <main class="page-content">
-      <section class="exam-overview" aria-labelledby="question-list-title">
-        <div>
-          <p class="section-label">Multiple choice</p>
-          <h2 id="question-list-title">Question set</h2>
+      <section id="topic-hub" class="topic-hub" aria-labelledby="topic-hub-title">
+        <div class="topic-hub-heading">
+          <p class="section-label">Choose a topic</p>
+          <h2 id="topic-hub-title">Practice hub</h2>
         </div>
-        <p id="question-count" class="question-count" aria-live="polite"></p>
+
+        <div id="topic-list" class="topic-list" aria-live="polite">
+          <p class="loading-message">Loading topics...</p>
+        </div>
       </section>
 
-      <div id="question-list" class="question-list" aria-live="polite">
-        <p class="loading-message">Loading questions...</p>
-      </div>
+      <section
+        id="practice-view"
+        class="practice-view"
+        aria-labelledby="question-list-title"
+        hidden
+      >
+        <button id="back-to-topics" class="back-button" type="button">
+          Back to Topics
+        </button>
+
+        <div class="exam-overview">
+          <div>
+            <p class="section-label">Multiple choice</p>
+            <h2 id="question-list-title">Question set</h2>
+          </div>
+          <p id="question-count" class="question-count" aria-live="polite"></p>
+        </div>
+
+        <div id="question-list" class="question-list" aria-live="polite"></div>
+      </section>
 
       <div id="error-message" class="error-message" role="alert" hidden></div>
     </main>
