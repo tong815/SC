@@ -10,11 +10,11 @@ Review
 
 **Current Goal:**
 
-Check whether the new map-based learning game layer is structured clearly and keeps map data, question data, and student progress separate.
+Check whether the expanded Grade 7 question bank is balanced, clear, and still works with the topic-based map practice structure.
 
 **Current Issue:**
 
-Codex added a 2D map with towers, key fragments, a blacksmith, and central tower unlocking. GPT should review whether the architecture is clean and whether the game rules are clear enough for the next student testing step.
+Codex expanded `questions.json` from 6 starter questions to 120 total questions: 20 questions each for Fractions, Integers, Percent, Algebra, Geometry, and Ratios. GPT should review whether the questions are appropriate for Grade 7 practice and whether the topic coverage feels balanced.
 
 **Artifact:**
 

@@ -1,92 +1,3242 @@
 [
   {
-    "id": "q1",
+    "id": "q001",
     "type": "multiple-choice",
     "topic": "Fractions",
-    "title": "Fractions",
+    "title": "Adding Fractions",
     "question": "What is 3/4 + 1/8?",
     "options": [
-      { "id": "A", "text": "4/12" },
-      { "id": "B", "text": "5/8" },
-      { "id": "C", "text": "7/8" },
-      { "id": "D", "text": "1" }
+      {
+        "id": "A",
+        "text": "4/12"
+      },
+      {
+        "id": "B",
+        "text": "5/8"
+      },
+      {
+        "id": "C",
+        "text": "7/8"
+      },
+      {
+        "id": "D",
+        "text": "1"
+      }
     ],
     "answer": "C",
     "explanation": "Convert 3/4 to eighths: 3/4 = 6/8. Then 6/8 + 1/8 = 7/8."
   },
   {
-    "id": "q2",
+    "id": "q002",
+    "type": "multiple-choice",
+    "topic": "Fractions",
+    "title": "Subtracting Fractions",
+    "question": "What is 5/6 - 1/3?",
+    "options": [
+      {
+        "id": "A",
+        "text": "1/6"
+      },
+      {
+        "id": "B",
+        "text": "1/2"
+      },
+      {
+        "id": "C",
+        "text": "2/3"
+      },
+      {
+        "id": "D",
+        "text": "4/9"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Convert 1/3 to sixths: 1/3 = 2/6. Then 5/6 - 2/6 = 3/6 = 1/2."
+  },
+  {
+    "id": "q003",
+    "type": "multiple-choice",
+    "topic": "Fractions",
+    "title": "Multiplying Fractions",
+    "question": "What is 2/5 x 3/4?",
+    "options": [
+      {
+        "id": "A",
+        "text": "5/9"
+      },
+      {
+        "id": "B",
+        "text": "6/20"
+      },
+      {
+        "id": "C",
+        "text": "3/10"
+      },
+      {
+        "id": "D",
+        "text": "1/2"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Multiply the numerators and denominators: 2 x 3 = 6 and 5 x 4 = 20. Then simplify 6/20 to 3/10."
+  },
+  {
+    "id": "q004",
+    "type": "multiple-choice",
+    "topic": "Fractions",
+    "title": "Dividing Fractions",
+    "question": "What is 3/4 divided by 1/2?",
+    "options": [
+      {
+        "id": "A",
+        "text": "3/8"
+      },
+      {
+        "id": "B",
+        "text": "1"
+      },
+      {
+        "id": "C",
+        "text": "3/2"
+      },
+      {
+        "id": "D",
+        "text": "2/3"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Divide by multiplying by the reciprocal: 3/4 x 2/1 = 6/4 = 3/2."
+  },
+  {
+    "id": "q005",
+    "type": "multiple-choice",
+    "topic": "Fractions",
+    "title": "Simplifying Fractions",
+    "question": "Simplify 12/18.",
+    "options": [
+      {
+        "id": "A",
+        "text": "1/2"
+      },
+      {
+        "id": "B",
+        "text": "2/3"
+      },
+      {
+        "id": "C",
+        "text": "3/4"
+      },
+      {
+        "id": "D",
+        "text": "6/9"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Divide both 12 and 18 by 6. The simplified fraction is 2/3."
+  },
+  {
+    "id": "q006",
+    "type": "multiple-choice",
+    "topic": "Fractions",
+    "title": "Mixed Numbers",
+    "question": "What is 1 1/2 + 2 1/4?",
+    "options": [
+      {
+        "id": "A",
+        "text": "3 1/4"
+      },
+      {
+        "id": "B",
+        "text": "3 1/2"
+      },
+      {
+        "id": "C",
+        "text": "3 3/4"
+      },
+      {
+        "id": "D",
+        "text": "4"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Add the whole numbers and fractions: 1 + 2 = 3, and 1/2 + 1/4 = 2/4 + 1/4 = 3/4."
+  },
+  {
+    "id": "q007",
+    "type": "multiple-choice",
+    "topic": "Fractions",
+    "title": "Comparing Fractions",
+    "question": "Which fraction is greater than 1/2?",
+    "options": [
+      {
+        "id": "A",
+        "text": "2/5"
+      },
+      {
+        "id": "B",
+        "text": "3/7"
+      },
+      {
+        "id": "C",
+        "text": "5/8"
+      },
+      {
+        "id": "D",
+        "text": "4/9"
+      }
+    ],
+    "answer": "C",
+    "explanation": "One half is 4/8, so 5/8 is greater than 1/2."
+  },
+  {
+    "id": "q008",
+    "type": "multiple-choice",
+    "topic": "Fractions",
+    "title": "Subtracting Fractions",
+    "question": "What is 7/10 - 2/5?",
+    "options": [
+      {
+        "id": "A",
+        "text": "1/10"
+      },
+      {
+        "id": "B",
+        "text": "2/10"
+      },
+      {
+        "id": "C",
+        "text": "3/10"
+      },
+      {
+        "id": "D",
+        "text": "5/10"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Convert 2/5 to tenths: 2/5 = 4/10. Then 7/10 - 4/10 = 3/10."
+  },
+  {
+    "id": "q009",
+    "type": "multiple-choice",
+    "topic": "Fractions",
+    "title": "Adding Fractions",
+    "question": "What is 4/9 + 2/3?",
+    "options": [
+      {
+        "id": "A",
+        "text": "6/12"
+      },
+      {
+        "id": "B",
+        "text": "8/9"
+      },
+      {
+        "id": "C",
+        "text": "10/9"
+      },
+      {
+        "id": "D",
+        "text": "2/9"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Convert 2/3 to ninths: 2/3 = 6/9. Then 4/9 + 6/9 = 10/9."
+  },
+  {
+    "id": "q010",
+    "type": "multiple-choice",
+    "topic": "Fractions",
+    "title": "Fraction of a Number",
+    "question": "What is 5/8 of 32?",
+    "options": [
+      {
+        "id": "A",
+        "text": "16"
+      },
+      {
+        "id": "B",
+        "text": "18"
+      },
+      {
+        "id": "C",
+        "text": "20"
+      },
+      {
+        "id": "D",
+        "text": "24"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Find one eighth of 32, which is 4. Then multiply by 5: 4 x 5 = 20."
+  },
+  {
+    "id": "q011",
+    "type": "multiple-choice",
+    "topic": "Fractions",
+    "title": "Fractions and Decimals",
+    "question": "What is 3/5 written as a decimal?",
+    "options": [
+      {
+        "id": "A",
+        "text": "0.3"
+      },
+      {
+        "id": "B",
+        "text": "0.5"
+      },
+      {
+        "id": "C",
+        "text": "0.6"
+      },
+      {
+        "id": "D",
+        "text": "0.8"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Divide 3 by 5. Since 3/5 = 6/10, the decimal is 0.6."
+  },
+  {
+    "id": "q012",
+    "type": "multiple-choice",
+    "topic": "Fractions",
+    "title": "Decimals and Fractions",
+    "question": "What is 0.75 written as a fraction in simplest form?",
+    "options": [
+      {
+        "id": "A",
+        "text": "1/4"
+      },
+      {
+        "id": "B",
+        "text": "1/2"
+      },
+      {
+        "id": "C",
+        "text": "3/4"
+      },
+      {
+        "id": "D",
+        "text": "75/10"
+      }
+    ],
+    "answer": "C",
+    "explanation": "0.75 means 75/100. Divide by 25 to simplify: 75/100 = 3/4."
+  },
+  {
+    "id": "q013",
+    "type": "multiple-choice",
+    "topic": "Fractions",
+    "title": "Fraction of a Number",
+    "question": "What is 2/3 of 18?",
+    "options": [
+      {
+        "id": "A",
+        "text": "6"
+      },
+      {
+        "id": "B",
+        "text": "9"
+      },
+      {
+        "id": "C",
+        "text": "12"
+      },
+      {
+        "id": "D",
+        "text": "15"
+      }
+    ],
+    "answer": "C",
+    "explanation": "One third of 18 is 6, so two thirds is 12."
+  },
+  {
+    "id": "q014",
+    "type": "multiple-choice",
+    "topic": "Fractions",
+    "title": "Simplifying Fractions",
+    "question": "Simplify 9/12.",
+    "options": [
+      {
+        "id": "A",
+        "text": "1/2"
+      },
+      {
+        "id": "B",
+        "text": "2/3"
+      },
+      {
+        "id": "C",
+        "text": "3/4"
+      },
+      {
+        "id": "D",
+        "text": "4/3"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Divide both 9 and 12 by 3. The simplified fraction is 3/4."
+  },
+  {
+    "id": "q015",
+    "type": "multiple-choice",
+    "topic": "Fractions",
+    "title": "Adding Fractions",
+    "question": "What is 1/6 + 1/4?",
+    "options": [
+      {
+        "id": "A",
+        "text": "2/10"
+      },
+      {
+        "id": "B",
+        "text": "1/12"
+      },
+      {
+        "id": "C",
+        "text": "5/12"
+      },
+      {
+        "id": "D",
+        "text": "1/2"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Use twelfths: 1/6 = 2/12 and 1/4 = 3/12. The sum is 5/12."
+  },
+  {
+    "id": "q016",
+    "type": "multiple-choice",
+    "topic": "Fractions",
+    "title": "Subtracting Fractions",
+    "question": "What is 4/5 - 1/10?",
+    "options": [
+      {
+        "id": "A",
+        "text": "3/5"
+      },
+      {
+        "id": "B",
+        "text": "7/10"
+      },
+      {
+        "id": "C",
+        "text": "1/2"
+      },
+      {
+        "id": "D",
+        "text": "9/10"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Convert 4/5 to tenths: 4/5 = 8/10. Then 8/10 - 1/10 = 7/10."
+  },
+  {
+    "id": "q017",
+    "type": "multiple-choice",
+    "topic": "Fractions",
+    "title": "Dividing Fractions",
+    "question": "What is 7/8 divided by 7/16?",
+    "options": [
+      {
+        "id": "A",
+        "text": "1/2"
+      },
+      {
+        "id": "B",
+        "text": "1"
+      },
+      {
+        "id": "C",
+        "text": "2"
+      },
+      {
+        "id": "D",
+        "text": "14"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Multiply by the reciprocal: 7/8 x 16/7. The 7s cancel, and 16/8 = 2."
+  },
+  {
+    "id": "q018",
+    "type": "multiple-choice",
+    "topic": "Fractions",
+    "title": "Improper Fractions",
+    "question": "What is 2 2/3 written as an improper fraction?",
+    "options": [
+      {
+        "id": "A",
+        "text": "4/3"
+      },
+      {
+        "id": "B",
+        "text": "6/3"
+      },
+      {
+        "id": "C",
+        "text": "7/3"
+      },
+      {
+        "id": "D",
+        "text": "8/3"
+      }
+    ],
+    "answer": "D",
+    "explanation": "Multiply 2 x 3 = 6, then add 2 to get 8. The improper fraction is 8/3."
+  },
+  {
+    "id": "q019",
+    "type": "multiple-choice",
+    "topic": "Fractions",
+    "title": "Adding Like Fractions",
+    "question": "What is 3/10 + 4/10?",
+    "options": [
+      {
+        "id": "A",
+        "text": "1/10"
+      },
+      {
+        "id": "B",
+        "text": "7/10"
+      },
+      {
+        "id": "C",
+        "text": "7/20"
+      },
+      {
+        "id": "D",
+        "text": "12/10"
+      }
+    ],
+    "answer": "B",
+    "explanation": "The denominators are the same, so add the numerators: 3 + 4 = 7. The answer is 7/10."
+  },
+  {
+    "id": "q020",
+    "type": "multiple-choice",
+    "topic": "Fractions",
+    "title": "Comparing Fractions",
+    "question": "Which fraction is the least?",
+    "options": [
+      {
+        "id": "A",
+        "text": "1/5"
+      },
+      {
+        "id": "B",
+        "text": "1/3"
+      },
+      {
+        "id": "C",
+        "text": "1/2"
+      },
+      {
+        "id": "D",
+        "text": "3/4"
+      }
+    ],
+    "answer": "A",
+    "explanation": "For unit fractions, the larger denominator makes the smaller piece. So 1/5 is the least."
+  },
+  {
+    "id": "q021",
     "type": "multiple-choice",
     "topic": "Integers",
-    "title": "Integers",
+    "title": "Adding Integers",
     "question": "What is -6 + 14?",
     "options": [
-      { "id": "A", "text": "-20" },
-      { "id": "B", "text": "-8" },
-      { "id": "C", "text": "8" },
-      { "id": "D", "text": "20" }
+      {
+        "id": "A",
+        "text": "-20"
+      },
+      {
+        "id": "B",
+        "text": "-8"
+      },
+      {
+        "id": "C",
+        "text": "8"
+      },
+      {
+        "id": "D",
+        "text": "20"
+      }
     ],
     "answer": "C",
     "explanation": "Starting at -6 and moving 14 units in the positive direction gives 8."
   },
   {
-    "id": "q3",
+    "id": "q022",
+    "type": "multiple-choice",
+    "topic": "Integers",
+    "title": "Subtracting Integers",
+    "question": "What is -9 - 5?",
+    "options": [
+      {
+        "id": "A",
+        "text": "-14"
+      },
+      {
+        "id": "B",
+        "text": "-4"
+      },
+      {
+        "id": "C",
+        "text": "4"
+      },
+      {
+        "id": "D",
+        "text": "14"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Subtracting 5 from -9 moves 5 more units left, ending at -14."
+  },
+  {
+    "id": "q023",
+    "type": "multiple-choice",
+    "topic": "Integers",
+    "title": "Multiplying Integers",
+    "question": "What is -4 x 7?",
+    "options": [
+      {
+        "id": "A",
+        "text": "-28"
+      },
+      {
+        "id": "B",
+        "text": "-11"
+      },
+      {
+        "id": "C",
+        "text": "11"
+      },
+      {
+        "id": "D",
+        "text": "28"
+      }
+    ],
+    "answer": "A",
+    "explanation": "A negative times a positive is negative. Since 4 x 7 = 28, the answer is -28."
+  },
+  {
+    "id": "q024",
+    "type": "multiple-choice",
+    "topic": "Integers",
+    "title": "Dividing Integers",
+    "question": "What is -24 divided by -6?",
+    "options": [
+      {
+        "id": "A",
+        "text": "-4"
+      },
+      {
+        "id": "B",
+        "text": "4"
+      },
+      {
+        "id": "C",
+        "text": "6"
+      },
+      {
+        "id": "D",
+        "text": "18"
+      }
+    ],
+    "answer": "B",
+    "explanation": "A negative divided by a negative is positive. 24 divided by 6 is 4."
+  },
+  {
+    "id": "q025",
+    "type": "multiple-choice",
+    "topic": "Integers",
+    "title": "Adding Integers",
+    "question": "What is 12 + (-18)?",
+    "options": [
+      {
+        "id": "A",
+        "text": "-30"
+      },
+      {
+        "id": "B",
+        "text": "-6"
+      },
+      {
+        "id": "C",
+        "text": "6"
+      },
+      {
+        "id": "D",
+        "text": "30"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Adding -18 is the same as subtracting 18. 12 - 18 = -6."
+  },
+  {
+    "id": "q026",
+    "type": "multiple-choice",
+    "topic": "Integers",
+    "title": "Adding Integers",
+    "question": "What is -15 + 9?",
+    "options": [
+      {
+        "id": "A",
+        "text": "-24"
+      },
+      {
+        "id": "B",
+        "text": "-6"
+      },
+      {
+        "id": "C",
+        "text": "6"
+      },
+      {
+        "id": "D",
+        "text": "24"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Starting at -15 and moving 9 units right gives -6."
+  },
+  {
+    "id": "q027",
+    "type": "multiple-choice",
+    "topic": "Integers",
+    "title": "Subtracting Integers",
+    "question": "What is 5 - (-8)?",
+    "options": [
+      {
+        "id": "A",
+        "text": "-13"
+      },
+      {
+        "id": "B",
+        "text": "-3"
+      },
+      {
+        "id": "C",
+        "text": "3"
+      },
+      {
+        "id": "D",
+        "text": "13"
+      }
+    ],
+    "answer": "D",
+    "explanation": "Subtracting a negative is the same as adding. 5 - (-8) = 5 + 8 = 13."
+  },
+  {
+    "id": "q028",
+    "type": "multiple-choice",
+    "topic": "Integers",
+    "title": "Adding Integers",
+    "question": "What is -20 + (-7)?",
+    "options": [
+      {
+        "id": "A",
+        "text": "-27"
+      },
+      {
+        "id": "B",
+        "text": "-13"
+      },
+      {
+        "id": "C",
+        "text": "13"
+      },
+      {
+        "id": "D",
+        "text": "27"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Adding two negative numbers keeps the negative sign: -20 + -7 = -27."
+  },
+  {
+    "id": "q029",
+    "type": "multiple-choice",
+    "topic": "Integers",
+    "title": "Absolute Value",
+    "question": "What is the absolute value of -12?",
+    "options": [
+      {
+        "id": "A",
+        "text": "-12"
+      },
+      {
+        "id": "B",
+        "text": "-1"
+      },
+      {
+        "id": "C",
+        "text": "0"
+      },
+      {
+        "id": "D",
+        "text": "12"
+      }
+    ],
+    "answer": "D",
+    "explanation": "Absolute value is distance from zero, so the absolute value of -12 is 12."
+  },
+  {
+    "id": "q030",
+    "type": "multiple-choice",
+    "topic": "Integers",
+    "title": "Multiplying Integers",
+    "question": "What is -2 x -9?",
+    "options": [
+      {
+        "id": "A",
+        "text": "-18"
+      },
+      {
+        "id": "B",
+        "text": "-11"
+      },
+      {
+        "id": "C",
+        "text": "11"
+      },
+      {
+        "id": "D",
+        "text": "18"
+      }
+    ],
+    "answer": "D",
+    "explanation": "A negative times a negative is positive. 2 x 9 = 18."
+  },
+  {
+    "id": "q031",
+    "type": "multiple-choice",
+    "topic": "Integers",
+    "title": "Dividing Integers",
+    "question": "What is 30 divided by -5?",
+    "options": [
+      {
+        "id": "A",
+        "text": "-6"
+      },
+      {
+        "id": "B",
+        "text": "-5"
+      },
+      {
+        "id": "C",
+        "text": "5"
+      },
+      {
+        "id": "D",
+        "text": "6"
+      }
+    ],
+    "answer": "A",
+    "explanation": "A positive divided by a negative is negative. 30 divided by 5 is 6, so the answer is -6."
+  },
+  {
+    "id": "q032",
+    "type": "multiple-choice",
+    "topic": "Integers",
+    "title": "Integer Change",
+    "question": "The temperature changes from -3 degrees to 7 degrees. How many degrees did it increase?",
+    "options": [
+      {
+        "id": "A",
+        "text": "4"
+      },
+      {
+        "id": "B",
+        "text": "7"
+      },
+      {
+        "id": "C",
+        "text": "10"
+      },
+      {
+        "id": "D",
+        "text": "14"
+      }
+    ],
+    "answer": "C",
+    "explanation": "From -3 to 0 is 3 degrees, and from 0 to 7 is 7 degrees. The total increase is 10 degrees."
+  },
+  {
+    "id": "q033",
+    "type": "multiple-choice",
+    "topic": "Integers",
+    "title": "Opposites",
+    "question": "What is -11 + 11?",
+    "options": [
+      {
+        "id": "A",
+        "text": "-22"
+      },
+      {
+        "id": "B",
+        "text": "-1"
+      },
+      {
+        "id": "C",
+        "text": "0"
+      },
+      {
+        "id": "D",
+        "text": "22"
+      }
+    ],
+    "answer": "C",
+    "explanation": "-11 and 11 are opposites, so their sum is 0."
+  },
+  {
+    "id": "q034",
+    "type": "multiple-choice",
+    "topic": "Integers",
+    "title": "Subtracting Integers",
+    "question": "What is -16 - (-6)?",
+    "options": [
+      {
+        "id": "A",
+        "text": "-22"
+      },
+      {
+        "id": "B",
+        "text": "-10"
+      },
+      {
+        "id": "C",
+        "text": "10"
+      },
+      {
+        "id": "D",
+        "text": "22"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Subtracting -6 is the same as adding 6. -16 + 6 = -10."
+  },
+  {
+    "id": "q035",
+    "type": "multiple-choice",
+    "topic": "Integers",
+    "title": "Integer Signs",
+    "question": "A negative number multiplied by a positive number is always what?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Negative"
+      },
+      {
+        "id": "B",
+        "text": "Positive"
+      },
+      {
+        "id": "C",
+        "text": "Zero"
+      },
+      {
+        "id": "D",
+        "text": "Sometimes positive"
+      }
+    ],
+    "answer": "A",
+    "explanation": "A negative times a positive is negative."
+  },
+  {
+    "id": "q036",
+    "type": "multiple-choice",
+    "topic": "Integers",
+    "title": "Adding Integers",
+    "question": "What is -7 + (-8) + 5?",
+    "options": [
+      {
+        "id": "A",
+        "text": "-20"
+      },
+      {
+        "id": "B",
+        "text": "-10"
+      },
+      {
+        "id": "C",
+        "text": "4"
+      },
+      {
+        "id": "D",
+        "text": "10"
+      }
+    ],
+    "answer": "B",
+    "explanation": "-7 + -8 = -15, and -15 + 5 = -10."
+  },
+  {
+    "id": "q037",
+    "type": "multiple-choice",
+    "topic": "Integers",
+    "title": "Comparing Integers",
+    "question": "Which number is greater?",
+    "options": [
+      {
+        "id": "A",
+        "text": "-5"
+      },
+      {
+        "id": "B",
+        "text": "-4"
+      },
+      {
+        "id": "C",
+        "text": "-3"
+      },
+      {
+        "id": "D",
+        "text": "-2"
+      }
+    ],
+    "answer": "D",
+    "explanation": "On a number line, -2 is farthest to the right, so it is greatest."
+  },
+  {
+    "id": "q038",
+    "type": "multiple-choice",
+    "topic": "Integers",
+    "title": "Subtracting From Zero",
+    "question": "What is 0 - 9?",
+    "options": [
+      {
+        "id": "A",
+        "text": "-9"
+      },
+      {
+        "id": "B",
+        "text": "0"
+      },
+      {
+        "id": "C",
+        "text": "9"
+      },
+      {
+        "id": "D",
+        "text": "90"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Starting at 0 and subtracting 9 gives -9."
+  },
+  {
+    "id": "q039",
+    "type": "multiple-choice",
+    "topic": "Integers",
+    "title": "Dividing Integers",
+    "question": "What is -36 divided by 4?",
+    "options": [
+      {
+        "id": "A",
+        "text": "-9"
+      },
+      {
+        "id": "B",
+        "text": "-6"
+      },
+      {
+        "id": "C",
+        "text": "6"
+      },
+      {
+        "id": "D",
+        "text": "9"
+      }
+    ],
+    "answer": "A",
+    "explanation": "A negative divided by a positive is negative. 36 divided by 4 is 9, so the answer is -9."
+  },
+  {
+    "id": "q040",
+    "type": "multiple-choice",
+    "topic": "Integers",
+    "title": "Adding Integers",
+    "question": "What is -1 + (-2) + (-3)?",
+    "options": [
+      {
+        "id": "A",
+        "text": "-6"
+      },
+      {
+        "id": "B",
+        "text": "-4"
+      },
+      {
+        "id": "C",
+        "text": "4"
+      },
+      {
+        "id": "D",
+        "text": "6"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Add the absolute values and keep the negative sign: 1 + 2 + 3 = 6, so the sum is -6."
+  },
+  {
+    "id": "q041",
     "type": "multiple-choice",
     "topic": "Percent",
-    "title": "Percent",
+    "title": "Discounts",
     "question": "A jacket costs $80. It is on sale for 25% off. What is the sale price?",
     "options": [
-      { "id": "A", "text": "$20" },
-      { "id": "B", "text": "$55" },
-      { "id": "C", "text": "$60" },
-      { "id": "D", "text": "$75" }
+      {
+        "id": "A",
+        "text": "$20"
+      },
+      {
+        "id": "B",
+        "text": "$55"
+      },
+      {
+        "id": "C",
+        "text": "$60"
+      },
+      {
+        "id": "D",
+        "text": "$75"
+      }
     ],
     "answer": "C",
     "explanation": "25% of $80 is $20. Subtract the discount: $80 - $20 = $60."
   },
   {
-    "id": "q4",
+    "id": "q042",
+    "type": "multiple-choice",
+    "topic": "Percent",
+    "title": "Finding a Percent",
+    "question": "What is 10% of 250?",
+    "options": [
+      {
+        "id": "A",
+        "text": "10"
+      },
+      {
+        "id": "B",
+        "text": "25"
+      },
+      {
+        "id": "C",
+        "text": "50"
+      },
+      {
+        "id": "D",
+        "text": "240"
+      }
+    ],
+    "answer": "B",
+    "explanation": "10% means one tenth. One tenth of 250 is 25."
+  },
+  {
+    "id": "q043",
+    "type": "multiple-choice",
+    "topic": "Percent",
+    "title": "Finding a Percent",
+    "question": "What is 15% of 60?",
+    "options": [
+      {
+        "id": "A",
+        "text": "6"
+      },
+      {
+        "id": "B",
+        "text": "9"
+      },
+      {
+        "id": "C",
+        "text": "15"
+      },
+      {
+        "id": "D",
+        "text": "45"
+      }
+    ],
+    "answer": "B",
+    "explanation": "10% of 60 is 6 and 5% of 60 is 3. Together they make 9."
+  },
+  {
+    "id": "q044",
+    "type": "multiple-choice",
+    "topic": "Percent",
+    "title": "Percent Increase",
+    "question": "Increase 40 by 20%. What is the new number?",
+    "options": [
+      {
+        "id": "A",
+        "text": "42"
+      },
+      {
+        "id": "B",
+        "text": "44"
+      },
+      {
+        "id": "C",
+        "text": "48"
+      },
+      {
+        "id": "D",
+        "text": "60"
+      }
+    ],
+    "answer": "C",
+    "explanation": "20% of 40 is 8. Add the increase: 40 + 8 = 48."
+  },
+  {
+    "id": "q045",
+    "type": "multiple-choice",
+    "topic": "Percent",
+    "title": "Percent of a Number",
+    "question": "30 is what percent of 150?",
+    "options": [
+      {
+        "id": "A",
+        "text": "15%"
+      },
+      {
+        "id": "B",
+        "text": "20%"
+      },
+      {
+        "id": "C",
+        "text": "30%"
+      },
+      {
+        "id": "D",
+        "text": "50%"
+      }
+    ],
+    "answer": "B",
+    "explanation": "30 divided by 150 is 0.2, which is 20%."
+  },
+  {
+    "id": "q046",
+    "type": "multiple-choice",
+    "topic": "Percent",
+    "title": "Finding a Percent",
+    "question": "What is 75% of 32?",
+    "options": [
+      {
+        "id": "A",
+        "text": "8"
+      },
+      {
+        "id": "B",
+        "text": "16"
+      },
+      {
+        "id": "C",
+        "text": "24"
+      },
+      {
+        "id": "D",
+        "text": "28"
+      }
+    ],
+    "answer": "C",
+    "explanation": "75% is 3/4. One fourth of 32 is 8, so three fourths is 24."
+  },
+  {
+    "id": "q047",
+    "type": "multiple-choice",
+    "topic": "Percent",
+    "title": "Finding a Percent",
+    "question": "What is 5% of 200?",
+    "options": [
+      {
+        "id": "A",
+        "text": "5"
+      },
+      {
+        "id": "B",
+        "text": "10"
+      },
+      {
+        "id": "C",
+        "text": "20"
+      },
+      {
+        "id": "D",
+        "text": "40"
+      }
+    ],
+    "answer": "B",
+    "explanation": "10% of 200 is 20, so 5% is half of that: 10."
+  },
+  {
+    "id": "q048",
+    "type": "multiple-choice",
+    "topic": "Percent",
+    "title": "Finding a Percent",
+    "question": "What is 50% of 86?",
+    "options": [
+      {
+        "id": "A",
+        "text": "36"
+      },
+      {
+        "id": "B",
+        "text": "43"
+      },
+      {
+        "id": "C",
+        "text": "50"
+      },
+      {
+        "id": "D",
+        "text": "172"
+      }
+    ],
+    "answer": "B",
+    "explanation": "50% means half. Half of 86 is 43."
+  },
+  {
+    "id": "q049",
+    "type": "multiple-choice",
+    "topic": "Percent",
+    "title": "Percent of a Number",
+    "question": "12 is what percent of 48?",
+    "options": [
+      {
+        "id": "A",
+        "text": "12%"
+      },
+      {
+        "id": "B",
+        "text": "20%"
+      },
+      {
+        "id": "C",
+        "text": "25%"
+      },
+      {
+        "id": "D",
+        "text": "40%"
+      }
+    ],
+    "answer": "C",
+    "explanation": "12/48 simplifies to 1/4, and 1/4 is 25%."
+  },
+  {
+    "id": "q050",
+    "type": "multiple-choice",
+    "topic": "Percent",
+    "title": "Finding a Percent",
+    "question": "What is 30% of 90?",
+    "options": [
+      {
+        "id": "A",
+        "text": "18"
+      },
+      {
+        "id": "B",
+        "text": "27"
+      },
+      {
+        "id": "C",
+        "text": "30"
+      },
+      {
+        "id": "D",
+        "text": "60"
+      }
+    ],
+    "answer": "B",
+    "explanation": "10% of 90 is 9, so 30% is 3 x 9 = 27."
+  },
+  {
+    "id": "q051",
+    "type": "multiple-choice",
+    "topic": "Percent",
+    "title": "Tax",
+    "question": "A $50 item has 8% tax. What is the total cost?",
+    "options": [
+      {
+        "id": "A",
+        "text": "$52"
+      },
+      {
+        "id": "B",
+        "text": "$54"
+      },
+      {
+        "id": "C",
+        "text": "$58"
+      },
+      {
+        "id": "D",
+        "text": "$62"
+      }
+    ],
+    "answer": "B",
+    "explanation": "8% of $50 is $4. Add the tax: $50 + $4 = $54."
+  },
+  {
+    "id": "q052",
+    "type": "multiple-choice",
+    "topic": "Percent",
+    "title": "Discounts",
+    "question": "A $35 book is 20% off. What is the sale price?",
+    "options": [
+      {
+        "id": "A",
+        "text": "$7"
+      },
+      {
+        "id": "B",
+        "text": "$15"
+      },
+      {
+        "id": "C",
+        "text": "$28"
+      },
+      {
+        "id": "D",
+        "text": "$32"
+      }
+    ],
+    "answer": "C",
+    "explanation": "20% of $35 is $7. Subtract the discount: $35 - $7 = $28."
+  },
+  {
+    "id": "q053",
+    "type": "multiple-choice",
+    "topic": "Percent",
+    "title": "Decimals and Percents",
+    "question": "What is 0.4 written as a percent?",
+    "options": [
+      {
+        "id": "A",
+        "text": "4%"
+      },
+      {
+        "id": "B",
+        "text": "40%"
+      },
+      {
+        "id": "C",
+        "text": "44%"
+      },
+      {
+        "id": "D",
+        "text": "400%"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Move the decimal two places right to convert to a percent: 0.4 = 40%."
+  },
+  {
+    "id": "q054",
+    "type": "multiple-choice",
+    "topic": "Percent",
+    "title": "Percents Over 100",
+    "question": "What is 125% of 20?",
+    "options": [
+      {
+        "id": "A",
+        "text": "20"
+      },
+      {
+        "id": "B",
+        "text": "22.5"
+      },
+      {
+        "id": "C",
+        "text": "25"
+      },
+      {
+        "id": "D",
+        "text": "125"
+      }
+    ],
+    "answer": "C",
+    "explanation": "125% is 1.25. Then 1.25 x 20 = 25."
+  },
+  {
+    "id": "q055",
+    "type": "multiple-choice",
+    "topic": "Percent",
+    "title": "Missing Number",
+    "question": "60% of what number is 18?",
+    "options": [
+      {
+        "id": "A",
+        "text": "24"
+      },
+      {
+        "id": "B",
+        "text": "30"
+      },
+      {
+        "id": "C",
+        "text": "36"
+      },
+      {
+        "id": "D",
+        "text": "60"
+      }
+    ],
+    "answer": "B",
+    "explanation": "If 60% is 18, then 10% is 3. So 100% is 30."
+  },
+  {
+    "id": "q056",
+    "type": "multiple-choice",
+    "topic": "Percent",
+    "title": "Parts and Wholes",
+    "question": "A student answers 3 out of 12 questions correctly. What percent is that?",
+    "options": [
+      {
+        "id": "A",
+        "text": "15%"
+      },
+      {
+        "id": "B",
+        "text": "20%"
+      },
+      {
+        "id": "C",
+        "text": "25%"
+      },
+      {
+        "id": "D",
+        "text": "30%"
+      }
+    ],
+    "answer": "C",
+    "explanation": "3/12 simplifies to 1/4, and 1/4 is 25%."
+  },
+  {
+    "id": "q057",
+    "type": "multiple-choice",
+    "topic": "Percent",
+    "title": "Percent Decrease",
+    "question": "Decrease 90 by 10%. What is the new number?",
+    "options": [
+      {
+        "id": "A",
+        "text": "9"
+      },
+      {
+        "id": "B",
+        "text": "80"
+      },
+      {
+        "id": "C",
+        "text": "81"
+      },
+      {
+        "id": "D",
+        "text": "99"
+      }
+    ],
+    "answer": "C",
+    "explanation": "10% of 90 is 9. Subtract the decrease: 90 - 9 = 81."
+  },
+  {
+    "id": "q058",
+    "type": "multiple-choice",
+    "topic": "Percent",
+    "title": "Finding a Percent",
+    "question": "What is 2% of 300?",
+    "options": [
+      {
+        "id": "A",
+        "text": "2"
+      },
+      {
+        "id": "B",
+        "text": "3"
+      },
+      {
+        "id": "C",
+        "text": "6"
+      },
+      {
+        "id": "D",
+        "text": "60"
+      }
+    ],
+    "answer": "C",
+    "explanation": "1% of 300 is 3, so 2% is 6."
+  },
+  {
+    "id": "q059",
+    "type": "multiple-choice",
+    "topic": "Percent",
+    "title": "Fractions and Percents",
+    "question": "What is 1/4 written as a percent?",
+    "options": [
+      {
+        "id": "A",
+        "text": "4%"
+      },
+      {
+        "id": "B",
+        "text": "14%"
+      },
+      {
+        "id": "C",
+        "text": "20%"
+      },
+      {
+        "id": "D",
+        "text": "25%"
+      }
+    ],
+    "answer": "D",
+    "explanation": "One fourth is 0.25, which is 25%."
+  },
+  {
+    "id": "q060",
+    "type": "multiple-choice",
+    "topic": "Percent",
+    "title": "Percents Over 100",
+    "question": "45 is 150% of what number?",
+    "options": [
+      {
+        "id": "A",
+        "text": "15"
+      },
+      {
+        "id": "B",
+        "text": "30"
+      },
+      {
+        "id": "C",
+        "text": "45"
+      },
+      {
+        "id": "D",
+        "text": "60"
+      }
+    ],
+    "answer": "B",
+    "explanation": "150% means 1.5. Since 1.5 x 30 = 45, the number is 30."
+  },
+  {
+    "id": "q061",
     "type": "multiple-choice",
     "topic": "Algebra",
     "title": "Expressions",
     "question": "If x = 5, what is the value of 3x + 7?",
     "options": [
-      { "id": "A", "text": "15" },
-      { "id": "B", "text": "18" },
-      { "id": "C", "text": "22" },
-      { "id": "D", "text": "35" }
+      {
+        "id": "A",
+        "text": "15"
+      },
+      {
+        "id": "B",
+        "text": "18"
+      },
+      {
+        "id": "C",
+        "text": "22"
+      },
+      {
+        "id": "D",
+        "text": "35"
+      }
     ],
     "answer": "C",
     "explanation": "Substitute 5 for x: 3x + 7 = 3(5) + 7 = 15 + 7 = 22."
   },
   {
-    "id": "q5",
+    "id": "q062",
+    "type": "multiple-choice",
+    "topic": "Algebra",
+    "title": "Solving Equations",
+    "question": "Solve x + 8 = 15.",
+    "options": [
+      {
+        "id": "A",
+        "text": "x = 5"
+      },
+      {
+        "id": "B",
+        "text": "x = 7"
+      },
+      {
+        "id": "C",
+        "text": "x = 8"
+      },
+      {
+        "id": "D",
+        "text": "x = 23"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Subtract 8 from both sides: x = 15 - 8 = 7."
+  },
+  {
+    "id": "q063",
+    "type": "multiple-choice",
+    "topic": "Algebra",
+    "title": "Solving Equations",
+    "question": "Solve 2x = 18.",
+    "options": [
+      {
+        "id": "A",
+        "text": "x = 8"
+      },
+      {
+        "id": "B",
+        "text": "x = 9"
+      },
+      {
+        "id": "C",
+        "text": "x = 16"
+      },
+      {
+        "id": "D",
+        "text": "x = 20"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Divide both sides by 2. x = 9."
+  },
+  {
+    "id": "q064",
+    "type": "multiple-choice",
+    "topic": "Algebra",
+    "title": "Combining Like Terms",
+    "question": "Simplify 4x + 3x.",
+    "options": [
+      {
+        "id": "A",
+        "text": "7"
+      },
+      {
+        "id": "B",
+        "text": "7x"
+      },
+      {
+        "id": "C",
+        "text": "12x"
+      },
+      {
+        "id": "D",
+        "text": "x"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Both terms have x, so add the coefficients: 4x + 3x = 7x."
+  },
+  {
+    "id": "q065",
+    "type": "multiple-choice",
+    "topic": "Algebra",
+    "title": "Combining Like Terms",
+    "question": "Simplify 5a - 2a.",
+    "options": [
+      {
+        "id": "A",
+        "text": "3"
+      },
+      {
+        "id": "B",
+        "text": "3a"
+      },
+      {
+        "id": "C",
+        "text": "7a"
+      },
+      {
+        "id": "D",
+        "text": "10a"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Subtract the coefficients and keep the variable: 5a - 2a = 3a."
+  },
+  {
+    "id": "q066",
+    "type": "multiple-choice",
+    "topic": "Algebra",
+    "title": "Solving Equations",
+    "question": "Solve y/4 = 6.",
+    "options": [
+      {
+        "id": "A",
+        "text": "y = 2"
+      },
+      {
+        "id": "B",
+        "text": "y = 10"
+      },
+      {
+        "id": "C",
+        "text": "y = 24"
+      },
+      {
+        "id": "D",
+        "text": "y = 64"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Multiply both sides by 4. y = 24."
+  },
+  {
+    "id": "q067",
+    "type": "multiple-choice",
+    "topic": "Algebra",
+    "title": "Distributive Property",
+    "question": "Which expression is equal to 2(n + 3)?",
+    "options": [
+      {
+        "id": "A",
+        "text": "2n + 3"
+      },
+      {
+        "id": "B",
+        "text": "2n + 6"
+      },
+      {
+        "id": "C",
+        "text": "n + 6"
+      },
+      {
+        "id": "D",
+        "text": "5n"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Distribute 2 to both terms: 2(n + 3) = 2n + 6."
+  },
+  {
+    "id": "q068",
+    "type": "multiple-choice",
+    "topic": "Algebra",
+    "title": "Solving Equations",
+    "question": "Solve x - 9 = -2.",
+    "options": [
+      {
+        "id": "A",
+        "text": "x = -11"
+      },
+      {
+        "id": "B",
+        "text": "x = -7"
+      },
+      {
+        "id": "C",
+        "text": "x = 7"
+      },
+      {
+        "id": "D",
+        "text": "x = 11"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Add 9 to both sides: x = -2 + 9 = 7."
+  },
+  {
+    "id": "q069",
+    "type": "multiple-choice",
+    "topic": "Algebra",
+    "title": "Solving Equations",
+    "question": "Solve 3x - 4 = 11.",
+    "options": [
+      {
+        "id": "A",
+        "text": "x = 3"
+      },
+      {
+        "id": "B",
+        "text": "x = 5"
+      },
+      {
+        "id": "C",
+        "text": "x = 7"
+      },
+      {
+        "id": "D",
+        "text": "x = 15"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Add 4 to get 3x = 15, then divide by 3 to get x = 5."
+  },
+  {
+    "id": "q070",
+    "type": "multiple-choice",
+    "topic": "Algebra",
+    "title": "Writing Expressions",
+    "question": "Which expression means 5 more than n?",
+    "options": [
+      {
+        "id": "A",
+        "text": "5n"
+      },
+      {
+        "id": "B",
+        "text": "n - 5"
+      },
+      {
+        "id": "C",
+        "text": "n + 5"
+      },
+      {
+        "id": "D",
+        "text": "5 - n"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Five more than n means add 5 to n, so the expression is n + 5."
+  },
+  {
+    "id": "q071",
+    "type": "multiple-choice",
+    "topic": "Algebra",
+    "title": "Combining Like Terms",
+    "question": "Simplify 2x + 3x + 4.",
+    "options": [
+      {
+        "id": "A",
+        "text": "5x + 4"
+      },
+      {
+        "id": "B",
+        "text": "9x"
+      },
+      {
+        "id": "C",
+        "text": "2x + 7"
+      },
+      {
+        "id": "D",
+        "text": "x + 4"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Combine the x terms: 2x + 3x = 5x. The constant 4 stays, so the answer is 5x + 4."
+  },
+  {
+    "id": "q072",
+    "type": "multiple-choice",
+    "topic": "Algebra",
+    "title": "Evaluating Expressions",
+    "question": "If x = 12, what is x/3 + 2?",
+    "options": [
+      {
+        "id": "A",
+        "text": "4"
+      },
+      {
+        "id": "B",
+        "text": "6"
+      },
+      {
+        "id": "C",
+        "text": "8"
+      },
+      {
+        "id": "D",
+        "text": "14"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Substitute 12: 12/3 + 2 = 4 + 2 = 6."
+  },
+  {
+    "id": "q073",
+    "type": "multiple-choice",
+    "topic": "Algebra",
+    "title": "Solving Equations",
+    "question": "Solve p - 6 = 14.",
+    "options": [
+      {
+        "id": "A",
+        "text": "p = 8"
+      },
+      {
+        "id": "B",
+        "text": "p = 14"
+      },
+      {
+        "id": "C",
+        "text": "p = 20"
+      },
+      {
+        "id": "D",
+        "text": "p = 84"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Add 6 to both sides: p = 20."
+  },
+  {
+    "id": "q074",
+    "type": "multiple-choice",
+    "topic": "Algebra",
+    "title": "Evaluating Expressions",
+    "question": "If m = 4, what is 7m?",
+    "options": [
+      {
+        "id": "A",
+        "text": "11"
+      },
+      {
+        "id": "B",
+        "text": "24"
+      },
+      {
+        "id": "C",
+        "text": "28"
+      },
+      {
+        "id": "D",
+        "text": "74"
+      }
+    ],
+    "answer": "C",
+    "explanation": "7m means 7 x m. With m = 4, 7 x 4 = 28."
+  },
+  {
+    "id": "q075",
+    "type": "multiple-choice",
+    "topic": "Algebra",
+    "title": "Solving Equations",
+    "question": "Solve 5x = 0.",
+    "options": [
+      {
+        "id": "A",
+        "text": "x = -5"
+      },
+      {
+        "id": "B",
+        "text": "x = 0"
+      },
+      {
+        "id": "C",
+        "text": "x = 1"
+      },
+      {
+        "id": "D",
+        "text": "x = 5"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Divide both sides by 5. Zero divided by 5 is 0."
+  },
+  {
+    "id": "q076",
+    "type": "multiple-choice",
+    "topic": "Algebra",
+    "title": "Writing Expressions",
+    "question": "What expression represents the perimeter of a square with side length s?",
+    "options": [
+      {
+        "id": "A",
+        "text": "s + 4"
+      },
+      {
+        "id": "B",
+        "text": "2s"
+      },
+      {
+        "id": "C",
+        "text": "4s"
+      },
+      {
+        "id": "D",
+        "text": "s squared"
+      }
+    ],
+    "answer": "C",
+    "explanation": "A square has four equal sides, so its perimeter is s + s + s + s = 4s."
+  },
+  {
+    "id": "q077",
+    "type": "multiple-choice",
+    "topic": "Algebra",
+    "title": "Evaluating Expressions",
+    "question": "If x = 3, what is 10 - 2x?",
+    "options": [
+      {
+        "id": "A",
+        "text": "4"
+      },
+      {
+        "id": "B",
+        "text": "7"
+      },
+      {
+        "id": "C",
+        "text": "8"
+      },
+      {
+        "id": "D",
+        "text": "16"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Substitute 3: 10 - 2(3) = 10 - 6 = 4."
+  },
+  {
+    "id": "q078",
+    "type": "multiple-choice",
+    "topic": "Algebra",
+    "title": "Solving Equations",
+    "question": "Solve x/5 = 7.",
+    "options": [
+      {
+        "id": "A",
+        "text": "x = 12"
+      },
+      {
+        "id": "B",
+        "text": "x = 25"
+      },
+      {
+        "id": "C",
+        "text": "x = 35"
+      },
+      {
+        "id": "D",
+        "text": "x = 57"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Multiply both sides by 5. x = 35."
+  },
+  {
+    "id": "q079",
+    "type": "multiple-choice",
+    "topic": "Algebra",
+    "title": "Distributive Property",
+    "question": "Simplify 6(x + 2).",
+    "options": [
+      {
+        "id": "A",
+        "text": "6x + 2"
+      },
+      {
+        "id": "B",
+        "text": "6x + 8"
+      },
+      {
+        "id": "C",
+        "text": "6x + 12"
+      },
+      {
+        "id": "D",
+        "text": "8x"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Distribute 6 to both terms: 6(x + 2) = 6x + 12."
+  },
+  {
+    "id": "q080",
+    "type": "multiple-choice",
+    "topic": "Algebra",
+    "title": "Writing Equations",
+    "question": "Which equation means twice a number is 18?",
+    "options": [
+      {
+        "id": "A",
+        "text": "n + 2 = 18"
+      },
+      {
+        "id": "B",
+        "text": "2n = 18"
+      },
+      {
+        "id": "C",
+        "text": "n/2 = 18"
+      },
+      {
+        "id": "D",
+        "text": "18n = 2"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Twice a number means 2 times n, so the equation is 2n = 18."
+  },
+  {
+    "id": "q081",
     "type": "multiple-choice",
     "topic": "Geometry",
     "title": "Area",
     "question": "A triangle has a base of 10 cm and a height of 6 cm. What is its area?",
     "options": [
-      { "id": "A", "text": "16 cm squared" },
-      { "id": "B", "text": "30 cm squared" },
-      { "id": "C", "text": "60 cm squared" },
-      { "id": "D", "text": "120 cm squared" }
+      {
+        "id": "A",
+        "text": "16 square cm"
+      },
+      {
+        "id": "B",
+        "text": "30 square cm"
+      },
+      {
+        "id": "C",
+        "text": "60 square cm"
+      },
+      {
+        "id": "D",
+        "text": "120 square cm"
+      }
     ],
     "answer": "B",
     "explanation": "The area of a triangle is base times height divided by 2: 10 x 6 / 2 = 30."
   },
   {
-    "id": "q6",
+    "id": "q082",
+    "type": "multiple-choice",
+    "topic": "Geometry",
+    "title": "Area",
+    "question": "What is the area of a rectangle that is 8 cm long and 5 cm wide?",
+    "options": [
+      {
+        "id": "A",
+        "text": "13 square cm"
+      },
+      {
+        "id": "B",
+        "text": "26 square cm"
+      },
+      {
+        "id": "C",
+        "text": "40 square cm"
+      },
+      {
+        "id": "D",
+        "text": "80 square cm"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Area of a rectangle is length x width: 8 x 5 = 40 square cm."
+  },
+  {
+    "id": "q083",
+    "type": "multiple-choice",
+    "topic": "Geometry",
+    "title": "Perimeter",
+    "question": "What is the perimeter of a rectangle with length 7 cm and width 4 cm?",
+    "options": [
+      {
+        "id": "A",
+        "text": "11 cm"
+      },
+      {
+        "id": "B",
+        "text": "22 cm"
+      },
+      {
+        "id": "C",
+        "text": "28 cm"
+      },
+      {
+        "id": "D",
+        "text": "44 cm"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Perimeter is 2(length + width): 2(7 + 4) = 22 cm."
+  },
+  {
+    "id": "q084",
+    "type": "multiple-choice",
+    "topic": "Geometry",
+    "title": "Volume",
+    "question": "What is the volume of a rectangular prism with length 3 cm, width 4 cm, and height 5 cm?",
+    "options": [
+      {
+        "id": "A",
+        "text": "12 cubic cm"
+      },
+      {
+        "id": "B",
+        "text": "20 cubic cm"
+      },
+      {
+        "id": "C",
+        "text": "47 cubic cm"
+      },
+      {
+        "id": "D",
+        "text": "60 cubic cm"
+      }
+    ],
+    "answer": "D",
+    "explanation": "Volume is length x width x height: 3 x 4 x 5 = 60 cubic cm."
+  },
+  {
+    "id": "q085",
+    "type": "multiple-choice",
+    "topic": "Geometry",
+    "title": "Area",
+    "question": "A parallelogram has a base of 12 cm and a height of 5 cm. What is its area?",
+    "options": [
+      {
+        "id": "A",
+        "text": "17 square cm"
+      },
+      {
+        "id": "B",
+        "text": "30 square cm"
+      },
+      {
+        "id": "C",
+        "text": "60 square cm"
+      },
+      {
+        "id": "D",
+        "text": "120 square cm"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Area of a parallelogram is base x height: 12 x 5 = 60 square cm."
+  },
+  {
+    "id": "q086",
+    "type": "multiple-choice",
+    "topic": "Geometry",
+    "title": "Area",
+    "question": "A trapezoid has bases 6 cm and 10 cm and height 4 cm. What is its area?",
+    "options": [
+      {
+        "id": "A",
+        "text": "16 square cm"
+      },
+      {
+        "id": "B",
+        "text": "24 square cm"
+      },
+      {
+        "id": "C",
+        "text": "32 square cm"
+      },
+      {
+        "id": "D",
+        "text": "64 square cm"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Area is (base1 + base2) x height / 2: (6 + 10) x 4 / 2 = 32 square cm."
+  },
+  {
+    "id": "q087",
+    "type": "multiple-choice",
+    "topic": "Geometry",
+    "title": "Angles",
+    "question": "What is the sum of the angles inside a triangle?",
+    "options": [
+      {
+        "id": "A",
+        "text": "90 degrees"
+      },
+      {
+        "id": "B",
+        "text": "180 degrees"
+      },
+      {
+        "id": "C",
+        "text": "270 degrees"
+      },
+      {
+        "id": "D",
+        "text": "360 degrees"
+      }
+    ],
+    "answer": "B",
+    "explanation": "The interior angles of every triangle add to 180 degrees."
+  },
+  {
+    "id": "q088",
+    "type": "multiple-choice",
+    "topic": "Geometry",
+    "title": "Angles",
+    "question": "A triangle has angles 50 degrees and 60 degrees. What is the third angle?",
+    "options": [
+      {
+        "id": "A",
+        "text": "60 degrees"
+      },
+      {
+        "id": "B",
+        "text": "70 degrees"
+      },
+      {
+        "id": "C",
+        "text": "80 degrees"
+      },
+      {
+        "id": "D",
+        "text": "110 degrees"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Triangle angles add to 180 degrees. 180 - 50 - 60 = 70 degrees."
+  },
+  {
+    "id": "q089",
+    "type": "multiple-choice",
+    "topic": "Geometry",
+    "title": "Angles",
+    "question": "What angle is complementary to 35 degrees?",
+    "options": [
+      {
+        "id": "A",
+        "text": "35 degrees"
+      },
+      {
+        "id": "B",
+        "text": "55 degrees"
+      },
+      {
+        "id": "C",
+        "text": "90 degrees"
+      },
+      {
+        "id": "D",
+        "text": "145 degrees"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Complementary angles add to 90 degrees. 90 - 35 = 55 degrees."
+  },
+  {
+    "id": "q090",
+    "type": "multiple-choice",
+    "topic": "Geometry",
+    "title": "Angles",
+    "question": "What angle is supplementary to 120 degrees?",
+    "options": [
+      {
+        "id": "A",
+        "text": "30 degrees"
+      },
+      {
+        "id": "B",
+        "text": "60 degrees"
+      },
+      {
+        "id": "C",
+        "text": "90 degrees"
+      },
+      {
+        "id": "D",
+        "text": "120 degrees"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Supplementary angles add to 180 degrees. 180 - 120 = 60 degrees."
+  },
+  {
+    "id": "q091",
+    "type": "multiple-choice",
+    "topic": "Geometry",
+    "title": "Circles",
+    "question": "A circle has radius 7 cm. What is its diameter?",
+    "options": [
+      {
+        "id": "A",
+        "text": "3.5 cm"
+      },
+      {
+        "id": "B",
+        "text": "7 cm"
+      },
+      {
+        "id": "C",
+        "text": "14 cm"
+      },
+      {
+        "id": "D",
+        "text": "21 cm"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Diameter is twice the radius: 2 x 7 = 14 cm."
+  },
+  {
+    "id": "q092",
+    "type": "multiple-choice",
+    "topic": "Geometry",
+    "title": "Circles",
+    "question": "Using pi = 3.14, what is the circumference of a circle with diameter 10 cm?",
+    "options": [
+      {
+        "id": "A",
+        "text": "15.7 cm"
+      },
+      {
+        "id": "B",
+        "text": "20 cm"
+      },
+      {
+        "id": "C",
+        "text": "31.4 cm"
+      },
+      {
+        "id": "D",
+        "text": "100 cm"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Circumference is pi x diameter: 3.14 x 10 = 31.4 cm."
+  },
+  {
+    "id": "q093",
+    "type": "multiple-choice",
+    "topic": "Geometry",
+    "title": "Area",
+    "question": "What is the area of a square with side length 9 cm?",
+    "options": [
+      {
+        "id": "A",
+        "text": "18 square cm"
+      },
+      {
+        "id": "B",
+        "text": "36 square cm"
+      },
+      {
+        "id": "C",
+        "text": "72 square cm"
+      },
+      {
+        "id": "D",
+        "text": "81 square cm"
+      }
+    ],
+    "answer": "D",
+    "explanation": "Area of a square is side x side: 9 x 9 = 81 square cm."
+  },
+  {
+    "id": "q094",
+    "type": "multiple-choice",
+    "topic": "Geometry",
+    "title": "Perimeter",
+    "question": "What is the perimeter of a square with side length 6 cm?",
+    "options": [
+      {
+        "id": "A",
+        "text": "12 cm"
+      },
+      {
+        "id": "B",
+        "text": "18 cm"
+      },
+      {
+        "id": "C",
+        "text": "24 cm"
+      },
+      {
+        "id": "D",
+        "text": "36 cm"
+      }
+    ],
+    "answer": "C",
+    "explanation": "A square has four equal sides, so 4 x 6 = 24 cm."
+  },
+  {
+    "id": "q095",
+    "type": "multiple-choice",
+    "topic": "Geometry",
+    "title": "Circles",
+    "question": "Using pi = 3.14, what is the area of a circle with radius 3 cm?",
+    "options": [
+      {
+        "id": "A",
+        "text": "9.42 square cm"
+      },
+      {
+        "id": "B",
+        "text": "18.84 square cm"
+      },
+      {
+        "id": "C",
+        "text": "28.26 square cm"
+      },
+      {
+        "id": "D",
+        "text": "36 square cm"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Area is pi x radius x radius: 3.14 x 3 x 3 = 28.26 square cm."
+  },
+  {
+    "id": "q096",
+    "type": "multiple-choice",
+    "topic": "Geometry",
+    "title": "Volume",
+    "question": "What is the volume of a cube with side length 4 cm?",
+    "options": [
+      {
+        "id": "A",
+        "text": "16 cubic cm"
+      },
+      {
+        "id": "B",
+        "text": "32 cubic cm"
+      },
+      {
+        "id": "C",
+        "text": "48 cubic cm"
+      },
+      {
+        "id": "D",
+        "text": "64 cubic cm"
+      }
+    ],
+    "answer": "D",
+    "explanation": "Volume of a cube is side x side x side: 4 x 4 x 4 = 64 cubic cm."
+  },
+  {
+    "id": "q097",
+    "type": "multiple-choice",
+    "topic": "Geometry",
+    "title": "Surface Area",
+    "question": "What is the surface area of a cube with side length 3 cm?",
+    "options": [
+      {
+        "id": "A",
+        "text": "18 square cm"
+      },
+      {
+        "id": "B",
+        "text": "27 square cm"
+      },
+      {
+        "id": "C",
+        "text": "36 square cm"
+      },
+      {
+        "id": "D",
+        "text": "54 square cm"
+      }
+    ],
+    "answer": "D",
+    "explanation": "A cube has 6 square faces. Each face is 3 x 3 = 9 square cm, and 6 x 9 = 54 square cm."
+  },
+  {
+    "id": "q098",
+    "type": "multiple-choice",
+    "topic": "Geometry",
+    "title": "Scale Drawings",
+    "question": "On a scale drawing, 1 cm represents 5 m. How many meters does 4 cm represent?",
+    "options": [
+      {
+        "id": "A",
+        "text": "9 m"
+      },
+      {
+        "id": "B",
+        "text": "15 m"
+      },
+      {
+        "id": "C",
+        "text": "20 m"
+      },
+      {
+        "id": "D",
+        "text": "25 m"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Multiply the drawing length by the scale: 4 x 5 = 20 m."
+  },
+  {
+    "id": "q099",
+    "type": "multiple-choice",
+    "topic": "Geometry",
+    "title": "3D Shapes",
+    "question": "How many faces does a rectangular prism have?",
+    "options": [
+      {
+        "id": "A",
+        "text": "4"
+      },
+      {
+        "id": "B",
+        "text": "5"
+      },
+      {
+        "id": "C",
+        "text": "6"
+      },
+      {
+        "id": "D",
+        "text": "8"
+      }
+    ],
+    "answer": "C",
+    "explanation": "A rectangular prism has 6 faces."
+  },
+  {
+    "id": "q100",
+    "type": "multiple-choice",
+    "topic": "Geometry",
+    "title": "Coordinate Plane",
+    "question": "Which quadrant contains the point (3, -2)?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Quadrant I"
+      },
+      {
+        "id": "B",
+        "text": "Quadrant II"
+      },
+      {
+        "id": "C",
+        "text": "Quadrant III"
+      },
+      {
+        "id": "D",
+        "text": "Quadrant IV"
+      }
+    ],
+    "answer": "D",
+    "explanation": "A positive x-value and negative y-value place the point in Quadrant IV."
+  },
+  {
+    "id": "q101",
     "type": "multiple-choice",
     "topic": "Ratios",
-    "title": "Ratios",
+    "title": "Ratio Reasoning",
     "question": "The ratio of blue marbles to red marbles is 3:5. If there are 15 blue marbles, how many red marbles are there?",
     "options": [
-      { "id": "A", "text": "9" },
-      { "id": "B", "text": "15" },
-      { "id": "C", "text": "20" },
-      { "id": "D", "text": "25" }
+      {
+        "id": "A",
+        "text": "9"
+      },
+      {
+        "id": "B",
+        "text": "15"
+      },
+      {
+        "id": "C",
+        "text": "20"
+      },
+      {
+        "id": "D",
+        "text": "25"
+      }
     ],
     "answer": "D",
     "explanation": "The blue part grew from 3 to 15, so the scale factor is 5. Red marbles: 5 x 5 = 25."
+  },
+  {
+    "id": "q102",
+    "type": "multiple-choice",
+    "topic": "Ratios",
+    "title": "Simplifying Ratios",
+    "question": "Simplify the ratio 12:18.",
+    "options": [
+      {
+        "id": "A",
+        "text": "1:2"
+      },
+      {
+        "id": "B",
+        "text": "2:3"
+      },
+      {
+        "id": "C",
+        "text": "3:2"
+      },
+      {
+        "id": "D",
+        "text": "6:9"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Divide both parts by 6. 12:18 simplifies to 2:3."
+  },
+  {
+    "id": "q103",
+    "type": "multiple-choice",
+    "topic": "Ratios",
+    "title": "Equivalent Ratios",
+    "question": "Which ratio is equivalent to 4:7?",
+    "options": [
+      {
+        "id": "A",
+        "text": "8:14"
+      },
+      {
+        "id": "B",
+        "text": "7:4"
+      },
+      {
+        "id": "C",
+        "text": "12:18"
+      },
+      {
+        "id": "D",
+        "text": "16:21"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Multiply both parts of 4:7 by 2 to get 8:14."
+  },
+  {
+    "id": "q104",
+    "type": "multiple-choice",
+    "topic": "Ratios",
+    "title": "Unit Rates",
+    "question": "A car travels 120 miles in 3 hours. What is its unit rate?",
+    "options": [
+      {
+        "id": "A",
+        "text": "30 miles per hour"
+      },
+      {
+        "id": "B",
+        "text": "40 miles per hour"
+      },
+      {
+        "id": "C",
+        "text": "60 miles per hour"
+      },
+      {
+        "id": "D",
+        "text": "360 miles per hour"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Divide distance by time: 120 divided by 3 = 40 miles per hour."
+  },
+  {
+    "id": "q105",
+    "type": "multiple-choice",
+    "topic": "Ratios",
+    "title": "Recipes",
+    "question": "A recipe uses 2 cups of flour for 5 cookies. How many cups are needed for 20 cookies?",
+    "options": [
+      {
+        "id": "A",
+        "text": "4 cups"
+      },
+      {
+        "id": "B",
+        "text": "6 cups"
+      },
+      {
+        "id": "C",
+        "text": "8 cups"
+      },
+      {
+        "id": "D",
+        "text": "10 cups"
+      }
+    ],
+    "answer": "C",
+    "explanation": "20 cookies is 4 times as many as 5 cookies, so multiply 2 cups by 4 to get 8 cups."
+  },
+  {
+    "id": "q106",
+    "type": "multiple-choice",
+    "topic": "Ratios",
+    "title": "Simplifying Ratios",
+    "question": "The ratio of boys to girls is 6:9. What is the simplified ratio?",
+    "options": [
+      {
+        "id": "A",
+        "text": "1:3"
+      },
+      {
+        "id": "B",
+        "text": "2:3"
+      },
+      {
+        "id": "C",
+        "text": "3:2"
+      },
+      {
+        "id": "D",
+        "text": "6:3"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Divide both parts by 3. 6:9 simplifies to 2:3."
+  },
+  {
+    "id": "q107",
+    "type": "multiple-choice",
+    "topic": "Ratios",
+    "title": "Unit Price",
+    "question": "Three pencils cost $1.50. What is the cost of one pencil?",
+    "options": [
+      {
+        "id": "A",
+        "text": "$0.25"
+      },
+      {
+        "id": "B",
+        "text": "$0.50"
+      },
+      {
+        "id": "C",
+        "text": "$1.00"
+      },
+      {
+        "id": "D",
+        "text": "$4.50"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Divide the total cost by 3: $1.50 divided by 3 = $0.50."
+  },
+  {
+    "id": "q108",
+    "type": "multiple-choice",
+    "topic": "Ratios",
+    "title": "Scale",
+    "question": "A model uses a scale of 1:100. If the model length is 3 cm, what is the real length?",
+    "options": [
+      {
+        "id": "A",
+        "text": "30 cm"
+      },
+      {
+        "id": "B",
+        "text": "100 cm"
+      },
+      {
+        "id": "C",
+        "text": "300 cm"
+      },
+      {
+        "id": "D",
+        "text": "3,000 cm"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Multiply the model length by 100: 3 x 100 = 300 cm."
+  },
+  {
+    "id": "q109",
+    "type": "multiple-choice",
+    "topic": "Ratios",
+    "title": "Part-to-Part Ratios",
+    "question": "A ratio is 5:2 and the total is 21. What is the amount represented by the 5 part?",
+    "options": [
+      {
+        "id": "A",
+        "text": "5"
+      },
+      {
+        "id": "B",
+        "text": "10"
+      },
+      {
+        "id": "C",
+        "text": "15"
+      },
+      {
+        "id": "D",
+        "text": "18"
+      }
+    ],
+    "answer": "C",
+    "explanation": "There are 7 equal parts total. 21 divided by 7 is 3, and 5 parts is 5 x 3 = 15."
+  },
+  {
+    "id": "q110",
+    "type": "multiple-choice",
+    "topic": "Ratios",
+    "title": "Part-to-Whole",
+    "question": "There are 4 red counters and 6 blue counters. What fraction of the counters are red?",
+    "options": [
+      {
+        "id": "A",
+        "text": "2/5"
+      },
+      {
+        "id": "B",
+        "text": "4/6"
+      },
+      {
+        "id": "C",
+        "text": "6/10"
+      },
+      {
+        "id": "D",
+        "text": "4/4"
+      }
+    ],
+    "answer": "A",
+    "explanation": "There are 10 counters total. Red counters are 4/10, which simplifies to 2/5."
+  },
+  {
+    "id": "q111",
+    "type": "multiple-choice",
+    "topic": "Ratios",
+    "title": "Equivalent Ratios",
+    "question": "Complete the equivalent ratio: 2:3 = __:15.",
+    "options": [
+      {
+        "id": "A",
+        "text": "5"
+      },
+      {
+        "id": "B",
+        "text": "10"
+      },
+      {
+        "id": "C",
+        "text": "12"
+      },
+      {
+        "id": "D",
+        "text": "30"
+      }
+    ],
+    "answer": "B",
+    "explanation": "The second part is multiplied by 5, so multiply the first part by 5 too: 2 x 5 = 10."
+  },
+  {
+    "id": "q112",
+    "type": "multiple-choice",
+    "topic": "Ratios",
+    "title": "Unit Rates",
+    "question": "A train travels 150 km in 2 hours. What is its speed?",
+    "options": [
+      {
+        "id": "A",
+        "text": "50 km/h"
+      },
+      {
+        "id": "B",
+        "text": "75 km/h"
+      },
+      {
+        "id": "C",
+        "text": "100 km/h"
+      },
+      {
+        "id": "D",
+        "text": "300 km/h"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Divide 150 km by 2 hours to get 75 km/h."
+  },
+  {
+    "id": "q113",
+    "type": "multiple-choice",
+    "topic": "Ratios",
+    "title": "Part-to-Part Ratios",
+    "question": "A ratio is 7:8 and the total is 45. What is the smaller part?",
+    "options": [
+      {
+        "id": "A",
+        "text": "7"
+      },
+      {
+        "id": "B",
+        "text": "21"
+      },
+      {
+        "id": "C",
+        "text": "24"
+      },
+      {
+        "id": "D",
+        "text": "38"
+      }
+    ],
+    "answer": "B",
+    "explanation": "There are 15 parts total. Each part is 45 divided by 15 = 3. The smaller part is 7 x 3 = 21."
+  },
+  {
+    "id": "q114",
+    "type": "multiple-choice",
+    "topic": "Ratios",
+    "title": "Simplifying Ratios",
+    "question": "Simplify the ratio 9:12.",
+    "options": [
+      {
+        "id": "A",
+        "text": "2:3"
+      },
+      {
+        "id": "B",
+        "text": "3:4"
+      },
+      {
+        "id": "C",
+        "text": "4:3"
+      },
+      {
+        "id": "D",
+        "text": "9:3"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Divide both parts by 3. 9:12 simplifies to 3:4."
+  },
+  {
+    "id": "q115",
+    "type": "multiple-choice",
+    "topic": "Ratios",
+    "title": "Unit Price",
+    "question": "Six apples cost $3.00. At the same rate, how much do 10 apples cost?",
+    "options": [
+      {
+        "id": "A",
+        "text": "$4.00"
+      },
+      {
+        "id": "B",
+        "text": "$5.00"
+      },
+      {
+        "id": "C",
+        "text": "$6.00"
+      },
+      {
+        "id": "D",
+        "text": "$10.00"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Each apple costs $3.00 divided by 6 = $0.50. Ten apples cost 10 x $0.50 = $5.00."
+  },
+  {
+    "id": "q116",
+    "type": "multiple-choice",
+    "topic": "Ratios",
+    "title": "Converting Ratios",
+    "question": "Simplify the ratio 2 L to 500 mL.",
+    "options": [
+      {
+        "id": "A",
+        "text": "1:4"
+      },
+      {
+        "id": "B",
+        "text": "2:5"
+      },
+      {
+        "id": "C",
+        "text": "4:1"
+      },
+      {
+        "id": "D",
+        "text": "20:5"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Convert 2 L to 2000 mL. The ratio 2000:500 simplifies to 4:1."
+  },
+  {
+    "id": "q117",
+    "type": "multiple-choice",
+    "topic": "Ratios",
+    "title": "Map Scale",
+    "question": "On a map, 1 cm represents 10 km. How far does 7 cm represent?",
+    "options": [
+      {
+        "id": "A",
+        "text": "17 km"
+      },
+      {
+        "id": "B",
+        "text": "60 km"
+      },
+      {
+        "id": "C",
+        "text": "70 km"
+      },
+      {
+        "id": "D",
+        "text": "700 km"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Multiply the map distance by the scale: 7 x 10 = 70 km."
+  },
+  {
+    "id": "q118",
+    "type": "multiple-choice",
+    "topic": "Ratios",
+    "title": "Ratio Reasoning",
+    "question": "The ratio of cats to dogs is 5:4. If there are 16 dogs, how many cats are there?",
+    "options": [
+      {
+        "id": "A",
+        "text": "12"
+      },
+      {
+        "id": "B",
+        "text": "16"
+      },
+      {
+        "id": "C",
+        "text": "20"
+      },
+      {
+        "id": "D",
+        "text": "25"
+      }
+    ],
+    "answer": "C",
+    "explanation": "The dog part grew from 4 to 16, so the scale factor is 4. Cats: 5 x 4 = 20."
+  },
+  {
+    "id": "q119",
+    "type": "multiple-choice",
+    "topic": "Ratios",
+    "title": "Equivalent Ratios",
+    "question": "Which statement is true about 2/3 and 4/6?",
+    "options": [
+      {
+        "id": "A",
+        "text": "2/3 is larger"
+      },
+      {
+        "id": "B",
+        "text": "4/6 is larger"
+      },
+      {
+        "id": "C",
+        "text": "They are equivalent"
+      },
+      {
+        "id": "D",
+        "text": "They are both equal to 1"
+      }
+    ],
+    "answer": "C",
+    "explanation": "Multiply 2/3 by 2/2 to get 4/6, so the ratios are equivalent."
+  },
+  {
+    "id": "q120",
+    "type": "multiple-choice",
+    "topic": "Ratios",
+    "title": "Unit Price",
+    "question": "Four notebooks cost $12. What is the unit price?",
+    "options": [
+      {
+        "id": "A",
+        "text": "$2 per notebook"
+      },
+      {
+        "id": "B",
+        "text": "$3 per notebook"
+      },
+      {
+        "id": "C",
+        "text": "$4 per notebook"
+      },
+      {
+        "id": "D",
+        "text": "$48 per notebook"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Divide the total cost by the number of notebooks: $12 divided by 4 = $3 per notebook."
   }
 ]

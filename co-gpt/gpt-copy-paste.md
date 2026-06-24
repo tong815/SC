@@ -1,4 +1,4 @@
-# GPT Copy-Paste Handoff
+﻿# GPT Copy-Paste Handoff
 
 Copy everything below and paste it into GPT.
 
@@ -16,11 +16,11 @@ Review
 
 **Current Goal:**
 
-Check whether the new map-based learning game layer is structured clearly and keeps map data, question data, and student progress separate.
+Check whether the expanded Grade 7 question bank is balanced, clear, and still works with the topic-based map practice structure.
 
 **Current Issue:**
 
-Codex added a 2D map with towers, key fragments, a blacksmith, and central tower unlocking. GPT should review whether the architecture is clean and whether the game rules are clear enough for the next student testing step.
+Codex expanded `questions.json` from 6 starter questions to 120 total questions: 20 questions each for Fractions, Integers, Percent, Algebra, Geometry, and Ratios. GPT should review whether the questions are appropriate for Grade 7 practice and whether the topic coverage feels balanced.
 
 **Artifact:**
 
@@ -40,11 +40,11 @@ Exam Visualizer
 
 **Build or Version:**
 
-Map-Based Learning Game Layer
+Expanded Grade 7 Question Bank
 
 **Date:**
 
-2026-06-23
+2026-06-24
 
 **Phase:** Implementation
 
@@ -52,57 +52,49 @@ Map-Based Learning Game Layer
 
 ## What We Built
 
-Codex added a simple 2D map layer on top of the existing Exam Visualizer.
+Codex expanded the Exam Visualizer question bank so each topic tower now has a larger set of practice questions.
 
 The project now has:
 
-- A map named Exam Island.
-- A movable player marker.
-- Six outer topic towers.
-- One locked central tower.
-- A blacksmith panel.
-- Key fragments earned from clearing topic towers.
-- A forge action that unlocks the central tower after all fragments are collected.
+- 120 total Grade 7 math questions.
+- 20 Fractions questions.
+- 20 Integers questions.
+- 20 Percent questions.
+- 20 Algebra questions.
+- 20 Geometry questions.
+- 20 Ratios questions.
 
-The existing topic hub, Save Progress, Load Progress, Back to Topics, answer feedback, and explanations were kept.
+The existing map, topic hub, Save Progress, Load Progress, Back to Topics, answer feedback, and explanations were kept.
 
 ---
 
-## What Was Added
+## What Was Changed
 
-Codex added a new file:
+Codex updated:
 
-- `map.json`
+- `questions.json`
 
-This file stores map layout only:
+Each question still uses the existing structure:
 
-- Map name
-- Player start position
-- Tower positions
-- Tower topics
-- Tower rewards
-- Blacksmith location
-- Blacksmith recipe
+- `id`
+- `type`
+- `topic`
+- `title`
+- `question`
+- `options`
+- `answer`
+- `explanation`
 
-Codex also updated saved progress so `progress` now includes:
+The topic names were kept exactly the same as the map topics:
 
-- `gameProgress.playerPosition`
-- `gameProgress.clearedTowerIds`
-- `gameProgress.keyFragments`
-- `gameProgress.hasCentralTowerKey`
-- `gameProgress.centralTowerUnlocked`
+- Fractions
+- Integers
+- Percent
+- Algebra
+- Geometry
+- Ratios
 
-The map rules are:
-
-- Clicking anywhere moves the player.
-- Clicking an outer tower opens that topic's questions.
-- One correct answer clears that tower.
-- Clearing a tower gives one key fragment.
-- The blacksmith shows fragment progress.
-- Forge Key is disabled until all six fragments are collected.
-- Forging the key unlocks the central tower.
-- Clicking the locked central tower shows a locked message.
-- Clicking the unlocked central tower opens All Questions.
+This matters because the map towers and topic entrance cards filter questions by the `topic` field.
 
 ---
 
@@ -111,23 +103,32 @@ The map rules are:
 - **Test:** Checked that `questions.json` is valid JSON.
 - **Result:** The question data is valid.
 
-- **Test:** Checked that `map.json` is valid JSON and contains six outer towers, one central tower, and one blacksmith.
-- **Result:** The map data is valid.
+- **Test:** Counted the total number of questions.
+- **Result:** There are 120 questions.
+
+- **Test:** Counted questions by topic.
+- **Result:** Each topic has exactly 20 questions.
+
+- **Test:** Checked that every question has a unique id.
+- **Result:** All question ids are unique.
+
+- **Test:** Checked that every answer matches one of the listed answer choices.
+- **Result:** All answers match valid choices.
+
+- **Test:** Checked that the map's six outer tower topics all have matching questions.
+- **Result:** Every outer tower topic has 20 matching questions.
 
 - **Test:** Checked that `app.js` has valid JavaScript syntax.
 - **Result:** The app script passes syntax checking.
-
-- **Test:** Checked that the served website includes the map, player, blacksmith, topic hub, Save Progress, Load Progress, and Back to Topics.
-- **Result:** The required interface pieces are present.
 
 ---
 
 ## What Still Needs Work
 
 - The live GitHub Pages version should be tested after pushing.
-- A student should try clearing each tower and forging the key.
-- GPT should review whether the map rules are clear and whether the save file structure is good for the future game system.
-- The current map uses placeholder graphics only.
+- A student should try each topic tower and confirm the questions feel clear.
+- GPT should review whether the questions are Grade 7 appropriate.
+- GPT should check whether any topic needs easier, harder, or more visual questions.
 
 ---
 
@@ -135,11 +136,11 @@ The map rules are:
 
 Possible next improvements:
 
-- Add per-topic progress labels on the map.
-- Add clearer visual effects when a tower is cleared.
-- Add a reset progress button.
-- Add more questions per tower.
-- Add rewards after unlocking the central tower.
+- Add difficulty labels such as easy, medium, and challenge.
+- Add visual diagrams for some geometry questions.
+- Add question randomization inside each topic.
+- Add review mode for wrong answers.
+- Connect question difficulty to the future game reward system.
 
 ---
 
@@ -148,17 +149,13 @@ Possible next improvements:
 During Review, the student should try these actions:
 
 - Open the website.
-- Confirm the map appears.
-- Click empty places on the map and watch the player move.
-- Click each outer tower and answer its topic question.
-- Confirm one correct answer clears the tower and gives a fragment.
-- Open the blacksmith panel before all fragments are collected.
-- Confirm Forge Key is disabled before all fragments are collected.
-- Clear all six outer towers.
-- Forge the Central Tower Key.
-- Confirm the central tower unlocks.
-- Click the central tower and confirm All Questions opens.
+- Click each outer topic tower.
+- Answer several questions from each topic.
+- Confirm each topic only shows its own questions.
+- Confirm All Questions shows questions from every topic.
+- Confirm answer feedback and explanations still appear.
 - Save progress and load it again.
-- Confirm tower clears, fragments, key status, unlock status, and player position are restored.
+- Confirm progress is still restored after using the larger question bank.
 
-GPT, please check whether this map-based learning game structure is clean and suggest one focused improvement for the next iteration.
+GPT, please check whether this expanded Grade 7 question bank is balanced, clear, and appropriate for student practice. Suggest one focused improvement for the next iteration.
+
