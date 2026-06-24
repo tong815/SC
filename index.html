@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="A Grade 7 math practice hub with a map-based learning game."
+      content="A Grade 7 math practice hub with topic-based multiple-choice questions."
     />
     <title>Exam Visualizer</title>
     <link rel="stylesheet" href="style.css" />
@@ -16,7 +16,7 @@
         <p class="eyebrow">Interactive practice</p>
         <h1>Grade 7 Math Practice</h1>
         <p class="subtitle">
-          Explore the map, clear topic towers, save progress, and unlock the Central Tower.
+          Choose a topic, answer practice questions, and read instant feedback.
         </p>
       </div>
     </header>
@@ -28,14 +28,16 @@
             <p class="section-label">Exam Island</p>
             <h2 id="map-title">Learning map</h2>
           </div>
-          <p id="map-status" class="map-status" aria-live="polite">Loading map...</p>
+          <p id="map-status" class="map-status" aria-live="polite">
+            Loading map...
+          </p>
         </div>
 
         <div id="game-map" class="game-map" aria-label="Exam Island map">
           <div id="map-player" class="map-player" aria-label="Player"></div>
           <div id="map-towers" class="map-towers"></div>
           <button id="blacksmith-button" class="blacksmith-button" type="button">
-            Blacksmith
+            ⚒ Blacksmith
           </button>
         </div>
 
@@ -43,7 +45,9 @@
           <div>
             <h3>Blacksmith</h3>
             <p>Collect all 6 key fragments to forge the Central Tower Key.</p>
-            <p id="fragment-count" class="fragment-count">Key fragments: 0 / 6</p>
+            <p id="fragment-count" class="fragment-count">
+              Key fragments: 0 / 6
+            </p>
           </div>
           <button id="forge-key" class="progress-button" type="button" disabled>
             Forge Key
@@ -58,9 +62,18 @@
             <h2 id="progress-title">Your progress</h2>
           </div>
           <div class="progress-actions">
-            <button id="save-progress" class="progress-button" type="button">Save Progress</button>
-            <button id="load-progress" class="progress-button" type="button">Load Progress</button>
-            <input id="progress-file" type="file" accept="application/json,.json" hidden />
+            <button id="save-progress" class="progress-button" type="button">
+              Save Progress
+            </button>
+            <button id="load-progress" class="progress-button" type="button">
+              Load Progress
+            </button>
+            <input
+              id="progress-file"
+              type="file"
+              accept="application/json,.json"
+              hidden
+            />
           </div>
         </div>
 
@@ -91,13 +104,22 @@
           <p class="section-label">Choose a topic</p>
           <h2 id="topic-hub-title">Practice hub</h2>
         </div>
+
         <div id="topic-list" class="topic-list" aria-live="polite">
           <p class="loading-message">Loading topics...</p>
         </div>
       </section>
 
-      <section id="practice-view" class="practice-view" aria-labelledby="question-list-title" hidden>
-        <button id="back-to-topics" class="back-button" type="button">Back to Topics</button>
+      <section
+        id="practice-view"
+        class="practice-view"
+        aria-labelledby="question-list-title"
+        hidden
+      >
+        <button id="back-to-topics" class="back-button" type="button">
+          Back to Topics
+        </button>
+
         <div class="exam-overview">
           <div>
             <p class="section-label">Multiple choice</p>
@@ -105,6 +127,7 @@
           </div>
           <p id="question-count" class="question-count" aria-live="polite"></p>
         </div>
+
         <div id="question-list" class="question-list" aria-live="polite"></div>
       </section>
 
@@ -115,6 +138,7 @@
       <p>Questions are loaded from the JSON data layer.</p>
     </footer>
 
+    <script src="gameRules.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

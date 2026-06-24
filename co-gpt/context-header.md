@@ -10,11 +10,11 @@ Review
 
 **Current Goal:**
 
-Check whether the expanded Grade 7 question bank is balanced, clear, and still works with the topic-based map practice structure.
+Check whether the new `gameRules.js` rules layer cleanly separates game progression behavior from UI rendering.
 
 **Current Issue:**
 
-Codex expanded `questions.json` from 6 starter questions to 120 total questions: 20 questions each for Fractions, Integers, Percent, Algebra, Geometry, and Ratios. GPT should review whether the questions are appropriate for Grade 7 practice and whether the topic coverage feels balanced.
+Codex extracted tower clearing, key fragment rewards, forging checks, central tower unlocking, and tower access validation from `app.js` into `gameRules.js`. GPT should review whether the architecture now has a clear separation between data, state, rules, and UI.
 
 **Artifact:**
 

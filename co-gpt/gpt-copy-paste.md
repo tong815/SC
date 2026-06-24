@@ -1,4 +1,4 @@
-﻿# GPT Copy-Paste Handoff
+# GPT Copy-Paste Handoff
 
 Copy everything below and paste it into GPT.
 
@@ -16,11 +16,11 @@ Review
 
 **Current Goal:**
 
-Check whether the expanded Grade 7 question bank is balanced, clear, and still works with the topic-based map practice structure.
+Check whether the new `gameRules.js` rules layer cleanly separates game progression behavior from UI rendering.
 
 **Current Issue:**
 
-Codex expanded `questions.json` from 6 starter questions to 120 total questions: 20 questions each for Fractions, Integers, Percent, Algebra, Geometry, and Ratios. GPT should review whether the questions are appropriate for Grade 7 practice and whether the topic coverage feels balanced.
+Codex extracted tower clearing, key fragment rewards, forging checks, central tower unlocking, and tower access validation from `app.js` into `gameRules.js`. GPT should review whether the architecture now has a clear separation between data, state, rules, and UI.
 
 **Artifact:**
 
@@ -40,7 +40,7 @@ Exam Visualizer
 
 **Build or Version:**
 
-Expanded Grade 7 Question Bank
+Dedicated Game Rules Module
 
 **Date:**
 
@@ -52,83 +52,75 @@ Expanded Grade 7 Question Bank
 
 ## What We Built
 
-Codex expanded the Exam Visualizer question bank so each topic tower now has a larger set of practice questions.
+Codex added a dedicated `gameRules.js` module for game progression behavior.
 
-The project now has:
+The project now separates responsibilities like this:
 
-- 120 total Grade 7 math questions.
-- 20 Fractions questions.
-- 20 Integers questions.
-- 20 Percent questions.
-- 20 Algebra questions.
-- 20 Geometry questions.
-- 20 Ratios questions.
+- `questions.json` stores question content only.
+- `map.json` stores world/map structure only.
+- `gameProgress` stores player and world state only.
+- `gameRules.js` decides game progression rules.
+- `app.js` renders the UI and responds to user actions.
 
-The existing map, topic hub, Save Progress, Load Progress, Back to Topics, answer feedback, and explanations were kept.
+The existing map gameplay, topic hub, Save Progress, Load Progress, Back to Topics, answer feedback, and explanations were kept.
 
 ---
 
 ## What Was Changed
 
+Codex added:
+
+- `gameRules.js`
+
 Codex updated:
 
-- `questions.json`
+- `index.html`
+- `app.js`
+- `co-gpt/context-header.md`
+- `co-gpt/implementation-report.md`
+- `co-gpt/gpt-copy-paste.md`
 
-Each question still uses the existing structure:
+`index.html` now loads `gameRules.js` before `app.js`.
 
-- `id`
-- `type`
-- `topic`
-- `title`
-- `question`
-- `options`
-- `answer`
-- `explanation`
+`gameRules.js` now controls:
 
-The topic names were kept exactly the same as the map topics:
+- checking whether a tower is cleared
+- awarding tower rewards
+- preventing duplicate key fragments
+- checking whether forging is allowed
+- forging the central tower key
+- unlocking the central tower
+- checking whether a tower can be accessed
+- applying tower-clear behavior after a correct answer
 
-- Fractions
-- Integers
-- Percent
-- Algebra
-- Geometry
-- Ratios
-
-This matters because the map towers and topic entrance cards filter questions by the `topic` field.
+`app.js` now calls `GameRules` for those decisions and keeps DOM rendering, click handling, progress display, save/load, and feedback UI.
 
 ---
 
 ## What We Tried
 
-- **Test:** Checked that `questions.json` is valid JSON.
-- **Result:** The question data is valid.
-
-- **Test:** Counted the total number of questions.
-- **Result:** There are 120 questions.
-
-- **Test:** Counted questions by topic.
-- **Result:** Each topic has exactly 20 questions.
-
-- **Test:** Checked that every question has a unique id.
-- **Result:** All question ids are unique.
-
-- **Test:** Checked that every answer matches one of the listed answer choices.
-- **Result:** All answers match valid choices.
-
-- **Test:** Checked that the map's six outer tower topics all have matching questions.
-- **Result:** Every outer tower topic has 20 matching questions.
+- **Test:** Checked that `gameRules.js` has valid JavaScript syntax.
+- **Result:** The rules module passes syntax checking.
 
 - **Test:** Checked that `app.js` has valid JavaScript syntax.
 - **Result:** The app script passes syntax checking.
+
+- **Test:** Checked that `questions.json` is valid JSON and still has 120 questions.
+- **Result:** The question data is valid.
+
+- **Test:** Checked topic counts.
+- **Result:** Each topic still has exactly 20 questions.
+
+- **Test:** Checked that `map.json` is valid JSON and tower topics still match question topics.
+- **Result:** The map data still matches the question bank.
 
 ---
 
 ## What Still Needs Work
 
 - The live GitHub Pages version should be tested after pushing.
-- A student should try each topic tower and confirm the questions feel clear.
-- GPT should review whether the questions are Grade 7 appropriate.
-- GPT should check whether any topic needs easier, harder, or more visual questions.
+- A student should test clearing towers, collecting fragments, forging the key, and opening the central tower.
+- GPT should review whether `gameRules.js` has the right API shape for future game features.
 
 ---
 
@@ -136,11 +128,10 @@ This matters because the map towers and topic entrance cards filter questions by
 
 Possible next improvements:
 
-- Add difficulty labels such as easy, medium, and challenge.
-- Add visual diagrams for some geometry questions.
-- Add question randomization inside each topic.
-- Add review mode for wrong answers.
-- Connect question difficulty to the future game reward system.
+- Add simple unit tests for `gameRules.js`.
+- Return result objects from rules functions, such as `{ state, changed }`, if future UI needs more precise messages.
+- Add difficulty rules after question difficulty labels are added.
+- Add replay or reset rules in the rules layer instead of directly in the UI.
 
 ---
 
@@ -150,12 +141,14 @@ During Review, the student should try these actions:
 
 - Open the website.
 - Click each outer topic tower.
-- Answer several questions from each topic.
-- Confirm each topic only shows its own questions.
-- Confirm All Questions shows questions from every topic.
-- Confirm answer feedback and explanations still appear.
+- Answer a correct question in each topic.
+- Confirm each tower clears only once.
+- Confirm each key fragment is awarded only once.
+- Confirm Forge Key is disabled before all fragments are collected.
+- Clear all six topic towers.
+- Forge the Central Tower Key.
+- Confirm the central tower opens All Questions.
 - Save progress and load it again.
-- Confirm progress is still restored after using the larger question bank.
+- Confirm tower clears, fragments, key status, unlock status, and player position are restored.
 
-GPT, please check whether this expanded Grade 7 question bank is balanced, clear, and appropriate for student practice. Suggest one focused improvement for the next iteration.
-
+GPT, please check whether this rules-layer architecture is clean and whether `app.js` now has an appropriate boundary between UI rendering and game progression logic.
