@@ -10,11 +10,11 @@ Review
 
 **Current Goal:**
 
-Review the gameplay polish update that makes the existing tower practice framework feel more like an educational RPG for Grade 7 students.
+Review the architecture cleanup that prepares the project for future educational RPG content without changing the current gameplay.
 
 **Current Issue:**
 
-Codex kept the existing architecture and gameplay progression intact, then polished the tower-run experience. The tower run now uses story-themed Seal Energy instead of technical progress wording, visual heart-based HP, stronger combo feedback, short tower story descriptions from `map.json`, and a shuffled per-run question deck so questions do not repeat until the topic pool is exhausted. GPT should review whether these changes improve student engagement without making the UI confusing or overcomplicated.
+Codex moved several reusable rule helpers from `app.js` into `gameRules.js` and added clear responsibility comments to the main UI files. The cleanup keeps the existing map -> tower -> answer -> clear/fail -> return flow working, preserves save/load compatibility, and avoids adding new lore, bosses, sounds, animations, or mechanics. GPT should review whether the file boundaries are now clearer for future student contributors.
 
 **Artifact:**
 

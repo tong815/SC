@@ -6,7 +6,7 @@ Exam Visualizer / SC
 
 **Build or Version:**
 
-Educational RPG Gameplay Polish
+Architecture Preparation Cleanup
 
 **Date:**
 
@@ -18,24 +18,30 @@ Educational RPG Gameplay Polish
 
 ## What We Built
 
-Codex polished the existing tower practice framework so it feels more like a real educational RPG for Grade 7 students.
+Codex completed a small structure cleanup to prepare the project for future educational RPG content.
 
-This was not a refactor. The existing architecture, save/load logic, progression rules, file separation, tower clear behavior, replay behavior, failure behavior, and retry behavior were preserved.
+This was not a new gameplay-content task.
 
-The main gameplay loop is still:
+Codex did not add:
+
+- new lore
+- boss content
+- sound effects
+- new animations
+- new mechanics
+
+The goal was to make the current architecture easier for students to extend without mixing data, UI, rules, and save state.
+
+The existing gameplay loop still works:
 
 Open website
--> see only the map
--> click an outer tower
--> enter a tower practice screen
--> answer one question at a time
--> wrong answers reduce HP
--> correct streaks restore tower power
--> reach 50 to clear the tower
--> first clear gives a key fragment
+-> see map
+-> click outer tower
+-> enter tower practice
+-> answer questions
+-> gain Seal Energy or lose HP
+-> clear/fail the tower
 -> return to map
-
-The polish update makes that loop feel more story-based and rewarding.
 
 ---
 
@@ -43,156 +49,161 @@ The polish update makes that loop feel more story-based and rewarding.
 
 Codex updated:
 
-- `index.html`
 - `app.js`
+- `gameRules.js`
+- `index.html`
 - `style.css`
-- `map.json`
 - `co-gpt/context-header.md`
 - `co-gpt/implementation-report.md`
 - `co-gpt/gpt-copy-paste.md`
 
-No question content was moved into HTML.
+Codex did not change:
 
-The separation is still:
-
-- `questions.json` stores question data only.
-- `map.json` stores map/tower layout and tower story descriptions.
-- `gameRules.js` stores reusable game progression helpers.
-- `app.js` stores UI behavior, tower-run state, shuffled question decks, save/load normalization, and event handling.
-- Progress save JSON stores player progress only.
+- `questions.json`
+- `map.json`
+- current question content
+- current map/tower data
+- current gameplay content
 
 ---
 
-## Story-Themed Energy
+## Current File Responsibilities
 
-The tower-run label no longer says technical `Progress 31 / 50`.
+### `questions.json`
 
-It now uses:
+Stores question data only:
 
-`Seal Energy 31 / 50`
+- question id
+- topic
+- title/prompt
+- answer choices
+- correct answer
+- explanation
 
-The progress bar still behaves the same way, but the player-facing text now suggests that the student is restoring or purifying the tower.
+No UI logic.
+No game-state logic.
 
-This keeps the old mechanic while making it feel more like a game.
+### `map.json`
 
----
+Stores map and tower data:
 
-## Combo Feedback
+- tower id
+- tower type
+- tower topic
+- tower name
+- tower story description
+- tower position
+- tower reward/key fragment
+- blacksmith recipe
 
-Correct answers now show more rewarding feedback.
+No runtime player progress is stored here.
 
-Examples:
+### `gameRules.js`
 
-- `Correct`
-- `Combo x1`
-- `Keep going!`
-- `+1 Seal Energy`
+Stores reusable game-rule helpers.
 
-At higher streaks:
+This file now has a clear comment:
 
-- `Combo x3`
-- `Great streak!`
-- `+3 Seal Energy`
+`Pure/reusable game rules. This file must not read or write the DOM.`
 
-At larger combos:
+It does not directly manipulate HTML.
 
-- `Combo x5!`
-- `Amazing!`
-- `+5 Seal Energy`
+### `app.js`
 
-At very large combos:
+Still controls browser runtime behavior:
 
-- `Combo x8!`
-- `Excellent!`
-- `+8 Seal Energy`
+- data loading
+- data lookup helpers
+- map rendering
+- map interactions
+- tower-run state
+- shuffled question deck
+- question-card rendering
+- answer handling
+- tower outcome flow
+- permanent answer statistics
+- tower practice UI rendering
+- save/load import/export
+- blacksmith and central tower unlock flow
+- startup
 
-Simple CSS pop animations were added for correct feedback and combo feedback.
+Section comments were added so students can find these areas more easily.
 
----
+### `index.html`
 
-## HP Display
+Owns static UI containers only.
 
-The plain HP text was replaced with a visual health display.
+A file-level comment now explains:
 
-The tower screen now shows hearts:
+`index.html defines the static UI containers. Game data, rules, and save state live outside this file.`
 
-`♥♥♥♥♥♥♥♥♥♥`
+### `style.css`
 
-It also keeps the numeric value:
+Owns presentation only.
 
-`10 / 10`
+A file-level comment now explains:
 
-Wrong answers change the visual display, for example:
-
-`♥♥♥♥♥♥♥♥♥♡`
-
-with:
-
-`9 / 10`
-
-This makes remaining health easier for students to recognize quickly.
-
----
-
-## Tower Stories
-
-Each tower now has a short story description stored in `map.json`.
-
-Examples:
-
-- Fractions Tower: "Restore the balance of fractions to remove the ancient curse."
-- Integers Tower: "Defeat the chaos of positive and negative numbers."
-- Geometry Tower: "Repair the broken geometric seal."
-
-The tower practice screen displays the story description under the tower title.
-
-These descriptions are data-driven from `map.json`, not hardcoded throughout `app.js`.
+`style.css owns presentation only: layout, visual states, and small UI animations.`
 
 ---
 
-## Improved Random Question Selection
+## Logic Moved Into `gameRules.js`
 
-The tower run no longer picks a random question directly from the full topic list every time.
+Codex moved or added these reusable helpers to `gameRules.js`:
 
-Each tower run now creates a shuffled question deck:
+- `createDefaultPlayerProgress`
+- `createDefaultTowerProgress`
+- `normalizeTowerProgress`
+- `calculateSealEnergyGain`
+- `isTowerRunCleared`
+- `updateTowerRunProgress`
 
-- shuffle all questions for the tower topic
-- draw one question from the deck
-- remove it from the deck after use
-- continue until every question has appeared once
-- when the deck is empty, reshuffle and start again
+These helpers support:
 
-This means students should not see the same question repeatedly unless the full question pool has already been used.
+- creating default player progress
+- creating default per-tower progress
+- normalizing saved tower progress
+- calculating Seal Energy gain from a correct-answer streak
+- checking whether a tower run has reached the clear threshold
+- updating permanent tower progress after a run ends
 
-The shuffled deck is temporary tower-run state and is not saved.
+Existing `gameRules.js` helpers were preserved:
+
+- `isTowerCleared`
+- `awardTowerReward`
+- `canForgeKey`
+- `forgeCentralKey`
+- `isCentralTowerUnlocked`
+- `canAccessTower`
+- `onCorrectAnswer`
 
 ---
 
 ## Save / Load Compatibility
 
-The save/load structure was not redesigned.
+Save/load compatibility was preserved.
 
-Permanent saved progress still includes:
+Permanent save state still includes:
 
 - total answered/correct/wrong statistics
 - answered/correct/wrong question IDs
 - per-topic stats
 - player map position
 - cleared tower IDs
-- per-tower saved progress
-- collected key fragments
+- per-tower progress
+- key fragments
 - central tower key status
 - central tower unlock status
 
-Temporary run details are still not saved:
+Temporary tower-run state is still not saved:
 
 - current HP
 - current streak
 - current Seal Energy
-- current question deck
 - current question
+- current shuffled deck
 
-This preserves the existing rule that a tower run starts fresh when entering or retrying a tower.
+Older saves with `clearedTowerIds` can still be normalized into the newer per-tower progress object.
 
 ---
 
@@ -213,40 +224,33 @@ This preserves the existing rule that a tower run starts fresh when entering or 
 - **Test:** Browser flow in Microsoft Edge.
 - **Result:** Passed.
 
-Browser polish test verified:
+Browser regression verified:
 
-- Map still opens as the first screen.
-- Topic hub is still absent.
+- The map opens as the first screen.
+- The tower practice screen is hidden on load.
+- Six outer towers appear.
 - No question cards appear on the map screen.
-- Six outer towers are present.
-- Fractions Tower opens a tower practice screen.
-- Tower story text appears under the tower title.
-- HP appears as hearts plus `10 / 10`.
-- The tower label says `Seal Energy 0 / 50`.
-- Five correct answers showed increasing combo feedback.
-- Combo x5 showed `Amazing!`.
-- The first five questions in one run were all unique.
-- A wrong answer reduced HP to 9 / 10 and reset streak to 0.
-- Back to Map returned to the map-only screen.
-
-Regression test verified:
-
-- 10 consecutive correct answers still clear a tower.
-- First tower clear still gives 1 key fragment.
-- Returning to map still shows the tower as Cleared.
-- Clearing the same tower again still gives no extra key fragment.
-- 10 wrong answers still fail a tower run.
-- Retry still resets HP to 10 / 10 and Seal Energy to 0 / 50.
+- Clicking Fractions Tower opens tower practice.
+- HP hearts still render.
+- Seal Energy still renders.
+- Tower description still renders.
+- 10 correct answers still clear the tower.
+- Key fragment count updates to 1 / 6.
+- Back to Map returns to the map-only screen.
+- The cleared tower shows `Cleared`.
 - No browser console errors appeared.
 
 ---
 
-## What Still Needs Work
+## Architecture Risks That Remain
 
-- Live GitHub Pages should be tested after pushing.
-- A real Grade 7 student should try the flow and say whether the combo feedback and story text feel motivating.
-- Central tower behavior is still minimal. It can be unlocked, but it does not yet have a final-boss practice mode.
-- If the app grows, some tower-run rule calculations could move into `gameRules.js`, but this polish pass intentionally avoided refactoring.
+`app.js` is still large.
+
+This is acceptable for now because the task requested minimal, reviewable cleanup instead of a full redesign. The file is now better sectioned and delegates more reusable rule logic to `gameRules.js`.
+
+Future cleanup could split UI rendering into separate files, but that would be a larger refactor and should be done only when the project needs it.
+
+`gameRules.js` now has more reusable rule helpers, but some logic remains in `app.js` because it is tied to UI events and temporary tower-run control.
 
 ---
 
@@ -254,10 +258,9 @@ Regression test verified:
 
 GPT, please review:
 
-- Does `Seal Energy` feel clearer and more game-like than `Progress`?
-- Is the combo feedback motivating without being distracting?
-- Is the heart-based HP display easy for Grade 7 students to understand?
-- Are the tower descriptions short, age-appropriate, and useful?
-- Does the shuffled question deck logic preserve the expected practice flow?
-- Did Codex preserve file separation and save/load compatibility?
-- Is any polish too much, or does it fit the educational RPG goal?
+- Are the file responsibility boundaries clear enough for future student contributors?
+- Did Codex move the right logic into `gameRules.js` without turning it into UI code?
+- Is `app.js` now easier to navigate because of the section comments?
+- Is save/load compatibility preserved?
+- Is the remaining size of `app.js` acceptable for a student project at this stage?
+- Are there any small architecture risks to fix before adding future RPG content?
