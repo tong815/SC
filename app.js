@@ -1,13 +1,10 @@
-const topicHubElement = document.querySelector("#topic-hub");
-const topicListElement = document.querySelector("#topic-list");
+const mapScreenElement = document.querySelector("#map-screen");
 const practiceViewElement = document.querySelector("#practice-view");
-const backToTopicsButton = document.querySelector("#back-to-topics");
+const backToMapButton = document.querySelector("#back-to-map");
 const saveProgressButton = document.querySelector("#save-progress");
 const loadProgressButton = document.querySelector("#load-progress");
 const progressFileInput = document.querySelector("#progress-file");
 const questionsAnsweredElement = document.querySelector("#questions-answered");
-const correctAnswersElement = document.querySelector("#correct-answers");
-const wrongAnswersElement = document.querySelector("#wrong-answers");
 const accuracyPercentageElement = document.querySelector("#accuracy-percentage");
 const progressMessageElement = document.querySelector("#progress-message");
 const gameMapElement = document.querySelector("#game-map");
@@ -18,18 +15,28 @@ const blacksmithButton = document.querySelector("#blacksmith-button");
 const blacksmithPanelElement = document.querySelector("#blacksmith-panel");
 const fragmentCountElement = document.querySelector("#fragment-count");
 const forgeKeyButton = document.querySelector("#forge-key");
+const towerTitleElement = document.querySelector("#tower-title");
+const towerDescriptionElement = document.querySelector("#tower-description");
+const towerStatusElement = document.querySelector("#tower-status");
+const towerHpElement = document.querySelector("#tower-hp");
+const towerStreakElement = document.querySelector("#tower-streak");
+const towerProgressTextElement = document.querySelector("#tower-progress-text");
+const towerProgressFillElement = document.querySelector("#tower-progress-fill");
+const towerResultElement = document.querySelector("#tower-result");
 const questionListElement = document.querySelector("#question-list");
-const questionListTitleElement = document.querySelector("#question-list-title");
-const questionCountElement = document.querySelector("#question-count");
 const errorMessageElement = document.querySelector("#error-message");
 
 const APP_NAME = "Exam Visualizer";
-const SAVE_FILE_VERSION = "2.0";
+const SAVE_FILE_VERSION = "3.0";
 const ALL_QUESTIONS_TOPIC = "All Questions";
+const TOWER_STARTING_HP = 10;
+const TOWER_CLEAR_PROGRESS = 50;
 
 let allQuestions = [];
 let mapData = null;
 let progress = null;
+// A tower run is temporary: HP, streak, and run progress reset when entering or retrying.
+let currentRun = null;
 
 async function loadJson(path) {
   const response = await fetch(path);
@@ -49,18 +56,32 @@ function getPracticeTopics() {
   return getOuterTowers().map((tower) => tower.topic);
 }
 
-function getTopicList() {
-  return [ALL_QUESTIONS_TOPIC, ...getPracticeTopics()];
+function getQuestionsForTopic(questions, topic) {
+  if (topic === ALL_QUESTIONS_TOPIC) {
+    return questions;
+  }
+
+  return questions.filter((question) => question.topic === topic);
 }
 
 function createEmptyProgress() {
   const topicStats = {};
+  const towerProgress = {};
 
   getPracticeTopics().forEach((topic) => {
     topicStats[topic] = {
       answered: 0,
       correct: 0,
       wrong: 0,
+    };
+  });
+
+  getOuterTowers().forEach((tower) => {
+    towerProgress[tower.id] = {
+      cleared: false,
+      clearCount: 0,
+      bestRunProgress: 0,
+      lastPlayedAt: null,
     };
   });
 
@@ -78,30 +99,12 @@ function createEmptyProgress() {
         y: mapData.playerStart.y,
       },
       clearedTowerIds: [],
+      towerProgress,
       keyFragments: [],
       hasCentralTowerKey: false,
       centralTowerUnlocked: false,
     },
   };
-}
-
-function renderTopicHub(questions) {
-  topicListElement.innerHTML = "";
-
-  getTopicList().forEach((topic) => {
-    const topicQuestions = getQuestionsForTopic(questions, topic);
-    const card = document.createElement("button");
-    card.className = "topic-card";
-    card.type = "button";
-    card.dataset.topic = topic;
-    card.innerHTML = `
-      <span class="topic-card-title">${topic}</span>
-      <span class="topic-card-count">${topicQuestions.length} questions</span>
-    `;
-
-    card.addEventListener("click", () => showPracticeTopic(topic));
-    topicListElement.append(card);
-  });
 }
 
 function renderMap() {
@@ -125,8 +128,9 @@ function renderMap() {
     towerButton.style.left = `${tower.x}%`;
     towerButton.style.top = `${tower.y}%`;
     towerButton.innerHTML = `
-      <span class="tower-icon">${tower.type === "central" ? "★" : "▲"}</span>
+      <span class="tower-icon">${tower.type === "central" ? "C" : "T"}</span>
       <span class="tower-name">${tower.name}</span>
+      <span class="tower-state">${getTowerStateLabel(tower, isCleared, isLocked)}</span>
     `;
     towerButton.addEventListener("click", (event) => {
       event.stopPropagation();
@@ -138,6 +142,19 @@ function renderMap() {
 
   renderPlayerPosition();
   renderBlacksmith();
+  renderProgress();
+}
+
+function getTowerStateLabel(tower, isCleared, isLocked) {
+  if (isLocked) {
+    return "Locked";
+  }
+
+  if (tower.type === "central") {
+    return "Unlocked";
+  }
+
+  return isCleared ? "Cleared" : "Enter";
 }
 
 function renderPlayerPosition() {
@@ -169,7 +186,7 @@ function handleMapClick(event) {
   const y = clamp(((event.clientY - rect.top) / rect.height) * 100, 0, 100);
 
   movePlayerTo(x, y);
-  setMapStatus("Player moved.");
+  setMapStatus("Player moved. Choose a tower to begin a run.");
 }
 
 function handleTowerClick(tower) {
@@ -182,8 +199,12 @@ function handleTowerClick(tower) {
     return;
   }
 
-  setMapStatus(`${tower.name} opened.`);
-  showPracticeTopic(tower.topic);
+  if (tower.type === "central") {
+    setMapStatus("The Central Tower is unlocked. Clear the outer towers again anytime for practice.");
+    return;
+  }
+
+  startTowerRun(tower);
 }
 
 function movePlayerTo(x, y) {
@@ -194,44 +215,302 @@ function movePlayerTo(x, y) {
   renderPlayerPosition();
 }
 
-function clearTowerForTopic(topic) {
-  const tower = getOuterTowers().find((candidate) => candidate.topic === topic);
+function startTowerRun(tower) {
+  const questions = getQuestionsForTopic(allQuestions, tower.topic);
 
-  if (!tower || GameRules.isTowerCleared(progress.gameProgress, tower.id)) {
+  if (questions.length === 0) {
+    setMapStatus(`${tower.name} has no questions yet.`);
     return;
   }
 
+  currentRun = {
+    tower,
+    questions,
+    questionDeck: shuffleQuestions(questions),
+    hp: TOWER_STARTING_HP,
+    streak: 0,
+    runProgress: 0,
+    currentQuestion: null,
+    isFinished: false,
+  };
+
+  mapScreenElement.hidden = true;
+  practiceViewElement.hidden = false;
+  towerTitleElement.textContent = tower.name;
+  towerDescriptionElement.textContent =
+    tower.description || "Restore this tower by answering questions with focus.";
+  towerResultElement.hidden = true;
+  towerResultElement.innerHTML = "";
+  setTowerStatus(`${tower.topic} run started. Restore ${TOWER_CLEAR_PROGRESS} Seal Energy before HP reaches 0.`);
+  updateTowerRunDisplay();
+  loadRandomTowerQuestion();
+}
+
+function loadRandomTowerQuestion() {
+  if (!currentRun || currentRun.isFinished) {
+    return;
+  }
+
+  currentRun.currentQuestion = drawTowerQuestion();
+  towerResultElement.hidden = true;
+  towerResultElement.innerHTML = "";
+  questionListElement.innerHTML = "";
+  questionListElement.append(createQuestionCard(currentRun.currentQuestion));
+  setTowerStatus("Choose an answer.");
+}
+
+function drawTowerQuestion() {
+  if (currentRun.questionDeck.length === 0) {
+    currentRun.questionDeck = shuffleQuestions(currentRun.questions);
+  }
+
+  return currentRun.questionDeck.pop();
+}
+
+function shuffleQuestions(questions) {
+  const shuffledQuestions = [...questions];
+
+  for (let index = shuffledQuestions.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(Math.random() * (index + 1));
+    [shuffledQuestions[index], shuffledQuestions[swapIndex]] = [
+      shuffledQuestions[swapIndex],
+      shuffledQuestions[index],
+    ];
+  }
+
+  return shuffledQuestions;
+}
+
+function createQuestionCard(question) {
+  const card = document.createElement("article");
+  card.className = "question-card";
+  card.dataset.questionId = question.id;
+
+  const optionButtons = question.options
+    .map(
+      (option) => `
+        <button
+          class="option-button"
+          type="button"
+          data-option-id="${option.id}"
+          aria-describedby="feedback-${question.id}"
+        >
+          <span class="option-key">${option.id}</span>
+          <span>${option.text}</span>
+        </button>
+      `,
+    )
+    .join("");
+
+  card.innerHTML = `
+    <div class="question-meta">
+      <span class="question-number">Tower question</span>
+      <span class="question-type">${question.topic}</span>
+    </div>
+    <h3 class="question-title">${question.title}</h3>
+    <p class="question-text">${question.question}</p>
+    <div class="option-list" role="group" aria-label="Answer choices">
+      ${optionButtons}
+    </div>
+    <div id="feedback-${question.id}" class="feedback" aria-live="polite" hidden></div>
+  `;
+
+  card.querySelectorAll(".option-button").forEach((button) => {
+    button.addEventListener("click", () => handleTowerAnswer(question, card, button));
+  });
+
+  return card;
+}
+
+function handleTowerAnswer(question, card, selectedButton) {
+  if (!currentRun || currentRun.isFinished) {
+    return;
+  }
+
+  const selectedAnswer = selectedButton.dataset.optionId;
+  const isCorrect = selectedAnswer === question.answer;
+  const correctOption = question.options.find(
+    (option) => option.id === question.answer,
+  );
+
+  lockAnsweredCard(card, selectedButton, question.answer, isCorrect);
+  recordAnswer(question, isCorrect);
+
+  let gainedEnergy = 0;
+
+  if (isCorrect) {
+    currentRun.streak += 1;
+    gainedEnergy = currentRun.streak;
+    currentRun.runProgress = Math.min(
+      TOWER_CLEAR_PROGRESS,
+      currentRun.runProgress + gainedEnergy,
+    );
+  } else {
+    currentRun.hp = Math.max(0, currentRun.hp - 1);
+    currentRun.streak = 0;
+  }
+
+  updateTowerRunDisplay();
+  showAnswerFeedback(card, question, correctOption, isCorrect, gainedEnergy);
+
+  if (currentRun.runProgress >= TOWER_CLEAR_PROGRESS) {
+    completeTowerRun();
+    return;
+  }
+
+  if (currentRun.hp <= 0) {
+    failTowerRun();
+    return;
+  }
+
+  renderTowerActionButton("Next question", loadRandomTowerQuestion);
+  setTowerStatus(
+    isCorrect
+      ? `Correct. Combo x${currentRun.streak} restored ${gainedEnergy} Seal Energy.`
+      : "Wrong. HP decreased by 1 and your streak reset.",
+  );
+}
+
+function lockAnsweredCard(card, selectedButton, correctAnswer, isCorrect) {
+  card.querySelectorAll(".option-button").forEach((button) => {
+    button.disabled = true;
+
+    if (button.dataset.optionId === correctAnswer) {
+      button.classList.add("is-correct");
+    }
+  });
+
+  if (!isCorrect) {
+    selectedButton.classList.add("is-incorrect");
+  }
+}
+
+function showAnswerFeedback(card, question, correctOption, isCorrect, gainedEnergy) {
+  const feedbackElement = card.querySelector(".feedback");
+  feedbackElement.hidden = false;
+  feedbackElement.className = `feedback ${isCorrect ? "correct" : "incorrect"}`;
+  feedbackElement.innerHTML = `
+    <p class="feedback-status">${isCorrect ? "Correct" : "Wrong"}</p>
+    ${isCorrect ? createComboFeedback(currentRun.streak, gainedEnergy) : ""}
+    <p class="feedback-answer">
+      <strong>Correct answer:</strong> ${correctOption.id}. ${correctOption.text}
+    </p>
+    <p class="feedback-explanation">
+      <strong>Explanation:</strong> ${question.explanation}
+    </p>
+  `;
+}
+
+function createComboFeedback(streak, gainedEnergy) {
+  const praise = getComboPraise(streak);
+
+  return `
+    <div class="combo-feedback" aria-live="polite">
+      <span class="combo-count">Combo x${streak}${streak >= 5 ? "!" : ""}</span>
+      <span class="combo-praise">${praise}</span>
+      <span class="energy-gain">+${gainedEnergy} Seal Energy</span>
+    </div>
+  `;
+}
+
+function getComboPraise(streak) {
+  if (streak >= 8) {
+    return "Excellent!";
+  }
+
+  if (streak >= 5) {
+    return "Amazing!";
+  }
+
+  if (streak >= 3) {
+    return "Great streak!";
+  }
+
+  return "Keep going!";
+}
+
+function renderTowerActionButton(label, onClick) {
+  const action = document.createElement("button");
+  action.className = "progress-button tower-action";
+  action.type = "button";
+  action.textContent = label;
+  action.addEventListener("click", onClick);
+  towerResultElement.hidden = false;
+  towerResultElement.innerHTML = "";
+  towerResultElement.append(action);
+}
+
+function completeTowerRun() {
+  const { tower } = currentRun;
+  const wasAlreadyCleared = GameRules.isTowerCleared(progress.gameProgress, tower.id);
+
+  currentRun.isFinished = true;
+  updateSavedTowerProgress(tower, true);
   progress.gameProgress = GameRules.onCorrectAnswer(progress.gameProgress, tower);
-  setMapStatus(`${tower.name} cleared. Key fragment collected.`);
+
+  const rewardMessage = wasAlreadyCleared
+    ? "Tower cleared again. No new key fragment because this tower was already completed."
+    : "Tower cleared. Key fragment collected.";
+
+  setTowerStatus(rewardMessage);
+  showRunEndMessage("Tower Cleared", rewardMessage, true);
   renderMap();
 }
 
-function toggleBlacksmithPanel() {
-  blacksmithPanelElement.hidden = !blacksmithPanelElement.hidden;
-  renderBlacksmith();
+function failTowerRun() {
+  const { tower } = currentRun;
+
+  currentRun.isFinished = true;
+  updateSavedTowerProgress(tower, false);
+  setTowerStatus("Tower run failed. HP reached 0.");
+  showRunEndMessage(
+    "Run Failed",
+    "HP reached 0. Return to the map or retry this tower with a fresh 10 HP.",
+    false,
+  );
 }
 
-function forgeCentralTowerKey() {
-  const recipe = getBlacksmithRecipe();
+function showRunEndMessage(title, message, wasCleared) {
+  questionListElement.innerHTML = "";
+  towerResultElement.hidden = false;
+  towerResultElement.className = `tower-result ${wasCleared ? "is-cleared" : "is-failed"}`;
+  towerResultElement.innerHTML = `
+    <h3>${title}</h3>
+    <p>${message}</p>
+    <div class="tower-result-actions">
+      <button id="return-map-action" class="progress-button" type="button">Back to Map</button>
+      <button id="retry-tower-action" class="progress-button" type="button">Retry Tower</button>
+    </div>
+  `;
 
-  if (!GameRules.canForgeKey(progress.gameProgress, recipe)) {
-    setMapStatus("Collect all 6 key fragments to forge the Central Tower Key.");
-    renderBlacksmith();
-    return;
-  }
-
-  progress.gameProgress = GameRules.forgeCentralKey(progress.gameProgress, recipe);
-  setMapStatus("Central Tower Key forged. The Central Tower is now available.");
-  renderMap();
+  towerResultElement
+    .querySelector("#return-map-action")
+    .addEventListener("click", showMapScreen);
+  towerResultElement
+    .querySelector("#retry-tower-action")
+    .addEventListener("click", () => startTowerRun(currentRun.tower));
 }
 
-function updateProgress(question, isCorrect) {
-  if (progress.answeredQuestionIds.includes(question.id)) {
-    return false;
-  }
+function updateSavedTowerProgress(tower, wasCleared) {
+  const savedTower = progress.gameProgress.towerProgress[tower.id];
 
-  progress.answeredQuestionIds.push(question.id);
+  savedTower.lastPlayedAt = new Date().toISOString();
+  savedTower.bestRunProgress = Math.max(
+    savedTower.bestRunProgress,
+    currentRun.runProgress,
+  );
+
+  if (wasCleared) {
+    savedTower.cleared = true;
+    savedTower.clearCount += 1;
+  }
+}
+
+function recordAnswer(question, isCorrect) {
   progress.totalQuestionsAnswered += 1;
+  progress.totalCorrectAnswers += isCorrect ? 1 : 0;
+  progress.totalWrongAnswers += isCorrect ? 0 : 1;
+  addUnique(progress.answeredQuestionIds, question.id);
 
   if (!progress.topicStats[question.topic]) {
     progress.topicStats[question.topic] = {
@@ -244,18 +523,15 @@ function updateProgress(question, isCorrect) {
   progress.topicStats[question.topic].answered += 1;
 
   if (isCorrect) {
-    progress.correctQuestionIds.push(question.id);
-    progress.totalCorrectAnswers += 1;
+    addUnique(progress.correctQuestionIds, question.id);
     progress.topicStats[question.topic].correct += 1;
-    clearTowerForTopic(question.topic);
   } else {
-    progress.wrongQuestionIds.push(question.id);
-    progress.totalWrongAnswers += 1;
+    addUnique(progress.wrongQuestionIds, question.id);
     progress.topicStats[question.topic].wrong += 1;
   }
 
   renderProgress();
-  return true;
+  setProgressMessage("Progress updated.");
 }
 
 function renderProgress() {
@@ -266,10 +542,39 @@ function renderProgress() {
           (progress.totalCorrectAnswers / progress.totalQuestionsAnswered) * 100,
         );
 
-  questionsAnsweredElement.textContent = progress.totalQuestionsAnswered;
-  correctAnswersElement.textContent = progress.totalCorrectAnswers;
-  wrongAnswersElement.textContent = progress.totalWrongAnswers;
-  accuracyPercentageElement.textContent = `${accuracy}%`;
+  questionsAnsweredElement.textContent = `${progress.totalQuestionsAnswered} answered`;
+  accuracyPercentageElement.textContent = `${accuracy}% accuracy`;
+}
+
+function updateTowerRunDisplay() {
+  if (!currentRun) {
+    return;
+  }
+
+  const progressPercent = (currentRun.runProgress / TOWER_CLEAR_PROGRESS) * 100;
+
+  towerHpElement.innerHTML = `
+    <span class="stat-label">Health</span>
+    <span class="hp-hearts" aria-hidden="true">${renderHpHearts(currentRun.hp)}</span>
+    <span class="hp-number">${currentRun.hp} / ${TOWER_STARTING_HP}</span>
+  `;
+  towerStreakElement.textContent = `Streak ${currentRun.streak}`;
+  towerProgressTextElement.textContent = `Seal Energy ${currentRun.runProgress} / ${TOWER_CLEAR_PROGRESS}`;
+  towerProgressFillElement.style.width = `${progressPercent}%`;
+}
+
+function renderHpHearts(hp) {
+  return `${"♥".repeat(hp)}${"♡".repeat(TOWER_STARTING_HP - hp)}`;
+}
+
+function showMapScreen() {
+  currentRun = null;
+  practiceViewElement.hidden = true;
+  mapScreenElement.hidden = false;
+  towerResultElement.className = "tower-result";
+  questionListElement.innerHTML = "";
+  renderMap();
+  setMapStatus("Choose a tower to begin a run.");
 }
 
 function setProgressMessage(message) {
@@ -278,6 +583,10 @@ function setProgressMessage(message) {
 
 function setMapStatus(message) {
   mapStatusElement.textContent = message;
+}
+
+function setTowerStatus(message) {
+  towerStatusElement.textContent = message;
 }
 
 function saveProgress() {
@@ -320,9 +629,8 @@ function loadProgressFile(event) {
     try {
       const saveData = JSON.parse(reader.result);
       progress = validateAndNormalizeSaveData(saveData);
-      renderProgress();
-      renderMap();
-      renderTopicHub(allQuestions);
+      currentRun = null;
+      showMapScreen();
       setProgressMessage("Progress file loaded.");
       setMapStatus("Saved map progress restored.");
     } catch (error) {
@@ -354,48 +662,108 @@ function normalizeProgress(importedProgress) {
   const correctIds = getUniqueStringArray(importedProgress.correctQuestionIds);
   const wrongIds = getUniqueStringArray(importedProgress.wrongQuestionIds);
 
-  answeredIds.forEach((questionId) => {
-    const question = questionById.get(questionId);
+  nextProgress.answeredQuestionIds = answeredIds.filter((questionId) =>
+    questionById.has(questionId),
+  );
+  nextProgress.correctQuestionIds = correctIds.filter(
+    (questionId) =>
+      questionById.has(questionId) &&
+      nextProgress.answeredQuestionIds.includes(questionId),
+  );
+  nextProgress.wrongQuestionIds = wrongIds.filter(
+    (questionId) =>
+      questionById.has(questionId) &&
+      nextProgress.answeredQuestionIds.includes(questionId) &&
+      !nextProgress.correctQuestionIds.includes(questionId),
+  );
 
-    if (!question) {
-      return;
-    }
-
-    nextProgress.answeredQuestionIds.push(questionId);
-    nextProgress.totalQuestionsAnswered += 1;
-    nextProgress.topicStats[question.topic].answered += 1;
-  });
-
-  correctIds.forEach((questionId) => {
-    const question = questionById.get(questionId);
-
-    if (!question || !nextProgress.answeredQuestionIds.includes(questionId)) {
-      return;
-    }
-
-    nextProgress.correctQuestionIds.push(questionId);
-    nextProgress.totalCorrectAnswers += 1;
-    nextProgress.topicStats[question.topic].correct += 1;
-  });
-
-  wrongIds.forEach((questionId) => {
-    const question = questionById.get(questionId);
-
-    if (
-      !question ||
-      !nextProgress.answeredQuestionIds.includes(questionId) ||
-      nextProgress.correctQuestionIds.includes(questionId)
-    ) {
-      return;
-    }
-
-    nextProgress.wrongQuestionIds.push(questionId);
-    nextProgress.totalWrongAnswers += 1;
-    nextProgress.topicStats[question.topic].wrong += 1;
-  });
-
+  const rebuiltTotals = rebuildTopicStats(nextProgress);
+  nextProgress.totalQuestionsAnswered = getNonNegativeNumber(
+    importedProgress.totalQuestionsAnswered,
+    rebuiltTotals.answered,
+  );
+  nextProgress.totalCorrectAnswers = getNonNegativeNumber(
+    importedProgress.totalCorrectAnswers,
+    rebuiltTotals.correct,
+  );
+  nextProgress.totalWrongAnswers = getNonNegativeNumber(
+    importedProgress.totalWrongAnswers,
+    rebuiltTotals.wrong,
+  );
+  nextProgress.topicStats = normalizeTopicStats(
+    importedProgress.topicStats,
+    rebuiltTotals.topicStats,
+  );
   nextProgress.gameProgress = normalizeGameProgress(importedProgress.gameProgress);
+
   return nextProgress;
+}
+
+function rebuildTopicStats(nextProgress) {
+  const topicStats = {};
+  let answered = 0;
+  let correct = 0;
+  let wrong = 0;
+  const questionById = new Map(
+    allQuestions.map((question) => [question.id, question]),
+  );
+
+  getPracticeTopics().forEach((topic) => {
+    topicStats[topic] = {
+      answered: 0,
+      correct: 0,
+      wrong: 0,
+    };
+  });
+
+  nextProgress.answeredQuestionIds.forEach((questionId) => {
+    const question = questionById.get(questionId);
+    if (!question || !topicStats[question.topic]) {
+      return;
+    }
+
+    answered += 1;
+    topicStats[question.topic].answered += 1;
+  });
+
+  nextProgress.correctQuestionIds.forEach((questionId) => {
+    const question = questionById.get(questionId);
+    if (!question || !topicStats[question.topic]) {
+      return;
+    }
+
+    correct += 1;
+    topicStats[question.topic].correct += 1;
+  });
+
+  nextProgress.wrongQuestionIds.forEach((questionId) => {
+    const question = questionById.get(questionId);
+    if (!question || !topicStats[question.topic]) {
+      return;
+    }
+
+    wrong += 1;
+    topicStats[question.topic].wrong += 1;
+  });
+
+  return { answered, correct, wrong, topicStats };
+}
+
+function normalizeTopicStats(importedTopicStats = {}, fallbackTopicStats) {
+  const topicStats = {};
+
+  getPracticeTopics().forEach((topic) => {
+    const importedStats = importedTopicStats[topic] || {};
+    const fallbackStats = fallbackTopicStats[topic] || {};
+
+    topicStats[topic] = {
+      answered: getNonNegativeNumber(importedStats.answered, fallbackStats.answered || 0),
+      correct: getNonNegativeNumber(importedStats.correct, fallbackStats.correct || 0),
+      wrong: getNonNegativeNumber(importedStats.wrong, fallbackStats.wrong || 0),
+    };
+  });
+
+  return topicStats;
 }
 
 function normalizeGameProgress(importedGameProgress = {}) {
@@ -410,19 +778,50 @@ function normalizeGameProgress(importedGameProgress = {}) {
   const keyFragments = getUniqueStringArray(importedGameProgress.keyFragments).filter(
     (fragmentId) => validFragmentIds.has(fragmentId),
   );
+  const clearedTowerIds = getUniqueStringArray(importedGameProgress.clearedTowerIds).filter(
+    (towerId) => validTowerIds.has(towerId),
+  );
 
+  // Save files keep permanent tower progress only; live HP is intentionally excluded.
   return {
     playerPosition: {
       x: clamp(Number(position.x) || emptyGameProgress.playerPosition.x, 0, 100),
       y: clamp(Number(position.y) || emptyGameProgress.playerPosition.y, 0, 100),
     },
-    clearedTowerIds: getUniqueStringArray(importedGameProgress.clearedTowerIds).filter(
-      (towerId) => validTowerIds.has(towerId),
+    clearedTowerIds,
+    towerProgress: normalizeTowerProgress(
+      importedGameProgress.towerProgress,
+      clearedTowerIds,
     ),
     keyFragments,
     hasCentralTowerKey: Boolean(importedGameProgress.hasCentralTowerKey),
     centralTowerUnlocked: Boolean(importedGameProgress.centralTowerUnlocked),
   };
+}
+
+function normalizeTowerProgress(importedTowerProgress = {}, clearedTowerIds) {
+  const towerProgress = {};
+
+  getOuterTowers().forEach((tower) => {
+    const importedTower = importedTowerProgress[tower.id] || {};
+    const isCleared = Boolean(importedTower.cleared) || clearedTowerIds.includes(tower.id);
+
+    towerProgress[tower.id] = {
+      cleared: isCleared,
+      clearCount: getNonNegativeNumber(importedTower.clearCount, isCleared ? 1 : 0),
+      bestRunProgress: clamp(
+        getNonNegativeNumber(importedTower.bestRunProgress, isCleared ? TOWER_CLEAR_PROGRESS : 0),
+        0,
+        TOWER_CLEAR_PROGRESS,
+      ),
+      lastPlayedAt:
+        typeof importedTower.lastPlayedAt === "string"
+          ? importedTower.lastPlayedAt
+          : null,
+    };
+  });
+
+  return towerProgress;
 }
 
 function getUniqueStringArray(value) {
@@ -433,126 +832,43 @@ function getUniqueStringArray(value) {
   return [...new Set(value.filter((item) => typeof item === "string"))];
 }
 
-function getQuestionsForTopic(questions, topic) {
-  if (topic === ALL_QUESTIONS_TOPIC) {
-    return questions;
+function getNonNegativeNumber(value, fallback) {
+  const numberValue = Number(value);
+
+  if (!Number.isFinite(numberValue) || numberValue < 0) {
+    return fallback;
   }
 
-  return questions.filter((question) => question.topic === topic);
+  return Math.round(numberValue);
 }
 
-function showPracticeTopic(topic) {
-  const questions = getQuestionsForTopic(allQuestions, topic);
-
-  topicHubElement.hidden = true;
-  practiceViewElement.hidden = false;
-  questionListTitleElement.textContent = topic;
-  renderQuestions(questions);
+function addUnique(list, value) {
+  if (!list.includes(value)) {
+    list.push(value);
+  }
 }
 
-function showTopicHub() {
-  practiceViewElement.hidden = true;
-  topicHubElement.hidden = false;
-  questionListElement.innerHTML = "";
-  questionCountElement.textContent = "";
+function toggleBlacksmithPanel() {
+  blacksmithPanelElement.hidden = !blacksmithPanelElement.hidden;
+  renderBlacksmith();
 }
 
-function renderQuestions(questions) {
-  questionListElement.innerHTML = "";
-  questionCountElement.textContent = `${questions.length} questions`;
+function forgeCentralTowerKey() {
+  const recipe = getBlacksmithRecipe();
 
-  questions.forEach((question, questionIndex) => {
-    questionListElement.append(createQuestionCard(question, questionIndex));
-  });
-}
-
-function createQuestionCard(question, questionIndex) {
-  const card = document.createElement("article");
-  card.className = "question-card";
-  card.dataset.questionId = question.id;
-
-  const optionButtons = question.options
-    .map(
-      (option) => `
-        <button
-          class="option-button"
-          type="button"
-          data-option-id="${option.id}"
-          aria-describedby="feedback-${question.id}"
-        >
-          <span class="option-key">${option.id}</span>
-          <span>${option.text}</span>
-        </button>
-      `,
-    )
-    .join("");
-
-  card.innerHTML = `
-    <div class="question-meta">
-      <span class="question-number">Question ${questionIndex + 1}</span>
-      <span class="question-type">${question.topic}</span>
-    </div>
-    <h3 class="question-title">${question.title}</h3>
-    <p class="question-text">${question.question}</p>
-    <div class="option-list" role="group" aria-label="Answer choices">
-      ${optionButtons}
-    </div>
-    <div id="feedback-${question.id}" class="feedback" aria-live="polite" hidden></div>
-  `;
-
-  card.querySelectorAll(".option-button").forEach((button) => {
-    button.addEventListener("click", () => handleAnswer(question, card, button));
-  });
-
-  return card;
-}
-
-function handleAnswer(question, card, selectedButton) {
-  const optionButtons = card.querySelectorAll(".option-button");
-  const selectedAnswer = selectedButton.dataset.optionId;
-  const isCorrect = selectedAnswer === question.answer;
-  const correctOption = question.options.find(
-    (option) => option.id === question.answer,
-  );
-
-  optionButtons.forEach((button) => {
-    button.disabled = true;
-
-    if (button.dataset.optionId === question.answer) {
-      button.classList.add("is-correct");
-    }
-  });
-
-  if (!isCorrect) {
-    selectedButton.classList.add("is-incorrect");
+  if (!GameRules.canForgeKey(progress.gameProgress, recipe)) {
+    setMapStatus("Collect all 6 key fragments to forge the Central Tower Key.");
+    renderBlacksmith();
+    return;
   }
 
-  const wasCounted = updateProgress(question, isCorrect);
-
-  const feedbackElement = card.querySelector(".feedback");
-  feedbackElement.hidden = false;
-  feedbackElement.className = `feedback ${isCorrect ? "correct" : "incorrect"}`;
-  feedbackElement.innerHTML = `
-    <p class="feedback-status">${isCorrect ? "Correct" : "Incorrect"}</p>
-    <p class="feedback-answer">
-      <strong>Correct answer:</strong> ${correctOption.id}. ${correctOption.text}
-    </p>
-    <p class="feedback-explanation">
-      <strong>Explanation:</strong> ${question.explanation}
-    </p>
-  `;
-
-  if (wasCounted) {
-    setProgressMessage("Progress updated.");
-  } else {
-    setProgressMessage("This question was already counted in your progress.");
-  }
+  progress.gameProgress = GameRules.forgeCentralKey(progress.gameProgress, recipe);
+  setMapStatus("Central Tower Key forged. The Central Tower is now available.");
+  renderMap();
 }
 
 function showLoadError(error) {
-  topicListElement.innerHTML = "";
   questionListElement.innerHTML = "";
-  questionCountElement.textContent = "";
   errorMessageElement.hidden = false;
   errorMessageElement.textContent =
     "The map or question bank could not be loaded. Please run the project through a local web server and try again.";
@@ -571,15 +887,13 @@ async function initializeExam() {
     ]);
     progress = createEmptyProgress();
     renderMap();
-    renderTopicHub(allQuestions);
-    renderProgress();
-    setMapStatus("Choose a tower or click anywhere to move.");
+    setMapStatus("Choose a tower to begin a run.");
   } catch (error) {
     showLoadError(error);
   }
 }
 
-backToTopicsButton.addEventListener("click", showTopicHub);
+backToMapButton.addEventListener("click", showMapScreen);
 saveProgressButton.addEventListener("click", saveProgress);
 loadProgressButton.addEventListener("click", requestProgressFile);
 progressFileInput.addEventListener("change", loadProgressFile);

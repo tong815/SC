@@ -10,6 +10,7 @@
       "type": "outer",
       "topic": "Fractions",
       "name": "Fractions Tower",
+      "description": "Restore the balance of fractions to remove the ancient curse.",
       "x": 25,
       "y": 25,
       "reward": {
@@ -22,6 +23,7 @@
       "type": "outer",
       "topic": "Integers",
       "name": "Integers Tower",
+      "description": "Defeat the chaos of positive and negative numbers.",
       "x": 75,
       "y": 25,
       "reward": {
@@ -34,6 +36,7 @@
       "type": "outer",
       "topic": "Percent",
       "name": "Percent Tower",
+      "description": "Charge the percent crystal before its power fades.",
       "x": 85,
       "y": 50,
       "reward": {
@@ -46,6 +49,7 @@
       "type": "outer",
       "topic": "Algebra",
       "name": "Algebra Tower",
+      "description": "Solve the hidden patterns to unlock the tower's spell.",
       "x": 75,
       "y": 75,
       "reward": {
@@ -58,6 +62,7 @@
       "type": "outer",
       "topic": "Geometry",
       "name": "Geometry Tower",
+      "description": "Repair the broken geometric seal.",
       "x": 25,
       "y": 75,
       "reward": {
@@ -70,6 +75,7 @@
       "type": "outer",
       "topic": "Ratios",
       "name": "Ratios Tower",
+      "description": "Rebuild the ratio bridge and restore its ancient rhythm.",
       "x": 15,
       "y": 50,
       "reward": {
@@ -82,6 +88,7 @@
       "type": "central",
       "topic": "All Questions",
       "name": "Central Tower",
+      "description": "Use every key fragment to challenge the heart of Exam Island.",
       "x": 50,
       "y": 50,
       "requires": {

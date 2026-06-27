@@ -2,7 +2,7 @@
 
 **Current Project:**
 
-Exam Visualizer
+Exam Visualizer / SC
 
 **Current Phase:**
 
@@ -10,11 +10,11 @@ Review
 
 **Current Goal:**
 
-Check whether the new `gameRules.js` rules layer cleanly separates game progression behavior from UI rendering.
+Review the gameplay polish update that makes the existing tower practice framework feel more like an educational RPG for Grade 7 students.
 
 **Current Issue:**
 
-Codex extracted tower clearing, key fragment rewards, forging checks, central tower unlocking, and tower access validation from `app.js` into `gameRules.js`. GPT should review whether the architecture now has a clear separation between data, state, rules, and UI.
+Codex kept the existing architecture and gameplay progression intact, then polished the tower-run experience. The tower run now uses story-themed Seal Energy instead of technical progress wording, visual heart-based HP, stronger combo feedback, short tower story descriptions from `map.json`, and a shuffled per-run question deck so questions do not repeat until the topic pool is exhausted. GPT should review whether these changes improve student engagement without making the UI confusing or overcomplicated.
 
 **Artifact:**
 
@@ -22,4 +22,4 @@ Implementation Report
 
 **Project Link or Folder:**
 
-GitHub Pages website / GitHub repository for Exam Visualizer
+`C:\Users\chena\Desktop\Exam-Visualizer`
