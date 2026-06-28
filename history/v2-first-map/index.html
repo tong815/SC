@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prototype v2: The First Map</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../shared/history.css">
+</head>
+<body>
+  <main class="history-page">
+    <section class="history-shell">
+      <header class="history-header">
+        <div class="fragment-banner">
+          <p>Observed Time Fragment</p>
+          <strong>Age III - The First World</strong>
+          <span>This is not the current world. This is a recovered fragment of how the world once looked.</span>
+        </div>
+        <h1>Prototype v2: The First Map</h1>
+        <p class="subtitle">The topic list became a small world. Each topic rose as a tower.</p>
+      </header>
+
+      <div class="stage-grid">
+        <section class="tower-map panel" aria-label="First map with six towers">
+          <div class="tower-center">Central Tower</div>
+          <div id="tower-layer"></div>
+        </section>
+        <section id="question-panel" class="panel" aria-live="polite"></section>
+      </div>
+    </section>
+  </main>
+
+  <script src="../shared/history-utils.js"></script>
+  <script>
+    const towers = [
+      { name: "Fractions Tower", topic: "Fractions", x: 25, y: 25, prompt: "What is 1/3 + 1/3?", choices: ["1/6", "2/3", "3/6", "1"], answer: "2/3" },
+      { name: "Integers Tower", topic: "Integers", x: 75, y: 25, prompt: "What is -2 - 5?", choices: ["-7", "-3", "3", "7"], answer: "-7" },
+      { name: "Percent Tower", topic: "Percent", x: 85, y: 50, prompt: "What is 25% of 80?", choices: ["10", "20", "25", "40"], answer: "20" },
+      { name: "Algebra Tower", topic: "Algebra", x: 75, y: 75, prompt: "If x + 4 = 9, what is x?", choices: ["3", "4", "5", "13"], answer: "5" },
+      { name: "Geometry Tower", topic: "Geometry", x: 25, y: 75, prompt: "A triangle has how many sides?", choices: ["2", "3", "4", "5"], answer: "3" },
+      { name: "Ratios Tower", topic: "Ratios", x: 15, y: 50, prompt: "Which ratio matches 2:3?", choices: ["4:6", "3:2", "2:5", "6:4"], answer: "4:6" }
+    ];
+
+    const towerLayer = document.querySelector("#tower-layer");
+    const questionPanel = document.querySelector("#question-panel");
+
+    towers.forEach((tower) => {
+      const button = document.createElement("button");
+      button.className = "tower-node";
+      button.type = "button";
+      button.style.left = `${tower.x}%`;
+      button.style.top = `${tower.y}%`;
+      button.innerHTML = `<strong>${tower.name}</strong><br><span>${tower.topic}</span>`;
+      button.addEventListener("click", () => {
+        HistoryPreview.setSelected(towerLayer, button, "is-selected");
+        HistoryPreview.makeQuestion(questionPanel, {
+          title: tower.name,
+          prompt: tower.prompt,
+          choices: tower.choices,
+          answer: tower.answer
+        });
+      });
+      towerLayer.append(button);
+    });
+
+    towerLayer.querySelector("button").click();
+  </script>
+</body>
+</html>

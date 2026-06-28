@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prototype v3: Rules of Challenge</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../shared/history.css">
+</head>
+<body>
+  <main class="history-page">
+    <section class="history-shell">
+      <header class="history-header">
+        <div class="fragment-banner">
+          <p>Observed Time Fragment</p>
+          <strong>Age IV - The First Rules</strong>
+          <span>This is not the current world. This is a recovered fragment of how the world once looked.</span>
+        </div>
+        <h1>Prototype v3: Rules of Challenge</h1>
+        <p class="subtitle">The world gained risk and reward: HP, combo, Seal Energy, and a clear goal.</p>
+      </header>
+
+      <div class="stage-grid">
+        <section class="panel">
+          <div class="stat-row">
+            <span id="hp" class="stat">HP: 5 / 5</span>
+            <span id="combo" class="stat">Combo x0</span>
+            <span id="energy" class="stat">Seal Energy: 0 / 10</span>
+          </div>
+          <div class="energy-bar" aria-hidden="true">
+            <div id="energy-fill" class="energy-fill"></div>
+          </div>
+          <div id="question-panel" aria-live="polite"></div>
+        </section>
+
+        <aside class="panel">
+          <h2>Simple Rule Demo</h2>
+          <p class="soft-text">Correct answers build combo and add Seal Energy. Wrong answers lower HP and reset combo. This small version clears at 10 energy.</p>
+          <button id="reset-run" class="secondary" type="button">Reset Demo</button>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <script src="../shared/history-utils.js"></script>
+  <script>
+    const questions = [
+      { prompt: "What is 40% of 50?", choices: ["10", "20", "25", "40"], answer: "20" },
+      { prompt: "What is 6 x 7?", choices: ["36", "42", "48", "56"], answer: "42" },
+      { prompt: "What is -5 + 9?", choices: ["-14", "-4", "4", "14"], answer: "4" }
+    ];
+
+    let hp = 5;
+    let combo = 0;
+    let energy = 0;
+    let questionIndex = 0;
+
+    const hpElement = document.querySelector("#hp");
+    const comboElement = document.querySelector("#combo");
+    const energyElement = document.querySelector("#energy");
+    const energyFill = document.querySelector("#energy-fill");
+    const questionPanel = document.querySelector("#question-panel");
+
+    function updateStats() {
+      hpElement.textContent = `HP: ${hp} / 5`;
+      comboElement.textContent = `Combo x${combo}`;
+      energyElement.textContent = `Seal Energy: ${energy} / 10`;
+      energyFill.style.width = `${Math.min(energy, 10) * 10}%`;
+    }
+
+    function renderQuestion() {
+      if (energy >= 10) {
+        questionPanel.innerHTML = `
+          <h2>Tower Cleared</h2>
+          <p class="feedback good">The first rule system worked. A tower can now be restored.</p>
+        `;
+        updateStats();
+        return;
+      }
+
+      if (hp <= 0) {
+        questionPanel.innerHTML = `
+          <h2>Run Failed</h2>
+          <p class="feedback bad">HP reached 0. The rules now have real challenge.</p>
+        `;
+        updateStats();
+        return;
+      }
+
+      const question = questions[questionIndex % questions.length];
+      questionPanel.innerHTML = `
+        <h2>Challenge Question</h2>
+        <p class="soft-text">${question.prompt}</p>
+        <div class="choices">
+          ${question.choices.map((choice) => `
+            <button class="choice" type="button" data-answer="${choice}">${choice}</button>
+          `).join("")}
+        </div>
+        <p class="feedback" aria-live="polite"></p>
+      `;
+
+      const feedback = questionPanel.querySelector(".feedback");
+      questionPanel.querySelectorAll(".choice").forEach((button) => {
+        button.addEventListener("click", () => {
+          const isCorrect = button.dataset.answer === question.answer;
+          if (isCorrect) {
+            combo += 1;
+            energy += combo;
+            HistoryPreview.markChoice(button, true, feedback, `Correct. Combo x${combo}. +${combo} Seal Energy.`);
+          } else {
+            hp -= 1;
+            combo = 0;
+            HistoryPreview.markChoice(button, false, feedback, `Wrong. HP -1. The answer is ${question.answer}.`);
+          }
+
+          questionIndex += 1;
+          updateStats();
+          setTimeout(renderQuestion, 850);
+        });
+      });
+    }
+
+    function resetRun() {
+      hp = 5;
+      combo = 0;
+      energy = 0;
+      questionIndex = 0;
+      updateStats();
+      renderQuestion();
+    }
+
+    document.querySelector("#reset-run").addEventListener("click", resetRun);
+    resetRun();
+  </script>
+</body>
+</html>

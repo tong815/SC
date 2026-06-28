@@ -889,18 +889,24 @@ function renderChronicleReader(chronicle) {
   renderChronicleCount();
 
   const preview = chronicle.projectStage || {};
+  const eraLabel = `Age ${toRomanNumeral(chronicle.order)} - ${chronicle.title}`;
 
   chronicleReaderElement.innerHTML = `
-    <p class="section-label">Chronicle ${toRomanNumeral(chronicle.order)}</p>
+    <div class="chronicle-record-header">
+      <p class="section-label">Creation Record ${toRomanNumeral(chronicle.order)}</p>
+      <span>Recovered</span>
+    </div>
     <h3>${chronicle.title}</h3>
     <div class="chronicle-dialogue">
       ${chronicle.dialogue.map((line) => createChronicleLine(line, chronicle.speakers)).join("")}
     </div>
     <div class="chronicle-project-stage">
-      <h4>Project Stage Preview</h4>
+      <h4>Observed Era</h4>
+      <p class="era-title">${eraLabel}</p>
+      <p class="time-fragment-label">Time Fragment Window</p>
       ${renderChroniclePreview(preview)}
-      <p><strong>${preview.title || "Project preview"}</strong></p>
-      <p>${preview.caption || "Screenshot support is ready for a future lesson."}</p>
+      <p><strong>${preview.title || "Time fragment"}</strong></p>
+      <p>${preview.caption || "A fragment of this era has not fully awakened yet."}</p>
     </div>
   `;
 
@@ -913,20 +919,20 @@ function renderChroniclePreview(preview) {
       <iframe
         class="chronicle-preview-frame"
         src="${preview.previewPath}"
-        title="${preview.title || "Project stage preview"}"
+        title="${preview.title || "Time Fragment Window"}"
         loading="lazy"
       ></iframe>
     `;
   }
 
   if ((preview.previewType === "image" || preview.previewImage) && preview.previewImage) {
-    return `<img src="${preview.previewImage}" alt="${preview.title || "Project stage preview"}" />`;
+    return `<img src="${preview.previewImage}" alt="${preview.title || "Time fragment"}" />`;
   }
 
   return `
     <div class="chronicle-preview-placeholder">
-      <span>Preview placeholder</span>
-      <small>${preview.previewPath || "Future preview path ready"}</small>
+      <span>Time fragment dormant</span>
+      <small>${preview.previewPath || "A fragment of this era has not fully awakened yet."}</small>
     </div>
   `;
 }

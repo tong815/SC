@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prototype v0: Question Only</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../shared/history.css">
+</head>
+<body>
+  <main class="history-page">
+    <section class="history-shell">
+      <header class="history-header">
+        <div class="fragment-banner">
+          <p>Observed Time Fragment</p>
+          <strong>Age I - The First Idea</strong>
+          <span>This is not the current world. This is a recovered fragment of how the world once looked.</span>
+        </div>
+        <h1>Prototype v0: Question Only</h1>
+        <p class="subtitle">The first fossil of the world was only one question, four choices, and a tiny spark of feedback.</p>
+      </header>
+
+      <div class="stage-grid">
+        <section id="question-panel" class="panel" aria-live="polite"></section>
+        <aside class="panel">
+          <h2>What existed?</h2>
+          <p class="soft-text">No topics. No map. No HP. The project began by asking: can a student answer one question on a webpage?</p>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <script src="../shared/history-utils.js"></script>
+  <script>
+    HistoryPreview.makeQuestion(document.querySelector("#question-panel"), {
+      title: "One Math Question",
+      prompt: "What is 1/2 + 1/4?",
+      choices: ["2/6", "3/4", "1/8", "4/4"],
+      answer: "3/4"
+    });
+  </script>
+</body>
+</html>

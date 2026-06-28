@@ -28,13 +28,13 @@
       },
       {
         "speaker": "G",
-        "text": "There is an ancient tool. It may shape the first page."
+        "text": "There is an ancient tool called C. It may shape the first page."
       }
     ],
     "projectStage": {
       "title": "Prototype v0: Question Only",
-      "caption": "The earliest form was a simple page with one question and one answer.",
-      "previewType": "placeholder",
+      "caption": "A recovered fragment from the time when the world was only one question and one answer.",
+      "previewType": "iframe",
       "previewImage": "",
       "previewPath": "history/v0-question-only/"
     }
@@ -73,8 +73,8 @@
     ],
     "projectStage": {
       "title": "Prototype v1: Topic Structure",
-      "caption": "Questions were organized into topics so practice could become a journey.",
-      "previewType": "placeholder",
+      "caption": "A recovered fragment from the time when questions first gathered into topics.",
+      "previewType": "iframe",
       "previewImage": "",
       "previewPath": "history/v1-topic-structure/"
     }
@@ -113,8 +113,8 @@
     ],
     "projectStage": {
       "title": "Prototype v2: The First Map",
-      "caption": "The topic list became a map with six outer towers.",
-      "previewType": "placeholder",
+      "caption": "A living fragment from the time when the six towers first rose.",
+      "previewType": "iframe",
       "previewImage": "",
       "previewPath": "history/v2-first-map/"
     }
@@ -153,8 +153,8 @@
     ],
     "projectStage": {
       "title": "Prototype v3: Rules of Challenge",
-      "caption": "HP, Seal Energy, combos, tower clears, key fragments, and save/load took shape.",
-      "previewType": "placeholder",
+      "caption": "A recovered fragment from the time when HP, Seal Energy, combos, and rewards became rules.",
+      "previewType": "iframe",
       "previewImage": "",
       "previewPath": "history/v3-rules/"
     }
@@ -193,8 +193,8 @@
     ],
     "projectStage": {
       "title": "Prototype v4: The First Travelers",
-      "caption": "A future stage will let teams enter names and meet Sage Tong before exploring.",
-      "previewType": "placeholder",
+      "caption": "A recovered fragment from the time when travelers first spoke their names at the gate.",
+      "previewType": "iframe",
       "previewImage": "",
       "previewPath": "history/v4-travelers/"
     }
@@ -237,8 +237,8 @@
     ],
     "projectStage": {
       "title": "Prototype v5: The Complete Prototype",
-      "caption": "The current Math RPG prototype is complete enough to explore, but one question remains.",
-      "previewType": "placeholder",
+      "caption": "A recovered fragment from the current era. The world can be explored, but one question remains.",
+      "previewType": "iframe",
       "previewImage": "",
       "previewPath": "history/v5-complete-prototype/"
     }

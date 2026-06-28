@@ -10,11 +10,11 @@ Review
 
 **Current Goal:**
 
-Review the updated Chronicles content and preview structure for the six outer-tower records.
+Review the Chronicle and historical preview presentation polish.
 
 **Current Issue:**
 
-Codex updated `chronicles.json` from placeholder records into a six-stage creation-history narrative. Each Chronicle now explains one prototype stage, keeps the final truth hidden for the future central tower, and includes preview metadata (`previewType`, `previewImage`, `previewPath`). `app.js` now supports placeholder, image, and future iframe previews without hardcoding Chronicle text. GPT should review whether the content stays age-appropriate, mythic but clear, and structurally ready for future screenshots or historical mini versions.
+Codex improved the Chronicle experience so it feels less like documentation and more like recovered creation records / observed time fragments. The main mechanics, tower rules, save/load, and Chronicle unlock rules were not changed. GPT should review whether the new terminology, visual styling, animations, and history page banners make the Chronicles feel mythic and archaeological while staying clear for Grade 5-7 students.
 
 **Artifact:**
 

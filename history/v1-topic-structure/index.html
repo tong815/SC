@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prototype v1: Topic Structure</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../shared/history.css">
+</head>
+<body>
+  <main class="history-page">
+    <section class="history-shell">
+      <header class="history-header">
+        <div class="fragment-banner">
+          <p>Observed Time Fragment</p>
+          <strong>Age II - The First Structure</strong>
+          <span>This is not the current world. This is a recovered fragment of how the world once looked.</span>
+        </div>
+        <h1>Prototype v1: Topic Structure</h1>
+        <p class="subtitle">Questions stopped floating around by themselves. They were sorted into math topics.</p>
+      </header>
+
+      <div class="stage-grid">
+        <section class="panel">
+          <h2>Choose a Topic</h2>
+          <div id="topic-grid" class="topic-grid"></div>
+        </section>
+        <section id="question-panel" class="panel" aria-live="polite"></section>
+      </div>
+    </section>
+  </main>
+
+  <script src="../shared/history-utils.js"></script>
+  <script>
+    const topics = [
+      {
+        name: "Fractions",
+        prompt: "Which fraction is equal to 0.5?",
+        choices: ["1/2", "1/3", "2/5", "3/5"],
+        answer: "1/2"
+      },
+      {
+        name: "Integers",
+        prompt: "What is -3 + 7?",
+        choices: ["-10", "-4", "4", "10"],
+        answer: "4"
+      },
+      {
+        name: "Geometry",
+        prompt: "How many degrees are in a right angle?",
+        choices: ["45", "60", "90", "180"],
+        answer: "90"
+      }
+    ];
+
+    const topicGrid = document.querySelector("#topic-grid");
+    const questionPanel = document.querySelector("#question-panel");
+
+    topics.forEach((topic) => {
+      const button = document.createElement("button");
+      button.className = "topic-card";
+      button.type = "button";
+      button.textContent = topic.name;
+      button.addEventListener("click", () => {
+        HistoryPreview.setSelected(topicGrid, button, "is-selected");
+        HistoryPreview.makeQuestion(questionPanel, {
+          title: `${topic.name} Sample`,
+          prompt: topic.prompt,
+          choices: topic.choices,
+          answer: topic.answer
+        });
+      });
+      topicGrid.append(button);
+    });
+
+    topicGrid.querySelector("button").click();
+  </script>
+</body>
+</html>

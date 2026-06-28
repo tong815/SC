@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prototype v4: The First Travelers</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../shared/history.css">
+</head>
+<body>
+  <main class="history-page">
+    <section class="history-shell">
+      <header class="history-header">
+        <div class="fragment-banner">
+          <p>Observed Time Fragment</p>
+          <strong>Age V - The First Journey</strong>
+          <span>This is not the current world. This is a recovered fragment of how the world once looked.</span>
+        </div>
+        <h1>Prototype v4: The First Travelers</h1>
+        <p class="subtitle">Before the journey begins, the world asks who is entering.</p>
+      </header>
+
+      <div class="stage-grid">
+        <section class="panel">
+          <h2>Enter the Gate</h2>
+          <form id="traveler-form" class="traveler-form">
+            <label>
+              Team Size
+              <select id="team-size">
+                <option value="1">1 traveler</option>
+                <option value="2" selected>2 travelers</option>
+                <option value="3">3 travelers</option>
+                <option value="4">4 travelers</option>
+              </select>
+            </label>
+            <div id="name-fields"></div>
+            <button type="submit">Begin Journey</button>
+          </form>
+        </section>
+
+        <section class="panel" aria-live="polite">
+          <h2>Sage Tong</h2>
+          <div id="sage-message" class="sage-box">
+            Welcome, travelers. Speak your names, and the map will begin to remember you.
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const teamSize = document.querySelector("#team-size");
+    const nameFields = document.querySelector("#name-fields");
+    const sageMessage = document.querySelector("#sage-message");
+    const form = document.querySelector("#traveler-form");
+
+    function renderNameFields() {
+      const size = Number(teamSize.value);
+      nameFields.innerHTML = "";
+      for (let index = 1; index <= size; index += 1) {
+        const label = document.createElement("label");
+        label.innerHTML = `
+          Traveler ${index}
+          <input type="text" name="traveler" placeholder="Enter a name" value="${index === 1 ? "Alex" : ""}">
+        `;
+        nameFields.append(label);
+      }
+    }
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const names = [...form.querySelectorAll("input")]
+        .map((input, index) => input.value.trim() || `Traveler ${index + 1}`);
+      sageMessage.innerHTML = `
+        <strong>${names.join(", ")}</strong><br>
+        Sage Tong opens the path. The first travelers are ready to explore the towers.
+      `;
+    });
+
+    teamSize.addEventListener("change", renderNameFields);
+    renderNameFields();
+  </script>
+</body>
+</html>

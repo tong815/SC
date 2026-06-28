@@ -336,11 +336,19 @@ h1 {
   border: 1px solid #e5c985;
   border-radius: 8px;
   cursor: pointer;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
 }
 
 .chronicle-item:hover:not(:disabled),
 .chronicle-item:focus-visible {
   background: #fff4d1;
+  border-color: #c9973f;
+  box-shadow: 0 10px 20px rgba(111, 84, 33, 0.12);
+  transform: translateY(-1px);
   outline: none;
 }
 
@@ -374,12 +382,18 @@ h1 {
 .chronicle-reader {
   min-height: 520px;
   padding: 28px;
+  background:
+    radial-gradient(circle at 18% 8%, rgba(255, 255, 255, 0.9), transparent 14rem),
+    linear-gradient(135deg, rgba(255, 248, 230, 0.95), rgba(255, 253, 247, 0.9));
+  animation: recoveredRecordIn 360ms ease both;
 }
 
 .chronicle-reader h3 {
   margin-bottom: 20px;
   font-size: clamp(1.8rem, 4vw, 3.4rem);
   line-height: 1.05;
+  text-shadow: 0 0 18px rgba(193, 132, 22, 0.18);
+  animation: chronicleTitleRise 420ms ease both;
 }
 
 .chronicle-reader > p {
@@ -388,10 +402,38 @@ h1 {
   font-weight: 720;
 }
 
+.chronicle-record-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(201, 151, 63, 0.32);
+}
+
+.chronicle-record-header .section-label {
+  margin: 0;
+}
+
+.chronicle-record-header span {
+  border: 1px solid rgba(36, 113, 79, 0.35);
+  border-radius: 999px;
+  padding: 5px 10px;
+  color: var(--forest);
+  background: rgba(233, 246, 237, 0.78);
+  font-size: 0.76rem;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .chronicle-dialogue {
   display: grid;
   gap: 16px;
   margin: 22px 0;
+  animation: chronicleDialogueReveal 480ms ease 80ms both;
 }
 
 .chronicle-line {
@@ -439,9 +481,13 @@ h1 {
 .chronicle-project-stage {
   margin-top: 24px;
   padding: 18px;
-  background: rgba(255, 255, 255, 0.64);
+  background:
+    linear-gradient(135deg, rgba(255, 252, 241, 0.84), rgba(238, 225, 193, 0.58)),
+    rgba(255, 255, 255, 0.64);
   border: 1px solid #e5c985;
   border-radius: 8px;
+  box-shadow: inset 0 0 24px rgba(193, 132, 22, 0.08);
+  animation: timeFragmentReveal 480ms ease 120ms both;
 }
 
 .chronicle-project-stage h4 {
@@ -450,6 +496,27 @@ h1 {
   font-size: 0.82rem;
   font-weight: 950;
   letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.chronicle-project-stage .era-title {
+  margin-bottom: 4px;
+  color: #3c321f;
+  font-size: 1.12rem;
+  font-weight: 950;
+}
+
+.time-fragment-label {
+  display: inline-flex;
+  margin-bottom: 10px;
+  border: 1px solid rgba(201, 151, 63, 0.35);
+  border-radius: 999px;
+  padding: 5px 9px;
+  color: #6f5421;
+  background: rgba(255, 244, 209, 0.72);
+  font-size: 0.78rem;
+  font-weight: 950;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
@@ -468,11 +535,22 @@ h1 {
     #fffdf7;
   border: 1px dashed #c9973f;
   border-radius: 8px;
+  box-shadow: 0 0 0 4px rgba(201, 151, 63, 0.08);
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
 }
 
 .chronicle-preview-frame {
   display: block;
   height: 240px;
+}
+
+.chronicle-preview-frame:hover,
+.chronicle-preview-frame:focus-visible {
+  border-color: #6f5421;
+  box-shadow: 0 0 20px rgba(201, 151, 63, 0.26);
 }
 
 .chronicle-preview-placeholder span,
@@ -490,6 +568,50 @@ h1 {
 .chronicle-project-stage p {
   margin-bottom: 5px;
   color: #5f4f2f;
+}
+
+@keyframes recoveredRecordIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes chronicleTitleRise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes chronicleDialogueReveal {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes timeFragmentReveal {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .tower-topbar { align-items: center; }
