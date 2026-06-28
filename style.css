@@ -75,8 +75,100 @@ h1 {
 
 .page-content { padding: 28px 24px 56px; }
 
-.map-section, .practice-view, .chronicle-screen {
+.opening-screen, .map-section, .practice-view, .chronicle-screen {
   margin-bottom: 26px;
+}
+
+.opening-screen {
+  min-height: 560px;
+  display: grid;
+  place-items: center;
+}
+
+.opening-content {
+  width: min(780px, 100%);
+}
+
+.opening-card {
+  padding: clamp(24px, 5vw, 44px);
+  background:
+    radial-gradient(circle at 14% 12%, rgba(255, 245, 214, 0.82), transparent 16rem),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(233, 247, 239, 0.82));
+  border: 1px solid rgba(193, 132, 22, 0.34);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.opening-card.is-wide {
+  width: min(920px, 100%);
+}
+
+.opening-card h2 {
+  margin-bottom: 10px;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  line-height: 1.05;
+}
+
+.opening-field {
+  display: grid;
+  gap: 6px;
+  margin: 16px 0;
+  color: #41516a;
+  font-weight: 850;
+}
+
+.opening-field input {
+  width: 100%;
+  min-height: 44px;
+  padding: 9px 11px;
+  color: var(--text);
+  font: inherit;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.opening-error {
+  min-height: 24px;
+  color: var(--danger);
+  font-weight: 850;
+}
+
+.opening-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.team-name-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 14px;
+  max-height: 48vh;
+  overflow: auto;
+  padding-right: 4px;
+}
+
+.opening-team-line {
+  color: var(--forest);
+  font-weight: 850;
+}
+
+.sage-dialogue {
+  display: grid;
+  gap: 8px;
+  margin: 20px 0;
+  color: #2f2819;
+  font-weight: 760;
+}
+
+.sage-dialogue p {
+  margin: 0;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.68);
+  border-left: 4px solid var(--gold);
+  border-radius: 8px;
 }
 
 .map-heading, .tower-overview, .tower-topbar, .chronicle-topbar {
@@ -1180,6 +1272,9 @@ h1 {
 @media (max-width: 700px) {
   .site-header { padding: 32px 18px 20px; }
   .page-content { padding: 24px 14px 44px; }
+  .team-name-grid {
+    grid-template-columns: 1fr;
+  }
   .map-heading, .tower-overview, .tower-topbar, .chronicle-topbar {
     align-items: flex-start;
     flex-direction: column;

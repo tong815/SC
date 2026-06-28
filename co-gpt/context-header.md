@@ -10,11 +10,11 @@ Review
 
 **Current Goal:**
 
-Review the Time Fragment viewing polish and Chronicle keyboard guard.
+Review the demo-completion fixes: return-to-world state preservation, opening flow, team data, and Save/Load Chronicle story.
 
 **Current Issue:**
 
-Codex improved the revealed Time Fragment layout so the historical iframe becomes the primary focus of the page. The iframe now uses viewport-based height instead of a small fixed height, and the reader scrolls the observed-era panel into view after reveal. Codex also tightened Enter/Space handling so keyboard shortcuts only advance Chronicle dialogue before the Time Fragment is revealed and do not intercept input from buttons, form controls, links, contenteditable areas, or iframes. GPT should review whether the layout and interaction behavior are appropriate for student use.
+Codex fixed the critical state-loss bug caused by the final Time Fragment reloading `index.html` with `target="_top"`. The final fragment now posts a return-to-world message to the parent app, so returning to the map uses existing in-memory progress instead of starting a new game. Codex also added a first-run opening flow, optional normalized team data, and short Save/Load memory lines in Chronicle IV. GPT should review whether these changes make the demo feel like a complete playable beginning while preserving existing game state and save/load compatibility.
 
 **Artifact:**
 

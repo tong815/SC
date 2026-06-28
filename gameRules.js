@@ -33,6 +33,10 @@ const GameRules = (() => {
         clearedTowerIds: [],
         towerProgress,
         keyFragments: [],
+        team: {
+          size: 1,
+          members: ["Explorer 1"],
+        },
         chronicles: createDefaultChronicleProgress(),
         hasCentralTowerKey: false,
         centralTowerUnlocked: false,

@@ -1,4 +1,6 @@
 // DOM references: app.js owns rendering and browser events.
+const openingScreenElement = document.querySelector("#opening-screen");
+const openingContentElement = document.querySelector("#opening-content");
 const mapScreenElement = document.querySelector("#map-screen");
 const practiceViewElement = document.querySelector("#practice-view");
 const backToMapButton = document.querySelector("#back-to-map");
@@ -49,6 +51,7 @@ let progress = null;
 // A tower run is temporary: HP, streak, and run progress reset when entering or retrying.
 let currentRun = null;
 let currentChronicleExperience = null;
+let openingCompleted = false;
 
 // Data loading
 async function loadJson(path) {
@@ -93,6 +96,173 @@ function createEmptyProgress() {
     practiceTopics: getPracticeTopics(),
     outerTowers: getOuterTowers(),
   });
+}
+
+function createDefaultTeam(size = 1) {
+  const safeSize = clamp(Math.round(Number(size) || 1), 1, 50);
+
+  return {
+    size: safeSize,
+    members: Array.from({ length: safeSize }, (_, index) => `Explorer ${index + 1}`),
+  };
+}
+
+function normalizeTeamProgress(importedTeam = null) {
+  if (!importedTeam || typeof importedTeam !== "object") {
+    return createDefaultTeam(1);
+  }
+
+  const importedMembers = Array.isArray(importedTeam.members)
+    ? importedTeam.members
+    : [];
+  const requestedSize = Number(importedTeam.size);
+  const memberBasedSize = importedMembers.length || 1;
+  const safeSize = clamp(
+    Number.isInteger(requestedSize) && requestedSize > 0 ? requestedSize : memberBasedSize,
+    1,
+    50,
+  );
+  const members = Array.from({ length: safeSize }, (_, index) => {
+    const value = importedMembers[index];
+    const normalizedName = typeof value === "string" ? value.trim() : "";
+
+    return normalizedName || `Explorer ${index + 1}`;
+  });
+
+  return {
+    size: safeSize,
+    members,
+  };
+}
+
+// Opening flow
+function showOpeningWelcome() {
+  openingScreenElement.hidden = false;
+  mapScreenElement.hidden = true;
+  practiceViewElement.hidden = true;
+  chronicleScreenElement.hidden = true;
+  openingContentElement.innerHTML = `
+    <div class="opening-card">
+      <p class="section-label">Welcome</p>
+      <h2 id="opening-title">Exam Visualizer</h2>
+      <p>A world built from questions, records, and memory.</p>
+      <div class="opening-actions">
+        <button id="begin-opening" class="progress-button" type="button">Begin</button>
+        <button id="load-from-opening" class="back-button" type="button">Load Progress</button>
+      </div>
+    </div>
+  `;
+  openingContentElement
+    .querySelector("#begin-opening")
+    .addEventListener("click", showTeamSizeStep);
+  openingContentElement
+    .querySelector("#load-from-opening")
+    .addEventListener("click", requestProgressFile);
+}
+
+function showTeamSizeStep() {
+  openingContentElement.innerHTML = `
+    <form id="team-size-form" class="opening-card">
+      <p class="section-label">First Memory</p>
+      <h2 id="opening-title">How many explorers are joining this expedition?</h2>
+      <p>Every world begins with its creators. Tell me who is joining this expedition.</p>
+      <label class="opening-field">
+        Team size
+        <input id="team-size-input" type="number" min="1" max="50" step="1" value="1" inputmode="numeric" />
+      </label>
+      <p id="team-size-error" class="opening-error" aria-live="polite"></p>
+      <button class="progress-button" type="submit">Continue</button>
+    </form>
+  `;
+
+  openingContentElement
+    .querySelector("#team-size-form")
+    .addEventListener("submit", (event) => {
+      event.preventDefault();
+      const sizeInput = openingContentElement.querySelector("#team-size-input");
+      const errorElement = openingContentElement.querySelector("#team-size-error");
+      const teamSize = Number(sizeInput.value);
+
+      if (!Number.isInteger(teamSize) || teamSize < 1 || teamSize > 50) {
+        errorElement.textContent = "Enter a whole number from 1 to 50.";
+        return;
+      }
+
+      showTeamNamesStep(teamSize);
+    });
+}
+
+function showTeamNamesStep(teamSize) {
+  const fields = Array.from({ length: teamSize }, (_, index) => {
+    const defaultName = `Explorer ${index + 1}`;
+
+    return `
+      <label class="opening-field">
+        Explorer ${index + 1}
+        <input name="team-member" type="text" value="${defaultName}" />
+      </label>
+    `;
+  }).join("");
+
+  openingContentElement.innerHTML = `
+    <form id="team-names-form" class="opening-card is-wide">
+      <p class="section-label">Team</p>
+      <h2 id="opening-title">Name Your Team</h2>
+      <p>These names will become part of this world's first memory.</p>
+      <div class="team-name-grid">${fields}</div>
+      <button class="progress-button" type="submit">Continue</button>
+    </form>
+  `;
+
+  openingContentElement
+    .querySelector("#team-names-form")
+    .addEventListener("submit", (event) => {
+      event.preventDefault();
+      const members = [...openingContentElement.querySelectorAll("[name='team-member']")]
+        .map((input, index) => input.value.trim() || `Explorer ${index + 1}`);
+
+      progress.gameProgress.team = normalizeTeamProgress({
+        size: members.length,
+        members,
+      });
+      showSageTongIntro();
+    });
+}
+
+function showSageTongIntro() {
+  const team = normalizeTeamProgress(progress.gameProgress.team);
+  const teamPreview = team.members.slice(0, 6).join(", ");
+  const extraCount = Math.max(0, team.members.length - 6);
+  const teamLine = extraCount > 0
+    ? `${teamPreview}, and ${extraCount} more`
+    : teamPreview;
+
+  progress.gameProgress.team = team;
+  openingContentElement.innerHTML = `
+    <div class="opening-card is-wide">
+      <p class="section-label">Sage Tong</p>
+      <h2 id="opening-title">Welcome, builders.</h2>
+      <p class="opening-team-line">${teamLine}</p>
+      <div class="sage-dialogue">
+        <p>"Every world begins with its creators."</p>
+        <p>"This world is made from questions, records, and memory."</p>
+        <p>"Each tower holds a challenge."</p>
+        <p>"When you clear a tower, a Creation Record may return."</p>
+        <p>"Those records will show you how this world was built."</p>
+        <p>"Work together. Learn the rules. Then create a world of your own."</p>
+      </div>
+      <button id="enter-world" class="progress-button" type="button">Enter the World</button>
+    </div>
+  `;
+  openingContentElement
+    .querySelector("#enter-world")
+    .addEventListener("click", enterWorldFromOpening);
+}
+
+function enterWorldFromOpening() {
+  openingCompleted = true;
+  openingScreenElement.hidden = true;
+  showMapScreen();
 }
 
 // Map rendering and map interactions
@@ -585,8 +755,13 @@ function renderHpHearts(hp) {
 }
 
 function showMapScreen() {
+  if (!progress) {
+    progress = createEmptyProgress();
+  }
+
   currentRun = null;
   currentChronicleExperience = null;
+  openingScreenElement.hidden = true;
   practiceViewElement.hidden = true;
   chronicleScreenElement.hidden = true;
   mapScreenElement.hidden = false;
@@ -649,6 +824,7 @@ function loadProgressFile(event) {
     try {
       const saveData = JSON.parse(reader.result);
       progress = validateAndNormalizeSaveData(saveData);
+      openingCompleted = true;
       currentRun = null;
       showMapScreen();
       setProgressMessage("Progress file loaded.");
@@ -817,6 +993,7 @@ function normalizeGameProgress(importedGameProgress = {}) {
       clearProgress: TOWER_CLEAR_PROGRESS,
     }),
     keyFragments,
+    team: normalizeTeamProgress(importedGameProgress.team),
     chronicles: GameRules.normalizeChronicleProgress(
       importedGameProgress.chronicles,
       getOrderedChronicles().map((chronicle) => chronicle.id),
@@ -1191,8 +1368,11 @@ async function initializeExam() {
       loadJson("chronicles.json"),
     ]);
     progress = createEmptyProgress();
-    renderMap();
-    setMapStatus("Choose a tower to begin a run.");
+    if (openingCompleted) {
+      showMapScreen();
+    } else {
+      showOpeningWelcome();
+    }
   } catch (error) {
     showLoadError(error);
   }
@@ -1239,6 +1419,20 @@ function isInteractiveKeyTarget(target) {
     ),
   );
 }
+
+window.addEventListener("message", (event) => {
+  if (event.origin !== window.location.origin) {
+    return;
+  }
+
+  if (event.data?.type !== "exam-visualizer:return-to-world") {
+    return;
+  }
+
+  openingCompleted = true;
+  showMapScreen();
+  setMapStatus("Returned to the world. Progress is preserved.");
+});
 
 progressFileInput.addEventListener("change", loadProgressFile);
 gameMapElement.addEventListener("click", handleMapClick);

@@ -126,7 +126,7 @@
     "id": "chronicle-004",
     "order": 4,
     "title": "The First Rules",
-    "description": "A recovered record from the age when challenge, HP, and rewards took shape.",
+    "description": "A recovered record from the age when challenge, rewards, and memory took shape.",
     "unlockedByTower": "fourth-new-tower-clear",
     "speakers": {
       "T": "Sage Tong",
@@ -153,6 +153,22 @@
       {
         "speaker": "T",
         "text": "And the world must remember what has been won."
+      },
+      {
+        "speaker": "G",
+        "text": "So we taught the world to remember."
+      },
+      {
+        "speaker": "T",
+        "text": "Each save is a small record of what was restored."
+      },
+      {
+        "speaker": "G",
+        "text": "Each load returns to a remembered path."
+      },
+      {
+        "speaker": "T",
+        "text": "This is not magic. It is structure."
       }
     ],
     "projectStage": {
