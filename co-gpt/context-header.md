@@ -10,11 +10,11 @@ Review
 
 **Current Goal:**
 
-Review the architecture cleanup that prepares the project for future educational RPG content without changing the current gameplay.
+Review the updated Chronicles content and preview structure for the six outer-tower records.
 
 **Current Issue:**
 
-Codex moved several reusable rule helpers from `app.js` into `gameRules.js` and added clear responsibility comments to the main UI files. The cleanup keeps the existing map -> tower -> answer -> clear/fail -> return flow working, preserves save/load compatibility, and avoids adding new lore, bosses, sounds, animations, or mechanics. GPT should review whether the file boundaries are now clearer for future student contributors.
+Codex updated `chronicles.json` from placeholder records into a six-stage creation-history narrative. Each Chronicle now explains one prototype stage, keeps the final truth hidden for the future central tower, and includes preview metadata (`previewType`, `previewImage`, `previewPath`). `app.js` now supports placeholder, image, and future iframe previews without hardcoding Chronicle text. GPT should review whether the content stays age-appropriate, mythic but clear, and structurally ready for future screenshots or historical mini versions.
 
 **Artifact:**
 

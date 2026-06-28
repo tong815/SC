@@ -4,6 +4,7 @@ const practiceViewElement = document.querySelector("#practice-view");
 const backToMapButton = document.querySelector("#back-to-map");
 const saveProgressButton = document.querySelector("#save-progress");
 const loadProgressButton = document.querySelector("#load-progress");
+const openChroniclesButton = document.querySelector("#open-chronicles");
 const progressFileInput = document.querySelector("#progress-file");
 const questionsAnsweredElement = document.querySelector("#questions-answered");
 const accuracyPercentageElement = document.querySelector("#accuracy-percentage");
@@ -15,6 +16,7 @@ const mapStatusElement = document.querySelector("#map-status");
 const blacksmithButton = document.querySelector("#blacksmith-button");
 const blacksmithPanelElement = document.querySelector("#blacksmith-panel");
 const fragmentCountElement = document.querySelector("#fragment-count");
+const chronicleCountElement = document.querySelector("#chronicle-count");
 const forgeKeyButton = document.querySelector("#forge-key");
 const towerTitleElement = document.querySelector("#tower-title");
 const towerDescriptionElement = document.querySelector("#tower-description");
@@ -25,6 +27,11 @@ const towerProgressTextElement = document.querySelector("#tower-progress-text");
 const towerProgressFillElement = document.querySelector("#tower-progress-fill");
 const towerResultElement = document.querySelector("#tower-result");
 const questionListElement = document.querySelector("#question-list");
+const chronicleScreenElement = document.querySelector("#chronicle-screen");
+const closeChroniclesButton = document.querySelector("#close-chronicles");
+const chronicleStatusElement = document.querySelector("#chronicle-status");
+const chronicleListElement = document.querySelector("#chronicle-list");
+const chronicleReaderElement = document.querySelector("#chronicle-reader");
 const errorMessageElement = document.querySelector("#error-message");
 
 const APP_NAME = "Exam Visualizer";
@@ -35,6 +42,7 @@ const TOWER_CLEAR_PROGRESS = 50;
 
 // Loaded data and runtime state. currentRun is never saved.
 let allQuestions = [];
+let allChronicles = [];
 let mapData = null;
 let progress = null;
 // A tower run is temporary: HP, streak, and run progress reset when entering or retrying.
@@ -66,6 +74,14 @@ function getQuestionsForTopic(questions, topic) {
   }
 
   return questions.filter((question) => question.topic === topic);
+}
+
+function getOrderedChronicles() {
+  return [...allChronicles].sort((first, second) => first.order - second.order);
+}
+
+function isChronicleUnlocked(chronicle) {
+  return progress.gameProgress.chronicles.unlockedChronicleIds.includes(chronicle.id);
 }
 
 // Player progress defaults and save normalization
@@ -113,6 +129,7 @@ function renderMap() {
 
   renderPlayerPosition();
   renderBlacksmith();
+  renderChronicleCount();
   renderProgress();
 }
 
@@ -145,6 +162,11 @@ function renderBlacksmith() {
   forgeKeyButton.textContent = progress.gameProgress.hasCentralTowerKey
     ? "Key Forged"
     : "Forge Key";
+}
+
+function renderChronicleCount() {
+  const unlockedCount = progress.gameProgress.chronicles.unlockedChronicleIds.length;
+  chronicleCountElement.textContent = `Chronicles: ${unlockedCount} / ${allChronicles.length}`;
 }
 
 function getBlacksmithRecipe() {
@@ -418,17 +440,30 @@ function renderTowerActionButton(label, onClick) {
 function completeTowerRun() {
   const { tower } = currentRun;
   const wasAlreadyCleared = GameRules.isTowerCleared(progress.gameProgress, tower.id);
+  let unlockedChronicle = null;
 
   currentRun.isFinished = true;
   updateSavedTowerProgress(tower, true);
   progress.gameProgress = GameRules.onCorrectAnswer(progress.gameProgress, tower);
 
+  if (!wasAlreadyCleared) {
+    const unlockResult = GameRules.unlockNextChronicle(
+      progress.gameProgress,
+      getOrderedChronicles(),
+    );
+    progress.gameProgress = unlockResult.state;
+    unlockedChronicle = unlockResult.chronicle;
+  }
+
   const rewardMessage = wasAlreadyCleared
     ? "Tower cleared again. No new key fragment because this tower was already completed."
     : "Tower cleared. Key fragment collected.";
+  const chronicleMessage = unlockedChronicle
+    ? ` Chronicle unlocked: ${unlockedChronicle.title}.`
+    : "";
 
-  setTowerStatus(rewardMessage);
-  showRunEndMessage("Tower Cleared", rewardMessage, true);
+  setTowerStatus(`${rewardMessage}${chronicleMessage}`);
+  showRunEndMessage("Tower Cleared", `${rewardMessage}${chronicleMessage}`, true, unlockedChronicle);
   renderMap();
 }
 
@@ -445,18 +480,28 @@ function failTowerRun() {
   );
 }
 
-function showRunEndMessage(title, message, wasCleared) {
+function showRunEndMessage(title, message, wasCleared, unlockedChronicle = null) {
   questionListElement.innerHTML = "";
   towerResultElement.hidden = false;
   towerResultElement.className = `tower-result ${wasCleared ? "is-cleared" : "is-failed"}`;
+  const chronicleAction = unlockedChronicle
+    ? `<button id="read-chronicle-action" class="progress-button" type="button">Read Chronicle</button>`
+    : "";
   towerResultElement.innerHTML = `
     <h3>${title}</h3>
     <p>${message}</p>
     <div class="tower-result-actions">
+      ${chronicleAction}
       <button id="return-map-action" class="progress-button" type="button">Back to Map</button>
       <button id="retry-tower-action" class="progress-button" type="button">Retry Tower</button>
     </div>
   `;
+
+  if (unlockedChronicle) {
+    towerResultElement
+      .querySelector("#read-chronicle-action")
+      .addEventListener("click", () => showChronicleScreen(unlockedChronicle.id));
+  }
 
   towerResultElement
     .querySelector("#return-map-action")
@@ -540,6 +585,7 @@ function renderHpHearts(hp) {
 function showMapScreen() {
   currentRun = null;
   practiceViewElement.hidden = true;
+  chronicleScreenElement.hidden = true;
   mapScreenElement.hidden = false;
   towerResultElement.className = "tower-result";
   questionListElement.innerHTML = "";
@@ -752,6 +798,7 @@ function normalizeGameProgress(importedGameProgress = {}) {
   const clearedTowerIds = getUniqueStringArray(importedGameProgress.clearedTowerIds).filter(
     (towerId) => validTowerIds.has(towerId),
   );
+  const validChronicleIds = allChronicles.map((chronicle) => chronicle.id);
 
   // Save files keep permanent tower progress only; live HP is intentionally excluded.
   return {
@@ -767,9 +814,144 @@ function normalizeGameProgress(importedGameProgress = {}) {
       clearProgress: TOWER_CLEAR_PROGRESS,
     }),
     keyFragments,
+    chronicles: GameRules.normalizeChronicleProgress(
+      importedGameProgress.chronicles,
+      getOrderedChronicles().map((chronicle) => chronicle.id),
+      clearedTowerIds.length,
+    ),
     hasCentralTowerKey: Boolean(importedGameProgress.hasCentralTowerKey),
     centralTowerUnlocked: Boolean(importedGameProgress.centralTowerUnlocked),
   };
+}
+
+// Chronicle rendering and navigation
+function showChronicleScreen(chronicleId = null) {
+  currentRun = null;
+  mapScreenElement.hidden = true;
+  practiceViewElement.hidden = true;
+  chronicleScreenElement.hidden = false;
+
+  renderChronicleList();
+
+  const selectedChronicle =
+    getOrderedChronicles().find((chronicle) => chronicle.id === chronicleId) ||
+    getOrderedChronicles().find((chronicle) => isChronicleUnlocked(chronicle));
+
+  if (selectedChronicle) {
+    renderChronicleReader(selectedChronicle);
+  } else {
+    renderEmptyChronicleReader();
+  }
+}
+
+function renderChronicleList() {
+  chronicleListElement.innerHTML = "";
+
+  getOrderedChronicles().forEach((chronicle) => {
+    const unlocked = isChronicleUnlocked(chronicle);
+    const read = progress.gameProgress.chronicles.readChronicleIds.includes(chronicle.id);
+    const item = document.createElement("button");
+
+    item.type = "button";
+    item.className = [
+      "chronicle-item",
+      unlocked ? "is-unlocked" : "is-locked",
+      read ? "is-read" : "",
+    ]
+      .filter(Boolean)
+      .join(" ");
+    item.disabled = !unlocked;
+    item.innerHTML = `
+      <span>Chronicle ${toRomanNumeral(chronicle.order)}</span>
+      <strong>${unlocked ? chronicle.title : "Locked Record"}</strong>
+      <small>${read ? "Read" : unlocked ? "Unlocked" : "Clear a new tower"}</small>
+    `;
+
+    if (unlocked) {
+      item.addEventListener("click", () => renderChronicleReader(chronicle));
+    }
+
+    chronicleListElement.append(item);
+  });
+}
+
+function renderChronicleReader(chronicle) {
+  if (!isChronicleUnlocked(chronicle)) {
+    renderEmptyChronicleReader();
+    return;
+  }
+
+  progress.gameProgress = GameRules.markChronicleRead(
+    progress.gameProgress,
+    chronicle.id,
+  );
+  renderChronicleList();
+  renderChronicleCount();
+
+  const preview = chronicle.projectStage || {};
+
+  chronicleReaderElement.innerHTML = `
+    <p class="section-label">Chronicle ${toRomanNumeral(chronicle.order)}</p>
+    <h3>${chronicle.title}</h3>
+    <div class="chronicle-dialogue">
+      ${chronicle.dialogue.map((line) => createChronicleLine(line, chronicle.speakers)).join("")}
+    </div>
+    <div class="chronicle-project-stage">
+      <h4>Project Stage Preview</h4>
+      ${renderChroniclePreview(preview)}
+      <p><strong>${preview.title || "Project preview"}</strong></p>
+      <p>${preview.caption || "Screenshot support is ready for a future lesson."}</p>
+    </div>
+  `;
+
+  chronicleStatusElement.textContent = `${chronicle.title} opened.`;
+}
+
+function renderChroniclePreview(preview) {
+  if (preview.previewType === "iframe" && preview.previewPath) {
+    return `
+      <iframe
+        class="chronicle-preview-frame"
+        src="${preview.previewPath}"
+        title="${preview.title || "Project stage preview"}"
+        loading="lazy"
+      ></iframe>
+    `;
+  }
+
+  if ((preview.previewType === "image" || preview.previewImage) && preview.previewImage) {
+    return `<img src="${preview.previewImage}" alt="${preview.title || "Project stage preview"}" />`;
+  }
+
+  return `
+    <div class="chronicle-preview-placeholder">
+      <span>Preview placeholder</span>
+      <small>${preview.previewPath || "Future preview path ready"}</small>
+    </div>
+  `;
+}
+
+function createChronicleLine(line, speakers = {}) {
+  const speakerName = speakers[line.speaker] || line.speaker;
+
+  return `
+    <div class="chronicle-line">
+      <span>${line.speaker}</span>
+      <div>
+        <strong>${speakerName}</strong>
+        <p>"${line.text}"</p>
+      </div>
+    </div>
+  `;
+}
+
+function renderEmptyChronicleReader() {
+  chronicleReaderElement.innerHTML = `
+    <p class="section-label">Record Chamber</p>
+    <h3>No Chronicles unlocked yet</h3>
+    <p>Clear an outer tower for the first time to reveal Chronicle I.</p>
+  `;
+  chronicleStatusElement.textContent = "Clear a new tower to unlock the first Chronicle.";
 }
 
 // Utility functions
@@ -829,12 +1011,18 @@ function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
 }
 
+function toRomanNumeral(value) {
+  const numerals = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
+  return numerals[value] || String(value);
+}
+
 // Startup
 async function initializeExam() {
   try {
-    [allQuestions, mapData] = await Promise.all([
+    [allQuestions, mapData, allChronicles] = await Promise.all([
       loadJson("questions.json"),
       loadJson("map.json"),
+      loadJson("chronicles.json"),
     ]);
     progress = createEmptyProgress();
     renderMap();
@@ -845,8 +1033,10 @@ async function initializeExam() {
 }
 
 backToMapButton.addEventListener("click", showMapScreen);
+closeChroniclesButton.addEventListener("click", showMapScreen);
 saveProgressButton.addEventListener("click", saveProgress);
 loadProgressButton.addEventListener("click", requestProgressFile);
+openChroniclesButton.addEventListener("click", () => showChronicleScreen());
 progressFileInput.addEventListener("change", loadProgressFile);
 gameMapElement.addEventListener("click", handleMapClick);
 blacksmithButton.addEventListener("click", (event) => {

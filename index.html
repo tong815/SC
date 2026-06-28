@@ -38,6 +38,7 @@
         <div id="game-map" class="game-map" aria-label="Exam Island map">
           <div class="map-hud" aria-label="Player progress">
             <span id="fragment-count" class="hud-pill">Key fragments: 0 / 6</span>
+            <span id="chronicle-count" class="hud-pill">Chronicles: 0 / 6</span>
             <span id="questions-answered" class="hud-pill">0 answered</span>
             <span id="accuracy-percentage" class="hud-pill">0% accuracy</span>
           </div>
@@ -64,6 +65,9 @@
           </button>
           <button id="load-progress" class="progress-button" type="button">
             Load Progress
+          </button>
+          <button id="open-chronicles" class="progress-button" type="button">
+            Chronicles
           </button>
           <input
             id="progress-file"
@@ -112,6 +116,37 @@
 
         <div id="tower-result" class="tower-result" aria-live="polite" hidden></div>
         <div id="question-list" class="question-list" aria-live="polite"></div>
+      </section>
+
+      <section
+        id="chronicle-screen"
+        class="chronicle-screen"
+        aria-labelledby="chronicle-heading"
+        hidden
+      >
+        <div class="chronicle-topbar">
+          <button id="close-chronicles" class="back-button" type="button">
+            Back to Map
+          </button>
+          <p id="chronicle-status" class="chronicle-status" aria-live="polite"></p>
+        </div>
+
+        <div class="chronicle-layout">
+          <aside class="chronicle-index" aria-label="Chronicle list">
+            <p class="section-label">Chronicles</p>
+            <h2 id="chronicle-heading">Ancient Records</h2>
+            <div id="chronicle-list" class="chronicle-list"></div>
+          </aside>
+
+          <article id="chronicle-reader" class="chronicle-reader" aria-live="polite">
+            <p class="section-label">Record Chamber</p>
+            <h3>Select an unlocked Chronicle</h3>
+            <p>
+              First-time tower clears reveal the history of this world and the
+              project that created it.
+            </p>
+          </article>
+        </div>
       </section>
 
       <div id="error-message" class="error-message" role="alert" hidden></div>

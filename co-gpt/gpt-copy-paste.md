@@ -1,6 +1,6 @@
-# GPT Copy-Paste Handoff
+# GPT Copy-Paste Report
 
-Copy everything below and paste it into GPT.
+Please review the following implementation update for the Exam Visualizer / SC project.
 
 ---
 
@@ -16,11 +16,11 @@ Review
 
 **Current Goal:**
 
-Review the architecture cleanup that prepares the project for future educational RPG content without changing the current gameplay.
+Review the updated Chronicles content and preview structure for the six outer-tower records.
 
 **Current Issue:**
 
-Codex moved several reusable rule helpers from `app.js` into `gameRules.js` and added clear responsibility comments to the main UI files. The cleanup keeps the existing map -> tower -> answer -> clear/fail -> return flow working, preserves save/load compatibility, and avoids adding new lore, bosses, sounds, animations, or mechanics. GPT should review whether the file boundaries are now clearer for future student contributors.
+Codex updated `chronicles.json` from placeholder records into a six-stage creation-history narrative. Each Chronicle now explains one prototype stage, keeps the final truth hidden for the future central tower, and includes preview metadata (`previewType`, `previewImage`, `previewPath`). `app.js` now supports placeholder, image, and future iframe previews without hardcoding Chronicle text. GPT should review whether the content stays age-appropriate, mythic but clear, and structurally ready for future screenshots or historical mini versions.
 
 **Artifact:**
 
@@ -34,267 +34,132 @@ Implementation Report
 
 # Implementation Report
 
-**Project:**
-
-Exam Visualizer / SC
-
-**Build or Version:**
-
-Architecture Preparation Cleanup
-
-**Date:**
-
-2026-06-27
-
+**Project:** Exam Visualizer / SC
+**Build or Version:** Chronicles Narrative Content and Preview Structure
+**Date:** 2026-06-28
 **Phase:** Implementation / Review
 
----
+## What We Updated
 
-## What We Built
+Codex updated the existing Chronicles framework with the new six-stage narrative plan. This was mainly content plus light support structure. No tower practice mechanics, save/load rules, or map flow were redesigned.
 
-Codex completed a small structure cleanup to prepare the project for future educational RPG content.
+## Files Changed
 
-This was not a new gameplay-content task.
-
-Codex did not add:
-
-- new lore
-- boss content
-- sound effects
-- new animations
-- new mechanics
-
-The goal was to make the current architecture easier for students to extend without mixing data, UI, rules, and save state.
-
-The existing gameplay loop still works:
-
-Open website
--> see map
--> click outer tower
--> enter tower practice
--> answer questions
--> gain Seal Energy or lose HP
--> clear/fail the tower
--> return to map
-
----
-
-## What Was Changed
-
-Codex updated:
-
+- `chronicles.json`
 - `app.js`
-- `gameRules.js`
-- `index.html`
 - `style.css`
 - `co-gpt/context-header.md`
 - `co-gpt/implementation-report.md`
 - `co-gpt/gpt-copy-paste.md`
 
-Codex did not change:
+Note: the current worktree also still includes earlier uncommitted Chronicles framework files (`gameRules.js`, `index.html`) and the untracked `teaching-slides/` folder from the separate slides task.
 
-- `questions.json`
-- `map.json`
-- current question content
-- current map/tower data
-- current gameplay content
+## Final Chronicle Titles
 
----
+1. Chronicle I - The First Idea
+2. Chronicle II - The First Structure
+3. Chronicle III - The First World
+4. Chronicle IV - The First Rules
+5. Chronicle V - The First Journey
+6. Chronicle VI - The Complete Prototype
 
-## Current File Responsibilities
+## Narrative Boundary
 
-### `questions.json`
+The six outer-tower Chronicles answer: "How was this world built?"
 
-Stores question data only:
+They do not answer: "Why was this world built?"
 
-- question id
-- topic
-- title/prompt
-- answer choices
-- correct answer
-- explanation
+The final Builder / Creator truth remains reserved for the future central tower or boss encounter.
 
-No UI logic.
-No game-state logic.
+## Data Structure
 
-### `map.json`
+`chronicles.json` now stores:
 
-Stores map and tower data:
+- `id`
+- `order`
+- `title`
+- `unlockedByTower`
+- `speakers`
+- `dialogue`
+- `projectStage.title`
+- `projectStage.caption`
+- `projectStage.previewType`
+- `projectStage.previewImage`
+- `projectStage.previewPath`
 
-- tower id
-- tower type
-- tower topic
-- tower name
-- tower story description
-- tower position
-- tower reward/key fragment
-- blacksmith recipe
+No Chronicle text is hardcoded in `app.js`.
 
-No runtime player progress is stored here.
+## Preview Structure
 
-### `gameRules.js`
+Each Chronicle now has preview metadata for future historical project versions:
 
-Stores reusable game-rule helpers.
+- `previewType: "placeholder"` for now
+- `previewImage: ""`
+- `previewPath` under future `history/...` folders
 
-This file now has a clear comment:
+Future supported paths:
 
-`Pure/reusable game rules. This file must not read or write the DOM.`
+- `history/v0-question-only/`
+- `history/v1-topic-structure/`
+- `history/v2-first-map/`
+- `history/v3-rules/`
+- `history/v4-travelers/`
+- `history/v5-complete-prototype/`
 
-It does not directly manipulate HTML.
+`app.js` now supports:
 
-### `app.js`
+- placeholder previews
+- image previews
+- future iframe previews
 
-Still controls browser runtime behavior:
+## UI Support
 
-- data loading
-- data lookup helpers
-- map rendering
-- map interactions
-- tower-run state
-- shuffled question deck
-- question-card rendering
-- answer handling
-- tower outcome flow
-- permanent answer statistics
-- tower practice UI rendering
-- save/load import/export
-- blacksmith and central tower unlock flow
-- startup
+The existing separate Chronicle screen was preserved. The reader still shows:
 
-Section comments were added so students can find these areas more easily.
+- Chronicle number
+- title
+- dialogue between T and G
+- project stage title
+- project stage caption
+- preview placeholder / future preview area
 
-### `index.html`
+The dialogue remains manuscript-like, not chat-like.
 
-Owns static UI containers only.
+## Save / Load
 
-A file-level comment now explains:
+No save/load structure was redesigned. Existing Chronicle save fields remain:
 
-`index.html defines the static UI containers. Game data, rules, and save state live outside this file.`
+- `unlockedChronicleIds`
+- `readChronicleIds`
+- `currentChronicleId`
+- `lastUnlockedChronicleId`
 
-### `style.css`
+## Tests
 
-Owns presentation only.
+Static checks:
 
-A file-level comment now explains:
+- `node --check app.js`
+- `node --check gameRules.js`
+- parsed `questions.json`, `map.json`, `chronicles.json`
+- `git diff --check` passed with only normal CRLF warnings
 
-`style.css owns presentation only: layout, visual states, and small UI animations.`
+Browser checks:
 
----
-
-## Logic Moved Into `gameRules.js`
-
-Codex moved or added these reusable helpers to `gameRules.js`:
-
-- `createDefaultPlayerProgress`
-- `createDefaultTowerProgress`
-- `normalizeTowerProgress`
-- `calculateSealEnergyGain`
-- `isTowerRunCleared`
-- `updateTowerRunProgress`
-
-These helpers support:
-
-- creating default player progress
-- creating default per-tower progress
-- normalizing saved tower progress
-- calculating Seal Energy gain from a correct-answer streak
-- checking whether a tower run has reached the clear threshold
-- updating permanent tower progress after a run ends
-
-Existing `gameRules.js` helpers were preserved:
-
-- `isTowerCleared`
-- `awardTowerReward`
-- `canForgeKey`
-- `forgeCentralKey`
-- `isCentralTowerUnlocked`
-- `canAccessTower`
-- `onCorrectAnswer`
-
----
-
-## Save / Load Compatibility
-
-Save/load compatibility was preserved.
-
-Permanent save state still includes:
-
-- total answered/correct/wrong statistics
-- answered/correct/wrong question IDs
-- per-topic stats
-- player map position
-- cleared tower IDs
-- per-tower progress
-- key fragments
-- central tower key status
-- central tower unlock status
-
-Temporary tower-run state is still not saved:
-
-- current HP
-- current streak
-- current Seal Energy
-- current question
-- current shuffled deck
-
-Older saves with `clearedTowerIds` can still be normalized into the newer per-tower progress object.
-
----
-
-## What We Tried
-
-- **Test:** Checked that `app.js` has valid JavaScript syntax.
-- **Result:** Passed.
-
-- **Test:** Checked that `gameRules.js` has valid JavaScript syntax.
-- **Result:** Passed.
-
-- **Test:** Parsed `questions.json` and `map.json`.
-- **Result:** Both JSON files are valid.
-
-- **Test:** Ran `git diff --check`.
-- **Result:** No whitespace errors. Git showed only normal Windows line-ending warnings.
-
-- **Test:** Browser flow in Microsoft Edge.
-- **Result:** Passed.
-
-Browser regression verified:
-
-- The map opens as the first screen.
-- The tower practice screen is hidden on load.
-- Six outer towers appear.
-- No question cards appear on the map screen.
-- Clicking Fractions Tower opens tower practice.
-- HP hearts still render.
-- Seal Energy still renders.
-- Tower description still renders.
-- 10 correct answers still clear the tower.
-- Key fragment count updates to 1 / 6.
-- Back to Map returns to the map-only screen.
-- The cleared tower shows `Cleared`.
-- No browser console errors appeared.
-
----
-
-## Architecture Risks That Remain
-
-`app.js` is still large.
-
-This is acceptable for now because the task requested minimal, reviewable cleanup instead of a full redesign. The file is now better sectioned and delegates more reusable rule logic to `gameRules.js`.
-
-Future cleanup could split UI rendering into separate files, but that would be a larger refactor and should be done only when the project needs it.
-
-`gameRules.js` now has more reusable rule helpers, but some logic remains in `app.js` because it is tied to UI events and temporary tower-run control.
-
----
+- Map opens normally.
+- Chronicles start locked.
+- First new tower clear unlocks Chronicle I.
+- Reading Chronicle I works.
+- Re-clearing the same tower does not unlock Chronicle II.
+- Clearing a second new tower unlocks Chronicle II.
+- Chronicle VI ends with mystery and does not reveal the final truth.
+- No console errors were found.
 
 ## GPT Review Request
 
 GPT, please review:
 
-- Are the file responsibility boundaries clear enough for future student contributors?
-- Did Codex move the right logic into `gameRules.js` without turning it into UI code?
-- Is `app.js` now easier to navigate because of the section comments?
-- Is save/load compatibility preserved?
-- Is the remaining size of `app.js` acceptable for a student project at this stage?
-- Are there any small architecture risks to fix before adding future RPG content?
+- Are the six Chronicles age-appropriate for Grade 5-7?
+- Do they feel mythic but still clear?
+- Is the final truth properly withheld?
+- Is the preview structure clean enough for future screenshots or historical mini-sites?
+- Is any wording too revealing or too abstract?

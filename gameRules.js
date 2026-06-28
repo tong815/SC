@@ -33,6 +33,7 @@ const GameRules = (() => {
         clearedTowerIds: [],
         towerProgress,
         keyFragments: [],
+        chronicles: createDefaultChronicleProgress(),
         hasCentralTowerKey: false,
         centralTowerUnlocked: false,
       },
@@ -45,6 +46,50 @@ const GameRules = (() => {
       clearCount: 0,
       bestRunProgress: 0,
       lastPlayedAt: null,
+    };
+  }
+
+  function createDefaultChronicleProgress() {
+    return {
+      unlockedChronicleIds: [],
+      readChronicleIds: [],
+      currentChronicleId: null,
+      lastUnlockedChronicleId: null,
+    };
+  }
+
+  function normalizeChronicleProgress(
+    importedChronicles = {},
+    validChronicleIds = [],
+    fallbackUnlockedCount = 0,
+  ) {
+    const validIds = new Set(validChronicleIds);
+    let unlockedChronicleIds = getUniqueStringArray(
+      importedChronicles.unlockedChronicleIds,
+    ).filter((chronicleId) => validIds.has(chronicleId));
+
+    if (unlockedChronicleIds.length === 0 && fallbackUnlockedCount > 0) {
+      unlockedChronicleIds = validChronicleIds.slice(0, fallbackUnlockedCount);
+    }
+
+    const readChronicleIds = getUniqueStringArray(
+      importedChronicles.readChronicleIds,
+    ).filter(
+      (chronicleId) =>
+        validIds.has(chronicleId) && unlockedChronicleIds.includes(chronicleId),
+    );
+    const currentChronicleId = validIds.has(importedChronicles.currentChronicleId)
+      ? importedChronicles.currentChronicleId
+      : unlockedChronicleIds.at(-1) || null;
+    const lastUnlockedChronicleId = validIds.has(importedChronicles.lastUnlockedChronicleId)
+      ? importedChronicles.lastUnlockedChronicleId
+      : currentChronicleId;
+
+    return {
+      unlockedChronicleIds,
+      readChronicleIds,
+      currentChronicleId,
+      lastUnlockedChronicleId,
     };
   }
 
@@ -171,6 +216,43 @@ const GameRules = (() => {
     return state;
   }
 
+  function unlockNextChronicle(state, chronicles) {
+    if (!state.chronicles) {
+      state.chronicles = createDefaultChronicleProgress();
+    }
+
+    const unlockedIds = state.chronicles.unlockedChronicleIds;
+    const nextChronicle = [...chronicles]
+      .sort((first, second) => first.order - second.order)
+      .find((chronicle) => !unlockedIds.includes(chronicle.id));
+
+    if (!nextChronicle) {
+      return { state, chronicle: null };
+    }
+
+    unlockedIds.push(nextChronicle.id);
+    state.chronicles.currentChronicleId = nextChronicle.id;
+    state.chronicles.lastUnlockedChronicleId = nextChronicle.id;
+
+    return { state, chronicle: nextChronicle };
+  }
+
+  function markChronicleRead(state, chronicleId) {
+    if (!state.chronicles) {
+      state.chronicles = createDefaultChronicleProgress();
+    }
+
+    if (
+      state.chronicles.unlockedChronicleIds.includes(chronicleId) &&
+      !state.chronicles.readChronicleIds.includes(chronicleId)
+    ) {
+      state.chronicles.readChronicleIds.push(chronicleId);
+    }
+
+    state.chronicles.currentChronicleId = chronicleId;
+    return state;
+  }
+
   function getNonNegativeNumber(value, fallback) {
     const numberValue = Number(value);
 
@@ -181,6 +263,14 @@ const GameRules = (() => {
     return Math.round(numberValue);
   }
 
+  function getUniqueStringArray(value) {
+    if (!Array.isArray(value)) {
+      return [];
+    }
+
+    return [...new Set(value.filter((item) => typeof item === "string"))];
+  }
+
   function clamp(value, min, max) {
     return Math.min(Math.max(value, min), max);
   }
@@ -188,16 +278,20 @@ const GameRules = (() => {
   return {
     calculateSealEnergyGain,
     createDefaultPlayerProgress,
+    createDefaultChronicleProgress,
     createDefaultTowerProgress,
     isTowerCleared,
     isTowerRunCleared,
+    markChronicleRead,
     awardTowerReward,
     canForgeKey,
     forgeCentralKey,
     isCentralTowerUnlocked,
     canAccessTower,
     normalizeTowerProgress,
+    normalizeChronicleProgress,
     onCorrectAnswer,
+    unlockNextChronicle,
     updateTowerRunProgress,
   };
 })();
