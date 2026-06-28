@@ -47,6 +47,7 @@ let mapData = null;
 let progress = null;
 // A tower run is temporary: HP, streak, and run progress reset when entering or retrying.
 let currentRun = null;
+let currentChronicleExperience = null;
 
 // Data loading
 async function loadJson(path) {
@@ -584,6 +585,7 @@ function renderHpHearts(hp) {
 
 function showMapScreen() {
   currentRun = null;
+  currentChronicleExperience = null;
   practiceViewElement.hidden = true;
   chronicleScreenElement.hidden = true;
   mapScreenElement.hidden = false;
@@ -833,12 +835,18 @@ function showChronicleScreen(chronicleId = null) {
 
   renderChronicleList();
 
-  const selectedChronicle =
-    getOrderedChronicles().find((chronicle) => chronicle.id === chronicleId) ||
-    getOrderedChronicles().find((chronicle) => isChronicleUnlocked(chronicle));
+  if (chronicleId) {
+    const selectedChronicle = getOrderedChronicles().find(
+      (chronicle) => chronicle.id === chronicleId,
+    );
+    if (selectedChronicle) {
+      startChronicleExperience(selectedChronicle);
+      return;
+    }
+  }
 
-  if (selectedChronicle) {
-    renderChronicleReader(selectedChronicle);
+  if (getOrderedChronicles().some((chronicle) => isChronicleUnlocked(chronicle))) {
+    renderChronicleListHome();
   } else {
     renderEmptyChronicleReader();
   }
@@ -846,8 +854,21 @@ function showChronicleScreen(chronicleId = null) {
 
 function renderChronicleList() {
   chronicleListElement.innerHTML = "";
+  const orderedChronicles = getOrderedChronicles();
+  const unlockedCount = orderedChronicles.filter((chronicle) =>
+    isChronicleUnlocked(chronicle),
+  ).length;
+  const readCount = progress.gameProgress.chronicles.readChronicleIds.length;
+  const summary = document.createElement("div");
 
-  getOrderedChronicles().forEach((chronicle) => {
+  summary.className = "chronicle-list-summary";
+  summary.innerHTML = `
+    <strong>Recovered: ${unlockedCount} / ${orderedChronicles.length}</strong>
+    <span>Witnessed: ${readCount} / ${orderedChronicles.length}</span>
+  `;
+  chronicleListElement.append(summary);
+
+  orderedChronicles.forEach((chronicle) => {
     const unlocked = isChronicleUnlocked(chronicle);
     const read = progress.gameProgress.chronicles.readChronicleIds.includes(chronicle.id);
     const item = document.createElement("button");
@@ -862,55 +883,183 @@ function renderChronicleList() {
       .join(" ");
     item.disabled = !unlocked;
     item.innerHTML = `
-      <span>Chronicle ${toRomanNumeral(chronicle.order)}</span>
+      <span>Creation Record ${toRomanNumeral(chronicle.order)}</span>
       <strong>${unlocked ? chronicle.title : "Locked Record"}</strong>
-      <small>${read ? "Read" : unlocked ? "Unlocked" : "Clear a new tower"}</small>
+      <small>${read ? "Witnessed" : unlocked ? "Recovered" : "Clear a new tower"}</small>
     `;
 
     if (unlocked) {
-      item.addEventListener("click", () => renderChronicleReader(chronicle));
+      item.addEventListener("click", () => startChronicleExperience(chronicle));
     }
 
     chronicleListElement.append(item);
   });
 }
 
-function renderChronicleReader(chronicle) {
+function startChronicleExperience(chronicle) {
   if (!isChronicleUnlocked(chronicle)) {
     renderEmptyChronicleReader();
     return;
   }
 
-  progress.gameProgress = GameRules.markChronicleRead(
-    progress.gameProgress,
-    chronicle.id,
-  );
-  renderChronicleList();
-  renderChronicleCount();
+  currentChronicleExperience = {
+    chronicle,
+    lineIndex: 0,
+    fragmentRevealed: false,
+  };
+  progress.gameProgress.chronicles.currentChronicleId = chronicle.id;
+  renderChronicleExperience();
+}
 
-  const preview = chronicle.projectStage || {};
+function renderChronicleExperience() {
+  if (!currentChronicleExperience) {
+    renderChronicleListHome();
+    return;
+  }
+
+  const { chronicle, lineIndex, fragmentRevealed } = currentChronicleExperience;
+  const dialogue = Array.isArray(chronicle.dialogue) ? chronicle.dialogue : [];
+  const currentLine = dialogue[lineIndex];
+  const speakerName = currentLine
+    ? chronicle.speakers?.[currentLine.speaker] || currentLine.speaker
+    : "";
   const eraLabel = `Age ${toRomanNumeral(chronicle.order)} - ${chronicle.title}`;
+  const lineCount = dialogue.length;
+  const progressText = lineCount > 0 ? `${Math.min(lineIndex + 1, lineCount)} / ${lineCount}` : "0 / 0";
+
+  if (fragmentRevealed) {
+    renderChronicleTimeFragment(chronicle, eraLabel);
+    return;
+  }
 
   chronicleReaderElement.innerHTML = `
     <div class="chronicle-record-header">
       <p class="section-label">Creation Record ${toRomanNumeral(chronicle.order)}</p>
       <span>Recovered</span>
     </div>
-    <h3>${chronicle.title}</h3>
-    <div class="chronicle-dialogue">
-      ${chronicle.dialogue.map((line) => createChronicleLine(line, chronicle.speakers)).join("")}
-    </div>
-    <div class="chronicle-project-stage">
-      <h4>Observed Era</h4>
-      <p class="era-title">${eraLabel}</p>
-      <p class="time-fragment-label">Time Fragment Window</p>
-      ${renderChroniclePreview(preview)}
-      <p><strong>${preview.title || "Time fragment"}</strong></p>
-      <p>${preview.caption || "A fragment of this era has not fully awakened yet."}</p>
+    <div class="chronicle-experience" role="button" tabindex="0" aria-label="Advance Chronicle dialogue">
+      <p class="chronicle-step-count">${progressText}</p>
+      <h3>${chronicle.title}</h3>
+      <div class="chronicle-stage-line ${currentLine?.speaker === "G" ? "is-guide" : "is-sage"}">
+        <span class="speaker-mark">${currentLine?.speaker || "?"}</span>
+        <div class="speaker-script">
+          <strong>${speakerName}</strong>
+          <p>"${currentLine?.text || "The record is silent."}"</p>
+        </div>
+      </div>
+      <div class="chronicle-actions">
+        <button id="advance-chronicle" class="progress-button" type="button">
+          ${lineIndex >= lineCount - 1 ? "Reveal Time Fragment" : "Next"}
+        </button>
+        <button id="return-records-action" class="back-button" type="button">Return to Creation Records</button>
+      </div>
+      <p class="chronicle-input-hint">Click the record, press Enter/Space, or use Next.</p>
     </div>
   `;
 
-  chronicleStatusElement.textContent = `${chronicle.title} opened.`;
+  chronicleReaderElement
+    .querySelector(".chronicle-experience")
+    .addEventListener("click", (event) => {
+      if (event.target.closest("button")) {
+        return;
+      }
+      advanceChronicleExperience();
+    });
+  chronicleReaderElement
+    .querySelector("#advance-chronicle")
+    .addEventListener("click", advanceChronicleExperience);
+  chronicleReaderElement
+    .querySelector("#return-records-action")
+    .addEventListener("click", renderChronicleListHome);
+
+  chronicleStatusElement.textContent = `${chronicle.title} is being witnessed.`;
+}
+
+function advanceChronicleExperience() {
+  if (!currentChronicleExperience) {
+    return;
+  }
+
+  const dialogue = Array.isArray(currentChronicleExperience.chronicle.dialogue)
+    ? currentChronicleExperience.chronicle.dialogue
+    : [];
+
+  if (currentChronicleExperience.lineIndex < dialogue.length - 1) {
+    currentChronicleExperience.lineIndex += 1;
+    renderChronicleExperience();
+    return;
+  }
+
+  currentChronicleExperience.fragmentRevealed = true;
+  progress.gameProgress = GameRules.markChronicleRead(
+    progress.gameProgress,
+    currentChronicleExperience.chronicle.id,
+  );
+  renderChronicleList();
+  renderChronicleCount();
+  renderChronicleExperience();
+}
+
+function renderChronicleTimeFragment(chronicle, eraLabel) {
+  const preview = chronicle.projectStage || {};
+
+  chronicleReaderElement.innerHTML = `
+    <div class="chronicle-record-header">
+      <p class="section-label">Creation Record ${toRomanNumeral(chronicle.order)}</p>
+      <span>Witnessed</span>
+    </div>
+    <div class="chronicle-fragment-reveal">
+      <h3>The record opens a path through time...</h3>
+      <div class="chronicle-project-stage">
+        <h4>Observed Era</h4>
+        <p class="era-title">${eraLabel}</p>
+        <p class="time-fragment-label">Time Fragment Window</p>
+        ${renderChroniclePreview(preview)}
+        <p><strong>${preview.title || "Time fragment"}</strong></p>
+        <p>${preview.caption || "A fragment of this era has not fully awakened yet."}</p>
+      </div>
+      <div class="chronicle-actions">
+        <button id="close-time-fragment" class="progress-button" type="button">
+          Return to Creation Records
+        </button>
+      </div>
+    </div>
+  `;
+
+  chronicleReaderElement
+    .querySelector("#close-time-fragment")
+    .addEventListener("click", renderChronicleListHome);
+  chronicleStatusElement.textContent = `${chronicle.title} witnessed.`;
+}
+
+function renderChronicleListHome() {
+  currentChronicleExperience = null;
+  renderChronicleList();
+  renderChronicleCount();
+
+  const orderedChronicles = getOrderedChronicles();
+  const unlockedCount = orderedChronicles.filter((chronicle) =>
+    isChronicleUnlocked(chronicle),
+  ).length;
+  const readCount = progress.gameProgress.chronicles.readChronicleIds.length;
+
+  chronicleReaderElement.innerHTML = `
+    <p class="section-label">Creation Records</p>
+    <h3>Recovered: ${unlockedCount} / ${orderedChronicles.length}</h3>
+    <div class="chronicle-record-grid" aria-hidden="true">
+      ${orderedChronicles
+        .map((chronicle) => {
+          const unlocked = isChronicleUnlocked(chronicle);
+          const read = progress.gameProgress.chronicles.readChronicleIds.includes(chronicle.id);
+          return `<span class="${unlocked ? "is-recovered" : "is-locked"} ${read ? "is-witnessed" : ""}">${toRomanNumeral(chronicle.order)}</span>`;
+        })
+        .join("")}
+    </div>
+    <p>Select a recovered Creation Record from the list to witness its history one line at a time.</p>
+    <p class="chronicle-input-hint">Witnessed records are marked after the Time Fragment appears.</p>
+  `;
+
+  chronicleStatusElement.textContent = "Choose a recovered Creation Record.";
 }
 
 function renderChroniclePreview(preview) {
@@ -937,21 +1086,8 @@ function renderChroniclePreview(preview) {
   `;
 }
 
-function createChronicleLine(line, speakers = {}) {
-  const speakerName = speakers[line.speaker] || line.speaker;
-
-  return `
-    <div class="chronicle-line">
-      <span>${line.speaker}</span>
-      <div>
-        <strong>${speakerName}</strong>
-        <p>"${line.text}"</p>
-      </div>
-    </div>
-  `;
-}
-
 function renderEmptyChronicleReader() {
+  currentChronicleExperience = null;
   chronicleReaderElement.innerHTML = `
     <p class="section-label">Record Chamber</p>
     <h3>No Chronicles unlocked yet</h3>
@@ -1043,6 +1179,20 @@ closeChroniclesButton.addEventListener("click", showMapScreen);
 saveProgressButton.addEventListener("click", saveProgress);
 loadProgressButton.addEventListener("click", requestProgressFile);
 openChroniclesButton.addEventListener("click", () => showChronicleScreen());
+
+document.addEventListener("keydown", (event) => {
+  if (
+    chronicleScreenElement.hidden ||
+    !currentChronicleExperience ||
+    currentChronicleExperience.fragmentRevealed ||
+    !["Enter", " "].includes(event.key)
+  ) {
+    return;
+  }
+
+  event.preventDefault();
+  advanceChronicleExperience();
+});
 progressFileInput.addEventListener("change", loadProgressFile);
 gameMapElement.addEventListener("click", handleMapClick);
 blacksmithButton.addEventListener("click", (event) => {
