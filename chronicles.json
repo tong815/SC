@@ -3,6 +3,7 @@
     "id": "chronicle-001",
     "order": 1,
     "title": "The First Idea",
+    "description": "A recovered record from the moment learning first became visible.",
     "unlockedByTower": "first-new-tower-clear",
     "speakers": {
       "T": "Sage Tong",
@@ -43,6 +44,7 @@
     "id": "chronicle-002",
     "order": 2,
     "title": "The First Structure",
+    "description": "A recovered record from the time questions first gathered into topics.",
     "unlockedByTower": "second-new-tower-clear",
     "speakers": {
       "T": "Sage Tong",
@@ -83,6 +85,7 @@
     "id": "chronicle-003",
     "order": 3,
     "title": "The First World",
+    "description": "A recovered record from the age when the first map and towers appeared.",
     "unlockedByTower": "third-new-tower-clear",
     "speakers": {
       "T": "Sage Tong",
@@ -123,6 +126,7 @@
     "id": "chronicle-004",
     "order": 4,
     "title": "The First Rules",
+    "description": "A recovered record from the age when challenge, HP, and rewards took shape.",
     "unlockedByTower": "fourth-new-tower-clear",
     "speakers": {
       "T": "Sage Tong",
@@ -163,6 +167,7 @@
     "id": "chronicle-005",
     "order": 5,
     "title": "The First Journey",
+    "description": "A recovered record from the age when travelers first approached the gate.",
     "unlockedByTower": "fifth-new-tower-clear",
     "speakers": {
       "T": "Sage Tong",
@@ -203,6 +208,7 @@
     "id": "chronicle-006",
     "order": 6,
     "title": "The Complete Prototype",
+    "description": "A recovered record from the current era, where the world can be explored.",
     "unlockedByTower": "sixth-new-tower-clear",
     "speakers": {
       "T": "Sage Tong",

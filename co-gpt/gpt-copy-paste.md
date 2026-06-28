@@ -16,11 +16,11 @@ Review
 
 **Current Goal:**
 
-Review the new visual-novel-style Chronicle Experience.
+Review the refactored three-layer Chronicle UI.
 
 **Current Issue:**
 
-Codex upgraded the Chronicle reader so recovered Creation Records now play like short creation-history cutscenes. Players choose a recovered record, advance one dialogue line at a time by clicking, pressing Next, or using Enter/Space, and only after the final line does the matching Time Fragment iframe appear. Read/witnessed state is now saved only after the Time Fragment is revealed. GPT should review whether this flow feels ceremonial and clear without disrupting the existing game mechanics.
+Codex refactored the Chronicle flow into three distinct layers: Map, Chronicle Library, and Individual Chronicle Reader. The Library is now an archive/index page with record cards and progress. The Reader plays one recovered Creation Record at a time, one dialogue line at a time. After dialogue completion, a `Reveal Time Fragment` button appears; only after clicking it does the iframe appear and the record become Witnessed. GPT should review whether this structure is clear, extensible, and student-friendly while preserving save/load and unlock behavior.
 
 **Artifact:**
 
@@ -35,109 +35,134 @@ Implementation Report
 # Implementation Report
 
 **Project:** Exam Visualizer / SC
-**Build or Version:** Visual-Novel Chronicle Experience
+**Build or Version:** Three-Layer Chronicle UI
 **Date:** 2026-06-28
 **Phase:** Implementation / Review
 
 ## What We Updated
 
-Codex upgraded the Chronicle reader into a visual-novel-style Chronicle Experience. A Chronicle no longer shows all dialogue and the Time Fragment immediately. Instead, the player witnesses one dialogue line at a time, then reveals the matching Time Fragment after the final line.
+Codex refactored the Chronicle UI into a clearer three-layer structure:
 
-No tower practice mechanics, HP rules, Seal Energy rules, combo rules, Chronicle unlock rules, history folder paths, or save/load structure were redesigned.
+1. Map
+2. Chronicle Library
+3. Individual Chronicle Reader
+
+The Time Fragment reveal remains inside the Individual Chronicle Reader and appears only after dialogue completion and an explicit reveal action.
+
+No tower practice mechanics, HP rules, Seal Energy rules, combo rules, map data, question data, Chronicle unlock rules, save/load structure, or history iframe paths were redesigned.
 
 ## Files Changed
 
+- `index.html`
 - `app.js`
 - `style.css`
-- `index.html`
+- `chronicles.json`
 - `co-gpt/context-header.md`
 - `co-gpt/implementation-report.md`
 - `co-gpt/gpt-copy-paste.md`
 
-## UI Flow Changes
+## Layer 1: Map
 
-New flow:
+The existing map screen was left unchanged.
 
-1. Open Chronicles.
-2. See the Creation Records list.
-3. Locked records are disabled.
-4. Recovered records are clickable.
-5. Click a recovered record.
-6. Enter the Chronicle Experience.
-7. See `Creation Record I`, `Recovered`, title, and one dialogue line.
-8. Advance with:
-   - clicking the record area
-   - clicking the `Next` button
-   - pressing Enter or Space
-9. After the final dialogue line, click `Reveal Time Fragment`.
-10. The Time Fragment iframe appears.
-11. Click `Return to Creation Records`.
-12. Back to Map still works from the Chronicle list.
+The existing `Chronicles` button now opens the Chronicle Library layer.
 
-## Dialogue Data
+## Layer 2: Chronicle Library
 
-Dialogue still comes from `chronicles.json`.
+The Chronicle Library is now a dedicated archive/index page.
 
-Each line still uses the existing data shape:
+It shows:
+
+- title: `Chronicles`
+- description: `Recovered Creation Records from the history of this world.`
+- `Recovered Records: X / 6`
+- `Witnessed Records: Y / 6`
+- a grid of Chronicle cards
+
+Each card shows:
+
+- `Creation Record I/II/III...`
+- status: `Locked`, `Recovered`, or `Witnessed`
+- Chronicle title
+- short description/teaser
+- action text:
+  - locked: `Locked`
+  - recovered: `Open Record`
+  - witnessed: `Witness Again`
+
+The Library does not show dialogue lines.
+
+The Library does not show Time Fragment iframes.
+
+## Layer 3: Individual Chronicle Reader
+
+Clicking an unlocked Library card opens the Individual Chronicle Reader.
+
+The Reader shows:
+
+- Creation Record label
+- Chronicle title
+- recovered/witnessed state
+- one dialogue line at a time
+- large speaker initial
+- speaker name from `chronicles.json`
+- manuscript-style dialogue panel
+
+Supported inputs:
+
+- click the record area
+- click `Next`
+- press Enter
+- press Space
+
+Dialogue still comes from `chronicles.json`; no dialogue was hardcoded into `app.js`.
+
+## Time Fragment Reveal
+
+After the final dialogue line:
+
+1. The Reader shows `The record opens a path through time...`
+2. The Reader shows a `Reveal Time Fragment` button.
+3. The iframe is still hidden at this point.
+4. Clicking `Reveal Time Fragment` reveals the matching iframe.
+5. Only then is the Chronicle marked as Witnessed.
+
+The revealed Time Fragment area still shows:
+
+- `Observed Era`
+- age label
+- `Time Fragment Window`
+- existing historical mini-site iframe
+
+Navigation after reveal:
+
+- `Return to Chronicle Library`
+- then `Back to Map` from the Library
+
+## Data Changes
+
+`chronicles.json` now includes a small stable `description` field on each Chronicle for Library cards.
+
+Example:
 
 ```json
-{
-  "speaker": "T",
-  "text": "Before there is a world, there is a wish."
-}
+"description": "A recovered record from the moment learning first became visible."
 ```
 
-No Chronicle dialogue was hardcoded into `app.js`.
+Dialogue data stayed in `chronicles.json`.
 
-## Read / Witnessed State
+## Save / Load
 
-Read state now means fully witnessed.
-
-Before this change, a Chronicle was marked read immediately when opened.
-
-Now a Chronicle is marked as witnessed only after:
-
-1. the player reaches the final dialogue line, and
-2. the Time Fragment is revealed.
-
-The existing save fields were preserved:
+Save/load fields were preserved:
 
 - `unlockedChronicleIds`
 - `readChronicleIds`
 - `currentChronicleId`
 - `lastUnlockedChronicleId`
 
-No new save fields were added.
+No temporary cutscene progress fields were added.
 
-## Time Fragment Reveal
-
-The iframe is hidden during dialogue playback.
-
-After the final line, the screen shows:
-
-`The record opens a path through time...`
-
-Then the existing Time Fragment iframe appears with:
-
-- `Observed Era`
-- `Age I/II/III...`
-- `Time Fragment Window`
-- the matching historical mini-site iframe
-
-## Styling / Animation
-
-`style.css` now supports:
-
-- visual-novel-style speaker stage
-- large speaker initials
-- centered manuscript dialogue panel
-- line fade transition
-- recovered/witnessed record indicators
-- Creation Records progress grid
-- Time Fragment reveal state
-- mobile stacking for the speaker layout
-
-The style remains mythic/manuscript-like and avoids modern chat bubbles.
+Internally, `readChronicleIds` still stores witnessed records. The UI label is now `Witnessed`.
 
 ## Tests
 
@@ -152,38 +177,43 @@ Static checks:
 
 Browser checks:
 
-- Main game opens normally.
-- Chronicle list opens normally.
-- Locked records cannot be opened.
-- Unlocked records open the Chronicle Experience.
-- Dialogue shows one line at a time.
-- Clicking the record area advances dialogue.
-- The visible `Next` button advances dialogue.
-- Enter key advances dialogue.
-- Time Fragment iframe does not appear before dialogue completion.
-- Time Fragment iframe appears after the final dialogue line.
-- Chronicle is not marked read/witnessed immediately on open.
-- Chronicle becomes witnessed only after Time Fragment reveal.
-- `Return to Creation Records` works.
-- `Back to Map` works from the Chronicle list.
+- Map opens normally.
+- Chronicles button opens Chronicle Library.
+- Library shows total records and progress.
+- Locked cards cannot be opened.
+- Recovered cards open the Individual Chronicle Reader.
+- Library does not show dialogue.
+- Library does not show iframe.
+- Reader shows one dialogue line at a time.
+- Click advances dialogue.
+- `Next` advances dialogue.
+- Enter advances dialogue.
+- Space key support remains wired through the same keyboard handler.
+- iframe is hidden before dialogue completion.
+- `Reveal Time Fragment` appears after the final dialogue line.
+- iframe is still hidden before clicking `Reveal Time Fragment`.
+- Chronicle becomes Witnessed only after Time Fragment reveal.
+- `Return to Chronicle Library` works.
+- `Back to Map` works from Chronicle Library.
 - First tower clear still unlocks Chronicle I.
 - Re-clearing the same tower does not unlock another Chronicle.
-- All six Chronicles reveal the correct Time Fragment iframe after their dialogue.
+- Existing save/load normalization preserves unlocked and witnessed records.
+- All six Chronicles reveal the correct Time Fragment iframe.
 - No console errors were found.
 
 ## Risks / Limitations
 
-- The Chronicle Experience currently restarts from the first dialogue line each time a record is opened. This keeps save data simple and avoids adding temporary cutscene progress.
-- There are no character portraits yet. Speaker identity is shown with large initials (`T`, `G`, etc.), as requested.
-- The full Time Fragment iframe loads only after completion, which is correct for the experience but means students must advance through the short dialogue before viewing the historical mini-site.
+- The Individual Chronicle Reader restarts from the first dialogue line each time a record is opened. This avoids adding temporary cutscene progress to save data.
+- The Library uses short Chronicle descriptions from `chronicles.json`; future content writers should keep these descriptions brief.
+- No portraits were added. Speaker presentation still uses large initials, which keeps the system simple and content-driven.
 
 ## GPT Review Request
 
 GPT, please review:
 
-- Does the Chronicle Experience now feel like witnessing a creation-history cutscene?
-- Is one-line-at-a-time dialogue clear and quick enough for Grade 5-7 students?
-- Is `Witnessed` a better read-state label than `Read`?
-- Does the Time Fragment reveal happen at the right moment?
-- Is the speaker presentation mythic without feeling like modern chat?
-- Are there any accessibility or clarity issues with click / Next / Enter / Space input?
+- Is the Map -> Chronicle Library -> Individual Reader -> Time Fragment structure clear?
+- Does the Library feel like an archive/index instead of a document reader?
+- Is the Reader flow clear for Grade 5-7 students?
+- Is `Reveal Time Fragment` placed at the right moment?
+- Is `Witnessed` understandable as the completed/read state?
+- Are there any risks for future student extension?

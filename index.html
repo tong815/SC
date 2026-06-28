@@ -132,19 +132,18 @@
         </div>
 
         <div class="chronicle-layout">
-          <aside class="chronicle-index" aria-label="Chronicle list">
+          <section id="chronicle-library" class="chronicle-library" aria-labelledby="chronicle-heading">
             <p class="section-label">Chronicles</p>
-            <h2 id="chronicle-heading">Creation Records</h2>
-            <div id="chronicle-list" class="chronicle-list"></div>
-          </aside>
-
-          <article id="chronicle-reader" class="chronicle-reader" aria-live="polite">
-            <p class="section-label">Record Chamber</p>
-            <h3>Select an unlocked Chronicle</h3>
-            <p>
-              First-time tower clears reveal the history of this world and the
-              project that created it.
+            <h2 id="chronicle-heading">Chronicles</h2>
+            <p class="chronicle-library-description">
+              Recovered Creation Records from the history of this world.
             </p>
+            <div id="chronicle-list" class="chronicle-list"></div>
+          </section>
+
+          <article id="chronicle-reader" class="chronicle-reader" aria-live="polite" hidden>
+            <p class="section-label">Creation Record</p>
+            <h3>Select a recovered Chronicle</h3>
           </article>
         </div>
       </section>

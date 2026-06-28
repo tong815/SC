@@ -10,11 +10,11 @@ Review
 
 **Current Goal:**
 
-Review the new visual-novel-style Chronicle Experience.
+Review the refactored three-layer Chronicle UI.
 
 **Current Issue:**
 
-Codex upgraded the Chronicle reader so recovered Creation Records now play like short creation-history cutscenes. Players choose a recovered record, advance one dialogue line at a time by clicking, pressing Next, or using Enter/Space, and only after the final line does the matching Time Fragment iframe appear. Read/witnessed state is now saved only after the Time Fragment is revealed. GPT should review whether this flow feels ceremonial and clear without disrupting the existing game mechanics.
+Codex refactored the Chronicle flow into three distinct layers: Map, Chronicle Library, and Individual Chronicle Reader. The Library is now an archive/index page with record cards and progress. The Reader plays one recovered Creation Record at a time, one dialogue line at a time. After dialogue completion, a `Reveal Time Fragment` button appears; only after clicking it does the iframe appear and the record become Witnessed. GPT should review whether this structure is clear, extensible, and student-friendly while preserving save/load and unlock behavior.
 
 **Artifact:**
 

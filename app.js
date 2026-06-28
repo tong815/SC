@@ -30,6 +30,7 @@ const questionListElement = document.querySelector("#question-list");
 const chronicleScreenElement = document.querySelector("#chronicle-screen");
 const closeChroniclesButton = document.querySelector("#close-chronicles");
 const chronicleStatusElement = document.querySelector("#chronicle-status");
+const chronicleLibraryElement = document.querySelector("#chronicle-library");
 const chronicleListElement = document.querySelector("#chronicle-list");
 const chronicleReaderElement = document.querySelector("#chronicle-reader");
 const errorMessageElement = document.querySelector("#error-message");
@@ -833,8 +834,6 @@ function showChronicleScreen(chronicleId = null) {
   practiceViewElement.hidden = true;
   chronicleScreenElement.hidden = false;
 
-  renderChronicleList();
-
   if (chronicleId) {
     const selectedChronicle = getOrderedChronicles().find(
       (chronicle) => chronicle.id === chronicleId,
@@ -845,14 +844,13 @@ function showChronicleScreen(chronicleId = null) {
     }
   }
 
-  if (getOrderedChronicles().some((chronicle) => isChronicleUnlocked(chronicle))) {
-    renderChronicleListHome();
-  } else {
-    renderEmptyChronicleReader();
-  }
+  renderChronicleLibrary();
 }
 
-function renderChronicleList() {
+function renderChronicleLibrary() {
+  currentChronicleExperience = null;
+  chronicleLibraryElement.hidden = false;
+  chronicleReaderElement.hidden = true;
   chronicleListElement.innerHTML = "";
   const orderedChronicles = getOrderedChronicles();
   const unlockedCount = orderedChronicles.filter((chronicle) =>
@@ -863,8 +861,8 @@ function renderChronicleList() {
 
   summary.className = "chronicle-list-summary";
   summary.innerHTML = `
-    <strong>Recovered: ${unlockedCount} / ${orderedChronicles.length}</strong>
-    <span>Witnessed: ${readCount} / ${orderedChronicles.length}</span>
+    <strong>Recovered Records: ${unlockedCount} / ${orderedChronicles.length}</strong>
+    <span>Witnessed Records: ${readCount} / ${orderedChronicles.length}</span>
   `;
   chronicleListElement.append(summary);
 
@@ -883,9 +881,11 @@ function renderChronicleList() {
       .join(" ");
     item.disabled = !unlocked;
     item.innerHTML = `
-      <span>Creation Record ${toRomanNumeral(chronicle.order)}</span>
+      <span class="record-number">Creation Record ${toRomanNumeral(chronicle.order)}</span>
+      <span class="record-status">${read ? "Witnessed" : unlocked ? "Recovered" : "Locked"}</span>
       <strong>${unlocked ? chronicle.title : "Locked Record"}</strong>
-      <small>${read ? "Witnessed" : unlocked ? "Recovered" : "Clear a new tower"}</small>
+      <small>${unlocked ? chronicle.description || "A recovered record from the history of the world." : "Clear a new tower to recover this record."}</small>
+      <span class="record-action">${read ? "Witness Again" : unlocked ? "Open Record" : "Locked"}</span>
     `;
 
     if (unlocked) {
@@ -894,18 +894,23 @@ function renderChronicleList() {
 
     chronicleListElement.append(item);
   });
+
+  chronicleStatusElement.textContent = "Choose a recovered Creation Record.";
 }
 
 function startChronicleExperience(chronicle) {
   if (!isChronicleUnlocked(chronicle)) {
-    renderEmptyChronicleReader();
+    renderChronicleLibrary();
     return;
   }
 
+  chronicleLibraryElement.hidden = true;
+  chronicleReaderElement.hidden = false;
   currentChronicleExperience = {
     chronicle,
     lineIndex: 0,
     fragmentRevealed: false,
+    readyToReveal: false,
   };
   progress.gameProgress.chronicles.currentChronicleId = chronicle.id;
   renderChronicleExperience();
@@ -913,11 +918,12 @@ function startChronicleExperience(chronicle) {
 
 function renderChronicleExperience() {
   if (!currentChronicleExperience) {
-    renderChronicleListHome();
+    renderChronicleLibrary();
     return;
   }
 
-  const { chronicle, lineIndex, fragmentRevealed } = currentChronicleExperience;
+  const { chronicle, lineIndex, fragmentRevealed, readyToReveal } =
+    currentChronicleExperience;
   const dialogue = Array.isArray(chronicle.dialogue) ? chronicle.dialogue : [];
   const currentLine = dialogue[lineIndex];
   const speakerName = currentLine
@@ -929,6 +935,11 @@ function renderChronicleExperience() {
 
   if (fragmentRevealed) {
     renderChronicleTimeFragment(chronicle, eraLabel);
+    return;
+  }
+
+  if (readyToReveal) {
+    renderChronicleRevealPrompt(chronicle);
     return;
   }
 
@@ -949,9 +960,9 @@ function renderChronicleExperience() {
       </div>
       <div class="chronicle-actions">
         <button id="advance-chronicle" class="progress-button" type="button">
-          ${lineIndex >= lineCount - 1 ? "Reveal Time Fragment" : "Next"}
+          ${lineIndex >= lineCount - 1 ? "Finish Record" : "Next"}
         </button>
-        <button id="return-records-action" class="back-button" type="button">Return to Creation Records</button>
+        <button id="return-records-action" class="back-button" type="button">Return to Chronicle Library</button>
       </div>
       <p class="chronicle-input-hint">Click the record, press Enter/Space, or use Next.</p>
     </div>
@@ -970,7 +981,7 @@ function renderChronicleExperience() {
     .addEventListener("click", advanceChronicleExperience);
   chronicleReaderElement
     .querySelector("#return-records-action")
-    .addEventListener("click", renderChronicleListHome);
+    .addEventListener("click", renderChronicleLibrary);
 
   chronicleStatusElement.textContent = `${chronicle.title} is being witnessed.`;
 }
@@ -990,12 +1001,51 @@ function advanceChronicleExperience() {
     return;
   }
 
+  currentChronicleExperience.readyToReveal = true;
+  renderChronicleExperience();
+}
+
+function renderChronicleRevealPrompt(chronicle) {
+  chronicleReaderElement.innerHTML = `
+    <div class="chronicle-record-header">
+      <p class="section-label">Creation Record ${toRomanNumeral(chronicle.order)}</p>
+      <span>Recovered</span>
+    </div>
+    <div class="chronicle-fragment-reveal">
+      <h3>The record opens a path through time...</h3>
+      <p class="chronicle-input-hint">
+        The dialogue is complete. Reveal the Time Fragment to witness this record.
+      </p>
+      <div class="chronicle-actions">
+        <button id="reveal-time-fragment" class="progress-button" type="button">
+          Reveal Time Fragment
+        </button>
+        <button id="return-records-action" class="back-button" type="button">
+          Return to Chronicle Library
+        </button>
+      </div>
+    </div>
+  `;
+
+  chronicleReaderElement
+    .querySelector("#reveal-time-fragment")
+    .addEventListener("click", revealChronicleTimeFragment);
+  chronicleReaderElement
+    .querySelector("#return-records-action")
+    .addEventListener("click", renderChronicleLibrary);
+  chronicleStatusElement.textContent = `${chronicle.title} is ready to reveal a Time Fragment.`;
+}
+
+function revealChronicleTimeFragment() {
+  if (!currentChronicleExperience) {
+    return;
+  }
+
   currentChronicleExperience.fragmentRevealed = true;
   progress.gameProgress = GameRules.markChronicleRead(
     progress.gameProgress,
     currentChronicleExperience.chronicle.id,
   );
-  renderChronicleList();
   renderChronicleCount();
   renderChronicleExperience();
 }
@@ -1020,7 +1070,7 @@ function renderChronicleTimeFragment(chronicle, eraLabel) {
       </div>
       <div class="chronicle-actions">
         <button id="close-time-fragment" class="progress-button" type="button">
-          Return to Creation Records
+          Return to Chronicle Library
         </button>
       </div>
     </div>
@@ -1028,38 +1078,8 @@ function renderChronicleTimeFragment(chronicle, eraLabel) {
 
   chronicleReaderElement
     .querySelector("#close-time-fragment")
-    .addEventListener("click", renderChronicleListHome);
+    .addEventListener("click", renderChronicleLibrary);
   chronicleStatusElement.textContent = `${chronicle.title} witnessed.`;
-}
-
-function renderChronicleListHome() {
-  currentChronicleExperience = null;
-  renderChronicleList();
-  renderChronicleCount();
-
-  const orderedChronicles = getOrderedChronicles();
-  const unlockedCount = orderedChronicles.filter((chronicle) =>
-    isChronicleUnlocked(chronicle),
-  ).length;
-  const readCount = progress.gameProgress.chronicles.readChronicleIds.length;
-
-  chronicleReaderElement.innerHTML = `
-    <p class="section-label">Creation Records</p>
-    <h3>Recovered: ${unlockedCount} / ${orderedChronicles.length}</h3>
-    <div class="chronicle-record-grid" aria-hidden="true">
-      ${orderedChronicles
-        .map((chronicle) => {
-          const unlocked = isChronicleUnlocked(chronicle);
-          const read = progress.gameProgress.chronicles.readChronicleIds.includes(chronicle.id);
-          return `<span class="${unlocked ? "is-recovered" : "is-locked"} ${read ? "is-witnessed" : ""}">${toRomanNumeral(chronicle.order)}</span>`;
-        })
-        .join("")}
-    </div>
-    <p>Select a recovered Creation Record from the list to witness its history one line at a time.</p>
-    <p class="chronicle-input-hint">Witnessed records are marked after the Time Fragment appears.</p>
-  `;
-
-  chronicleStatusElement.textContent = "Choose a recovered Creation Record.";
 }
 
 function renderChroniclePreview(preview) {
@@ -1088,11 +1108,9 @@ function renderChroniclePreview(preview) {
 
 function renderEmptyChronicleReader() {
   currentChronicleExperience = null;
-  chronicleReaderElement.innerHTML = `
-    <p class="section-label">Record Chamber</p>
-    <h3>No Chronicles unlocked yet</h3>
-    <p>Clear an outer tower for the first time to reveal Chronicle I.</p>
-  `;
+  chronicleLibraryElement.hidden = false;
+  chronicleReaderElement.hidden = true;
+  renderChronicleLibrary();
   chronicleStatusElement.textContent = "Clear a new tower to unlock the first Chronicle.";
 }
 
@@ -1184,6 +1202,7 @@ document.addEventListener("keydown", (event) => {
   if (
     chronicleScreenElement.hidden ||
     !currentChronicleExperience ||
+    currentChronicleExperience.readyToReveal ||
     currentChronicleExperience.fragmentRevealed ||
     !["Enter", " "].includes(event.key)
   ) {
