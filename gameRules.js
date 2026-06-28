@@ -191,7 +191,10 @@ const GameRules = (() => {
       return true;
     }
 
-    return isCentralTowerUnlocked(state);
+    const requiredChronicles = Number(tower.requires?.chronicles) || 0;
+    const recoveredChronicles = state.chronicles?.unlockedChronicleIds?.length || 0;
+
+    return isCentralTowerUnlocked(state) && recoveredChronicles >= requiredChronicles;
   }
 
   function onCorrectAnswer(state, tower) {

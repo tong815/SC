@@ -10,11 +10,11 @@ Review
 
 **Current Goal:**
 
-Review the demo-completion fixes: return-to-world state preservation, opening flow, team data, and Save/Load Chronicle story.
+Review the Chronicle manuscript-flow update and the short bridge into the Creator's Trial.
 
 **Current Issue:**
 
-Codex fixed the critical state-loss bug caused by the final Time Fragment reloading `index.html` with `target="_top"`. The final fragment now posts a return-to-world message to the parent app, so returning to the map uses existing in-memory progress instead of starting a new game. Codex also added a first-run opening flow, optional normalized team data, and short Save/Load memory lines in Chronicle IV. GPT should review whether these changes make the demo feel like a complete playable beginning while preserving existing game state and save/load compatibility.
+Codex revised the Chronicle dialogue so the six Creation Records read like one continuous history book instead of six separate stories. Chronicle VI now completes the recovered history and points toward the Central Tower without acting as the game ending. A short data-driven transition appears before the Creator's Trial begins.
 
 **Artifact:**
 

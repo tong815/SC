@@ -3238,5 +3238,140 @@
     ],
     "answer": "B",
     "explanation": "Divide the total cost by the number of notebooks: $12 divided by 4 = $3 per notebook."
+  },
+  {
+    "id": "trial-001",
+    "type": "multiple-choice",
+    "topic": "Creator Trial",
+    "title": "Why Towers Exist",
+    "question": "Why was knowledge divided into towers?",
+    "options": [
+      {
+        "id": "A",
+        "text": "So large knowledge could become smaller challenges"
+      },
+      {
+        "id": "B",
+        "text": "So players could skip learning"
+      },
+      {
+        "id": "C",
+        "text": "So every question would be harder"
+      },
+      {
+        "id": "D",
+        "text": "So the map would have no purpose"
+      }
+    ],
+    "answer": "A",
+    "explanation": "The towers separate large knowledge into smaller challenges that are easier to explore and learn."
+  },
+  {
+    "id": "trial-002",
+    "type": "multiple-choice",
+    "topic": "Creator Trial",
+    "title": "Creation Records",
+    "question": "What do the Chronicles represent?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Random side stories"
+      },
+      {
+        "id": "B",
+        "text": "The recovered history of how this world was built"
+      },
+      {
+        "id": "C",
+        "text": "A list of future homework"
+      },
+      {
+        "id": "D",
+        "text": "Only the player's personal diary"
+      }
+    ],
+    "answer": "B",
+    "explanation": "The Chronicles are Creation Records. They reveal the history and rules of this world."
+  },
+  {
+    "id": "trial-003",
+    "type": "multiple-choice",
+    "topic": "Creator Trial",
+    "title": "Save",
+    "question": "In this world, what does Save represent?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Forgetting everything and starting again"
+      },
+      {
+        "id": "B",
+        "text": "A record of what has been restored"
+      },
+      {
+        "id": "C",
+        "text": "A way to make questions disappear"
+      },
+      {
+        "id": "D",
+        "text": "A reward that only appears once"
+      }
+    ],
+    "answer": "B",
+    "explanation": "Save means the world records progress, such as restored towers, fragments, and Chronicles."
+  },
+  {
+    "id": "trial-004",
+    "type": "multiple-choice",
+    "topic": "Creator Trial",
+    "title": "Load",
+    "question": "What does Load represent?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Returning to a remembered path"
+      },
+      {
+        "id": "B",
+        "text": "Deleting all progress"
+      },
+      {
+        "id": "C",
+        "text": "Changing every tower topic"
+      },
+      {
+        "id": "D",
+        "text": "Adding a new player without records"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Load brings back a saved state. It returns the traveler to a path the world already remembers."
+  },
+  {
+    "id": "trial-005",
+    "type": "multiple-choice",
+    "topic": "Creator Trial",
+    "title": "The Next Creator",
+    "question": "After understanding this world, what should a creator do next?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Copy the world without thinking"
+      },
+      {
+        "id": "B",
+        "text": "Build a new world with care, structure, and purpose"
+      },
+      {
+        "id": "C",
+        "text": "Remove all questions"
+      },
+      {
+        "id": "D",
+        "text": "Stop learning forever"
+      }
+    ],
+    "answer": "B",
+    "explanation": "The demo ends by inviting students to become creators in the summer camp, outside this game."
   }
 ]

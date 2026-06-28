@@ -1222,6 +1222,44 @@ h1 {
   gap: 10px;
 }
 
+.creator-ending {
+  background:
+    linear-gradient(135deg, rgba(255, 245, 214, 0.9), rgba(233, 247, 239, 0.94));
+}
+
+.creator-trial-transition {
+  background:
+    linear-gradient(135deg, rgba(237, 242, 255, 0.96), rgba(255, 245, 214, 0.88));
+  border-color: rgba(49, 87, 200, 0.28);
+}
+
+.creator-ending .section-label,
+.creator-trial-transition .section-label {
+  color: var(--gold);
+}
+
+.ending-dialogue {
+  display: grid;
+  gap: 8px;
+  margin: 16px 0;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(193, 132, 22, 0.28);
+  border-radius: 8px;
+}
+
+.ending-dialogue p,
+.ending-message p {
+  margin-bottom: 0;
+}
+
+.ending-message {
+  margin: 16px 0;
+  color: var(--text);
+  font-size: 1.15rem;
+  font-weight: 850;
+}
+
 .tower-action {
   margin-top: 14px;
 }

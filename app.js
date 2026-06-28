@@ -70,7 +70,13 @@ function getOuterTowers() {
 }
 
 function getPracticeTopics() {
-  return getOuterTowers().map((tower) => tower.topic);
+  return [
+    ...new Set(
+      mapData.towers
+        .map((tower) => tower.topic)
+        .filter((topic) => topic && topic !== ALL_QUESTIONS_TOPIC),
+    ),
+  ];
 }
 
 function getQuestionsForTopic(questions, topic) {
@@ -79,6 +85,20 @@ function getQuestionsForTopic(questions, topic) {
   }
 
   return questions.filter((question) => question.topic === topic);
+}
+
+function isCreatorTrialTower(tower) {
+  return tower?.type === "central";
+}
+
+function getTowerClearProgress(tower) {
+  return isCreatorTrialTower(tower)
+    ? Number(tower.clearProgress) || 5
+    : TOWER_CLEAR_PROGRESS;
+}
+
+function getTowerProgressLabel(tower) {
+  return isCreatorTrialTower(tower) ? "Creator Insight" : "Seal Energy";
 }
 
 function getOrderedChronicles() {
@@ -311,7 +331,7 @@ function getTowerStateLabel(tower, isCleared, isLocked) {
   }
 
   if (tower.type === "central") {
-    return "Unlocked";
+    return isCleared ? "Completed" : "Creator Trial";
   }
 
   return isCleared ? "Cleared" : "Enter";
@@ -359,13 +379,13 @@ function handleTowerClick(tower) {
 
   if (!GameRules.canAccessTower(progress.gameProgress, tower)) {
     setMapStatus(
-      "The Central Tower is locked. Clear all six outer towers and forge the key first.",
+      "The Creator's Trial is locked. Recover all six Chronicles, collect all six key fragments, and forge the key first.",
     );
     return;
   }
 
-  if (tower.type === "central") {
-    setMapStatus("The Central Tower is unlocked. Clear the outer towers again anytime for practice.");
+  if (isCreatorTrialTower(tower) && tower.transition) {
+    showCreatorTrialTransition(tower);
     return;
   }
 
@@ -383,6 +403,8 @@ function movePlayerTo(x, y) {
 // Tower run state and screen flow
 function startTowerRun(tower) {
   const questions = getQuestionsForTopic(allQuestions, tower.topic);
+  const clearProgress = getTowerClearProgress(tower);
+  const progressLabel = getTowerProgressLabel(tower);
 
   if (questions.length === 0) {
     setMapStatus(`${tower.name} has no questions yet.`);
@@ -396,6 +418,8 @@ function startTowerRun(tower) {
     hp: TOWER_STARTING_HP,
     streak: 0,
     runProgress: 0,
+    clearProgress,
+    progressLabel,
     currentQuestion: null,
     isFinished: false,
   };
@@ -407,9 +431,63 @@ function startTowerRun(tower) {
     tower.description || "Restore this tower by answering questions with focus.";
   towerResultElement.hidden = true;
   towerResultElement.innerHTML = "";
-  setTowerStatus(`${tower.topic} run started. Restore ${TOWER_CLEAR_PROGRESS} Seal Energy before HP reaches 0.`);
+  setTowerStatus(
+    isCreatorTrialTower(tower)
+      ? "Creator's Trial started. Answer 5 understanding questions before HP reaches 0."
+      : `${tower.topic} run started. Restore ${TOWER_CLEAR_PROGRESS} Seal Energy before HP reaches 0.`,
+  );
   updateTowerRunDisplay();
   loadRandomTowerQuestion();
+}
+
+function showCreatorTrialTransition(tower) {
+  currentRun = null;
+  mapScreenElement.hidden = true;
+  practiceViewElement.hidden = false;
+  towerTitleElement.textContent = tower.name;
+  towerDescriptionElement.textContent =
+    tower.description || "A short final trial about the world you recovered.";
+  towerHpElement.innerHTML = "";
+  towerStreakElement.textContent = "";
+  towerProgressTextElement.textContent = "Creator Trial Ready";
+  towerProgressFillElement.style.width = "0%";
+  questionListElement.innerHTML = "";
+  towerResultElement.hidden = false;
+  towerResultElement.className = "tower-result is-cleared creator-trial-transition";
+  towerResultElement.innerHTML = `
+    <p class="section-label">Recovered History</p>
+    <h3>${tower.transition.title || "The Restored History"}</h3>
+    <div class="ending-dialogue" aria-label="Creator Trial transition">
+      ${renderTransitionLines(tower.transition.lines)}
+    </div>
+    <div class="tower-result-actions">
+      <button id="enter-creator-trial-action" class="progress-button" type="button">
+        ${tower.transition.actionLabel || "Enter the Creator's Trial"}
+      </button>
+      <button id="return-map-action" class="back-button" type="button">Back to Map</button>
+    </div>
+  `;
+  setTowerStatus("The recovered history points toward the Central Tower.");
+  towerResultElement
+    .querySelector("#enter-creator-trial-action")
+    .addEventListener("click", () => startTowerRun(tower));
+  towerResultElement
+    .querySelector("#return-map-action")
+    .addEventListener("click", showMapScreen);
+}
+
+function renderTransitionLines(lines = []) {
+  if (!Array.isArray(lines) || lines.length === 0) {
+    return "<p>The transition record is silent.</p>";
+  }
+
+  return lines
+    .map(
+      (line) => `
+        <p><strong>${line.speaker || "Voice"}:</strong> "${line.text || ""}"</p>
+      `,
+    )
+    .join("");
 }
 
 // Question deck: each tower run draws from a shuffled pool before reshuffling.
@@ -509,9 +587,11 @@ function handleTowerAnswer(question, card, selectedButton) {
 
   if (isCorrect) {
     currentRun.streak += 1;
-    gainedEnergy = GameRules.calculateSealEnergyGain(currentRun.streak);
+    gainedEnergy = isCreatorTrialTower(currentRun.tower)
+      ? 1
+      : GameRules.calculateSealEnergyGain(currentRun.streak);
     currentRun.runProgress = Math.min(
-      TOWER_CLEAR_PROGRESS,
+      currentRun.clearProgress,
       currentRun.runProgress + gainedEnergy,
     );
   } else {
@@ -522,7 +602,7 @@ function handleTowerAnswer(question, card, selectedButton) {
   updateTowerRunDisplay();
   showAnswerFeedback(card, question, correctOption, isCorrect, gainedEnergy);
 
-  if (GameRules.isTowerRunCleared(currentRun.runProgress, TOWER_CLEAR_PROGRESS)) {
+  if (GameRules.isTowerRunCleared(currentRun.runProgress, currentRun.clearProgress)) {
     completeTowerRun();
     return;
   }
@@ -535,7 +615,7 @@ function handleTowerAnswer(question, card, selectedButton) {
   renderTowerActionButton("Next question", loadRandomTowerQuestion);
   setTowerStatus(
     isCorrect
-      ? `Correct. Combo x${currentRun.streak} restored ${gainedEnergy} Seal Energy.`
+      ? `Correct. ${currentRun.progressLabel} +${gainedEnergy}.`
       : "Wrong. HP decreased by 1 and your streak reset.",
   );
 }
@@ -577,7 +657,7 @@ function createComboFeedback(streak, gainedEnergy) {
     <div class="combo-feedback" aria-live="polite">
       <span class="combo-count">Combo x${streak}${streak >= 5 ? "!" : ""}</span>
       <span class="combo-praise">${praise}</span>
-      <span class="energy-gain">+${gainedEnergy} Seal Energy</span>
+      <span class="energy-gain">+${gainedEnergy} ${currentRun.progressLabel}</span>
     </div>
   `;
 }
@@ -617,6 +697,13 @@ function completeTowerRun() {
   currentRun.isFinished = true;
   updateSavedTowerProgress(tower, true);
   progress.gameProgress = GameRules.onCorrectAnswer(progress.gameProgress, tower);
+
+  if (isCreatorTrialTower(tower)) {
+    setTowerStatus("Creator's Trial cleared.");
+    showCreatorEnding();
+    renderMap();
+    return;
+  }
 
   if (!wasAlreadyCleared) {
     const unlockResult = GameRules.unlockNextChronicle(
@@ -683,6 +770,39 @@ function showRunEndMessage(title, message, wasCleared, unlockedChronicle = null)
     .addEventListener("click", () => startTowerRun(currentRun.tower));
 }
 
+function showCreatorEnding() {
+  questionListElement.innerHTML = "";
+  towerResultElement.hidden = false;
+  towerResultElement.className = "tower-result is-cleared creator-ending";
+  towerResultElement.innerHTML = `
+    <p class="section-label">Creator's Trial Complete</p>
+    <h3>The Next World</h3>
+    <div class="ending-dialogue" aria-label="Ending dialogue">
+      <p><strong>Tong:</strong> "You have recovered our history."</p>
+      <p><strong>G:</strong> "You now understand how this world was created."</p>
+      <p><strong>Tong:</strong> "But understanding a world..."</p>
+      <p><strong>Tong:</strong> "...is only the beginning."</p>
+      <p><strong>G:</strong> "Every creator once stood where you stand today."</p>
+      <p><strong>Tong:</strong> "Now..."</p>
+      <p><strong>Tong:</strong> "It is your turn."</p>
+    </div>
+    <div class="ending-message">
+      <p>This world was our creation.</p>
+      <p>The next world will be yours.</p>
+    </div>
+    <div class="tower-result-actions">
+      <button id="finish-journey-action" class="progress-button" type="button">Finish Journey</button>
+      <button id="retry-tower-action" class="back-button" type="button">Retry Trial</button>
+    </div>
+  `;
+  towerResultElement
+    .querySelector("#finish-journey-action")
+    .addEventListener("click", showMapScreen);
+  towerResultElement
+    .querySelector("#retry-tower-action")
+    .addEventListener("click", () => startTowerRun(currentRun.tower));
+}
+
 function updateSavedTowerProgress(tower, wasCleared) {
   progress.gameProgress = GameRules.updateTowerRunProgress(progress.gameProgress, tower, {
     runProgress: currentRun.runProgress,
@@ -738,7 +858,8 @@ function updateTowerRunDisplay() {
     return;
   }
 
-  const progressPercent = (currentRun.runProgress / TOWER_CLEAR_PROGRESS) * 100;
+  const clearProgress = currentRun.clearProgress || TOWER_CLEAR_PROGRESS;
+  const progressPercent = (currentRun.runProgress / clearProgress) * 100;
 
   towerHpElement.innerHTML = `
     <span class="stat-label">Health</span>
@@ -746,12 +867,12 @@ function updateTowerRunDisplay() {
     <span class="hp-number">${currentRun.hp} / ${TOWER_STARTING_HP}</span>
   `;
   towerStreakElement.textContent = `Streak ${currentRun.streak}`;
-  towerProgressTextElement.textContent = `Seal Energy ${currentRun.runProgress} / ${TOWER_CLEAR_PROGRESS}`;
+  towerProgressTextElement.textContent = `${currentRun.progressLabel} ${currentRun.runProgress} / ${clearProgress}`;
   towerProgressFillElement.style.width = `${progressPercent}%`;
 }
 
 function renderHpHearts(hp) {
-  return `${"♥".repeat(hp)}${"♡".repeat(TOWER_STARTING_HP - hp)}`;
+  return `${"&#9829;".repeat(hp)}${"&#9825;".repeat(TOWER_STARTING_HP - hp)}`;
 }
 
 function showMapScreen() {

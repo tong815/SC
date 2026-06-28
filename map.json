@@ -86,13 +86,29 @@
     {
       "id": "tower-central",
       "type": "central",
-      "topic": "All Questions",
-      "name": "Central Tower",
-      "description": "Use every key fragment to challenge the heart of Exam Island.",
+      "topic": "Creator Trial",
+      "name": "The Creator's Trial",
+      "description": "A short final trial about the world you recovered and the creator you may become.",
       "x": 50,
       "y": 50,
       "requires": {
-        "fullKey": true
+        "fullKey": true,
+        "chronicles": 6
+      },
+      "clearProgress": 5,
+      "transition": {
+        "title": "The Restored History",
+        "lines": [
+          {
+            "speaker": "Tong",
+            "text": "The history has been restored."
+          },
+          {
+            "speaker": "G",
+            "text": "Now let us see what you have learned."
+          }
+        ],
+        "actionLabel": "Enter the Creator's Trial"
       }
     }
   ],

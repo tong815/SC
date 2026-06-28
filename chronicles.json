@@ -2,8 +2,8 @@
   {
     "id": "chronicle-001",
     "order": 1,
-    "title": "The First Idea",
-    "description": "A recovered record from the moment learning first became visible.",
+    "title": "The First Wish",
+    "description": "How this world began: a wish to make learning visible.",
     "unlockedByTower": "first-new-tower-clear",
     "speakers": {
       "T": "Sage Tong",
@@ -17,19 +17,19 @@
       },
       {
         "speaker": "T",
-        "text": "I want learning to become visible."
+        "text": "I wish learning could become something students can see and enter."
       },
       {
         "speaker": "G",
-        "text": "Then knowledge needs a form."
+        "text": "Then the first rule is simple: knowledge needs a form."
       },
       {
         "speaker": "T",
-        "text": "Can such a form be shaped?"
+        "text": "The first page was small, but the wish inside it was not."
       },
       {
         "speaker": "G",
-        "text": "There is an ancient tool called C. It may shape the first page."
+        "text": "But one page could not carry every piece of knowledge."
       }
     ],
     "projectStage": {
@@ -43,8 +43,8 @@
   {
     "id": "chronicle-002",
     "order": 2,
-    "title": "The First Structure",
-    "description": "A recovered record from the time questions first gathered into topics.",
+    "title": "The First Towers",
+    "description": "Why knowledge was divided into towers and smaller challenges.",
     "unlockedByTower": "second-new-tower-clear",
     "speakers": {
       "T": "Sage Tong",
@@ -54,28 +54,28 @@
     "dialogue": [
       {
         "speaker": "T",
-        "text": "One question shines, but many questions scatter."
+        "text": "So we raised the First Towers."
       },
       {
         "speaker": "T",
-        "text": "A learner may lose the path."
+        "text": "Each tower held one kind of knowledge."
       },
       {
         "speaker": "G",
-        "text": "Then give knowledge a structure."
+        "text": "Then divide the great knowledge into smaller challenges."
       },
       {
         "speaker": "T",
-        "text": "Let fractions stand with fractions, and shapes with shapes."
+        "text": "Fractions stood with fractions, and shapes stood with shapes."
       },
       {
         "speaker": "G",
-        "text": "The first groups appear. The page begins to remember its order."
+        "text": "The Towers protected knowledge... but knowledge alone could teach no one."
       }
     ],
     "projectStage": {
-      "title": "Prototype v1: Topic Structure",
-      "caption": "A recovered fragment from the time when questions first gathered into topics.",
+      "title": "Prototype v1: The First Towers",
+      "caption": "A recovered fragment from the time when large knowledge was divided into smaller tower challenges.",
       "previewType": "iframe",
       "previewImage": "",
       "previewPath": "history/v1-topic-structure/"
@@ -84,8 +84,8 @@
   {
     "id": "chronicle-003",
     "order": 3,
-    "title": "The First World",
-    "description": "A recovered record from the age when the first map and towers appeared.",
+    "title": "The First Questions",
+    "description": "Why questions became the foundation of learning in this world.",
     "unlockedByTower": "third-new-tower-clear",
     "speakers": {
       "T": "Sage Tong",
@@ -95,28 +95,28 @@
     "dialogue": [
       {
         "speaker": "T",
-        "text": "A list is useful, but it is not a world."
+        "text": "So we created the First Questions."
       },
       {
         "speaker": "T",
-        "text": "I want students to explore."
+        "text": "A tower could not be restored by battle alone."
       },
       {
         "speaker": "G",
-        "text": "Then give knowledge places."
+        "text": "A question asks the traveler to think, choose, and learn."
       },
       {
         "speaker": "T",
-        "text": "Let each topic rise as a tower."
+        "text": "The world would grow through answers, not combat."
       },
       {
         "speaker": "G",
-        "text": "Six towers stand. The first map opens."
+        "text": "The Questions allowed the world to grow... but growth must also be remembered."
       }
     ],
     "projectStage": {
-      "title": "Prototype v2: The First Map",
-      "caption": "A living fragment from the time when the six towers first rose.",
+      "title": "Prototype v2: The First Questions",
+      "caption": "A living fragment from the time when questions became the heart of the towers.",
       "previewType": "iframe",
       "previewImage": "",
       "previewPath": "history/v2-first-map/"
@@ -125,8 +125,8 @@
   {
     "id": "chronicle-004",
     "order": 4,
-    "title": "The First Rules",
-    "description": "A recovered record from the age when challenge, rewards, and memory took shape.",
+    "title": "The First Memory",
+    "description": "Why the world can remember what has been restored.",
     "unlockedByTower": "fourth-new-tower-clear",
     "speakers": {
       "T": "Sage Tong",
@@ -136,44 +136,44 @@
     "dialogue": [
       {
         "speaker": "T",
-        "text": "A world without risk feels empty."
-      },
-      {
-        "speaker": "G",
-        "text": "Then let challenge enter, but do not let it crush the traveler."
-      },
-      {
-        "speaker": "T",
-        "text": "There shall be health, recovery, and reward."
-      },
-      {
-        "speaker": "G",
-        "text": "Seal Energy will rise with focus. Fragments will mark each victory."
-      },
-      {
-        "speaker": "T",
-        "text": "And the world must remember what has been won."
-      },
-      {
-        "speaker": "G",
         "text": "So we taught the world to remember."
       },
       {
+        "speaker": "G",
+        "text": "A world that forgets cannot grow."
+      },
+      {
         "speaker": "T",
-        "text": "Each save is a small record of what was restored."
+        "text": "Each answer, each tower, and each fragment must be remembered."
       },
       {
         "speaker": "G",
-        "text": "Each load returns to a remembered path."
+        "text": "A save is not magic. It is a record of what has been restored."
       },
       {
         "speaker": "T",
-        "text": "This is not magic. It is structure."
+        "text": "The world began to keep records of restored progress."
+      },
+      {
+        "speaker": "G",
+        "text": "Students would see that memory is structure."
+      },
+      {
+        "speaker": "T",
+        "text": "Memory alone was not enough."
+      },
+      {
+        "speaker": "G",
+        "text": "Sometimes a path must be walked again."
+      },
+      {
+        "speaker": "T",
+        "text": "So another rule was needed."
       }
     ],
     "projectStage": {
-      "title": "Prototype v3: Rules of Challenge",
-      "caption": "A recovered fragment from the time when HP, Seal Energy, combos, and rewards became rules.",
+      "title": "Prototype v3: The First Memory",
+      "caption": "A recovered fragment from the time when the world learned to remember restored progress.",
       "previewType": "iframe",
       "previewImage": "",
       "previewPath": "history/v3-rules/"
@@ -182,8 +182,8 @@
   {
     "id": "chronicle-005",
     "order": 5,
-    "title": "The First Journey",
-    "description": "A recovered record from the age when travelers first approached the gate.",
+    "title": "The Remembered Path",
+    "description": "Why loading means returning to a path the world already remembers.",
     "unlockedByTower": "fifth-new-tower-clear",
     "speakers": {
       "T": "Sage Tong",
@@ -193,28 +193,28 @@
     "dialogue": [
       {
         "speaker": "T",
-        "text": "The world stands, yet it is silent."
+        "text": "So we created the Remembered Paths."
       },
       {
         "speaker": "G",
-        "text": "A world begins when travelers arrive."
+        "text": "Yes. A load does not create a new world."
       },
       {
         "speaker": "T",
-        "text": "Then let names be spoken at the gate."
+        "text": "It returns the traveler to a remembered path."
       },
       {
         "speaker": "G",
-        "text": "Let a team enter together, and let Sage Tong greet them."
+        "text": "Names, fragments, records, and positions could come back together."
       },
       {
         "speaker": "T",
-        "text": "The first travelers approach."
+        "text": "At last... the world was ready."
       }
     ],
     "projectStage": {
-      "title": "Prototype v4: The First Travelers",
-      "caption": "A recovered fragment from the time when travelers first spoke their names at the gate.",
+      "title": "Prototype v4: The Remembered Path",
+      "caption": "A recovered fragment from the time when loading returned travelers to a remembered path.",
       "previewType": "iframe",
       "previewImage": "",
       "previewPath": "history/v4-travelers/"
@@ -223,8 +223,8 @@
   {
     "id": "chronicle-006",
     "order": 6,
-    "title": "The Complete Prototype",
-    "description": "A recovered record from the current era, where the world can be explored.",
+    "title": "The Completed World",
+    "description": "How T and G completed the world the player has now recovered.",
     "unlockedByTower": "sixth-new-tower-clear",
     "speakers": {
       "T": "Sage Tong",
@@ -234,32 +234,32 @@
     "dialogue": [
       {
         "speaker": "T",
-        "text": "The map opens. The towers answer. The records awaken."
+        "text": "And together... we completed the world."
       },
       {
         "speaker": "G",
-        "text": "The prototype can now be explored."
+        "text": "The wish had a form."
       },
       {
         "speaker": "T",
-        "text": "Then... is the world complete?"
+        "text": "The towers stood, the questions taught, and the records awakened."
       },
       {
         "speaker": "G",
-        "text": "..."
+        "text": "The world was complete."
       },
       {
         "speaker": "T",
-        "text": "G?"
+        "text": "But no one had yet walked its paths."
       },
       {
         "speaker": "T",
-        "text": "The record ends before the answer is given."
+        "text": "At the center, the final trial waited."
       }
     ],
     "projectStage": {
       "title": "Prototype v5: The Complete Prototype",
-      "caption": "A recovered fragment from the current era. The world can be explored, but one question remains.",
+      "caption": "A recovered fragment from the current era. The first world is complete, and the next creator is almost ready.",
       "previewType": "iframe",
       "previewImage": "",
       "previewPath": "history/v5-complete-prototype/"
