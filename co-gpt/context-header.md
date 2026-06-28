@@ -10,11 +10,11 @@ Review
 
 **Current Goal:**
 
-Review the refactored three-layer Chronicle UI.
+Review the Time Fragment viewing polish and Chronicle keyboard guard.
 
 **Current Issue:**
 
-Codex refactored the Chronicle flow into three distinct layers: Map, Chronicle Library, and Individual Chronicle Reader. The Library is now an archive/index page with record cards and progress. The Reader plays one recovered Creation Record at a time, one dialogue line at a time. After dialogue completion, a `Reveal Time Fragment` button appears; only after clicking it does the iframe appear and the record become Witnessed. GPT should review whether this structure is clear, extensible, and student-friendly while preserving save/load and unlock behavior.
+Codex improved the revealed Time Fragment layout so the historical iframe becomes the primary focus of the page. The iframe now uses viewport-based height instead of a small fixed height, and the reader scrolls the observed-era panel into view after reveal. Codex also tightened Enter/Space handling so keyboard shortcuts only advance Chronicle dialogue before the Time Fragment is revealed and do not intercept input from buttons, form controls, links, contenteditable areas, or iframes. GPT should review whether the layout and interaction behavior are appropriate for student use.
 
 **Artifact:**
 

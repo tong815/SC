@@ -16,11 +16,11 @@ Review
 
 **Current Goal:**
 
-Review the refactored three-layer Chronicle UI.
+Review the Time Fragment viewing polish and Chronicle keyboard guard.
 
 **Current Issue:**
 
-Codex refactored the Chronicle flow into three distinct layers: Map, Chronicle Library, and Individual Chronicle Reader. The Library is now an archive/index page with record cards and progress. The Reader plays one recovered Creation Record at a time, one dialogue line at a time. After dialogue completion, a `Reveal Time Fragment` button appears; only after clicking it does the iframe appear and the record become Witnessed. GPT should review whether this structure is clear, extensible, and student-friendly while preserving save/load and unlock behavior.
+Codex improved the revealed Time Fragment layout so the historical iframe becomes the primary focus of the page. The iframe now uses viewport-based height instead of a small fixed height, and the reader scrolls the observed-era panel into view after reveal. Codex also tightened Enter/Space handling so keyboard shortcuts only advance Chronicle dialogue before the Time Fragment is revealed and do not intercept input from buttons, form controls, links, contenteditable areas, or iframes. GPT should review whether the layout and interaction behavior are appropriate for student use.
 
 **Artifact:**
 
@@ -35,185 +35,107 @@ Implementation Report
 # Implementation Report
 
 **Project:** Exam Visualizer / SC
-**Build or Version:** Three-Layer Chronicle UI
+**Build or Version:** Time Fragment Viewing Polish and Keyboard Guard
 **Date:** 2026-06-28
 **Phase:** Implementation / Review
 
 ## What We Updated
 
-Codex refactored the Chronicle UI into a clearer three-layer structure:
+Codex improved the Time Fragment viewing experience inside the Individual Chronicle Reader. Once a Time Fragment is revealed, the embedded historical mini-site iframe is now the main focus instead of a short panel that forces excessive outer-page scrolling.
 
-1. Map
-2. Chronicle Library
-3. Individual Chronicle Reader
+Codex also verified and tightened the Chronicle Enter/Space keyboard shortcut behavior so it only advances dialogue before the Time Fragment is revealed.
 
-The Time Fragment reveal remains inside the Individual Chronicle Reader and appears only after dialogue completion and an explicit reveal action.
-
-No tower practice mechanics, HP rules, Seal Energy rules, combo rules, map data, question data, Chronicle unlock rules, save/load structure, or history iframe paths were redesigned.
+No save/load logic, Chronicle unlock logic, iframe paths, historical mini-site content, tower mechanics, HP rules, Seal Energy rules, or combo rules were changed.
 
 ## Files Changed
 
-- `index.html`
 - `app.js`
 - `style.css`
-- `chronicles.json`
 - `co-gpt/context-header.md`
 - `co-gpt/implementation-report.md`
 - `co-gpt/gpt-copy-paste.md`
 
-## Layer 1: Map
+Note: there is an untracked `text.txt` in the working folder. Codex did not modify it.
 
-The existing map screen was left unchanged.
+## Time Fragment Layout Changes
 
-The existing `Chronicles` button now opens the Chronicle Library layer.
+`style.css` now makes the revealed Time Fragment iframe much larger:
 
-## Layer 2: Chronicle Library
-
-The Chronicle Library is now a dedicated archive/index page.
-
-It shows:
-
-- title: `Chronicles`
-- description: `Recovered Creation Records from the history of this world.`
-- `Recovered Records: X / 6`
-- `Witnessed Records: Y / 6`
-- a grid of Chronicle cards
-
-Each card shows:
-
-- `Creation Record I/II/III...`
-- status: `Locked`, `Recovered`, or `Witnessed`
-- Chronicle title
-- short description/teaser
-- action text:
-  - locked: `Locked`
-  - recovered: `Open Record`
-  - witnessed: `Witness Again`
-
-The Library does not show dialogue lines.
-
-The Library does not show Time Fragment iframes.
-
-## Layer 3: Individual Chronicle Reader
-
-Clicking an unlocked Library card opens the Individual Chronicle Reader.
-
-The Reader shows:
-
-- Creation Record label
-- Chronicle title
-- recovered/witnessed state
-- one dialogue line at a time
-- large speaker initial
-- speaker name from `chronicles.json`
-- manuscript-style dialogue panel
-
-Supported inputs:
-
-- click the record area
-- click `Next`
-- press Enter
-- press Space
-
-Dialogue still comes from `chronicles.json`; no dialogue was hardcoded into `app.js`.
-
-## Time Fragment Reveal
-
-After the final dialogue line:
-
-1. The Reader shows `The record opens a path through time...`
-2. The Reader shows a `Reveal Time Fragment` button.
-3. The iframe is still hidden at this point.
-4. Clicking `Reveal Time Fragment` reveals the matching iframe.
-5. Only then is the Chronicle marked as Witnessed.
-
-The revealed Time Fragment area still shows:
-
-- `Observed Era`
-- age label
-- `Time Fragment Window`
-- existing historical mini-site iframe
-
-Navigation after reveal:
-
-- `Return to Chronicle Library`
-- then `Back to Map` from the Library
-
-## Data Changes
-
-`chronicles.json` now includes a small stable `description` field on each Chronicle for Library cards.
-
-Example:
-
-```json
-"description": "A recovered record from the moment learning first became visible."
+```css
+height: calc(100vh - 180px);
+min-height: 80vh;
 ```
 
-Dialogue data stayed in `chronicles.json`.
+Spacing around the Time Fragment was reduced:
 
-## Save / Load
+- smaller heading spacing
+- smaller `Observed Era` / age label spacing
+- smaller `Time Fragment Window` spacing
+- smaller wrapper padding
 
-Save/load fields were preserved:
+This gives most of the viewport to the historical mini-site.
 
-- `unlockedChronicleIds`
-- `readChronicleIds`
-- `currentChronicleId`
-- `lastUnlockedChronicleId`
+## Time Fragment Focus Behavior
 
-No temporary cutscene progress fields were added.
+`app.js` now scrolls the observed-era panel into view after the Time Fragment is revealed.
 
-Internally, `readChronicleIds` still stores witnessed records. The UI label is now `Witnessed`.
+This makes the historical iframe the immediate focus for students, instead of leaving them at the top of the Chronicle reader.
+
+## Keyboard Guard Changes
+
+The Enter/Space shortcut now only advances Chronicle dialogue when:
+
+- the Chronicle screen is open
+- the Individual Chronicle Reader is visible
+- a Chronicle dialogue experience is active
+- the reveal prompt is not active
+- the Time Fragment has not been revealed
+- the key is Enter or Space
+- focus is not inside an interactive element
+
+Protected interactive targets include:
+
+- buttons
+- inputs
+- textareas
+- selects
+- iframes
+- links
+- contenteditable areas
+- other `role="button"` controls
+
+The intended Chronicle dialogue surface still supports Enter/Space.
 
 ## Tests
 
 Static checks:
 
 - `node --check app.js`
-- `node --check gameRules.js`
-- parsed `questions.json`
-- parsed `map.json`
-- parsed `chronicles.json`
 - `git diff --check` passed with only normal CRLF warnings
 
 Browser checks:
 
-- Map opens normally.
-- Chronicles button opens Chronicle Library.
-- Library shows total records and progress.
-- Locked cards cannot be opened.
-- Recovered cards open the Individual Chronicle Reader.
-- Library does not show dialogue.
-- Library does not show iframe.
-- Reader shows one dialogue line at a time.
-- Click advances dialogue.
-- `Next` advances dialogue.
-- Enter advances dialogue.
-- Space key support remains wired through the same keyboard handler.
-- iframe is hidden before dialogue completion.
-- `Reveal Time Fragment` appears after the final dialogue line.
-- iframe is still hidden before clicking `Reveal Time Fragment`.
-- Chronicle becomes Witnessed only after Time Fragment reveal.
-- `Return to Chronicle Library` works.
-- `Back to Map` works from Chronicle Library.
-- First tower clear still unlocks Chronicle I.
-- Re-clearing the same tower does not unlock another Chronicle.
-- Existing save/load normalization preserves unlocked and witnessed records.
-- All six Chronicles reveal the correct Time Fragment iframe.
-- No console errors were found.
+- Time Fragment iframe loads normally.
+- iframe measured `720px` high in a `900px` viewport.
+- iframe height ratio measured as `0.8` of viewport height.
+- after reveal, the page scrolls so the Time Fragment area is near the top of the visible viewport.
+- Enter advances dialogue before reveal.
+- Enter/Space do not reveal the Time Fragment from the reveal prompt.
+- after the iframe is visible, Enter/Space no longer trigger Chronicle actions.
+- no console errors were found.
 
-## Risks / Limitations
+## Save / Load
 
-- The Individual Chronicle Reader restarts from the first dialogue line each time a record is opened. This avoids adding temporary cutscene progress to save data.
-- The Library uses short Chronicle descriptions from `chronicles.json`; future content writers should keep these descriptions brief.
-- No portraits were added. Speaker presentation still uses large initials, which keeps the system simple and content-driven.
+Save/load behavior was not changed.
+
+No new save fields were added.
 
 ## GPT Review Request
 
 GPT, please review:
 
-- Is the Map -> Chronicle Library -> Individual Reader -> Time Fragment structure clear?
-- Does the Library feel like an archive/index instead of a document reader?
-- Is the Reader flow clear for Grade 5-7 students?
-- Is `Reveal Time Fragment` placed at the right moment?
-- Is `Witnessed` understandable as the completed/read state?
-- Are there any risks for future student extension?
+- Is the iframe height appropriate for student exploration?
+- Does the auto-scroll after reveal improve the Time Fragment focus?
+- Is the reduced surrounding spacing still readable?
+- Is the Enter/Space keyboard guard safe for iframe interaction?
+- Are there any accessibility concerns with the current behavior?

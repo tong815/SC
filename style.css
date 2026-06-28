@@ -644,7 +644,14 @@ h1 {
 }
 
 .chronicle-fragment-reveal {
+  display: grid;
+  gap: 10px;
   animation: timeFragmentReveal 480ms ease both;
+}
+
+.chronicle-fragment-reveal h3 {
+  margin-bottom: 4px;
+  font-size: clamp(1.35rem, 3vw, 2.2rem);
 }
 
 .chronicle-line {
@@ -690,8 +697,8 @@ h1 {
 }
 
 .chronicle-project-stage {
-  margin-top: 24px;
-  padding: 18px;
+  margin-top: 12px;
+  padding: 12px;
   background:
     linear-gradient(135deg, rgba(255, 252, 241, 0.84), rgba(238, 225, 193, 0.58)),
     rgba(255, 255, 255, 0.64);
@@ -702,7 +709,7 @@ h1 {
 }
 
 .chronicle-project-stage h4 {
-  margin: 0 0 12px;
+  margin: 0 0 4px;
   color: var(--gold);
   font-size: 0.82rem;
   font-weight: 950;
@@ -711,7 +718,7 @@ h1 {
 }
 
 .chronicle-project-stage .era-title {
-  margin-bottom: 4px;
+  margin-bottom: 2px;
   color: #3c321f;
   font-size: 1.12rem;
   font-weight: 950;
@@ -719,7 +726,7 @@ h1 {
 
 .time-fragment-label {
   display: inline-flex;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   border: 1px solid rgba(201, 151, 63, 0.35);
   border-radius: 999px;
   padding: 5px 9px;
@@ -737,7 +744,7 @@ h1 {
   display: grid;
   width: 100%;
   min-height: 180px;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   place-items: center;
   color: #6f5421;
   font-weight: 900;
@@ -755,7 +762,8 @@ h1 {
 
 .chronicle-preview-frame {
   display: block;
-  height: 240px;
+  height: calc(100vh - 180px);
+  min-height: 80vh;
 }
 
 .chronicle-preview-frame:hover,

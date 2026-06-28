@@ -1080,6 +1080,12 @@ function renderChronicleTimeFragment(chronicle, eraLabel) {
     .querySelector("#close-time-fragment")
     .addEventListener("click", renderChronicleLibrary);
   chronicleStatusElement.textContent = `${chronicle.title} witnessed.`;
+
+  requestAnimationFrame(() => {
+    chronicleReaderElement
+      .querySelector(".chronicle-project-stage")
+      ?.scrollIntoView({ block: "start", behavior: "smooth" });
+  });
 }
 
 function renderChroniclePreview(preview) {
@@ -1201,10 +1207,12 @@ openChroniclesButton.addEventListener("click", () => showChronicleScreen());
 document.addEventListener("keydown", (event) => {
   if (
     chronicleScreenElement.hidden ||
+    chronicleReaderElement.hidden ||
     !currentChronicleExperience ||
     currentChronicleExperience.readyToReveal ||
     currentChronicleExperience.fragmentRevealed ||
-    !["Enter", " "].includes(event.key)
+    !["Enter", " "].includes(event.key) ||
+    isInteractiveKeyTarget(event.target)
   ) {
     return;
   }
@@ -1212,6 +1220,26 @@ document.addEventListener("keydown", (event) => {
   event.preventDefault();
   advanceChronicleExperience();
 });
+
+function isInteractiveKeyTarget(target) {
+  if (!(target instanceof Element)) {
+    return false;
+  }
+
+  if (
+    target.closest(".chronicle-experience") &&
+    !target.closest("button, input, textarea, select, iframe, a, [contenteditable='true']")
+  ) {
+    return false;
+  }
+
+  return Boolean(
+    target.closest(
+      "button, input, textarea, select, iframe, a, [contenteditable='true'], [role='button']",
+    ),
+  );
+}
+
 progressFileInput.addEventListener("change", loadProgressFile);
 gameMapElement.addEventListener("click", handleMapClick);
 blacksmithButton.addEventListener("click", (event) => {
