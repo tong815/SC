@@ -1227,12 +1227,11 @@ function renderChronicleExperience() {
   const speakerName = currentLine
     ? chronicle.speakers?.[currentLine.speaker] || currentLine.speaker
     : "";
-  const eraLabel = `Age ${toRomanNumeral(chronicle.order)} - ${chronicle.title}`;
   const lineCount = dialogue.length;
   const progressText = lineCount > 0 ? `${Math.min(lineIndex + 1, lineCount)} / ${lineCount}` : "0 / 0";
 
   if (fragmentRevealed) {
-    renderChronicleTimeFragment(chronicle, eraLabel);
+    renderChronicleTimeFragment(chronicle);
     return;
   }
 
@@ -1348,7 +1347,7 @@ function revealChronicleTimeFragment() {
   renderChronicleExperience();
 }
 
-function renderChronicleTimeFragment(chronicle, eraLabel) {
+function renderChronicleTimeFragment(chronicle) {
   const preview = chronicle.projectStage || {};
 
   chronicleReaderElement.innerHTML = `
@@ -1360,7 +1359,6 @@ function renderChronicleTimeFragment(chronicle, eraLabel) {
       <h3>The record opens a path through time...</h3>
       <div class="chronicle-project-stage">
         <h4>Observed Era</h4>
-        <p class="era-title">${eraLabel}</p>
         <p class="time-fragment-label">Time Fragment Window</p>
         ${renderChroniclePreview(preview)}
         <p><strong>${preview.title || "Time fragment"}</strong></p>

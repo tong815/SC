@@ -809,13 +809,6 @@ h1 {
   text-transform: uppercase;
 }
 
-.chronicle-project-stage .era-title {
-  margin-bottom: 2px;
-  color: #3c321f;
-  font-size: 1.12rem;
-  font-weight: 950;
-}
-
 .time-fragment-label {
   display: inline-flex;
   margin-bottom: 8px;

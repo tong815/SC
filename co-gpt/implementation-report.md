@@ -1,81 +1,107 @@
 # Implementation Report
 
 **Project:** Exam Visualizer / SC
-**Build or Version:** Creation Record Stage Realignment
+**Build or Version:** Chronicle / Time Fragment Label Cleanup
 **Date:** 2026-06-28
 **Phase:** Implementation / Review
 
-## What We Updated
+## What Was Wrong
 
-Codex realigned the six Creation Records so each one describes a concrete development stage of the Exam Visualizer project.
+The six Creation Records now use the stage-based titles:
 
-This update does not redesign:
+1. `The First Question`
+2. `The First Categories`
+3. `The First Map`
+4. `The First Rules`
+5. `The First Memory`
+6. `The First Journey`
 
-- map gameplay
-- tower rules
-- HP rules
-- Seal Energy
-- combo rules
-- Chronicle unlock order
-- Chronicle Library structure
-- Individual Chronicle Reader structure
-- Creator's Trial mechanics
-- ending structure
-- save/load structure
+However, the Chronicle Reader's Time Fragment wrapper still rendered an outer title line like:
 
-The update focuses on Chronicle content and Time Fragment stage labels.
+```text
+Observed Era
+Age I - The First Wish
+Time Fragment Window
+```
+
+The iframe page also renders its own title, such as:
+
+```text
+Observed Time Fragment
+Age I - The First Question
+Prototype v0: Single-Question Website
+```
+
+This created a duplicated heading area and could show old labels outside the iframe.
+
+## What Changed
+
+### Chronicle Library
+
+The Chronicle Library continues to read card titles and descriptions from `chronicles.json`.
+
+The expected data values are:
+
+- Record I: `The First Question`
+  - `The first prototype: one question, four choices, instant feedback, and a short explanation.`
+- Record II: `The First Categories`
+  - `The questions were organized into logical groups, so learning could be explored one topic at a time.`
+- Record III: `The First Map`
+  - `The project became a world map, turning learning areas into places students could explore.`
+- Record IV: `The First Rules`
+  - `The world gained rules: challenges, progress, key fragments, and consequences.`
+- Record V: `The First Memory`
+  - `The world learned to remember progress through Save and return to it through Load.`
+- Record VI: `The First Journey`
+  - `The project became a complete journey with opening, characters, Chronicles, Time Fragments, final trial, and ending.`
+
+No separate hardcoded Chronicle card titles were added to `app.js`.
+
+### Time Fragment Wrapper
+
+The outer wrapper was simplified.
+
+Before:
+
+```text
+Observed Era
+Age I - The First Question
+Time Fragment Window
+<iframe>
+```
+
+After:
+
+```text
+Observed Era
+Time Fragment Window
+<iframe>
+```
+
+The iframe now remains the only place that shows the detailed stage title.
+
+This avoids mismatch between:
+
+- outer Chronicle UI title
+- inner Time Fragment page title
+
+### CSS Cleanup
+
+The unused `.era-title` style was removed from `style.css`.
 
 ## Files Changed
 
-- `chronicles.json`
-- `history/v0-question-only/index.html`
-- `history/v1-topic-structure/index.html`
-- `history/v2-first-map/index.html`
-- `history/v3-rules/index.html`
-- `history/v4-travelers/index.html`
-- `history/v5-complete-prototype/index.html`
-- `history/shared/history.css`
+- `app.js`
+- `style.css`
 - `co-gpt/context-header.md`
 - `co-gpt/implementation-report.md`
 - `co-gpt/gpt-copy-paste.md`
 
-## New Six-Stage Creation Record Structure
+## Iframe Paths
 
-1. **Creation Record I: `The First Question`**
-   - Stage: single-question website
-   - Meaning: first working prototype
-   - Time Fragment: `history/v0-question-only/`
+No iframe paths changed.
 
-2. **Creation Record II: `The First Categories`**
-   - Stage: questions classified by topic or logic
-   - Meaning: prototype becomes organized
-   - Time Fragment: `history/v1-topic-structure/`
-
-3. **Creation Record III: `The First Map`**
-   - Stage: map added
-   - Meaning: learning site becomes a world
-   - Time Fragment: `history/v2-first-map/`
-
-4. **Creation Record IV: `The First Rules`**
-   - Stage: game rules added
-   - Meaning: world becomes playable
-   - Time Fragment: `history/v3-rules/`
-
-5. **Creation Record V: `The First Memory`**
-   - Stage: Save and Load added
-   - Meaning: world gains memory
-   - Time Fragment: `history/v4-travelers/`
-
-6. **Creation Record VI: `The First Journey`**
-   - Stage: complete narrative/game experience
-   - Meaning: demo becomes a complete learning journey
-   - Time Fragment: `history/v5-complete-prototype/`
-
-## Time Fragment Mapping
-
-No iframe paths needed to change.
-
-The existing folder paths are still used:
+Current mapping remains:
 
 - Record I -> `history/v0-question-only/`
 - Record II -> `history/v1-topic-structure/`
@@ -84,88 +110,45 @@ The existing folder paths are still used:
 - Record V -> `history/v4-travelers/`
 - Record VI -> `history/v5-complete-prototype/`
 
-However, labels and content were updated so the pages match the new stage meanings.
+## Behavior Preserved
 
-Important note:
+This was a UI/text cleanup only.
 
-- `history/v4-travelers/` kept its folder name to avoid path churn, but its page content now demonstrates Save/Load memory instead of traveler/team entry.
+No changes were made to:
 
-## Chronicle Text Realignment
+- Chronicle unlock order
+- read/witnessed state
+- Time Fragment reveal timing
+- iframe loading behavior
+- save/load behavior
+- Creator's Trial
+- ending
+- tower mechanics
 
-`chronicles.json` now describes actual project development stages instead of abstract world rules.
-
-Examples:
-
-- Record I explains one question, four choices, feedback, and explanation.
-- Record II explains categorizing many questions into topic paths.
-- Record III explains turning topics into map towers.
-- Record IV explains HP, Seal Energy, key fragments, tower clearing, and locked center.
-- Record V explains Save as JSON memory and Load as returning to a remembered path.
-- Record VI explains the complete demo: opening, team names, Sage Tong, Chronicles, Time Fragments, Creator's Trial, and ending.
-
-Dialogue remains short, mythic, and Grade 5-7 friendly.
-
-All Chronicle dialogue still lives in `chronicles.json`.
-
-No Chronicle dialogue was hardcoded into `app.js`.
-
-## Stage Page Label Updates
-
-Updated labels:
-
-- `v0-question-only`: `Prototype v0: Single-Question Website`
-- `v1-topic-structure`: `Prototype v1: Topic Categories`
-- `v2-first-map`: `Age III - The First Map`
-- `v3-rules`: `Prototype v3: Game Rules`
-- `v4-travelers`: `Prototype v4: Save and Load Memory`
-- `v5-complete-prototype`: `Prototype v5: Complete Narrative Demo`
-
-`history/shared/history.css` received a small `textarea` / `.memory-record` style for the Save/Load JSON preview.
-
-## Save / Load Compatibility
-
-Game save/load behavior was not changed.
-
-The Save/Load content added to the v4 Time Fragment is only a historical mini-site demonstration.
-
-Permanent player progress fields and import/export behavior remain unchanged.
-
-## Tests To Verify
+## Tests Run
 
 Static checks:
 
 - `node --check app.js`
 - `node --check gameRules.js`
-- parse `questions.json`
-- parse `map.json`
-- parse `chronicles.json`
+- parsed `chronicles.json`
+- parsed `map.json`
+- parsed `questions.json`
 - `git diff --check`
 
-Browser checks:
+Chronicle label checks:
 
-- Chronicle Library shows the new titles and descriptions.
-- Each Creation Record opens the intended Time Fragment path.
-- Record I shows the single-question website.
-- Record II shows the topic/category question stage.
-- Record III shows the map stage.
-- Record IV shows the game-rules stage.
-- Record V shows the Save/Load memory stage.
-- Record VI shows the complete narrative demo stage.
-- Time Fragment reveal still works.
-- Creator's Trial still works.
-- Ending still works.
-- No console errors.
+- `chronicles.json` contains the stage-based titles from `The First Question` through `The First Journey`
+- old Chronicle title labels such as `The First Wish` are no longer present in `app.js`, `style.css`, or `chronicles.json`
+- `app.js` no longer renders the extra outer `Age I - ...` line in the Time Fragment wrapper
+- `style.css` no longer contains the unused `.era-title` wrapper style
+- all six historical iframe pages still contain their own detailed stage titles, such as `Age I - The First Question`
 
-## Remaining Limitations
+Browser smoke checks:
 
-- The Record V folder is still named `v4-travelers`, but its visible page now represents Save/Load memory. This avoids breaking existing iframe paths.
-- The Time Fragment pages are lightweight historical demos, not full copies of every old project state.
+- local app opened successfully over HTTP
+- no console errors were found during the smoke check
 
-## GPT Review Request
+## Remaining Notes
 
-GPT, please review:
-
-- Do the six Creation Records now clearly answer, "What did this project become at this stage?"
-- Do the Chronicle titles/descriptions/dialogue match the staged webpages?
-- Is the unchanged Record V iframe path acceptable now that the page content has been realigned?
-- Are there any remaining mismatches between `chronicles.json` and the history pages?
+If a browser still shows old Chronicle Library names, it is likely loading an old cached copy. Refresh the page or restart the local server.

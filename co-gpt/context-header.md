@@ -10,11 +10,11 @@ Review
 
 **Current Goal:**
 
-Review the realigned six Creation Records and matching Time Fragment stage pages.
+Review the Chronicle / Time Fragment label cleanup.
 
 **Current Issue:**
 
-Codex realigned the Chronicles so each Creation Record describes one concrete development stage of the Exam Visualizer project. Record titles, descriptions, dialogue, Time Fragment labels, and staged page labels now match the six-stage build history: single-question site, topic categories, first map, game rules, Save/Load memory, and complete narrative demo.
+The six Creation Records had been realigned to website-building stages, but the Time Fragment wrapper still rendered an outer `Age I - ...` title line. That line could duplicate or conflict with the iframe's own stage title. Codex removed the duplicated outer era-title line and confirmed Chronicle Library titles/descriptions come from `chronicles.json`.
 
 **Artifact:**
 
