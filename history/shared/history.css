@@ -28,7 +28,8 @@ body {
 }
 
 button,
-input {
+input,
+textarea {
   font: inherit;
 }
 
@@ -303,6 +304,18 @@ h2 {
   padding: 1rem;
   background: #fff5d8;
   line-height: 1.6;
+}
+
+.memory-record {
+  width: 100%;
+  resize: vertical;
+  border: 1px solid rgba(130, 96, 45, 0.42);
+  border-radius: 8px;
+  padding: 0.8rem;
+  color: var(--ink);
+  background: #fffdf5;
+  font-family: Consolas, "Courier New", monospace;
+  line-height: 1.45;
 }
 
 .open-world {

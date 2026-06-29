@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prototype v4: The First Travelers</title>
+  <title>Prototype v4: Save and Load Memory</title>
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="../shared/history.css">
 </head>
@@ -13,72 +13,121 @@
       <header class="history-header">
         <div class="fragment-banner">
           <p>Observed Time Fragment</p>
-          <strong>Age V - The First Journey</strong>
+          <strong>Age V - The First Memory</strong>
           <span>This is not the current world. This is a recovered fragment of how the world once looked.</span>
         </div>
-        <h1>Prototype v4: The First Travelers</h1>
-        <p class="subtitle">Before the journey begins, the world asks who is entering.</p>
+        <h1>Prototype v4: Save and Load Memory</h1>
+        <p class="subtitle">The world learned to save progress as a record and load that record later.</p>
       </header>
 
       <div class="stage-grid">
         <section class="panel">
-          <h2>Enter the Gate</h2>
-          <form id="traveler-form" class="traveler-form">
-            <label>
-              Team Size
-              <select id="team-size">
-                <option value="1">1 traveler</option>
-                <option value="2" selected>2 travelers</option>
-                <option value="3">3 travelers</option>
-                <option value="4">4 travelers</option>
-              </select>
-            </label>
-            <div id="name-fields"></div>
-            <button type="submit">Begin Journey</button>
-          </form>
+          <h2>Progress Record</h2>
+          <div class="stat-row">
+            <span id="answered" class="stat">Answered: 3</span>
+            <span id="correct" class="stat">Correct: 2</span>
+            <span id="fragments" class="stat">Fragments: 1 / 6</span>
+          </div>
+          <p class="soft-text">This small record stands for player progress: answers, accuracy, fragments, and restored state.</p>
+          <div class="choices">
+            <button id="answer-correct" class="choice" type="button">Answer Correctly</button>
+            <button id="collect-fragment" class="choice" type="button">Collect Fragment</button>
+            <button id="reset-progress" class="choice" type="button">Reset</button>
+          </div>
         </section>
 
-        <section class="panel" aria-live="polite">
-          <h2>Sage Tong</h2>
-          <div id="sage-message" class="sage-box">
-            Welcome, travelers. Speak your names, and the map will begin to remember you.
+        <section class="panel">
+          <h2>Save / Load JSON</h2>
+          <textarea id="save-record" class="memory-record" rows="9" aria-label="Saved progress JSON"></textarea>
+          <div class="choices">
+            <button id="save-progress" class="choice" type="button">Save Progress</button>
+            <button id="load-progress" class="choice" type="button">Load Progress</button>
           </div>
+          <p id="memory-message" class="feedback good" aria-live="polite">The world is ready to remember.</p>
         </section>
       </div>
     </section>
   </main>
 
   <script>
-    const teamSize = document.querySelector("#team-size");
-    const nameFields = document.querySelector("#name-fields");
-    const sageMessage = document.querySelector("#sage-message");
-    const form = document.querySelector("#traveler-form");
+    const defaultProgress = {
+      answered: 3,
+      correct: 2,
+      fragments: 1,
+      unlockedRecords: ["record-001", "record-002"]
+    };
 
-    function renderNameFields() {
-      const size = Number(teamSize.value);
-      nameFields.innerHTML = "";
-      for (let index = 1; index <= size; index += 1) {
-        const label = document.createElement("label");
-        label.innerHTML = `
-          Traveler ${index}
-          <input type="text" name="traveler" placeholder="Enter a name" value="${index === 1 ? "Alex" : ""}">
-        `;
-        nameFields.append(label);
+    let progress = { ...defaultProgress };
+
+    const answered = document.querySelector("#answered");
+    const correct = document.querySelector("#correct");
+    const fragments = document.querySelector("#fragments");
+    const saveRecord = document.querySelector("#save-record");
+    const memoryMessage = document.querySelector("#memory-message");
+
+    function renderProgress() {
+      answered.textContent = `Answered: ${progress.answered}`;
+      correct.textContent = `Correct: ${progress.correct}`;
+      fragments.textContent = `Fragments: ${progress.fragments} / 6`;
+    }
+
+    function saveProgress() {
+      saveRecord.value = JSON.stringify({
+        appName: "Exam Visualizer",
+        stage: "Prototype v4",
+        progress
+      }, null, 2);
+      memoryMessage.textContent = "Progress saved into a JSON record.";
+      memoryMessage.className = "feedback good";
+    }
+
+    function loadProgress() {
+      try {
+        const saved = JSON.parse(saveRecord.value);
+        progress = {
+          answered: Number(saved.progress?.answered) || 0,
+          correct: Number(saved.progress?.correct) || 0,
+          fragments: Number(saved.progress?.fragments) || 0,
+          unlockedRecords: Array.isArray(saved.progress?.unlockedRecords)
+            ? saved.progress.unlockedRecords
+            : []
+        };
+        renderProgress();
+        memoryMessage.textContent = "Progress loaded. The remembered path returned.";
+        memoryMessage.className = "feedback good";
+      } catch (error) {
+        memoryMessage.textContent = "The record could not be loaded.";
+        memoryMessage.className = "feedback bad";
       }
     }
 
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const names = [...form.querySelectorAll("input")]
-        .map((input, index) => input.value.trim() || `Traveler ${index + 1}`);
-      sageMessage.innerHTML = `
-        <strong>${names.join(", ")}</strong><br>
-        Sage Tong opens the path. The first travelers are ready to explore the towers.
-      `;
+    document.querySelector("#answer-correct").addEventListener("click", () => {
+      progress.answered += 1;
+      progress.correct += 1;
+      renderProgress();
+      memoryMessage.textContent = "The current progress changed. Save it to remember.";
+      memoryMessage.className = "feedback good";
     });
 
-    teamSize.addEventListener("change", renderNameFields);
-    renderNameFields();
+    document.querySelector("#collect-fragment").addEventListener("click", () => {
+      progress.fragments = Math.min(6, progress.fragments + 1);
+      renderProgress();
+      memoryMessage.textContent = "A fragment was collected. Save the new state.";
+      memoryMessage.className = "feedback good";
+    });
+
+    document.querySelector("#reset-progress").addEventListener("click", () => {
+      progress = { answered: 0, correct: 0, fragments: 0, unlockedRecords: [] };
+      renderProgress();
+      memoryMessage.textContent = "Progress changed. Load the record to restore it.";
+      memoryMessage.className = "feedback bad";
+    });
+
+    document.querySelector("#save-progress").addEventListener("click", saveProgress);
+    document.querySelector("#load-progress").addEventListener("click", loadProgress);
+
+    renderProgress();
+    saveProgress();
   </script>
 </body>
 </html>

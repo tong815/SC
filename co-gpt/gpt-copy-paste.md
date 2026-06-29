@@ -16,11 +16,11 @@ Review
 
 **Current Goal:**
 
-Review the Chronicle manuscript-flow update and the short bridge into the Creator's Trial.
+Review the realigned six Creation Records and matching Time Fragment stage pages.
 
 **Current Issue:**
 
-Codex revised the Chronicle dialogue so the six Creation Records read like one continuous history book instead of six separate stories. Chronicle VI now completes the recovered history and points toward the Central Tower without acting as the game ending. A short data-driven transition appears before the Creator's Trial begins.
+Codex realigned the Chronicles so each Creation Record describes one concrete development stage of the Exam Visualizer project. Record titles, descriptions, dialogue, Time Fragment labels, and staged page labels now match the six-stage build history: single-question site, topic categories, first map, game rules, Save/Load memory, and complete narrative demo.
 
 **Artifact:**
 
@@ -35,109 +35,134 @@ Implementation Report
 # Implementation Report
 
 **Project:** Exam Visualizer / SC
-**Build or Version:** Chronicle Manuscript Flow Update
+**Build or Version:** Creation Record Stage Realignment
 **Date:** 2026-06-28
 **Phase:** Implementation / Review
 
 ## What We Updated
 
-Codex improved the narrative flow without redesigning the stable game structure.
+Codex realigned the six Creation Records so each one describes a concrete development stage of the Exam Visualizer project.
 
-This update does not change:
+This update does not redesign:
 
 - map gameplay
-- outer tower mechanics
+- tower rules
 - HP rules
 - Seal Energy
-- Chronicle unlock rules
+- combo rules
+- Chronicle unlock order
+- Chronicle Library structure
+- Individual Chronicle Reader structure
 - Creator's Trial mechanics
-- final ending structure
-- save/load behavior
+- ending structure
+- save/load structure
 
-The work is focused on making the six Chronicles feel like one continuous manuscript.
+The update focuses on Chronicle content and Time Fragment stage labels.
 
 ## Files Changed
 
 - `chronicles.json`
-- `map.json`
-- `app.js`
-- `style.css`
+- `history/v0-question-only/index.html`
+- `history/v1-topic-structure/index.html`
+- `history/v2-first-map/index.html`
+- `history/v3-rules/index.html`
+- `history/v4-travelers/index.html`
+- `history/v5-complete-prototype/index.html`
+- `history/shared/history.css`
 - `co-gpt/context-header.md`
 - `co-gpt/implementation-report.md`
 - `co-gpt/gpt-copy-paste.md`
 
-## Continuous Chronicle Manuscript
+## New Six-Stage Creation Record Structure
 
-The Chronicle dialogue in `chronicles.json` was revised so each record leads naturally into the next one.
+1. **Creation Record I: `The First Question`**
+   - Stage: single-question website
+   - Meaning: first working prototype
+   - Time Fragment: `history/v0-question-only/`
 
-The flow is now:
+2. **Creation Record II: `The First Categories`**
+   - Stage: questions classified by topic or logic
+   - Meaning: prototype becomes organized
+   - Time Fragment: `history/v1-topic-structure/`
 
-1. Chronicle I, `The First Wish`: the world begins, but one page cannot hold all knowledge.
-2. Chronicle II, `The First Towers`: the towers divide knowledge, but knowledge alone cannot teach anyone.
-3. Chronicle III, `The First Questions`: questions allow the world to grow, but growth must be remembered.
-4. Chronicle IV, `The First Memory`: Save records restored progress, but memory alone is not enough.
-5. Chronicle V, `The Remembered Path`: Load returns to a remembered path, and the world becomes ready.
-6. Chronicle VI, `The Completed World`: T and G complete the world's history, but no one has walked its paths yet.
+3. **Creation Record III: `The First Map`**
+   - Stage: map added
+   - Meaning: learning site becomes a world
+   - Time Fragment: `history/v2-first-map/`
 
-All Chronicle dialogue still loads from `chronicles.json`.
+4. **Creation Record IV: `The First Rules`**
+   - Stage: game rules added
+   - Meaning: world becomes playable
+   - Time Fragment: `history/v3-rules/`
 
-No Chronicle dialogue was moved into `app.js`.
+5. **Creation Record V: `The First Memory`**
+   - Stage: Save and Load added
+   - Meaning: world gains memory
+   - Time Fragment: `history/v4-travelers/`
 
-## Chronicle VI Role
+6. **Creation Record VI: `The First Journey`**
+   - Stage: complete narrative/game experience
+   - Meaning: demo becomes a complete learning journey
+   - Time Fragment: `history/v5-complete-prototype/`
 
-Chronicle VI no longer feels like the ending.
+## Time Fragment Mapping
 
-It now says:
+No iframe paths needed to change.
 
-- the world was complete
-- no one had yet walked its paths
-- the final trial waited at the center
+The existing folder paths are still used:
 
-It does not congratulate the player.
+- Record I -> `history/v0-question-only/`
+- Record II -> `history/v1-topic-structure/`
+- Record III -> `history/v2-first-map/`
+- Record IV -> `history/v3-rules/`
+- Record V -> `history/v4-travelers/`
+- Record VI -> `history/v5-complete-prototype/`
 
-It does not say the player is now a creator.
+However, labels and content were updated so the pages match the new stage meanings.
 
-It does not trigger the final ending.
+Important note:
 
-Its purpose is to finish the recovered history and direct attention toward the Central Tower.
+- `history/v4-travelers/` kept its folder name to avoid path churn, but its page content now demonstrates Save/Load memory instead of traveler/team entry.
 
-## Creator's Trial Transition
+## Chronicle Text Realignment
 
-A short bridge now appears before entering the Creator's Trial.
+`chronicles.json` now describes actual project development stages instead of abstract world rules.
 
-The transition text is stored in `map.json` on the central tower:
+Examples:
 
-- Tong: `The history has been restored.`
-- G: `Now let us see what you have learned.`
+- Record I explains one question, four choices, feedback, and explanation.
+- Record II explains categorizing many questions into topic paths.
+- Record III explains turning topics into map towers.
+- Record IV explains HP, Seal Energy, key fragments, tower clearing, and locked center.
+- Record V explains Save as JSON memory and Load as returning to a remembered path.
+- Record VI explains the complete demo: opening, team names, Sage Tong, Chronicles, Time Fragments, Creator's Trial, and ending.
 
-`app.js` only renders this transition and then starts the existing Creator's Trial when the player chooses `Enter the Creator's Trial`.
+Dialogue remains short, mythic, and Grade 5-7 friendly.
 
-This keeps responsibilities separated:
+All Chronicle dialogue still lives in `chronicles.json`.
 
-- Chronicles teach the world's history.
-- Creator's Trial checks whether the player understood the history.
-- Ending invites students to become creators after the trial.
+No Chronicle dialogue was hardcoded into `app.js`.
+
+## Stage Page Label Updates
+
+Updated labels:
+
+- `v0-question-only`: `Prototype v0: Single-Question Website`
+- `v1-topic-structure`: `Prototype v1: Topic Categories`
+- `v2-first-map`: `Age III - The First Map`
+- `v3-rules`: `Prototype v3: Game Rules`
+- `v4-travelers`: `Prototype v4: Save and Load Memory`
+- `v5-complete-prototype`: `Prototype v5: Complete Narrative Demo`
+
+`history/shared/history.css` received a small `textarea` / `.memory-record` style for the Save/Load JSON preview.
 
 ## Save / Load Compatibility
 
-No save/load fields were added or removed.
+Game save/load behavior was not changed.
 
-The transition is temporary UI state only.
+The Save/Load content added to the v4 Time Fragment is only a historical mini-site demonstration.
 
-The current tower run state remains temporary.
-
-Permanent progress remains unchanged:
-
-- answered/correct/wrong statistics
-- question ID history
-- topic stats
-- player map position
-- cleared tower IDs
-- tower progress
-- key fragments
-- Chronicle progress
-- central tower key/unlock status
-- optional team data
+Permanent player progress fields and import/export behavior remain unchanged.
 
 ## Tests To Verify
 
@@ -150,22 +175,31 @@ Static checks:
 - parse `chronicles.json`
 - `git diff --check`
 
-Browser flow:
+Browser checks:
 
-- six Chronicles still unlock correctly
-- Chronicle dialogue still loads from `chronicles.json`
-- Chronicle VI prepares the Central Tower instead of ending the game
-- the transition scene appears before entering the Creator's Trial
-- Creator's Trial still uses the existing five-question multiple-choice flow
-- final ending still appears only after clearing the Creator's Trial
-- save/load behavior remains unchanged
-- no console errors
+- Chronicle Library shows the new titles and descriptions.
+- Each Creation Record opens the intended Time Fragment path.
+- Record I shows the single-question website.
+- Record II shows the topic/category question stage.
+- Record III shows the map stage.
+- Record IV shows the game-rules stage.
+- Record V shows the Save/Load memory stage.
+- Record VI shows the complete narrative demo stage.
+- Time Fragment reveal still works.
+- Creator's Trial still works.
+- Ending still works.
+- No console errors.
+
+## Remaining Limitations
+
+- The Record V folder is still named `v4-travelers`, but its visible page now represents Save/Load memory. This avoids breaking existing iframe paths.
+- The Time Fragment pages are lightweight historical demos, not full copies of every old project state.
 
 ## GPT Review Request
 
 GPT, please review:
 
-- Do the six Chronicles now feel like one continuous manuscript?
-- Does Chronicle VI clearly prepare the Central Tower without becoming the ending?
-- Does the transition scene bridge recovered history into the Creator's Trial cleanly?
-- Are the three responsibilities still separated: history, understanding check, and final creator invitation?
+- Do the six Creation Records now clearly answer, "What did this project become at this stage?"
+- Do the Chronicle titles/descriptions/dialogue match the staged webpages?
+- Is the unchanged Record V iframe path acceptable now that the page content has been realigned?
+- Are there any remaining mismatches between `chronicles.json` and the history pages?

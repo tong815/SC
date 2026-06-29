@@ -10,11 +10,11 @@ Review
 
 **Current Goal:**
 
-Review the Chronicle manuscript-flow update and the short bridge into the Creator's Trial.
+Review the realigned six Creation Records and matching Time Fragment stage pages.
 
 **Current Issue:**
 
-Codex revised the Chronicle dialogue so the six Creation Records read like one continuous history book instead of six separate stories. Chronicle VI now completes the recovered history and points toward the Central Tower without acting as the game ending. A short data-driven transition appears before the Creator's Trial begins.
+Codex realigned the Chronicles so each Creation Record describes one concrete development stage of the Exam Visualizer project. Record titles, descriptions, dialogue, Time Fragment labels, and staged page labels now match the six-stage build history: single-question site, topic categories, first map, game rules, Save/Load memory, and complete narrative demo.
 
 **Artifact:**
 
