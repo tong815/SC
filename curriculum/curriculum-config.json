@@ -1,0 +1,60 @@
+{
+  "easy": {
+    "label": "Easy Mode",
+    "shortLabel": "Easy",
+    "description": "For younger explorers. Questions use simple addition, subtraction, multiplication, and division.",
+    "towerTopics": {
+      "tower-fractions": "Addition",
+      "tower-integers": "Subtraction",
+      "tower-percent": "Multiplication",
+      "tower-algebra": "Division",
+      "tower-geometry": "Mixed Basic Operations",
+      "tower-ratios": "Mixed Advanced Operations"
+    },
+    "towerNames": {
+      "tower-fractions": "Addition Tower",
+      "tower-integers": "Subtraction Tower",
+      "tower-percent": "Multiplication Tower",
+      "tower-algebra": "Division Tower",
+      "tower-geometry": "Mixed Basic Tower",
+      "tower-ratios": "Mixed Advanced Tower"
+    },
+    "towerDescriptions": {
+      "tower-fractions": "Light the tower by solving simple addition facts.",
+      "tower-integers": "Restore the path by solving simple subtraction facts.",
+      "tower-percent": "Power the gears with multiplication facts.",
+      "tower-algebra": "Open the water gate with division facts.",
+      "tower-geometry": "Balance the tower with one-step mixed arithmetic.",
+      "tower-ratios": "Face slightly harder arithmetic while keeping the same basic operations."
+    }
+  },
+  "difficult": {
+    "label": "Difficult Mode",
+    "shortLabel": "Difficult",
+    "description": "For Grade 7 explorers. Questions use the regular project topics.",
+    "towerTopics": {
+      "tower-fractions": "Fractions",
+      "tower-integers": "Integers",
+      "tower-percent": "Percent",
+      "tower-algebra": "Algebra",
+      "tower-geometry": "Geometry",
+      "tower-ratios": "Ratios"
+    },
+    "towerNames": {
+      "tower-fractions": "Fractions Tower",
+      "tower-integers": "Integers Tower",
+      "tower-percent": "Percent Tower",
+      "tower-algebra": "Algebra Tower",
+      "tower-geometry": "Geometry Tower",
+      "tower-ratios": "Ratios Tower"
+    },
+    "towerDescriptions": {
+      "tower-fractions": "Restore the balance of fractions to remove the ancient curse.",
+      "tower-integers": "Defeat the chaos of positive and negative numbers.",
+      "tower-percent": "Charge the percent crystal before its power fades.",
+      "tower-algebra": "Solve the hidden patterns to unlock the tower's spell.",
+      "tower-geometry": "Repair the broken geometric seal.",
+      "tower-ratios": "Rebuild the ratio bridge and restore its ancient rhythm."
+    }
+  }
+}

@@ -24,7 +24,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "Convert 3/4 to eighths: 3/4 = 6/8. Then 6/8 + 1/8 = 7/8."
+    "explanation": "Convert 3/4 to eighths: 3/4 = 6/8. Then 6/8 + 1/8 = 7/8.",
+    "difficulty": "difficult"
   },
   {
     "id": "q002",
@@ -51,7 +52,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "Convert 1/3 to sixths: 1/3 = 2/6. Then 5/6 - 2/6 = 3/6 = 1/2."
+    "explanation": "Convert 1/3 to sixths: 1/3 = 2/6. Then 5/6 - 2/6 = 3/6 = 1/2.",
+    "difficulty": "difficult"
   },
   {
     "id": "q003",
@@ -78,7 +80,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "Multiply the numerators and denominators: 2 x 3 = 6 and 5 x 4 = 20. Then simplify 6/20 to 3/10."
+    "explanation": "Multiply the numerators and denominators: 2 x 3 = 6 and 5 x 4 = 20. Then simplify 6/20 to 3/10.",
+    "difficulty": "difficult"
   },
   {
     "id": "q004",
@@ -105,7 +108,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "Divide by multiplying by the reciprocal: 3/4 x 2/1 = 6/4 = 3/2."
+    "explanation": "Divide by multiplying by the reciprocal: 3/4 x 2/1 = 6/4 = 3/2.",
+    "difficulty": "difficult"
   },
   {
     "id": "q005",
@@ -132,7 +136,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "Divide both 12 and 18 by 6. The simplified fraction is 2/3."
+    "explanation": "Divide both 12 and 18 by 6. The simplified fraction is 2/3.",
+    "difficulty": "difficult"
   },
   {
     "id": "q006",
@@ -159,7 +164,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "Add the whole numbers and fractions: 1 + 2 = 3, and 1/2 + 1/4 = 2/4 + 1/4 = 3/4."
+    "explanation": "Add the whole numbers and fractions: 1 + 2 = 3, and 1/2 + 1/4 = 2/4 + 1/4 = 3/4.",
+    "difficulty": "difficult"
   },
   {
     "id": "q007",
@@ -186,7 +192,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "One half is 4/8, so 5/8 is greater than 1/2."
+    "explanation": "One half is 4/8, so 5/8 is greater than 1/2.",
+    "difficulty": "difficult"
   },
   {
     "id": "q008",
@@ -213,7 +220,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "Convert 2/5 to tenths: 2/5 = 4/10. Then 7/10 - 4/10 = 3/10."
+    "explanation": "Convert 2/5 to tenths: 2/5 = 4/10. Then 7/10 - 4/10 = 3/10.",
+    "difficulty": "difficult"
   },
   {
     "id": "q009",
@@ -240,7 +248,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "Convert 2/3 to ninths: 2/3 = 6/9. Then 4/9 + 6/9 = 10/9."
+    "explanation": "Convert 2/3 to ninths: 2/3 = 6/9. Then 4/9 + 6/9 = 10/9.",
+    "difficulty": "difficult"
   },
   {
     "id": "q010",
@@ -267,7 +276,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "Find one eighth of 32, which is 4. Then multiply by 5: 4 x 5 = 20."
+    "explanation": "Find one eighth of 32, which is 4. Then multiply by 5: 4 x 5 = 20.",
+    "difficulty": "difficult"
   },
   {
     "id": "q011",
@@ -294,7 +304,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "Divide 3 by 5. Since 3/5 = 6/10, the decimal is 0.6."
+    "explanation": "Divide 3 by 5. Since 3/5 = 6/10, the decimal is 0.6.",
+    "difficulty": "difficult"
   },
   {
     "id": "q012",
@@ -321,7 +332,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "0.75 means 75/100. Divide by 25 to simplify: 75/100 = 3/4."
+    "explanation": "0.75 means 75/100. Divide by 25 to simplify: 75/100 = 3/4.",
+    "difficulty": "difficult"
   },
   {
     "id": "q013",
@@ -348,7 +360,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "One third of 18 is 6, so two thirds is 12."
+    "explanation": "One third of 18 is 6, so two thirds is 12.",
+    "difficulty": "difficult"
   },
   {
     "id": "q014",
@@ -375,7 +388,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "Divide both 9 and 12 by 3. The simplified fraction is 3/4."
+    "explanation": "Divide both 9 and 12 by 3. The simplified fraction is 3/4.",
+    "difficulty": "difficult"
   },
   {
     "id": "q015",
@@ -402,7 +416,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "Use twelfths: 1/6 = 2/12 and 1/4 = 3/12. The sum is 5/12."
+    "explanation": "Use twelfths: 1/6 = 2/12 and 1/4 = 3/12. The sum is 5/12.",
+    "difficulty": "difficult"
   },
   {
     "id": "q016",
@@ -429,7 +444,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "Convert 4/5 to tenths: 4/5 = 8/10. Then 8/10 - 1/10 = 7/10."
+    "explanation": "Convert 4/5 to tenths: 4/5 = 8/10. Then 8/10 - 1/10 = 7/10.",
+    "difficulty": "difficult"
   },
   {
     "id": "q017",
@@ -456,7 +472,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "Multiply by the reciprocal: 7/8 x 16/7. The 7s cancel, and 16/8 = 2."
+    "explanation": "Multiply by the reciprocal: 7/8 x 16/7. The 7s cancel, and 16/8 = 2.",
+    "difficulty": "difficult"
   },
   {
     "id": "q018",
@@ -483,7 +500,8 @@
       }
     ],
     "answer": "D",
-    "explanation": "Multiply 2 x 3 = 6, then add 2 to get 8. The improper fraction is 8/3."
+    "explanation": "Multiply 2 x 3 = 6, then add 2 to get 8. The improper fraction is 8/3.",
+    "difficulty": "difficult"
   },
   {
     "id": "q019",
@@ -510,7 +528,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "The denominators are the same, so add the numerators: 3 + 4 = 7. The answer is 7/10."
+    "explanation": "The denominators are the same, so add the numerators: 3 + 4 = 7. The answer is 7/10.",
+    "difficulty": "difficult"
   },
   {
     "id": "q020",
@@ -537,7 +556,8 @@
       }
     ],
     "answer": "A",
-    "explanation": "For unit fractions, the larger denominator makes the smaller piece. So 1/5 is the least."
+    "explanation": "For unit fractions, the larger denominator makes the smaller piece. So 1/5 is the least.",
+    "difficulty": "difficult"
   },
   {
     "id": "q021",
@@ -564,7 +584,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "Starting at -6 and moving 14 units in the positive direction gives 8."
+    "explanation": "Starting at -6 and moving 14 units in the positive direction gives 8.",
+    "difficulty": "difficult"
   },
   {
     "id": "q022",
@@ -591,7 +612,8 @@
       }
     ],
     "answer": "A",
-    "explanation": "Subtracting 5 from -9 moves 5 more units left, ending at -14."
+    "explanation": "Subtracting 5 from -9 moves 5 more units left, ending at -14.",
+    "difficulty": "difficult"
   },
   {
     "id": "q023",
@@ -618,7 +640,8 @@
       }
     ],
     "answer": "A",
-    "explanation": "A negative times a positive is negative. Since 4 x 7 = 28, the answer is -28."
+    "explanation": "A negative times a positive is negative. Since 4 x 7 = 28, the answer is -28.",
+    "difficulty": "difficult"
   },
   {
     "id": "q024",
@@ -645,7 +668,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "A negative divided by a negative is positive. 24 divided by 6 is 4."
+    "explanation": "A negative divided by a negative is positive. 24 divided by 6 is 4.",
+    "difficulty": "difficult"
   },
   {
     "id": "q025",
@@ -672,7 +696,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "Adding -18 is the same as subtracting 18. 12 - 18 = -6."
+    "explanation": "Adding -18 is the same as subtracting 18. 12 - 18 = -6.",
+    "difficulty": "difficult"
   },
   {
     "id": "q026",
@@ -699,7 +724,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "Starting at -15 and moving 9 units right gives -6."
+    "explanation": "Starting at -15 and moving 9 units right gives -6.",
+    "difficulty": "difficult"
   },
   {
     "id": "q027",
@@ -726,7 +752,8 @@
       }
     ],
     "answer": "D",
-    "explanation": "Subtracting a negative is the same as adding. 5 - (-8) = 5 + 8 = 13."
+    "explanation": "Subtracting a negative is the same as adding. 5 - (-8) = 5 + 8 = 13.",
+    "difficulty": "difficult"
   },
   {
     "id": "q028",
@@ -753,7 +780,8 @@
       }
     ],
     "answer": "A",
-    "explanation": "Adding two negative numbers keeps the negative sign: -20 + -7 = -27."
+    "explanation": "Adding two negative numbers keeps the negative sign: -20 + -7 = -27.",
+    "difficulty": "difficult"
   },
   {
     "id": "q029",
@@ -780,7 +808,8 @@
       }
     ],
     "answer": "D",
-    "explanation": "Absolute value is distance from zero, so the absolute value of -12 is 12."
+    "explanation": "Absolute value is distance from zero, so the absolute value of -12 is 12.",
+    "difficulty": "difficult"
   },
   {
     "id": "q030",
@@ -807,7 +836,8 @@
       }
     ],
     "answer": "D",
-    "explanation": "A negative times a negative is positive. 2 x 9 = 18."
+    "explanation": "A negative times a negative is positive. 2 x 9 = 18.",
+    "difficulty": "difficult"
   },
   {
     "id": "q031",
@@ -834,7 +864,8 @@
       }
     ],
     "answer": "A",
-    "explanation": "A positive divided by a negative is negative. 30 divided by 5 is 6, so the answer is -6."
+    "explanation": "A positive divided by a negative is negative. 30 divided by 5 is 6, so the answer is -6.",
+    "difficulty": "difficult"
   },
   {
     "id": "q032",
@@ -861,7 +892,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "From -3 to 0 is 3 degrees, and from 0 to 7 is 7 degrees. The total increase is 10 degrees."
+    "explanation": "From -3 to 0 is 3 degrees, and from 0 to 7 is 7 degrees. The total increase is 10 degrees.",
+    "difficulty": "difficult"
   },
   {
     "id": "q033",
@@ -888,7 +920,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "-11 and 11 are opposites, so their sum is 0."
+    "explanation": "-11 and 11 are opposites, so their sum is 0.",
+    "difficulty": "difficult"
   },
   {
     "id": "q034",
@@ -915,7 +948,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "Subtracting -6 is the same as adding 6. -16 + 6 = -10."
+    "explanation": "Subtracting -6 is the same as adding 6. -16 + 6 = -10.",
+    "difficulty": "difficult"
   },
   {
     "id": "q035",
@@ -942,7 +976,8 @@
       }
     ],
     "answer": "A",
-    "explanation": "A negative times a positive is negative."
+    "explanation": "A negative times a positive is negative.",
+    "difficulty": "difficult"
   },
   {
     "id": "q036",
@@ -969,7 +1004,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "-7 + -8 = -15, and -15 + 5 = -10."
+    "explanation": "-7 + -8 = -15, and -15 + 5 = -10.",
+    "difficulty": "difficult"
   },
   {
     "id": "q037",
@@ -996,7 +1032,8 @@
       }
     ],
     "answer": "D",
-    "explanation": "On a number line, -2 is farthest to the right, so it is greatest."
+    "explanation": "On a number line, -2 is farthest to the right, so it is greatest.",
+    "difficulty": "difficult"
   },
   {
     "id": "q038",
@@ -1023,7 +1060,8 @@
       }
     ],
     "answer": "A",
-    "explanation": "Starting at 0 and subtracting 9 gives -9."
+    "explanation": "Starting at 0 and subtracting 9 gives -9.",
+    "difficulty": "difficult"
   },
   {
     "id": "q039",
@@ -1050,7 +1088,8 @@
       }
     ],
     "answer": "A",
-    "explanation": "A negative divided by a positive is negative. 36 divided by 4 is 9, so the answer is -9."
+    "explanation": "A negative divided by a positive is negative. 36 divided by 4 is 9, so the answer is -9.",
+    "difficulty": "difficult"
   },
   {
     "id": "q040",
@@ -1077,7 +1116,8 @@
       }
     ],
     "answer": "A",
-    "explanation": "Add the absolute values and keep the negative sign: 1 + 2 + 3 = 6, so the sum is -6."
+    "explanation": "Add the absolute values and keep the negative sign: 1 + 2 + 3 = 6, so the sum is -6.",
+    "difficulty": "difficult"
   },
   {
     "id": "q041",
@@ -1104,7 +1144,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "25% of $80 is $20. Subtract the discount: $80 - $20 = $60."
+    "explanation": "25% of $80 is $20. Subtract the discount: $80 - $20 = $60.",
+    "difficulty": "difficult"
   },
   {
     "id": "q042",
@@ -1131,7 +1172,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "10% means one tenth. One tenth of 250 is 25."
+    "explanation": "10% means one tenth. One tenth of 250 is 25.",
+    "difficulty": "difficult"
   },
   {
     "id": "q043",
@@ -1158,7 +1200,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "10% of 60 is 6 and 5% of 60 is 3. Together they make 9."
+    "explanation": "10% of 60 is 6 and 5% of 60 is 3. Together they make 9.",
+    "difficulty": "difficult"
   },
   {
     "id": "q044",
@@ -1185,7 +1228,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "20% of 40 is 8. Add the increase: 40 + 8 = 48."
+    "explanation": "20% of 40 is 8. Add the increase: 40 + 8 = 48.",
+    "difficulty": "difficult"
   },
   {
     "id": "q045",
@@ -1212,7 +1256,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "30 divided by 150 is 0.2, which is 20%."
+    "explanation": "30 divided by 150 is 0.2, which is 20%.",
+    "difficulty": "difficult"
   },
   {
     "id": "q046",
@@ -1239,7 +1284,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "75% is 3/4. One fourth of 32 is 8, so three fourths is 24."
+    "explanation": "75% is 3/4. One fourth of 32 is 8, so three fourths is 24.",
+    "difficulty": "difficult"
   },
   {
     "id": "q047",
@@ -1266,7 +1312,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "10% of 200 is 20, so 5% is half of that: 10."
+    "explanation": "10% of 200 is 20, so 5% is half of that: 10.",
+    "difficulty": "difficult"
   },
   {
     "id": "q048",
@@ -1293,7 +1340,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "50% means half. Half of 86 is 43."
+    "explanation": "50% means half. Half of 86 is 43.",
+    "difficulty": "difficult"
   },
   {
     "id": "q049",
@@ -1320,7 +1368,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "12/48 simplifies to 1/4, and 1/4 is 25%."
+    "explanation": "12/48 simplifies to 1/4, and 1/4 is 25%.",
+    "difficulty": "difficult"
   },
   {
     "id": "q050",
@@ -1347,7 +1396,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "10% of 90 is 9, so 30% is 3 x 9 = 27."
+    "explanation": "10% of 90 is 9, so 30% is 3 x 9 = 27.",
+    "difficulty": "difficult"
   },
   {
     "id": "q051",
@@ -1374,7 +1424,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "8% of $50 is $4. Add the tax: $50 + $4 = $54."
+    "explanation": "8% of $50 is $4. Add the tax: $50 + $4 = $54.",
+    "difficulty": "difficult"
   },
   {
     "id": "q052",
@@ -1401,7 +1452,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "20% of $35 is $7. Subtract the discount: $35 - $7 = $28."
+    "explanation": "20% of $35 is $7. Subtract the discount: $35 - $7 = $28.",
+    "difficulty": "difficult"
   },
   {
     "id": "q053",
@@ -1428,7 +1480,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "Move the decimal two places right to convert to a percent: 0.4 = 40%."
+    "explanation": "Move the decimal two places right to convert to a percent: 0.4 = 40%.",
+    "difficulty": "difficult"
   },
   {
     "id": "q054",
@@ -1455,7 +1508,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "125% is 1.25. Then 1.25 x 20 = 25."
+    "explanation": "125% is 1.25. Then 1.25 x 20 = 25.",
+    "difficulty": "difficult"
   },
   {
     "id": "q055",
@@ -1482,7 +1536,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "If 60% is 18, then 10% is 3. So 100% is 30."
+    "explanation": "If 60% is 18, then 10% is 3. So 100% is 30.",
+    "difficulty": "difficult"
   },
   {
     "id": "q056",
@@ -1509,7 +1564,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "3/12 simplifies to 1/4, and 1/4 is 25%."
+    "explanation": "3/12 simplifies to 1/4, and 1/4 is 25%.",
+    "difficulty": "difficult"
   },
   {
     "id": "q057",
@@ -1536,7 +1592,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "10% of 90 is 9. Subtract the decrease: 90 - 9 = 81."
+    "explanation": "10% of 90 is 9. Subtract the decrease: 90 - 9 = 81.",
+    "difficulty": "difficult"
   },
   {
     "id": "q058",
@@ -1563,7 +1620,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "1% of 300 is 3, so 2% is 6."
+    "explanation": "1% of 300 is 3, so 2% is 6.",
+    "difficulty": "difficult"
   },
   {
     "id": "q059",
@@ -1590,7 +1648,8 @@
       }
     ],
     "answer": "D",
-    "explanation": "One fourth is 0.25, which is 25%."
+    "explanation": "One fourth is 0.25, which is 25%.",
+    "difficulty": "difficult"
   },
   {
     "id": "q060",
@@ -1617,7 +1676,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "150% means 1.5. Since 1.5 x 30 = 45, the number is 30."
+    "explanation": "150% means 1.5. Since 1.5 x 30 = 45, the number is 30.",
+    "difficulty": "difficult"
   },
   {
     "id": "q061",
@@ -1644,7 +1704,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "Substitute 5 for x: 3x + 7 = 3(5) + 7 = 15 + 7 = 22."
+    "explanation": "Substitute 5 for x: 3x + 7 = 3(5) + 7 = 15 + 7 = 22.",
+    "difficulty": "difficult"
   },
   {
     "id": "q062",
@@ -1671,7 +1732,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "Subtract 8 from both sides: x = 15 - 8 = 7."
+    "explanation": "Subtract 8 from both sides: x = 15 - 8 = 7.",
+    "difficulty": "difficult"
   },
   {
     "id": "q063",
@@ -1698,7 +1760,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "Divide both sides by 2. x = 9."
+    "explanation": "Divide both sides by 2. x = 9.",
+    "difficulty": "difficult"
   },
   {
     "id": "q064",
@@ -1725,7 +1788,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "Both terms have x, so add the coefficients: 4x + 3x = 7x."
+    "explanation": "Both terms have x, so add the coefficients: 4x + 3x = 7x.",
+    "difficulty": "difficult"
   },
   {
     "id": "q065",
@@ -1752,7 +1816,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "Subtract the coefficients and keep the variable: 5a - 2a = 3a."
+    "explanation": "Subtract the coefficients and keep the variable: 5a - 2a = 3a.",
+    "difficulty": "difficult"
   },
   {
     "id": "q066",
@@ -1779,7 +1844,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "Multiply both sides by 4. y = 24."
+    "explanation": "Multiply both sides by 4. y = 24.",
+    "difficulty": "difficult"
   },
   {
     "id": "q067",
@@ -1806,7 +1872,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "Distribute 2 to both terms: 2(n + 3) = 2n + 6."
+    "explanation": "Distribute 2 to both terms: 2(n + 3) = 2n + 6.",
+    "difficulty": "difficult"
   },
   {
     "id": "q068",
@@ -1833,7 +1900,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "Add 9 to both sides: x = -2 + 9 = 7."
+    "explanation": "Add 9 to both sides: x = -2 + 9 = 7.",
+    "difficulty": "difficult"
   },
   {
     "id": "q069",
@@ -1860,7 +1928,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "Add 4 to get 3x = 15, then divide by 3 to get x = 5."
+    "explanation": "Add 4 to get 3x = 15, then divide by 3 to get x = 5.",
+    "difficulty": "difficult"
   },
   {
     "id": "q070",
@@ -1887,7 +1956,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "Five more than n means add 5 to n, so the expression is n + 5."
+    "explanation": "Five more than n means add 5 to n, so the expression is n + 5.",
+    "difficulty": "difficult"
   },
   {
     "id": "q071",
@@ -1914,7 +1984,8 @@
       }
     ],
     "answer": "A",
-    "explanation": "Combine the x terms: 2x + 3x = 5x. The constant 4 stays, so the answer is 5x + 4."
+    "explanation": "Combine the x terms: 2x + 3x = 5x. The constant 4 stays, so the answer is 5x + 4.",
+    "difficulty": "difficult"
   },
   {
     "id": "q072",
@@ -1941,7 +2012,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "Substitute 12: 12/3 + 2 = 4 + 2 = 6."
+    "explanation": "Substitute 12: 12/3 + 2 = 4 + 2 = 6.",
+    "difficulty": "difficult"
   },
   {
     "id": "q073",
@@ -1968,7 +2040,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "Add 6 to both sides: p = 20."
+    "explanation": "Add 6 to both sides: p = 20.",
+    "difficulty": "difficult"
   },
   {
     "id": "q074",
@@ -1995,7 +2068,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "7m means 7 x m. With m = 4, 7 x 4 = 28."
+    "explanation": "7m means 7 x m. With m = 4, 7 x 4 = 28.",
+    "difficulty": "difficult"
   },
   {
     "id": "q075",
@@ -2022,7 +2096,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "Divide both sides by 5. Zero divided by 5 is 0."
+    "explanation": "Divide both sides by 5. Zero divided by 5 is 0.",
+    "difficulty": "difficult"
   },
   {
     "id": "q076",
@@ -2049,7 +2124,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "A square has four equal sides, so its perimeter is s + s + s + s = 4s."
+    "explanation": "A square has four equal sides, so its perimeter is s + s + s + s = 4s.",
+    "difficulty": "difficult"
   },
   {
     "id": "q077",
@@ -2076,7 +2152,8 @@
       }
     ],
     "answer": "A",
-    "explanation": "Substitute 3: 10 - 2(3) = 10 - 6 = 4."
+    "explanation": "Substitute 3: 10 - 2(3) = 10 - 6 = 4.",
+    "difficulty": "difficult"
   },
   {
     "id": "q078",
@@ -2103,7 +2180,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "Multiply both sides by 5. x = 35."
+    "explanation": "Multiply both sides by 5. x = 35.",
+    "difficulty": "difficult"
   },
   {
     "id": "q079",
@@ -2130,7 +2208,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "Distribute 6 to both terms: 6(x + 2) = 6x + 12."
+    "explanation": "Distribute 6 to both terms: 6(x + 2) = 6x + 12.",
+    "difficulty": "difficult"
   },
   {
     "id": "q080",
@@ -2157,7 +2236,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "Twice a number means 2 times n, so the equation is 2n = 18."
+    "explanation": "Twice a number means 2 times n, so the equation is 2n = 18.",
+    "difficulty": "difficult"
   },
   {
     "id": "q081",
@@ -2184,7 +2264,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "The area of a triangle is base times height divided by 2: 10 x 6 / 2 = 30."
+    "explanation": "The area of a triangle is base times height divided by 2: 10 x 6 / 2 = 30.",
+    "difficulty": "difficult"
   },
   {
     "id": "q082",
@@ -2211,7 +2292,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "Area of a rectangle is length x width: 8 x 5 = 40 square cm."
+    "explanation": "Area of a rectangle is length x width: 8 x 5 = 40 square cm.",
+    "difficulty": "difficult"
   },
   {
     "id": "q083",
@@ -2238,7 +2320,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "Perimeter is 2(length + width): 2(7 + 4) = 22 cm."
+    "explanation": "Perimeter is 2(length + width): 2(7 + 4) = 22 cm.",
+    "difficulty": "difficult"
   },
   {
     "id": "q084",
@@ -2265,7 +2348,8 @@
       }
     ],
     "answer": "D",
-    "explanation": "Volume is length x width x height: 3 x 4 x 5 = 60 cubic cm."
+    "explanation": "Volume is length x width x height: 3 x 4 x 5 = 60 cubic cm.",
+    "difficulty": "difficult"
   },
   {
     "id": "q085",
@@ -2292,7 +2376,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "Area of a parallelogram is base x height: 12 x 5 = 60 square cm."
+    "explanation": "Area of a parallelogram is base x height: 12 x 5 = 60 square cm.",
+    "difficulty": "difficult"
   },
   {
     "id": "q086",
@@ -2319,7 +2404,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "Area is (base1 + base2) x height / 2: (6 + 10) x 4 / 2 = 32 square cm."
+    "explanation": "Area is (base1 + base2) x height / 2: (6 + 10) x 4 / 2 = 32 square cm.",
+    "difficulty": "difficult"
   },
   {
     "id": "q087",
@@ -2346,7 +2432,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "The interior angles of every triangle add to 180 degrees."
+    "explanation": "The interior angles of every triangle add to 180 degrees.",
+    "difficulty": "difficult"
   },
   {
     "id": "q088",
@@ -2373,7 +2460,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "Triangle angles add to 180 degrees. 180 - 50 - 60 = 70 degrees."
+    "explanation": "Triangle angles add to 180 degrees. 180 - 50 - 60 = 70 degrees.",
+    "difficulty": "difficult"
   },
   {
     "id": "q089",
@@ -2400,7 +2488,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "Complementary angles add to 90 degrees. 90 - 35 = 55 degrees."
+    "explanation": "Complementary angles add to 90 degrees. 90 - 35 = 55 degrees.",
+    "difficulty": "difficult"
   },
   {
     "id": "q090",
@@ -2427,7 +2516,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "Supplementary angles add to 180 degrees. 180 - 120 = 60 degrees."
+    "explanation": "Supplementary angles add to 180 degrees. 180 - 120 = 60 degrees.",
+    "difficulty": "difficult"
   },
   {
     "id": "q091",
@@ -2454,7 +2544,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "Diameter is twice the radius: 2 x 7 = 14 cm."
+    "explanation": "Diameter is twice the radius: 2 x 7 = 14 cm.",
+    "difficulty": "difficult"
   },
   {
     "id": "q092",
@@ -2481,7 +2572,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "Circumference is pi x diameter: 3.14 x 10 = 31.4 cm."
+    "explanation": "Circumference is pi x diameter: 3.14 x 10 = 31.4 cm.",
+    "difficulty": "difficult"
   },
   {
     "id": "q093",
@@ -2508,7 +2600,8 @@
       }
     ],
     "answer": "D",
-    "explanation": "Area of a square is side x side: 9 x 9 = 81 square cm."
+    "explanation": "Area of a square is side x side: 9 x 9 = 81 square cm.",
+    "difficulty": "difficult"
   },
   {
     "id": "q094",
@@ -2535,7 +2628,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "A square has four equal sides, so 4 x 6 = 24 cm."
+    "explanation": "A square has four equal sides, so 4 x 6 = 24 cm.",
+    "difficulty": "difficult"
   },
   {
     "id": "q095",
@@ -2562,7 +2656,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "Area is pi x radius x radius: 3.14 x 3 x 3 = 28.26 square cm."
+    "explanation": "Area is pi x radius x radius: 3.14 x 3 x 3 = 28.26 square cm.",
+    "difficulty": "difficult"
   },
   {
     "id": "q096",
@@ -2589,7 +2684,8 @@
       }
     ],
     "answer": "D",
-    "explanation": "Volume of a cube is side x side x side: 4 x 4 x 4 = 64 cubic cm."
+    "explanation": "Volume of a cube is side x side x side: 4 x 4 x 4 = 64 cubic cm.",
+    "difficulty": "difficult"
   },
   {
     "id": "q097",
@@ -2616,7 +2712,8 @@
       }
     ],
     "answer": "D",
-    "explanation": "A cube has 6 square faces. Each face is 3 x 3 = 9 square cm, and 6 x 9 = 54 square cm."
+    "explanation": "A cube has 6 square faces. Each face is 3 x 3 = 9 square cm, and 6 x 9 = 54 square cm.",
+    "difficulty": "difficult"
   },
   {
     "id": "q098",
@@ -2643,7 +2740,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "Multiply the drawing length by the scale: 4 x 5 = 20 m."
+    "explanation": "Multiply the drawing length by the scale: 4 x 5 = 20 m.",
+    "difficulty": "difficult"
   },
   {
     "id": "q099",
@@ -2670,7 +2768,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "A rectangular prism has 6 faces."
+    "explanation": "A rectangular prism has 6 faces.",
+    "difficulty": "difficult"
   },
   {
     "id": "q100",
@@ -2697,7 +2796,8 @@
       }
     ],
     "answer": "D",
-    "explanation": "A positive x-value and negative y-value place the point in Quadrant IV."
+    "explanation": "A positive x-value and negative y-value place the point in Quadrant IV.",
+    "difficulty": "difficult"
   },
   {
     "id": "q101",
@@ -2724,7 +2824,8 @@
       }
     ],
     "answer": "D",
-    "explanation": "The blue part grew from 3 to 15, so the scale factor is 5. Red marbles: 5 x 5 = 25."
+    "explanation": "The blue part grew from 3 to 15, so the scale factor is 5. Red marbles: 5 x 5 = 25.",
+    "difficulty": "difficult"
   },
   {
     "id": "q102",
@@ -2751,7 +2852,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "Divide both parts by 6. 12:18 simplifies to 2:3."
+    "explanation": "Divide both parts by 6. 12:18 simplifies to 2:3.",
+    "difficulty": "difficult"
   },
   {
     "id": "q103",
@@ -2778,7 +2880,8 @@
       }
     ],
     "answer": "A",
-    "explanation": "Multiply both parts of 4:7 by 2 to get 8:14."
+    "explanation": "Multiply both parts of 4:7 by 2 to get 8:14.",
+    "difficulty": "difficult"
   },
   {
     "id": "q104",
@@ -2805,7 +2908,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "Divide distance by time: 120 divided by 3 = 40 miles per hour."
+    "explanation": "Divide distance by time: 120 divided by 3 = 40 miles per hour.",
+    "difficulty": "difficult"
   },
   {
     "id": "q105",
@@ -2832,7 +2936,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "20 cookies is 4 times as many as 5 cookies, so multiply 2 cups by 4 to get 8 cups."
+    "explanation": "20 cookies is 4 times as many as 5 cookies, so multiply 2 cups by 4 to get 8 cups.",
+    "difficulty": "difficult"
   },
   {
     "id": "q106",
@@ -2859,7 +2964,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "Divide both parts by 3. 6:9 simplifies to 2:3."
+    "explanation": "Divide both parts by 3. 6:9 simplifies to 2:3.",
+    "difficulty": "difficult"
   },
   {
     "id": "q107",
@@ -2886,7 +2992,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "Divide the total cost by 3: $1.50 divided by 3 = $0.50."
+    "explanation": "Divide the total cost by 3: $1.50 divided by 3 = $0.50.",
+    "difficulty": "difficult"
   },
   {
     "id": "q108",
@@ -2913,7 +3020,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "Multiply the model length by 100: 3 x 100 = 300 cm."
+    "explanation": "Multiply the model length by 100: 3 x 100 = 300 cm.",
+    "difficulty": "difficult"
   },
   {
     "id": "q109",
@@ -2940,7 +3048,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "There are 7 equal parts total. 21 divided by 7 is 3, and 5 parts is 5 x 3 = 15."
+    "explanation": "There are 7 equal parts total. 21 divided by 7 is 3, and 5 parts is 5 x 3 = 15.",
+    "difficulty": "difficult"
   },
   {
     "id": "q110",
@@ -2967,7 +3076,8 @@
       }
     ],
     "answer": "A",
-    "explanation": "There are 10 counters total. Red counters are 4/10, which simplifies to 2/5."
+    "explanation": "There are 10 counters total. Red counters are 4/10, which simplifies to 2/5.",
+    "difficulty": "difficult"
   },
   {
     "id": "q111",
@@ -2994,7 +3104,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "The second part is multiplied by 5, so multiply the first part by 5 too: 2 x 5 = 10."
+    "explanation": "The second part is multiplied by 5, so multiply the first part by 5 too: 2 x 5 = 10.",
+    "difficulty": "difficult"
   },
   {
     "id": "q112",
@@ -3021,7 +3132,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "Divide 150 km by 2 hours to get 75 km/h."
+    "explanation": "Divide 150 km by 2 hours to get 75 km/h.",
+    "difficulty": "difficult"
   },
   {
     "id": "q113",
@@ -3048,7 +3160,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "There are 15 parts total. Each part is 45 divided by 15 = 3. The smaller part is 7 x 3 = 21."
+    "explanation": "There are 15 parts total. Each part is 45 divided by 15 = 3. The smaller part is 7 x 3 = 21.",
+    "difficulty": "difficult"
   },
   {
     "id": "q114",
@@ -3075,7 +3188,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "Divide both parts by 3. 9:12 simplifies to 3:4."
+    "explanation": "Divide both parts by 3. 9:12 simplifies to 3:4.",
+    "difficulty": "difficult"
   },
   {
     "id": "q115",
@@ -3102,7 +3216,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "Each apple costs $3.00 divided by 6 = $0.50. Ten apples cost 10 x $0.50 = $5.00."
+    "explanation": "Each apple costs $3.00 divided by 6 = $0.50. Ten apples cost 10 x $0.50 = $5.00.",
+    "difficulty": "difficult"
   },
   {
     "id": "q116",
@@ -3129,7 +3244,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "Convert 2 L to 2000 mL. The ratio 2000:500 simplifies to 4:1."
+    "explanation": "Convert 2 L to 2000 mL. The ratio 2000:500 simplifies to 4:1.",
+    "difficulty": "difficult"
   },
   {
     "id": "q117",
@@ -3156,7 +3272,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "Multiply the map distance by the scale: 7 x 10 = 70 km."
+    "explanation": "Multiply the map distance by the scale: 7 x 10 = 70 km.",
+    "difficulty": "difficult"
   },
   {
     "id": "q118",
@@ -3183,7 +3300,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "The dog part grew from 4 to 16, so the scale factor is 4. Cats: 5 x 4 = 20."
+    "explanation": "The dog part grew from 4 to 16, so the scale factor is 4. Cats: 5 x 4 = 20.",
+    "difficulty": "difficult"
   },
   {
     "id": "q119",
@@ -3210,7 +3328,8 @@
       }
     ],
     "answer": "C",
-    "explanation": "Multiply 2/3 by 2/2 to get 4/6, so the ratios are equivalent."
+    "explanation": "Multiply 2/3 by 2/2 to get 4/6, so the ratios are equivalent.",
+    "difficulty": "difficult"
   },
   {
     "id": "q120",
@@ -3237,7 +3356,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "Divide the total cost by the number of notebooks: $12 divided by 4 = $3 per notebook."
+    "explanation": "Divide the total cost by the number of notebooks: $12 divided by 4 = $3 per notebook.",
+    "difficulty": "difficult"
   },
   {
     "id": "trial-001",
@@ -3264,7 +3384,8 @@
       }
     ],
     "answer": "A",
-    "explanation": "The towers separate large knowledge into smaller challenges that are easier to explore and learn."
+    "explanation": "The towers separate large knowledge into smaller challenges that are easier to explore and learn.",
+    "difficulty": "both"
   },
   {
     "id": "trial-002",
@@ -3291,7 +3412,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "The Chronicles are Creation Records. They reveal the history and rules of this world."
+    "explanation": "The Chronicles are Creation Records. They reveal the history and rules of this world.",
+    "difficulty": "both"
   },
   {
     "id": "trial-003",
@@ -3318,7 +3440,8 @@
       }
     ],
     "answer": "B",
-    "explanation": "Save means the world records progress, such as restored towers, fragments, and Chronicles."
+    "explanation": "Save means the world records progress, such as restored towers, fragments, and Chronicles.",
+    "difficulty": "both"
   },
   {
     "id": "trial-004",
@@ -3345,7 +3468,8 @@
       }
     ],
     "answer": "A",
-    "explanation": "Load brings back a saved state. It returns the traveler to a path the world already remembers."
+    "explanation": "Load brings back a saved state. It returns the traveler to a path the world already remembers.",
+    "difficulty": "both"
   },
   {
     "id": "trial-005",
@@ -3372,6 +3496,2023 @@
       }
     ],
     "answer": "B",
-    "explanation": "The demo ends by inviting students to become creators in the summer camp, outside this game."
+    "explanation": "The demo ends by inviting students to become creators in the summer camp, outside this game.",
+    "difficulty": "both"
+  },
+  {
+    "id": "easy-addition-001",
+    "type": "multiple-choice",
+    "topic": "Addition",
+    "difficulty": "easy",
+    "title": "Addition Facts",
+    "question": "What is 8 + 5?",
+    "options": [
+      {
+        "id": "A",
+        "text": "13"
+      },
+      {
+        "id": "B",
+        "text": "12"
+      },
+      {
+        "id": "C",
+        "text": "15"
+      },
+      {
+        "id": "D",
+        "text": "10"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Add 8 and 5 to get 13."
+  },
+  {
+    "id": "easy-addition-002",
+    "type": "multiple-choice",
+    "topic": "Addition",
+    "difficulty": "easy",
+    "title": "Addition Facts",
+    "question": "What is 7 + 6?",
+    "options": [
+      {
+        "id": "A",
+        "text": "13"
+      },
+      {
+        "id": "B",
+        "text": "12"
+      },
+      {
+        "id": "C",
+        "text": "15"
+      },
+      {
+        "id": "D",
+        "text": "10"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Add 7 and 6 to get 13."
+  },
+  {
+    "id": "easy-addition-003",
+    "type": "multiple-choice",
+    "topic": "Addition",
+    "difficulty": "easy",
+    "title": "Addition Facts",
+    "question": "What is 9 + 4?",
+    "options": [
+      {
+        "id": "A",
+        "text": "13"
+      },
+      {
+        "id": "B",
+        "text": "12"
+      },
+      {
+        "id": "C",
+        "text": "15"
+      },
+      {
+        "id": "D",
+        "text": "10"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Add 9 and 4 to get 13."
+  },
+  {
+    "id": "easy-addition-004",
+    "type": "multiple-choice",
+    "topic": "Addition",
+    "difficulty": "easy",
+    "title": "Addition Facts",
+    "question": "What is 12 + 3?",
+    "options": [
+      {
+        "id": "A",
+        "text": "15"
+      },
+      {
+        "id": "B",
+        "text": "14"
+      },
+      {
+        "id": "C",
+        "text": "17"
+      },
+      {
+        "id": "D",
+        "text": "12"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Add 12 and 3 to get 15."
+  },
+  {
+    "id": "easy-addition-005",
+    "type": "multiple-choice",
+    "topic": "Addition",
+    "difficulty": "easy",
+    "title": "Addition Facts",
+    "question": "What is 15 + 2?",
+    "options": [
+      {
+        "id": "A",
+        "text": "17"
+      },
+      {
+        "id": "B",
+        "text": "16"
+      },
+      {
+        "id": "C",
+        "text": "19"
+      },
+      {
+        "id": "D",
+        "text": "14"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Add 15 and 2 to get 17."
+  },
+  {
+    "id": "easy-addition-006",
+    "type": "multiple-choice",
+    "topic": "Addition",
+    "difficulty": "easy",
+    "title": "Addition Facts",
+    "question": "What is 11 + 8?",
+    "options": [
+      {
+        "id": "A",
+        "text": "19"
+      },
+      {
+        "id": "B",
+        "text": "18"
+      },
+      {
+        "id": "C",
+        "text": "21"
+      },
+      {
+        "id": "D",
+        "text": "16"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Add 11 and 8 to get 19."
+  },
+  {
+    "id": "easy-addition-007",
+    "type": "multiple-choice",
+    "topic": "Addition",
+    "difficulty": "easy",
+    "title": "Addition Facts",
+    "question": "What is 14 + 6?",
+    "options": [
+      {
+        "id": "A",
+        "text": "20"
+      },
+      {
+        "id": "B",
+        "text": "19"
+      },
+      {
+        "id": "C",
+        "text": "22"
+      },
+      {
+        "id": "D",
+        "text": "17"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Add 14 and 6 to get 20."
+  },
+  {
+    "id": "easy-addition-008",
+    "type": "multiple-choice",
+    "topic": "Addition",
+    "difficulty": "easy",
+    "title": "Addition Facts",
+    "question": "What is 18 + 7?",
+    "options": [
+      {
+        "id": "A",
+        "text": "25"
+      },
+      {
+        "id": "B",
+        "text": "24"
+      },
+      {
+        "id": "C",
+        "text": "27"
+      },
+      {
+        "id": "D",
+        "text": "22"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Add 18 and 7 to get 25."
+  },
+  {
+    "id": "easy-addition-009",
+    "type": "multiple-choice",
+    "topic": "Addition",
+    "difficulty": "easy",
+    "title": "Addition Facts",
+    "question": "What is 21 + 9?",
+    "options": [
+      {
+        "id": "A",
+        "text": "30"
+      },
+      {
+        "id": "B",
+        "text": "29"
+      },
+      {
+        "id": "C",
+        "text": "32"
+      },
+      {
+        "id": "D",
+        "text": "27"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Add 21 and 9 to get 30."
+  },
+  {
+    "id": "easy-addition-010",
+    "type": "multiple-choice",
+    "topic": "Addition",
+    "difficulty": "easy",
+    "title": "Addition Facts",
+    "question": "What is 24 + 5?",
+    "options": [
+      {
+        "id": "A",
+        "text": "29"
+      },
+      {
+        "id": "B",
+        "text": "28"
+      },
+      {
+        "id": "C",
+        "text": "31"
+      },
+      {
+        "id": "D",
+        "text": "26"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Add 24 and 5 to get 29."
+  },
+  {
+    "id": "easy-addition-011",
+    "type": "multiple-choice",
+    "topic": "Addition",
+    "difficulty": "easy",
+    "title": "Addition Facts",
+    "question": "What is 32 + 8?",
+    "options": [
+      {
+        "id": "A",
+        "text": "40"
+      },
+      {
+        "id": "B",
+        "text": "39"
+      },
+      {
+        "id": "C",
+        "text": "42"
+      },
+      {
+        "id": "D",
+        "text": "37"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Add 32 and 8 to get 40."
+  },
+  {
+    "id": "easy-addition-012",
+    "type": "multiple-choice",
+    "topic": "Addition",
+    "difficulty": "easy",
+    "title": "Addition Facts",
+    "question": "What is 45 + 12?",
+    "options": [
+      {
+        "id": "A",
+        "text": "57"
+      },
+      {
+        "id": "B",
+        "text": "56"
+      },
+      {
+        "id": "C",
+        "text": "59"
+      },
+      {
+        "id": "D",
+        "text": "54"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Add 45 and 12 to get 57."
+  },
+  {
+    "id": "easy-subtraction-001",
+    "type": "multiple-choice",
+    "topic": "Subtraction",
+    "difficulty": "easy",
+    "title": "Subtraction Facts",
+    "question": "What is 9 - 4?",
+    "options": [
+      {
+        "id": "A",
+        "text": "5"
+      },
+      {
+        "id": "B",
+        "text": "6"
+      },
+      {
+        "id": "C",
+        "text": "3"
+      },
+      {
+        "id": "D",
+        "text": "9"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Take 4 away from 9 to get 5."
+  },
+  {
+    "id": "easy-subtraction-002",
+    "type": "multiple-choice",
+    "topic": "Subtraction",
+    "difficulty": "easy",
+    "title": "Subtraction Facts",
+    "question": "What is 12 - 5?",
+    "options": [
+      {
+        "id": "A",
+        "text": "7"
+      },
+      {
+        "id": "B",
+        "text": "8"
+      },
+      {
+        "id": "C",
+        "text": "5"
+      },
+      {
+        "id": "D",
+        "text": "11"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Take 5 away from 12 to get 7."
+  },
+  {
+    "id": "easy-subtraction-003",
+    "type": "multiple-choice",
+    "topic": "Subtraction",
+    "difficulty": "easy",
+    "title": "Subtraction Facts",
+    "question": "What is 15 - 7?",
+    "options": [
+      {
+        "id": "A",
+        "text": "8"
+      },
+      {
+        "id": "B",
+        "text": "9"
+      },
+      {
+        "id": "C",
+        "text": "6"
+      },
+      {
+        "id": "D",
+        "text": "12"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Take 7 away from 15 to get 8."
+  },
+  {
+    "id": "easy-subtraction-004",
+    "type": "multiple-choice",
+    "topic": "Subtraction",
+    "difficulty": "easy",
+    "title": "Subtraction Facts",
+    "question": "What is 18 - 6?",
+    "options": [
+      {
+        "id": "A",
+        "text": "12"
+      },
+      {
+        "id": "B",
+        "text": "13"
+      },
+      {
+        "id": "C",
+        "text": "10"
+      },
+      {
+        "id": "D",
+        "text": "16"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Take 6 away from 18 to get 12."
+  },
+  {
+    "id": "easy-subtraction-005",
+    "type": "multiple-choice",
+    "topic": "Subtraction",
+    "difficulty": "easy",
+    "title": "Subtraction Facts",
+    "question": "What is 20 - 9?",
+    "options": [
+      {
+        "id": "A",
+        "text": "11"
+      },
+      {
+        "id": "B",
+        "text": "12"
+      },
+      {
+        "id": "C",
+        "text": "9"
+      },
+      {
+        "id": "D",
+        "text": "15"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Take 9 away from 20 to get 11."
+  },
+  {
+    "id": "easy-subtraction-006",
+    "type": "multiple-choice",
+    "topic": "Subtraction",
+    "difficulty": "easy",
+    "title": "Subtraction Facts",
+    "question": "What is 25 - 8?",
+    "options": [
+      {
+        "id": "A",
+        "text": "17"
+      },
+      {
+        "id": "B",
+        "text": "18"
+      },
+      {
+        "id": "C",
+        "text": "15"
+      },
+      {
+        "id": "D",
+        "text": "21"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Take 8 away from 25 to get 17."
+  },
+  {
+    "id": "easy-subtraction-007",
+    "type": "multiple-choice",
+    "topic": "Subtraction",
+    "difficulty": "easy",
+    "title": "Subtraction Facts",
+    "question": "What is 31 - 12?",
+    "options": [
+      {
+        "id": "A",
+        "text": "19"
+      },
+      {
+        "id": "B",
+        "text": "20"
+      },
+      {
+        "id": "C",
+        "text": "17"
+      },
+      {
+        "id": "D",
+        "text": "23"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Take 12 away from 31 to get 19."
+  },
+  {
+    "id": "easy-subtraction-008",
+    "type": "multiple-choice",
+    "topic": "Subtraction",
+    "difficulty": "easy",
+    "title": "Subtraction Facts",
+    "question": "What is 40 - 15?",
+    "options": [
+      {
+        "id": "A",
+        "text": "25"
+      },
+      {
+        "id": "B",
+        "text": "26"
+      },
+      {
+        "id": "C",
+        "text": "23"
+      },
+      {
+        "id": "D",
+        "text": "29"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Take 15 away from 40 to get 25."
+  },
+  {
+    "id": "easy-subtraction-009",
+    "type": "multiple-choice",
+    "topic": "Subtraction",
+    "difficulty": "easy",
+    "title": "Subtraction Facts",
+    "question": "What is 52 - 20?",
+    "options": [
+      {
+        "id": "A",
+        "text": "32"
+      },
+      {
+        "id": "B",
+        "text": "33"
+      },
+      {
+        "id": "C",
+        "text": "30"
+      },
+      {
+        "id": "D",
+        "text": "36"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Take 20 away from 52 to get 32."
+  },
+  {
+    "id": "easy-subtraction-010",
+    "type": "multiple-choice",
+    "topic": "Subtraction",
+    "difficulty": "easy",
+    "title": "Subtraction Facts",
+    "question": "What is 63 - 18?",
+    "options": [
+      {
+        "id": "A",
+        "text": "45"
+      },
+      {
+        "id": "B",
+        "text": "46"
+      },
+      {
+        "id": "C",
+        "text": "43"
+      },
+      {
+        "id": "D",
+        "text": "49"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Take 18 away from 63 to get 45."
+  },
+  {
+    "id": "easy-subtraction-011",
+    "type": "multiple-choice",
+    "topic": "Subtraction",
+    "difficulty": "easy",
+    "title": "Subtraction Facts",
+    "question": "What is 74 - 29?",
+    "options": [
+      {
+        "id": "A",
+        "text": "45"
+      },
+      {
+        "id": "B",
+        "text": "46"
+      },
+      {
+        "id": "C",
+        "text": "43"
+      },
+      {
+        "id": "D",
+        "text": "49"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Take 29 away from 74 to get 45."
+  },
+  {
+    "id": "easy-subtraction-012",
+    "type": "multiple-choice",
+    "topic": "Subtraction",
+    "difficulty": "easy",
+    "title": "Subtraction Facts",
+    "question": "What is 86 - 34?",
+    "options": [
+      {
+        "id": "A",
+        "text": "52"
+      },
+      {
+        "id": "B",
+        "text": "53"
+      },
+      {
+        "id": "C",
+        "text": "50"
+      },
+      {
+        "id": "D",
+        "text": "56"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Take 34 away from 86 to get 52."
+  },
+  {
+    "id": "easy-multiplication-001",
+    "type": "multiple-choice",
+    "topic": "Multiplication",
+    "difficulty": "easy",
+    "title": "Multiplication Facts",
+    "question": "What is 2 x 3?",
+    "options": [
+      {
+        "id": "A",
+        "text": "6"
+      },
+      {
+        "id": "B",
+        "text": "8"
+      },
+      {
+        "id": "C",
+        "text": "3"
+      },
+      {
+        "id": "D",
+        "text": "8"
+      }
+    ],
+    "answer": "A",
+    "explanation": "2 groups of 3 make 6."
+  },
+  {
+    "id": "easy-multiplication-002",
+    "type": "multiple-choice",
+    "topic": "Multiplication",
+    "difficulty": "easy",
+    "title": "Multiplication Facts",
+    "question": "What is 4 x 5?",
+    "options": [
+      {
+        "id": "A",
+        "text": "20"
+      },
+      {
+        "id": "B",
+        "text": "24"
+      },
+      {
+        "id": "C",
+        "text": "15"
+      },
+      {
+        "id": "D",
+        "text": "22"
+      }
+    ],
+    "answer": "A",
+    "explanation": "4 groups of 5 make 20."
+  },
+  {
+    "id": "easy-multiplication-003",
+    "type": "multiple-choice",
+    "topic": "Multiplication",
+    "difficulty": "easy",
+    "title": "Multiplication Facts",
+    "question": "What is 6 x 2?",
+    "options": [
+      {
+        "id": "A",
+        "text": "12"
+      },
+      {
+        "id": "B",
+        "text": "18"
+      },
+      {
+        "id": "C",
+        "text": "10"
+      },
+      {
+        "id": "D",
+        "text": "14"
+      }
+    ],
+    "answer": "A",
+    "explanation": "6 groups of 2 make 12."
+  },
+  {
+    "id": "easy-multiplication-004",
+    "type": "multiple-choice",
+    "topic": "Multiplication",
+    "difficulty": "easy",
+    "title": "Multiplication Facts",
+    "question": "What is 3 x 7?",
+    "options": [
+      {
+        "id": "A",
+        "text": "21"
+      },
+      {
+        "id": "B",
+        "text": "24"
+      },
+      {
+        "id": "C",
+        "text": "14"
+      },
+      {
+        "id": "D",
+        "text": "23"
+      }
+    ],
+    "answer": "A",
+    "explanation": "3 groups of 7 make 21."
+  },
+  {
+    "id": "easy-multiplication-005",
+    "type": "multiple-choice",
+    "topic": "Multiplication",
+    "difficulty": "easy",
+    "title": "Multiplication Facts",
+    "question": "What is 8 x 4?",
+    "options": [
+      {
+        "id": "A",
+        "text": "32"
+      },
+      {
+        "id": "B",
+        "text": "40"
+      },
+      {
+        "id": "C",
+        "text": "28"
+      },
+      {
+        "id": "D",
+        "text": "34"
+      }
+    ],
+    "answer": "A",
+    "explanation": "8 groups of 4 make 32."
+  },
+  {
+    "id": "easy-multiplication-006",
+    "type": "multiple-choice",
+    "topic": "Multiplication",
+    "difficulty": "easy",
+    "title": "Multiplication Facts",
+    "question": "What is 5 x 6?",
+    "options": [
+      {
+        "id": "A",
+        "text": "30"
+      },
+      {
+        "id": "B",
+        "text": "35"
+      },
+      {
+        "id": "C",
+        "text": "24"
+      },
+      {
+        "id": "D",
+        "text": "32"
+      }
+    ],
+    "answer": "A",
+    "explanation": "5 groups of 6 make 30."
+  },
+  {
+    "id": "easy-multiplication-007",
+    "type": "multiple-choice",
+    "topic": "Multiplication",
+    "difficulty": "easy",
+    "title": "Multiplication Facts",
+    "question": "What is 9 x 3?",
+    "options": [
+      {
+        "id": "A",
+        "text": "27"
+      },
+      {
+        "id": "B",
+        "text": "36"
+      },
+      {
+        "id": "C",
+        "text": "24"
+      },
+      {
+        "id": "D",
+        "text": "29"
+      }
+    ],
+    "answer": "A",
+    "explanation": "9 groups of 3 make 27."
+  },
+  {
+    "id": "easy-multiplication-008",
+    "type": "multiple-choice",
+    "topic": "Multiplication",
+    "difficulty": "easy",
+    "title": "Multiplication Facts",
+    "question": "What is 7 x 8?",
+    "options": [
+      {
+        "id": "A",
+        "text": "56"
+      },
+      {
+        "id": "B",
+        "text": "63"
+      },
+      {
+        "id": "C",
+        "text": "48"
+      },
+      {
+        "id": "D",
+        "text": "58"
+      }
+    ],
+    "answer": "A",
+    "explanation": "7 groups of 8 make 56."
+  },
+  {
+    "id": "easy-multiplication-009",
+    "type": "multiple-choice",
+    "topic": "Multiplication",
+    "difficulty": "easy",
+    "title": "Multiplication Facts",
+    "question": "What is 6 x 9?",
+    "options": [
+      {
+        "id": "A",
+        "text": "54"
+      },
+      {
+        "id": "B",
+        "text": "60"
+      },
+      {
+        "id": "C",
+        "text": "45"
+      },
+      {
+        "id": "D",
+        "text": "56"
+      }
+    ],
+    "answer": "A",
+    "explanation": "6 groups of 9 make 54."
+  },
+  {
+    "id": "easy-multiplication-010",
+    "type": "multiple-choice",
+    "topic": "Multiplication",
+    "difficulty": "easy",
+    "title": "Multiplication Facts",
+    "question": "What is 10 x 4?",
+    "options": [
+      {
+        "id": "A",
+        "text": "40"
+      },
+      {
+        "id": "B",
+        "text": "50"
+      },
+      {
+        "id": "C",
+        "text": "36"
+      },
+      {
+        "id": "D",
+        "text": "42"
+      }
+    ],
+    "answer": "A",
+    "explanation": "10 groups of 4 make 40."
+  },
+  {
+    "id": "easy-multiplication-011",
+    "type": "multiple-choice",
+    "topic": "Multiplication",
+    "difficulty": "easy",
+    "title": "Multiplication Facts",
+    "question": "What is 11 x 3?",
+    "options": [
+      {
+        "id": "A",
+        "text": "33"
+      },
+      {
+        "id": "B",
+        "text": "44"
+      },
+      {
+        "id": "C",
+        "text": "30"
+      },
+      {
+        "id": "D",
+        "text": "35"
+      }
+    ],
+    "answer": "A",
+    "explanation": "11 groups of 3 make 33."
+  },
+  {
+    "id": "easy-multiplication-012",
+    "type": "multiple-choice",
+    "topic": "Multiplication",
+    "difficulty": "easy",
+    "title": "Multiplication Facts",
+    "question": "What is 12 x 2?",
+    "options": [
+      {
+        "id": "A",
+        "text": "24"
+      },
+      {
+        "id": "B",
+        "text": "36"
+      },
+      {
+        "id": "C",
+        "text": "22"
+      },
+      {
+        "id": "D",
+        "text": "26"
+      }
+    ],
+    "answer": "A",
+    "explanation": "12 groups of 2 make 24."
+  },
+  {
+    "id": "easy-division-001",
+    "type": "multiple-choice",
+    "topic": "Division",
+    "difficulty": "easy",
+    "title": "Division Facts",
+    "question": "What is 12 / 3?",
+    "options": [
+      {
+        "id": "A",
+        "text": "4"
+      },
+      {
+        "id": "B",
+        "text": "5"
+      },
+      {
+        "id": "C",
+        "text": "3"
+      },
+      {
+        "id": "D",
+        "text": "7"
+      }
+    ],
+    "answer": "A",
+    "explanation": "12 split into groups of 3 makes 4."
+  },
+  {
+    "id": "easy-division-002",
+    "type": "multiple-choice",
+    "topic": "Division",
+    "difficulty": "easy",
+    "title": "Division Facts",
+    "question": "What is 20 / 5?",
+    "options": [
+      {
+        "id": "A",
+        "text": "4"
+      },
+      {
+        "id": "B",
+        "text": "5"
+      },
+      {
+        "id": "C",
+        "text": "3"
+      },
+      {
+        "id": "D",
+        "text": "7"
+      }
+    ],
+    "answer": "A",
+    "explanation": "20 split into groups of 5 makes 4."
+  },
+  {
+    "id": "easy-division-003",
+    "type": "multiple-choice",
+    "topic": "Division",
+    "difficulty": "easy",
+    "title": "Division Facts",
+    "question": "What is 18 / 2?",
+    "options": [
+      {
+        "id": "A",
+        "text": "9"
+      },
+      {
+        "id": "B",
+        "text": "10"
+      },
+      {
+        "id": "C",
+        "text": "8"
+      },
+      {
+        "id": "D",
+        "text": "12"
+      }
+    ],
+    "answer": "A",
+    "explanation": "18 split into groups of 2 makes 9."
+  },
+  {
+    "id": "easy-division-004",
+    "type": "multiple-choice",
+    "topic": "Division",
+    "difficulty": "easy",
+    "title": "Division Facts",
+    "question": "What is 24 / 6?",
+    "options": [
+      {
+        "id": "A",
+        "text": "4"
+      },
+      {
+        "id": "B",
+        "text": "5"
+      },
+      {
+        "id": "C",
+        "text": "3"
+      },
+      {
+        "id": "D",
+        "text": "7"
+      }
+    ],
+    "answer": "A",
+    "explanation": "24 split into groups of 6 makes 4."
+  },
+  {
+    "id": "easy-division-005",
+    "type": "multiple-choice",
+    "topic": "Division",
+    "difficulty": "easy",
+    "title": "Division Facts",
+    "question": "What is 28 / 4?",
+    "options": [
+      {
+        "id": "A",
+        "text": "7"
+      },
+      {
+        "id": "B",
+        "text": "8"
+      },
+      {
+        "id": "C",
+        "text": "6"
+      },
+      {
+        "id": "D",
+        "text": "10"
+      }
+    ],
+    "answer": "A",
+    "explanation": "28 split into groups of 4 makes 7."
+  },
+  {
+    "id": "easy-division-006",
+    "type": "multiple-choice",
+    "topic": "Division",
+    "difficulty": "easy",
+    "title": "Division Facts",
+    "question": "What is 30 / 5?",
+    "options": [
+      {
+        "id": "A",
+        "text": "6"
+      },
+      {
+        "id": "B",
+        "text": "7"
+      },
+      {
+        "id": "C",
+        "text": "5"
+      },
+      {
+        "id": "D",
+        "text": "9"
+      }
+    ],
+    "answer": "A",
+    "explanation": "30 split into groups of 5 makes 6."
+  },
+  {
+    "id": "easy-division-007",
+    "type": "multiple-choice",
+    "topic": "Division",
+    "difficulty": "easy",
+    "title": "Division Facts",
+    "question": "What is 36 / 6?",
+    "options": [
+      {
+        "id": "A",
+        "text": "6"
+      },
+      {
+        "id": "B",
+        "text": "7"
+      },
+      {
+        "id": "C",
+        "text": "5"
+      },
+      {
+        "id": "D",
+        "text": "9"
+      }
+    ],
+    "answer": "A",
+    "explanation": "36 split into groups of 6 makes 6."
+  },
+  {
+    "id": "easy-division-008",
+    "type": "multiple-choice",
+    "topic": "Division",
+    "difficulty": "easy",
+    "title": "Division Facts",
+    "question": "What is 42 / 7?",
+    "options": [
+      {
+        "id": "A",
+        "text": "6"
+      },
+      {
+        "id": "B",
+        "text": "7"
+      },
+      {
+        "id": "C",
+        "text": "5"
+      },
+      {
+        "id": "D",
+        "text": "9"
+      }
+    ],
+    "answer": "A",
+    "explanation": "42 split into groups of 7 makes 6."
+  },
+  {
+    "id": "easy-division-009",
+    "type": "multiple-choice",
+    "topic": "Division",
+    "difficulty": "easy",
+    "title": "Division Facts",
+    "question": "What is 48 / 8?",
+    "options": [
+      {
+        "id": "A",
+        "text": "6"
+      },
+      {
+        "id": "B",
+        "text": "7"
+      },
+      {
+        "id": "C",
+        "text": "5"
+      },
+      {
+        "id": "D",
+        "text": "9"
+      }
+    ],
+    "answer": "A",
+    "explanation": "48 split into groups of 8 makes 6."
+  },
+  {
+    "id": "easy-division-010",
+    "type": "multiple-choice",
+    "topic": "Division",
+    "difficulty": "easy",
+    "title": "Division Facts",
+    "question": "What is 54 / 9?",
+    "options": [
+      {
+        "id": "A",
+        "text": "6"
+      },
+      {
+        "id": "B",
+        "text": "7"
+      },
+      {
+        "id": "C",
+        "text": "5"
+      },
+      {
+        "id": "D",
+        "text": "9"
+      }
+    ],
+    "answer": "A",
+    "explanation": "54 split into groups of 9 makes 6."
+  },
+  {
+    "id": "easy-division-011",
+    "type": "multiple-choice",
+    "topic": "Division",
+    "difficulty": "easy",
+    "title": "Division Facts",
+    "question": "What is 63 / 7?",
+    "options": [
+      {
+        "id": "A",
+        "text": "9"
+      },
+      {
+        "id": "B",
+        "text": "10"
+      },
+      {
+        "id": "C",
+        "text": "8"
+      },
+      {
+        "id": "D",
+        "text": "12"
+      }
+    ],
+    "answer": "A",
+    "explanation": "63 split into groups of 7 makes 9."
+  },
+  {
+    "id": "easy-division-012",
+    "type": "multiple-choice",
+    "topic": "Division",
+    "difficulty": "easy",
+    "title": "Division Facts",
+    "question": "What is 72 / 8?",
+    "options": [
+      {
+        "id": "A",
+        "text": "9"
+      },
+      {
+        "id": "B",
+        "text": "10"
+      },
+      {
+        "id": "C",
+        "text": "8"
+      },
+      {
+        "id": "D",
+        "text": "12"
+      }
+    ],
+    "answer": "A",
+    "explanation": "72 split into groups of 8 makes 9."
+  },
+  {
+    "id": "easy-mixed-basic-001",
+    "type": "multiple-choice",
+    "topic": "Mixed Basic Operations",
+    "difficulty": "easy",
+    "title": "Mixed Basic Operations",
+    "question": "What is 6 + 7?",
+    "options": [
+      {
+        "id": "A",
+        "text": "13"
+      },
+      {
+        "id": "B",
+        "text": "12"
+      },
+      {
+        "id": "C",
+        "text": "14"
+      },
+      {
+        "id": "D",
+        "text": "10"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Solve the operation 6 + 7 to get 13."
+  },
+  {
+    "id": "easy-mixed-basic-002",
+    "type": "multiple-choice",
+    "topic": "Mixed Basic Operations",
+    "difficulty": "easy",
+    "title": "Mixed Basic Operations",
+    "question": "What is 15 - 8?",
+    "options": [
+      {
+        "id": "A",
+        "text": "7"
+      },
+      {
+        "id": "B",
+        "text": "8"
+      },
+      {
+        "id": "C",
+        "text": "6"
+      },
+      {
+        "id": "D",
+        "text": "5"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Solve the operation 15 - 8 to get 7."
+  },
+  {
+    "id": "easy-mixed-basic-003",
+    "type": "multiple-choice",
+    "topic": "Mixed Basic Operations",
+    "difficulty": "easy",
+    "title": "Mixed Basic Operations",
+    "question": "What is 3 x 4?",
+    "options": [
+      {
+        "id": "A",
+        "text": "12"
+      },
+      {
+        "id": "B",
+        "text": "7"
+      },
+      {
+        "id": "C",
+        "text": "14"
+      },
+      {
+        "id": "D",
+        "text": "16"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Solve the operation 3 x 4 to get 12."
+  },
+  {
+    "id": "easy-mixed-basic-004",
+    "type": "multiple-choice",
+    "topic": "Mixed Basic Operations",
+    "difficulty": "easy",
+    "title": "Mixed Basic Operations",
+    "question": "What is 20 / 4?",
+    "options": [
+      {
+        "id": "A",
+        "text": "5"
+      },
+      {
+        "id": "B",
+        "text": "4"
+      },
+      {
+        "id": "C",
+        "text": "6"
+      },
+      {
+        "id": "D",
+        "text": "8"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Solve the operation 20 / 4 to get 5."
+  },
+  {
+    "id": "easy-mixed-basic-005",
+    "type": "multiple-choice",
+    "topic": "Mixed Basic Operations",
+    "difficulty": "easy",
+    "title": "Mixed Basic Operations",
+    "question": "What is 9 + 5?",
+    "options": [
+      {
+        "id": "A",
+        "text": "14"
+      },
+      {
+        "id": "B",
+        "text": "15"
+      },
+      {
+        "id": "C",
+        "text": "13"
+      },
+      {
+        "id": "D",
+        "text": "11"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Solve the operation 9 + 5 to get 14."
+  },
+  {
+    "id": "easy-mixed-basic-006",
+    "type": "multiple-choice",
+    "topic": "Mixed Basic Operations",
+    "difficulty": "easy",
+    "title": "Mixed Basic Operations",
+    "question": "What is 18 - 9?",
+    "options": [
+      {
+        "id": "A",
+        "text": "9"
+      },
+      {
+        "id": "B",
+        "text": "8"
+      },
+      {
+        "id": "C",
+        "text": "10"
+      },
+      {
+        "id": "D",
+        "text": "7"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Solve the operation 18 - 9 to get 9."
+  },
+  {
+    "id": "easy-mixed-basic-007",
+    "type": "multiple-choice",
+    "topic": "Mixed Basic Operations",
+    "difficulty": "easy",
+    "title": "Mixed Basic Operations",
+    "question": "What is 6 x 5?",
+    "options": [
+      {
+        "id": "A",
+        "text": "30"
+      },
+      {
+        "id": "B",
+        "text": "11"
+      },
+      {
+        "id": "C",
+        "text": "25"
+      },
+      {
+        "id": "D",
+        "text": "35"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Solve the operation 6 x 5 to get 30."
+  },
+  {
+    "id": "easy-mixed-basic-008",
+    "type": "multiple-choice",
+    "topic": "Mixed Basic Operations",
+    "difficulty": "easy",
+    "title": "Mixed Basic Operations",
+    "question": "What is 36 / 6?",
+    "options": [
+      {
+        "id": "A",
+        "text": "6"
+      },
+      {
+        "id": "B",
+        "text": "7"
+      },
+      {
+        "id": "C",
+        "text": "5"
+      },
+      {
+        "id": "D",
+        "text": "9"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Solve the operation 36 / 6 to get 6."
+  },
+  {
+    "id": "easy-mixed-basic-009",
+    "type": "multiple-choice",
+    "topic": "Mixed Basic Operations",
+    "difficulty": "easy",
+    "title": "Mixed Basic Operations",
+    "question": "What is 22 + 8?",
+    "options": [
+      {
+        "id": "A",
+        "text": "30"
+      },
+      {
+        "id": "B",
+        "text": "28"
+      },
+      {
+        "id": "C",
+        "text": "31"
+      },
+      {
+        "id": "D",
+        "text": "24"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Solve the operation 22 + 8 to get 30."
+  },
+  {
+    "id": "easy-mixed-basic-010",
+    "type": "multiple-choice",
+    "topic": "Mixed Basic Operations",
+    "difficulty": "easy",
+    "title": "Mixed Basic Operations",
+    "question": "What is 40 - 16?",
+    "options": [
+      {
+        "id": "A",
+        "text": "24"
+      },
+      {
+        "id": "B",
+        "text": "26"
+      },
+      {
+        "id": "C",
+        "text": "22"
+      },
+      {
+        "id": "D",
+        "text": "20"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Solve the operation 40 - 16 to get 24."
+  },
+  {
+    "id": "easy-mixed-basic-011",
+    "type": "multiple-choice",
+    "topic": "Mixed Basic Operations",
+    "difficulty": "easy",
+    "title": "Mixed Basic Operations",
+    "question": "What is 7 x 6?",
+    "options": [
+      {
+        "id": "A",
+        "text": "42"
+      },
+      {
+        "id": "B",
+        "text": "36"
+      },
+      {
+        "id": "C",
+        "text": "48"
+      },
+      {
+        "id": "D",
+        "text": "13"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Solve the operation 7 x 6 to get 42."
+  },
+  {
+    "id": "easy-mixed-basic-012",
+    "type": "multiple-choice",
+    "topic": "Mixed Basic Operations",
+    "difficulty": "easy",
+    "title": "Mixed Basic Operations",
+    "question": "What is 45 / 5?",
+    "options": [
+      {
+        "id": "A",
+        "text": "9"
+      },
+      {
+        "id": "B",
+        "text": "8"
+      },
+      {
+        "id": "C",
+        "text": "10"
+      },
+      {
+        "id": "D",
+        "text": "7"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Solve the operation 45 / 5 to get 9."
+  },
+  {
+    "id": "easy-mixed-advanced-001",
+    "type": "multiple-choice",
+    "topic": "Mixed Advanced Operations",
+    "difficulty": "easy",
+    "title": "Mixed Advanced Operations",
+    "question": "What is 27 + 35?",
+    "options": [
+      {
+        "id": "A",
+        "text": "62"
+      },
+      {
+        "id": "B",
+        "text": "52"
+      },
+      {
+        "id": "C",
+        "text": "72"
+      },
+      {
+        "id": "D",
+        "text": "58"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Use basic arithmetic to solve 27 + 35. The answer is 62."
+  },
+  {
+    "id": "easy-mixed-advanced-002",
+    "type": "multiple-choice",
+    "topic": "Mixed Advanced Operations",
+    "difficulty": "easy",
+    "title": "Mixed Advanced Operations",
+    "question": "What is 84 - 37?",
+    "options": [
+      {
+        "id": "A",
+        "text": "47"
+      },
+      {
+        "id": "B",
+        "text": "57"
+      },
+      {
+        "id": "C",
+        "text": "43"
+      },
+      {
+        "id": "D",
+        "text": "51"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Use basic arithmetic to solve 84 - 37. The answer is 47."
+  },
+  {
+    "id": "easy-mixed-advanced-003",
+    "type": "multiple-choice",
+    "topic": "Mixed Advanced Operations",
+    "difficulty": "easy",
+    "title": "Mixed Advanced Operations",
+    "question": "What is 12 x 3?",
+    "options": [
+      {
+        "id": "A",
+        "text": "36"
+      },
+      {
+        "id": "B",
+        "text": "15"
+      },
+      {
+        "id": "C",
+        "text": "30"
+      },
+      {
+        "id": "D",
+        "text": "42"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Use basic arithmetic to solve 12 x 3. The answer is 36."
+  },
+  {
+    "id": "easy-mixed-advanced-004",
+    "type": "multiple-choice",
+    "topic": "Mixed Advanced Operations",
+    "difficulty": "easy",
+    "title": "Mixed Advanced Operations",
+    "question": "What is 96 / 8?",
+    "options": [
+      {
+        "id": "A",
+        "text": "12"
+      },
+      {
+        "id": "B",
+        "text": "10"
+      },
+      {
+        "id": "C",
+        "text": "14"
+      },
+      {
+        "id": "D",
+        "text": "16"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Use basic arithmetic to solve 96 / 8. The answer is 12."
+  },
+  {
+    "id": "easy-mixed-advanced-005",
+    "type": "multiple-choice",
+    "topic": "Mixed Advanced Operations",
+    "difficulty": "easy",
+    "title": "Mixed Advanced Operations",
+    "question": "What is 46 + 28?",
+    "options": [
+      {
+        "id": "A",
+        "text": "74"
+      },
+      {
+        "id": "B",
+        "text": "64"
+      },
+      {
+        "id": "C",
+        "text": "84"
+      },
+      {
+        "id": "D",
+        "text": "70"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Use basic arithmetic to solve 46 + 28. The answer is 74."
+  },
+  {
+    "id": "easy-mixed-advanced-006",
+    "type": "multiple-choice",
+    "topic": "Mixed Advanced Operations",
+    "difficulty": "easy",
+    "title": "Mixed Advanced Operations",
+    "question": "What is 73 - 29?",
+    "options": [
+      {
+        "id": "A",
+        "text": "44"
+      },
+      {
+        "id": "B",
+        "text": "54"
+      },
+      {
+        "id": "C",
+        "text": "42"
+      },
+      {
+        "id": "D",
+        "text": "46"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Use basic arithmetic to solve 73 - 29. The answer is 44."
+  },
+  {
+    "id": "easy-mixed-advanced-007",
+    "type": "multiple-choice",
+    "topic": "Mixed Advanced Operations",
+    "difficulty": "easy",
+    "title": "Mixed Advanced Operations",
+    "question": "What is 14 x 2?",
+    "options": [
+      {
+        "id": "A",
+        "text": "28"
+      },
+      {
+        "id": "B",
+        "text": "16"
+      },
+      {
+        "id": "C",
+        "text": "24"
+      },
+      {
+        "id": "D",
+        "text": "32"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Use basic arithmetic to solve 14 x 2. The answer is 28."
+  },
+  {
+    "id": "easy-mixed-advanced-008",
+    "type": "multiple-choice",
+    "topic": "Mixed Advanced Operations",
+    "difficulty": "easy",
+    "title": "Mixed Advanced Operations",
+    "question": "What is 81 / 9?",
+    "options": [
+      {
+        "id": "A",
+        "text": "9"
+      },
+      {
+        "id": "B",
+        "text": "8"
+      },
+      {
+        "id": "C",
+        "text": "10"
+      },
+      {
+        "id": "D",
+        "text": "7"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Use basic arithmetic to solve 81 / 9. The answer is 9."
+  },
+  {
+    "id": "easy-mixed-advanced-009",
+    "type": "multiple-choice",
+    "topic": "Mixed Advanced Operations",
+    "difficulty": "easy",
+    "title": "Mixed Advanced Operations",
+    "question": "What is 58 + 19?",
+    "options": [
+      {
+        "id": "A",
+        "text": "77"
+      },
+      {
+        "id": "B",
+        "text": "67"
+      },
+      {
+        "id": "C",
+        "text": "87"
+      },
+      {
+        "id": "D",
+        "text": "71"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Use basic arithmetic to solve 58 + 19. The answer is 77."
+  },
+  {
+    "id": "easy-mixed-advanced-010",
+    "type": "multiple-choice",
+    "topic": "Mixed Advanced Operations",
+    "difficulty": "easy",
+    "title": "Mixed Advanced Operations",
+    "question": "What is 90 - 45?",
+    "options": [
+      {
+        "id": "A",
+        "text": "45"
+      },
+      {
+        "id": "B",
+        "text": "35"
+      },
+      {
+        "id": "C",
+        "text": "55"
+      },
+      {
+        "id": "D",
+        "text": "40"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Use basic arithmetic to solve 90 - 45. The answer is 45."
+  },
+  {
+    "id": "easy-mixed-advanced-011",
+    "type": "multiple-choice",
+    "topic": "Mixed Advanced Operations",
+    "difficulty": "easy",
+    "title": "Mixed Advanced Operations",
+    "question": "What is 11 x 4?",
+    "options": [
+      {
+        "id": "A",
+        "text": "44"
+      },
+      {
+        "id": "B",
+        "text": "15"
+      },
+      {
+        "id": "C",
+        "text": "40"
+      },
+      {
+        "id": "D",
+        "text": "48"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Use basic arithmetic to solve 11 x 4. The answer is 44."
+  },
+  {
+    "id": "easy-mixed-advanced-012",
+    "type": "multiple-choice",
+    "topic": "Mixed Advanced Operations",
+    "difficulty": "easy",
+    "title": "Mixed Advanced Operations",
+    "question": "What is 64 / 4?",
+    "options": [
+      {
+        "id": "A",
+        "text": "16"
+      },
+      {
+        "id": "B",
+        "text": "14"
+      },
+      {
+        "id": "C",
+        "text": "18"
+      },
+      {
+        "id": "D",
+        "text": "20"
+      }
+    ],
+    "answer": "A",
+    "explanation": "Use basic arithmetic to solve 64 / 4. The answer is 16."
   }
 ]

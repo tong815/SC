@@ -1,6 +1,6 @@
 # GPT Copy-Paste Report
 
-Please review this Chronicle / Time Fragment label cleanup for the Exam Visualizer / SC project.
+Please review this Architecture Naming Refactor for the Exam Visualizer / SC project.
 
 ---
 
@@ -12,15 +12,15 @@ Exam Visualizer / SC
 
 **Current Phase:**
 
-Review
+Architecture Naming Refactor
 
 **Current Goal:**
 
-Review the Chronicle / Time Fragment label cleanup.
+Review the responsibility-based Engine / Curriculum / History folder structure.
 
 **Current Issue:**
 
-The six Creation Records had been realigned to website-building stages, but the Time Fragment wrapper still rendered an outer `Age I - ...` title line. That line could duplicate or conflict with the iframe's own stage title. Codex removed the duplicated outer era-title line and confirmed Chronicle Library titles/descriptions come from `chronicles.json`.
+The project previously used file names based on current implementation details, such as `map.json`, `questions.json`, `difficulty-config.json`, and `gameRules.js`. Codex renamed and reorganized these into responsibility-based folders so students can understand what each part owns over the long term.
 
 **Artifact:**
 
@@ -35,154 +35,220 @@ Implementation Report
 # Implementation Report
 
 **Project:** Exam Visualizer / SC
-**Build or Version:** Chronicle / Time Fragment Label Cleanup
+**Build or Version:** Architecture Naming Refactor
 **Date:** 2026-06-28
 **Phase:** Implementation / Review
 
-## What Was Wrong
+## Goal
 
-The six Creation Records now use the stage-based titles:
+This was a naming and structure refactor only.
 
-1. `The First Question`
-2. `The First Categories`
-3. `The First Map`
-4. `The First Rules`
-5. `The First Memory`
-6. `The First Journey`
+The purpose was to organize files by long-term responsibility:
 
-However, the Chronicle Reader's Time Fragment wrapper still rendered an outer title line like:
+- `engine/` defines how the world works.
+- `curriculum/` defines what students learn.
+- `history/` shows the historical development of the project.
+- `assets/` prepares a home for future visual assets.
+- `save/` documents permanent progress structure.
+- `co-gpt/` stores GPT handoff reports.
 
-```text
-Observed Era
-Age I - The First Wish
-Time Fragment Window
-```
+No new gameplay mechanics were added.
 
-The iframe page also renders its own title, such as:
+## Folder Restructuring
 
-```text
-Observed Time Fragment
-Age I - The First Question
-Prototype v0: Single-Question Website
-```
+Created or formalized:
 
-This created a duplicated heading area and could show old labels outside the iframe.
+- `engine/`
+- `curriculum/`
+- `history/`
+- `assets/`
+- `save/`
+- `co-gpt/`
 
-## What Changed
+The UI files stayed at the project root for now:
 
-### Chronicle Library
-
-The Chronicle Library continues to read card titles and descriptions from `chronicles.json`.
-
-The expected data values are:
-
-- Record I: `The First Question`
-  - `The first prototype: one question, four choices, instant feedback, and a short explanation.`
-- Record II: `The First Categories`
-  - `The questions were organized into logical groups, so learning could be explored one topic at a time.`
-- Record III: `The First Map`
-  - `The project became a world map, turning learning areas into places students could explore.`
-- Record IV: `The First Rules`
-  - `The world gained rules: challenges, progress, key fragments, and consequences.`
-- Record V: `The First Memory`
-  - `The world learned to remember progress through Save and return to it through Load.`
-- Record VI: `The First Journey`
-  - `The project became a complete journey with opening, characters, Chronicles, Time Fragments, final trial, and ending.`
-
-No separate hardcoded Chronicle card titles were added to `app.js`.
-
-### Time Fragment Wrapper
-
-The outer wrapper was simplified.
-
-Before:
-
-```text
-Observed Era
-Age I - The First Question
-Time Fragment Window
-<iframe>
-```
-
-After:
-
-```text
-Observed Era
-Time Fragment Window
-<iframe>
-```
-
-The iframe now remains the only place that shows the detailed stage title.
-
-This avoids mismatch between:
-
-- outer Chronicle UI title
-- inner Time Fragment page title
-
-### CSS Cleanup
-
-The unused `.era-title` style was removed from `style.css`.
-
-## Files Changed
-
+- `index.html`
 - `app.js`
 - `style.css`
-- `co-gpt/context-header.md`
-- `co-gpt/implementation-report.md`
-- `co-gpt/gpt-copy-paste.md`
 
-## Iframe Paths
+This avoids unnecessary path churn while the students are still learning the basic website shell.
 
-No iframe paths changed.
+## Old Names To New Names
 
-Current mapping remains:
+| Old name | New name | Reason |
+| --- | --- | --- |
+| `map.json` | `engine/world-map.json` | Describes world structure, map objects, tower positions, and navigation context. |
+| `chronicles.json` | `engine/chronicles.json` | Chronicles are part of the world's recovered history and belong with world engine data. |
+| `gameRules.js` | `engine/engine-rules.js` | The file now represents world progression rules, not only generic game rules. |
+| `difficulty-config.json` | `curriculum/curriculum-config.json` | The config now represents curricula and tower-to-topic mappings, not only difficulty. |
+| `questions.json` | `curriculum/question-bank.json` | The file is a learning-content bank, not just a temporary question list. |
+| `history/v4-travelers/` | `history/v4-memory/` | The visible stage now teaches Save/Load memory, so the folder name was aligned. |
 
-- Record I -> `history/v0-question-only/`
-- Record II -> `history/v1-topic-structure/`
-- Record III -> `history/v2-first-map/`
-- Record IV -> `history/v3-rules/`
-- Record V -> `history/v4-travelers/`
-- Record VI -> `history/v5-complete-prototype/`
+## Engine Responsibilities
+
+`engine/world-map.json`
+
+- world layout
+- tower IDs
+- tower positions
+- central tower requirements
+- blacksmith recipe
+
+`engine/chronicles.json`
+
+- recovered Creation Records
+- dialogue
+- project stage preview paths
+- Time Fragment iframe paths
+
+`engine/engine-rules.js`
+
+- HP and Seal Energy helper rules
+- tower clear state
+- key fragment rewards
+- central tower unlock rules
+- Chronicle progress helpers
+- save-state normalization helpers
+
+The rule-layer global was renamed from `GameRules` to `EngineRules`.
+
+## Curriculum Responsibilities
+
+`curriculum/curriculum-config.json`
+
+- available curriculum modes
+- Easy / Difficult labels
+- tower-to-topic mappings
+- tower display names
+- curriculum-specific tower descriptions
+
+`curriculum/question-bank.json`
+
+- question IDs
+- topics
+- difficulty values
+- prompts
+- answer choices
+- correct answers
+- explanations
+
+## History Responsibilities
+
+`history/` still stores Time Fragment mini-sites.
+
+The folder `history/v4-travelers/` was renamed to `history/v4-memory/` because that stage now represents Save/Load memory.
+
+The Chronicle preview path was updated:
+
+```text
+history/v4-memory/
+```
+
+## Save Responsibilities
+
+Added:
+
+- `save/progress-schema.json`
+
+This documents the permanent save structure only. It does not store user save files.
+
+Temporary tower-run state remains unsaved:
+
+- current HP
+- current streak
+- current Seal Energy
+- current shuffled deck
+- current open Chronicle screen
+
+## Assets Responsibilities
+
+Added:
+
+- `assets/.gitkeep`
+
+This creates a stable folder for future avatars, icons, backgrounds, and other visual assets.
+
+## Path Updates
+
+Updated `index.html`:
+
+- loads `engine/engine-rules.js`
+
+Updated `app.js`:
+
+- loads `curriculum/question-bank.json`
+- loads `engine/world-map.json`
+- loads `engine/chronicles.json`
+- loads `curriculum/curriculum-config.json`
+- uses `EngineRules` instead of `GameRules`
+
+Updated `engine/chronicles.json`:
+
+- Record V preview path now points to `history/v4-memory/`
+
+Updated `README.md`:
+
+- documents the new responsibility-based architecture.
 
 ## Behavior Preserved
 
-This was a UI/text cleanup only.
+The application should behave the same after this refactor.
 
 No changes were made to:
 
+- map gameplay
+- tower objects
+- HP rules
+- Seal Energy rules
+- combo rules
 - Chronicle unlock order
-- read/witnessed state
-- Time Fragment reveal timing
-- iframe loading behavior
-- save/load behavior
+- Chronicle Reader behavior
 - Creator's Trial
 - ending
-- tower mechanics
+- save/load behavior
+- Easy / Difficult curriculum behavior
 
 ## Tests Run
 
 Static checks:
 
 - `node --check app.js`
-- `node --check gameRules.js`
-- parsed `chronicles.json`
-- parsed `map.json`
-- parsed `questions.json`
+- `node --check engine/engine-rules.js`
+- parsed `curriculum/question-bank.json`
+- parsed `curriculum/curriculum-config.json`
+- parsed `engine/world-map.json`
+- parsed `engine/chronicles.json`
+- parsed `save/progress-schema.json`
+- verified every configured curriculum tower topic has questions
+- verified all question IDs are unique
 - `git diff --check`
 
-Chronicle label checks:
+Browser checks:
 
-- `chronicles.json` contains the stage-based titles from `The First Question` through `The First Journey`
-- old Chronicle title labels such as `The First Wish` are no longer present in `app.js`, `style.css`, or `chronicles.json`
-- `app.js` no longer renders the extra outer `Age I - ...` line in the Time Fragment wrapper
-- `style.css` no longer contains the unused `.era-title` wrapper style
-- all six historical iframe pages still contain their own detailed stage titles, such as `Age I - The First Question`
+- local app loaded through HTTP
+- opening screen appeared
+- Easy Mode reached map
+- Easy Tower 1 opened Addition Tower
+- Easy Tower 1 loaded an Addition question
+- Difficult Mode reached map
+- Difficult Tower 1 opened Fractions Tower
+- Difficult Tower 1 loaded a Fractions question
+- no console errors were found during the smoke checks
 
-Browser smoke checks:
+## Architecture Diagram
 
-- local app opened successfully over HTTP
-- no console errors were found during the smoke check
+```text
+Engine
+  ↓
+Curriculum
+  ↓
+History
+  ↓
+UI
+  ↓
+Assets
+```
 
 ## Remaining Notes
 
-If a browser still shows old Chronicle Library names, it is likely loading an old cached copy. Refresh the page or restart the local server.
+`index.html`, `app.js`, and `style.css` stayed at the root intentionally. Moving them into `ui/` can happen later, but this pass prioritized low-risk responsibility naming.

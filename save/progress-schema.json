@@ -1,0 +1,56 @@
+{
+  "purpose": "Documents the permanent player progress saved by Exam Visualizer. User save files are downloaded by the browser and are not stored in this folder.",
+  "appName": "Exam Visualizer",
+  "version": "3.0",
+  "progress": {
+    "totalQuestionsAnswered": "number",
+    "totalCorrectAnswers": "number",
+    "totalWrongAnswers": "number",
+    "answeredQuestionIds": "string[]",
+    "correctQuestionIds": "string[]",
+    "wrongQuestionIds": "string[]",
+    "topicStats": {
+      "<topic>": {
+        "answered": "number",
+        "correct": "number",
+        "wrong": "number"
+      }
+    },
+    "gameProgress": {
+      "difficulty": "easy | difficult",
+      "playerPosition": {
+        "x": "number",
+        "y": "number"
+      },
+      "clearedTowerIds": "string[]",
+      "towerProgress": {
+        "<towerId>": {
+          "cleared": "boolean",
+          "clearCount": "number",
+          "bestRunProgress": "number",
+          "lastPlayedAt": "ISO timestamp | null"
+        }
+      },
+      "keyFragments": "string[]",
+      "team": {
+        "size": "number",
+        "members": "string[]"
+      },
+      "chronicles": {
+        "unlockedChronicleIds": "string[]",
+        "readChronicleIds": "string[]",
+        "currentChronicleId": "string | null",
+        "lastUnlockedChronicleId": "string | null"
+      },
+      "hasCentralTowerKey": "boolean",
+      "centralTowerUnlocked": "boolean"
+    }
+  },
+  "notSaved": [
+    "current tower HP",
+    "current streak",
+    "current Seal Energy run state",
+    "current shuffled question deck",
+    "currently opened Chronicle screen"
+  ]
+}

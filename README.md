@@ -1,36 +1,43 @@
 # Exam Visualizer
 
-Exam Visualizer is a minimal exam website that turns a JSON question bank into
-interactive multiple-choice questions. A student can select an answer once,
-receive immediate correct/incorrect feedback, and read the correct answer and
-explanation.
+Exam Visualizer is an educational math RPG. Students explore a map, enter towers,
+answer curriculum questions, recover Chronicles, and eventually reach the
+Creator's Trial.
 
-The project deliberately separates three concerns:
+The project is organized by long-term responsibility:
 
-1. **Question data layer** — the reusable question content in `questions.json`.
-2. **JSON structure layer** — the consistent fields used to describe every question.
-3. **Visualization layer** — `app.js` converts the JSON data into interactive HTML,
-   while `style.css` controls presentation.
+1. **Engine** - how the world works.
+2. **Curriculum** - what students learn.
+3. **History** - how the project explains its own development.
+4. **UI** - how students see and control the experience.
+5. **Assets** - future images, icons, and visual resources.
+6. **Save** - documentation for permanent player progress.
 
-## File structure
+## File Structure
 
 ```text
-SC/
-├── index.html      # Page structure and application containers
-├── style.css       # Responsive visual styling
-├── app.js          # Data loading, rendering, and answer interaction
-├── questions.json  # Source question bank
-└── README.md       # Project documentation
+Exam-Visualizer/
+├── engine/                 # World structure, Chronicles, and progression rules
+│   ├── world-map.json
+│   ├── chronicles.json
+│   └── engine-rules.js
+├── curriculum/             # Learning content and curriculum mappings
+│   ├── curriculum-config.json
+│   └── question-bank.json
+├── history/                # Historical Time Fragment mini-sites
+├── save/                   # Save structure documentation
+├── assets/                 # Future visual assets
+├── co-gpt/                 # GPT handoff reports
+├── index.html              # Static UI containers
+├── app.js                  # Data loading, rendering, and browser events
+├── style.css               # Presentation and responsive styling
+└── README.md
 ```
 
-## How to run
+## How To Run
 
-Because `app.js` loads `questions.json` with `fetch`, the project should be served
-through a small local web server instead of opening `index.html` directly.
-
-### Option 1: Python
-
-Open a terminal in this folder and run:
+Because `app.js` loads JSON files with `fetch`, serve the project through a
+small local web server instead of opening `index.html` directly.
 
 ```powershell
 python -m http.server 8000
@@ -42,44 +49,11 @@ Then open:
 http://localhost:8000
 ```
 
-### Option 2: VS Code Live Server
+## Student Editing Guide
 
-Open the folder in VS Code, install the Live Server extension, and choose
-**Open with Live Server** from `index.html`.
-
-## JSON question structure
-
-Each question uses this structure:
-
-```json
-{
-  "id": "q1",
-  "type": "multiple-choice",
-  "title": "Question topic",
-  "question": "Question text",
-  "options": [
-    { "id": "A", "text": "First answer" },
-    { "id": "B", "text": "Second answer" }
-  ],
-  "answer": "A",
-  "explanation": "Why the answer is correct."
-}
-```
-
-- `id`: unique question identifier
-- `type`: question type used by the renderer
-- `title`: short question title or topic
-- `question`: full question prompt
-- `options`: available answers, each with an ID and display text
-- `answer`: ID of the correct option
-- `explanation`: feedback shown after the student answers
-
-## Possible next steps
-
-- Add score and completion statistics.
-- Store student answers and timestamps in local storage or a database.
-- Add navigation, filters, categories, and randomized question order.
-- Support true/false, fill-in-the-blank, and short-answer questions.
-- Create a teacher editor that validates and updates the JSON question bank.
-- Add import/export tools for larger question sets.
-- Connect the front end to an API for users, classes, and saved exam attempts.
+- Add or edit learning questions in `curriculum/question-bank.json`.
+- Change curriculum-to-tower mappings in `curriculum/curriculum-config.json`.
+- Change map objects and tower positions in `engine/world-map.json`.
+- Change progression rules in `engine/engine-rules.js`.
+- Change visible screens and interactions in `app.js`.
+- Change visual styling in `style.css`.

@@ -19,6 +19,7 @@ const blacksmithButton = document.querySelector("#blacksmith-button");
 const blacksmithPanelElement = document.querySelector("#blacksmith-panel");
 const fragmentCountElement = document.querySelector("#fragment-count");
 const chronicleCountElement = document.querySelector("#chronicle-count");
+const difficultyModeElement = document.querySelector("#difficulty-mode");
 const forgeKeyButton = document.querySelector("#forge-key");
 const towerTitleElement = document.querySelector("#tower-title");
 const towerDescriptionElement = document.querySelector("#tower-description");
@@ -39,6 +40,7 @@ const errorMessageElement = document.querySelector("#error-message");
 
 const APP_NAME = "Exam Visualizer";
 const SAVE_FILE_VERSION = "3.0";
+const DATA_VERSION = "architecture-names";
 const ALL_QUESTIONS_TOPIC = "All Questions";
 const TOWER_STARTING_HP = 10;
 const TOWER_CLEAR_PROGRESS = 50;
@@ -47,6 +49,7 @@ const TOWER_CLEAR_PROGRESS = 50;
 let allQuestions = [];
 let allChronicles = [];
 let mapData = null;
+let difficultyConfig = {};
 let progress = null;
 // A tower run is temporary: HP, streak, and run progress reset when entering or retrying.
 let currentRun = null;
@@ -55,7 +58,7 @@ let openingCompleted = false;
 
 // Data loading
 async function loadJson(path) {
-  const response = await fetch(path);
+  const response = await fetch(`${path}?v=${DATA_VERSION}`, { cache: "no-store" });
 
   if (!response.ok) {
     throw new Error(`Unable to load ${path} (HTTP ${response.status}).`);
@@ -72,19 +75,75 @@ function getOuterTowers() {
 function getPracticeTopics() {
   return [
     ...new Set(
-      mapData.towers
-        .map((tower) => tower.topic)
+      allQuestions
+        .map((question) => question.topic)
         .filter((topic) => topic && topic !== ALL_QUESTIONS_TOPIC),
     ),
   ];
 }
 
-function getQuestionsForTopic(questions, topic) {
+function getQuestionsForTopic(questions, topic, difficulty = getCurrentDifficulty()) {
   if (topic === ALL_QUESTIONS_TOPIC) {
-    return questions;
+    return questions.filter((question) => questionMatchesDifficulty(question, difficulty));
   }
 
-  return questions.filter((question) => question.topic === topic);
+  return questions.filter(
+    (question) =>
+      question.topic === topic && questionMatchesDifficulty(question, difficulty),
+  );
+}
+
+function questionMatchesDifficulty(question, difficulty) {
+  const questionDifficulty = EngineRules.normalizeDifficulty(
+    question.difficulty,
+    question.difficulty === "both" ? "both" : "difficult",
+  );
+
+  return questionDifficulty === difficulty || question.difficulty === "both";
+}
+
+function getCurrentDifficulty() {
+  return EngineRules.normalizeDifficulty(progress?.gameProgress?.difficulty);
+}
+
+function getDifficultySettings(difficulty = getCurrentDifficulty()) {
+  return difficultyConfig[difficulty] || difficultyConfig.easy || {};
+}
+
+function getDifficultyLabel(difficulty = getCurrentDifficulty()) {
+  const settings = getDifficultySettings(difficulty);
+  return settings.shortLabel || settings.label || (difficulty === "difficult" ? "Difficult" : "Easy");
+}
+
+function getTowerTopic(tower) {
+  if (isCreatorTrialTower(tower)) {
+    return tower.topic;
+  }
+
+  const settings = getDifficultySettings();
+  return settings.towerTopics?.[tower.id] || tower.topic;
+}
+
+function getTowerDisplay(tower) {
+  if (isCreatorTrialTower(tower)) {
+    return {
+      name: tower.name,
+      topic: tower.topic,
+      description: tower.description,
+    };
+  }
+
+  const settings = getDifficultySettings();
+  const topic = getTowerTopic(tower);
+
+  return {
+    name: settings.towerNames?.[tower.id] || tower.name,
+    topic,
+    description:
+      settings.towerDescriptions?.[tower.id] ||
+      tower.description ||
+      "Restore this tower by answering questions with focus.",
+  };
 }
 
 function isCreatorTrialTower(tower) {
@@ -111,7 +170,7 @@ function isChronicleUnlocked(chronicle) {
 
 // Player progress defaults and save normalization
 function createEmptyProgress() {
-  return GameRules.createDefaultPlayerProgress({
+  return EngineRules.createDefaultPlayerProgress({
     playerStart: mapData.playerStart,
     practiceTopics: getPracticeTopics(),
     outerTowers: getOuterTowers(),
@@ -201,13 +260,62 @@ function showTeamSizeStep() {
       event.preventDefault();
       const sizeInput = openingContentElement.querySelector("#team-size-input");
       const errorElement = openingContentElement.querySelector("#team-size-error");
-      const teamSize = Number(sizeInput.value);
+      const teamSize = Number(sizeInput.value || sizeInput.defaultValue || 1);
 
       if (!Number.isInteger(teamSize) || teamSize < 1 || teamSize > 50) {
         errorElement.textContent = "Enter a whole number from 1 to 50.";
         return;
       }
 
+      showDifficultyStep(teamSize);
+    });
+}
+
+function showDifficultyStep(teamSize) {
+  const modes = ["easy", "difficult"]
+    .map((difficulty) => {
+      const settings = getDifficultySettings(difficulty);
+      const checked = difficulty === getCurrentDifficulty() ? "checked" : "";
+
+      return `
+        <label class="difficulty-option">
+          <input name="difficulty-mode" type="radio" value="${difficulty}" ${checked} />
+          <span>
+            <strong>${settings.label || difficulty}</strong>
+            <small>${settings.description || ""}</small>
+          </span>
+        </label>
+      `;
+    })
+    .join("");
+
+  openingContentElement.innerHTML = `
+    <form id="difficulty-form" class="opening-card is-wide">
+      <p class="section-label">Challenge Mode</p>
+      <h2 id="opening-title">Choose Your Challenge</h2>
+      <p>Choose the question level for this team's journey.</p>
+      <div class="difficulty-options">${modes}</div>
+      <p id="difficulty-error" class="opening-error" aria-live="polite"></p>
+      <button class="progress-button" type="submit">Continue</button>
+    </form>
+  `;
+
+  openingContentElement
+    .querySelector("#difficulty-form")
+    .addEventListener("submit", (event) => {
+      event.preventDefault();
+      const selectedMode = openingContentElement.querySelector(
+        "[name='difficulty-mode']:checked",
+      )?.value;
+      const normalizedMode = EngineRules.normalizeDifficulty(selectedMode, null);
+
+      if (!normalizedMode) {
+        openingContentElement.querySelector("#difficulty-error").textContent =
+          "Choose Easy Mode or Difficult Mode before continuing.";
+        return;
+      }
+
+      progress.gameProgress.difficulty = normalizedMode;
       showTeamNamesStep(teamSize);
     });
 }
@@ -251,6 +359,7 @@ function showTeamNamesStep(teamSize) {
 
 function showSageTongIntro() {
   const team = normalizeTeamProgress(progress.gameProgress.team);
+  const modeLabel = getDifficultyLabel();
   const teamPreview = team.members.slice(0, 6).join(", ");
   const extraCount = Math.max(0, team.members.length - 6);
   const teamLine = extraCount > 0
@@ -263,6 +372,7 @@ function showSageTongIntro() {
       <p class="section-label">Sage Tong</p>
       <h2 id="opening-title">Welcome, builders.</h2>
       <p class="opening-team-line">${teamLine}</p>
+      <p class="opening-team-line">Challenge Mode: ${modeLabel}</p>
       <div class="sage-dialogue">
         <p>"Every world begins with its creators."</p>
         <p>"This world is made from questions, records, and memory."</p>
@@ -291,8 +401,9 @@ function renderMap() {
 
   mapData.towers.forEach((tower) => {
     const towerButton = document.createElement("button");
-    const isCleared = GameRules.isTowerCleared(progress.gameProgress, tower.id);
-    const isLocked = !GameRules.canAccessTower(progress.gameProgress, tower);
+    const isCleared = EngineRules.isTowerCleared(progress.gameProgress, tower.id);
+    const isLocked = !EngineRules.canAccessTower(progress.gameProgress, tower);
+    const towerDisplay = getTowerDisplay(tower);
 
     towerButton.className = [
       "map-tower",
@@ -308,7 +419,7 @@ function renderMap() {
     towerButton.style.top = `${tower.y}%`;
     towerButton.innerHTML = `
       <span class="tower-icon">${tower.type === "central" ? "C" : "T"}</span>
-      <span class="tower-name">${tower.name}</span>
+      <span class="tower-name">${towerDisplay.name}</span>
       <span class="tower-state">${getTowerStateLabel(tower, isCleared, isLocked)}</span>
     `;
     towerButton.addEventListener("click", (event) => {
@@ -347,7 +458,7 @@ function renderPlayerPosition() {
 function renderBlacksmith() {
   const requiredFragments = getBlacksmithRecipe().input.length;
   const collectedFragments = progress.gameProgress.keyFragments.length;
-  const canForge = GameRules.canForgeKey(progress.gameProgress, getBlacksmithRecipe());
+  const canForge = EngineRules.canForgeKey(progress.gameProgress, getBlacksmithRecipe());
 
   fragmentCountElement.textContent = `Key fragments: ${collectedFragments} / ${requiredFragments}`;
   forgeKeyButton.disabled = !canForge;
@@ -359,6 +470,7 @@ function renderBlacksmith() {
 function renderChronicleCount() {
   const unlockedCount = progress.gameProgress.chronicles.unlockedChronicleIds.length;
   chronicleCountElement.textContent = `Chronicles: ${unlockedCount} / ${allChronicles.length}`;
+  difficultyModeElement.textContent = `Mode: ${getDifficultyLabel()}`;
 }
 
 function getBlacksmithRecipe() {
@@ -377,7 +489,7 @@ function handleMapClick(event) {
 function handleTowerClick(tower) {
   movePlayerTo(tower.x, tower.y);
 
-  if (!GameRules.canAccessTower(progress.gameProgress, tower)) {
+  if (!EngineRules.canAccessTower(progress.gameProgress, tower)) {
     setMapStatus(
       "The Creator's Trial is locked. Recover all six Chronicles, collect all six key fragments, and forge the key first.",
     );
@@ -402,17 +514,19 @@ function movePlayerTo(x, y) {
 
 // Tower run state and screen flow
 function startTowerRun(tower) {
-  const questions = getQuestionsForTopic(allQuestions, tower.topic);
+  const towerDisplay = getTowerDisplay(tower);
+  const questions = getQuestionsForTopic(allQuestions, towerDisplay.topic);
   const clearProgress = getTowerClearProgress(tower);
   const progressLabel = getTowerProgressLabel(tower);
 
   if (questions.length === 0) {
-    setMapStatus(`${tower.name} has no questions yet.`);
+    setMapStatus(`${towerDisplay.name} has no questions yet.`);
     return;
   }
 
   currentRun = {
     tower,
+    towerDisplay,
     questions,
     questionDeck: shuffleQuestions(questions),
     hp: TOWER_STARTING_HP,
@@ -426,15 +540,14 @@ function startTowerRun(tower) {
 
   mapScreenElement.hidden = true;
   practiceViewElement.hidden = false;
-  towerTitleElement.textContent = tower.name;
-  towerDescriptionElement.textContent =
-    tower.description || "Restore this tower by answering questions with focus.";
+  towerTitleElement.textContent = towerDisplay.name;
+  towerDescriptionElement.textContent = towerDisplay.description;
   towerResultElement.hidden = true;
   towerResultElement.innerHTML = "";
   setTowerStatus(
     isCreatorTrialTower(tower)
       ? "Creator's Trial started. Answer 5 understanding questions before HP reaches 0."
-      : `${tower.topic} run started. Restore ${TOWER_CLEAR_PROGRESS} Seal Energy before HP reaches 0.`,
+      : `${towerDisplay.topic} run started in ${getDifficultyLabel()} Mode. Restore ${TOWER_CLEAR_PROGRESS} Seal Energy before HP reaches 0.`,
   );
   updateTowerRunDisplay();
   loadRandomTowerQuestion();
@@ -589,7 +702,7 @@ function handleTowerAnswer(question, card, selectedButton) {
     currentRun.streak += 1;
     gainedEnergy = isCreatorTrialTower(currentRun.tower)
       ? 1
-      : GameRules.calculateSealEnergyGain(currentRun.streak);
+      : EngineRules.calculateSealEnergyGain(currentRun.streak);
     currentRun.runProgress = Math.min(
       currentRun.clearProgress,
       currentRun.runProgress + gainedEnergy,
@@ -602,7 +715,7 @@ function handleTowerAnswer(question, card, selectedButton) {
   updateTowerRunDisplay();
   showAnswerFeedback(card, question, correctOption, isCorrect, gainedEnergy);
 
-  if (GameRules.isTowerRunCleared(currentRun.runProgress, currentRun.clearProgress)) {
+  if (EngineRules.isTowerRunCleared(currentRun.runProgress, currentRun.clearProgress)) {
     completeTowerRun();
     return;
   }
@@ -691,12 +804,12 @@ function renderTowerActionButton(label, onClick) {
 
 function completeTowerRun() {
   const { tower } = currentRun;
-  const wasAlreadyCleared = GameRules.isTowerCleared(progress.gameProgress, tower.id);
+  const wasAlreadyCleared = EngineRules.isTowerCleared(progress.gameProgress, tower.id);
   let unlockedChronicle = null;
 
   currentRun.isFinished = true;
   updateSavedTowerProgress(tower, true);
-  progress.gameProgress = GameRules.onCorrectAnswer(progress.gameProgress, tower);
+  progress.gameProgress = EngineRules.onCorrectAnswer(progress.gameProgress, tower);
 
   if (isCreatorTrialTower(tower)) {
     setTowerStatus("Creator's Trial cleared.");
@@ -706,7 +819,7 @@ function completeTowerRun() {
   }
 
   if (!wasAlreadyCleared) {
-    const unlockResult = GameRules.unlockNextChronicle(
+    const unlockResult = EngineRules.unlockNextChronicle(
       progress.gameProgress,
       getOrderedChronicles(),
     );
@@ -804,7 +917,7 @@ function showCreatorEnding() {
 }
 
 function updateSavedTowerProgress(tower, wasCleared) {
-  progress.gameProgress = GameRules.updateTowerRunProgress(progress.gameProgress, tower, {
+  progress.gameProgress = EngineRules.updateTowerRunProgress(progress.gameProgress, tower, {
     runProgress: currentRun.runProgress,
     wasCleared,
     playedAt: new Date().toISOString(),
@@ -924,7 +1037,7 @@ function saveProgress() {
   downloadLink.click();
   downloadLink.remove();
   URL.revokeObjectURL(url);
-  setProgressMessage("Progress file downloaded.");
+  setProgressMessage(`Progress file downloaded. Saved Mode: ${getDifficultyLabel()}.`);
 }
 
 function requestProgressFile() {
@@ -948,8 +1061,8 @@ function loadProgressFile(event) {
       openingCompleted = true;
       currentRun = null;
       showMapScreen();
-      setProgressMessage("Progress file loaded.");
-      setMapStatus("Saved map progress restored.");
+      setProgressMessage(`Progress file loaded. Saved Mode: ${getDifficultyLabel()}.`);
+      setMapStatus(`Saved map progress restored in ${getDifficultyLabel()} Mode.`);
     } catch (error) {
       setProgressMessage(error.message);
     }
@@ -1102,12 +1215,13 @@ function normalizeGameProgress(importedGameProgress = {}) {
 
   // Save files keep permanent tower progress only; live HP is intentionally excluded.
   return {
+    difficulty: EngineRules.normalizeDifficulty(importedGameProgress.difficulty),
     playerPosition: {
       x: clamp(Number(position.x) || emptyGameProgress.playerPosition.x, 0, 100),
       y: clamp(Number(position.y) || emptyGameProgress.playerPosition.y, 0, 100),
     },
     clearedTowerIds,
-    towerProgress: GameRules.normalizeTowerProgress({
+    towerProgress: EngineRules.normalizeTowerProgress({
       importedTowerProgress: importedGameProgress.towerProgress,
       clearedTowerIds,
       outerTowers: getOuterTowers(),
@@ -1115,7 +1229,7 @@ function normalizeGameProgress(importedGameProgress = {}) {
     }),
     keyFragments,
     team: normalizeTeamProgress(importedGameProgress.team),
-    chronicles: GameRules.normalizeChronicleProgress(
+    chronicles: EngineRules.normalizeChronicleProgress(
       importedGameProgress.chronicles,
       getOrderedChronicles().map((chronicle) => chronicle.id),
       clearedTowerIds.length,
@@ -1339,7 +1453,7 @@ function revealChronicleTimeFragment() {
   }
 
   currentChronicleExperience.fragmentRevealed = true;
-  progress.gameProgress = GameRules.markChronicleRead(
+  progress.gameProgress = EngineRules.markChronicleRead(
     progress.gameProgress,
     currentChronicleExperience.chronicle.id,
   );
@@ -1450,13 +1564,13 @@ function toggleBlacksmithPanel() {
 function forgeCentralTowerKey() {
   const recipe = getBlacksmithRecipe();
 
-  if (!GameRules.canForgeKey(progress.gameProgress, recipe)) {
+  if (!EngineRules.canForgeKey(progress.gameProgress, recipe)) {
     setMapStatus("Collect all 6 key fragments to forge the Central Tower Key.");
     renderBlacksmith();
     return;
   }
 
-  progress.gameProgress = GameRules.forgeCentralKey(progress.gameProgress, recipe);
+  progress.gameProgress = EngineRules.forgeCentralKey(progress.gameProgress, recipe);
   setMapStatus("Central Tower Key forged. The Central Tower is now available.");
   renderMap();
 }
@@ -1481,10 +1595,11 @@ function toRomanNumeral(value) {
 // Startup
 async function initializeExam() {
   try {
-    [allQuestions, mapData, allChronicles] = await Promise.all([
-      loadJson("questions.json"),
-      loadJson("map.json"),
-      loadJson("chronicles.json"),
+    [allQuestions, mapData, allChronicles, difficultyConfig] = await Promise.all([
+      loadJson("curriculum/question-bank.json"),
+      loadJson("engine/world-map.json"),
+      loadJson("engine/chronicles.json"),
+      loadJson("curriculum/curriculum-config.json"),
     ]);
     progress = createEmptyProgress();
     if (openingCompleted) {

@@ -141,6 +141,45 @@ h1 {
   align-items: center;
 }
 
+.difficulty-options {
+  display: grid;
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.difficulty-option {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  align-items: start;
+  padding: 14px;
+  text-align: left;
+  background: rgba(255, 249, 230, 0.82);
+  border: 2px solid rgba(84, 65, 33, 0.22);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.difficulty-option:has(input:checked) {
+  border-color: #8d4e1f;
+  box-shadow: 0 0 0 3px rgba(199, 135, 43, 0.22);
+}
+
+.difficulty-option input {
+  margin-top: 4px;
+}
+
+.difficulty-option strong,
+.difficulty-option small {
+  display: block;
+}
+
+.difficulty-option small {
+  margin-top: 4px;
+  color: #5f5135;
+  line-height: 1.45;
+}
+
 .team-name-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

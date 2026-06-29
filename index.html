@@ -10,7 +10,7 @@
     />
     <title>Exam Visualizer</title>
     <link rel="icon" href="data:," />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css?v=architecture-names" />
   </head>
   <body>
     <header class="site-header">
@@ -43,6 +43,7 @@
           <div class="map-hud" aria-label="Player progress">
             <span id="fragment-count" class="hud-pill">Key fragments: 0 / 6</span>
             <span id="chronicle-count" class="hud-pill">Chronicles: 0 / 6</span>
+            <span id="difficulty-mode" class="hud-pill">Mode: Easy</span>
             <span id="questions-answered" class="hud-pill">0 answered</span>
             <span id="accuracy-percentage" class="hud-pill">0% accuracy</span>
           </div>
@@ -159,7 +160,7 @@
       <p>Questions are loaded from the JSON data layer.</p>
     </footer>
 
-    <script src="gameRules.js"></script>
-    <script src="app.js"></script>
+    <script src="engine/engine-rules.js?v=architecture-names"></script>
+    <script src="app.js?v=architecture-names"></script>
   </body>
 </html>

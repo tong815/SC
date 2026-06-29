@@ -1,5 +1,5 @@
-const GameRules = (() => {
-  // Pure/reusable game rules. This file must not read or write the DOM.
+const EngineRules = (() => {
+  // Pure/reusable world rules. This file must not read or write the DOM.
 
   function createDefaultPlayerProgress({ playerStart, practiceTopics, outerTowers }) {
     const topicStats = {};
@@ -38,10 +38,15 @@ const GameRules = (() => {
           members: ["Explorer 1"],
         },
         chronicles: createDefaultChronicleProgress(),
+        difficulty: "easy",
         hasCentralTowerKey: false,
         centralTowerUnlocked: false,
       },
     };
+  }
+
+  function normalizeDifficulty(value, fallback = "easy") {
+    return ["easy", "difficult"].includes(value) ? value : fallback;
   }
 
   function createDefaultTowerProgress() {
@@ -296,6 +301,7 @@ const GameRules = (() => {
     isCentralTowerUnlocked,
     canAccessTower,
     normalizeTowerProgress,
+    normalizeDifficulty,
     normalizeChronicleProgress,
     onCorrectAnswer,
     unlockNextChronicle,
