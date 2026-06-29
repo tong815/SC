@@ -1022,6 +1022,10 @@ function saveProgress() {
   const saveData = {
     appName: APP_NAME,
     version: SAVE_FILE_VERSION,
+    metadata: {
+      version: SAVE_FILE_VERSION,
+      curriculum: getCurrentDifficulty(),
+    },
     savedAt: new Date().toISOString(),
     progress,
   };
@@ -1080,10 +1084,20 @@ function validateAndNormalizeSaveData(saveData) {
     throw new Error("This does not look like an Exam Visualizer progress file.");
   }
 
-  return normalizeProgress(saveData.progress);
+  return normalizeProgress(saveData.progress, getSavedCurriculum(saveData));
 }
 
-function normalizeProgress(importedProgress) {
+function getSavedCurriculum(saveData) {
+  return EngineRules.normalizeDifficulty(
+    saveData.metadata?.curriculum ||
+      saveData.curriculum ||
+      saveData.progress?.metadata?.curriculum ||
+      saveData.progress?.gameProgress?.difficulty ||
+      saveData.progress?.difficulty,
+  );
+}
+
+function normalizeProgress(importedProgress, savedCurriculum = "easy") {
   const nextProgress = createEmptyProgress();
   const questionById = new Map(
     allQuestions.map((question) => [question.id, question]),
@@ -1124,7 +1138,10 @@ function normalizeProgress(importedProgress) {
     importedProgress.topicStats,
     rebuiltTotals.topicStats,
   );
-  nextProgress.gameProgress = normalizeGameProgress(importedProgress.gameProgress);
+  nextProgress.gameProgress = normalizeGameProgress(
+    importedProgress.gameProgress,
+    savedCurriculum,
+  );
 
   return nextProgress;
 }
@@ -1196,7 +1213,7 @@ function normalizeTopicStats(importedTopicStats = {}, fallbackTopicStats) {
   return topicStats;
 }
 
-function normalizeGameProgress(importedGameProgress = {}) {
+function normalizeGameProgress(importedGameProgress = {}, savedCurriculum = "easy") {
   const emptyGameProgress = createEmptyProgress().gameProgress;
   const validTowerIds = new Set(mapData.towers.map((tower) => tower.id));
   const validFragmentIds = new Set(
@@ -1213,9 +1230,11 @@ function normalizeGameProgress(importedGameProgress = {}) {
   );
   const validChronicleIds = allChronicles.map((chronicle) => chronicle.id);
 
+  // Curriculum mode is a configuration reference. Runtime still reads this field
+  // for compatibility, but it is written to save metadata in new save files.
   // Save files keep permanent tower progress only; live HP is intentionally excluded.
   return {
-    difficulty: EngineRules.normalizeDifficulty(importedGameProgress.difficulty),
+    difficulty: EngineRules.normalizeDifficulty(savedCurriculum),
     playerPosition: {
       x: clamp(Number(position.x) || emptyGameProgress.playerPosition.x, 0, 100),
       y: clamp(Number(position.y) || emptyGameProgress.playerPosition.y, 0, 100),

@@ -1,178 +1,199 @@
 # Implementation Report
 
 **Project:** Exam Visualizer / SC
-**Build or Version:** Chronicle Curriculum Responsibility Cleanup
+**Build or Version:** Save / Load Architecture Language Cleanup
 **Date:** 2026-06-29
 **Phase:** Implementation / Review
 
 ## Goal
 
-This was a naming and responsibility cleanup only.
+This was mainly a conceptual cleanup.
 
-The purpose was to correct one conceptual boundary from the previous architecture refactor:
-
-```text
-Chronicles are curriculum content, not engine behavior.
-```
-
-No gameplay behavior was changed.
-
-## Why Chronicles Moved
-
-`chronicles.json` stores:
-
-- Creation Record titles
-- descriptions
-- dialogue
-- Time Fragment mappings
-- stage history text
-
-These records teach students how the project and world were built. They are read and learned by the player, so they belong in Curriculum.
-
-They do not define HP, Seal Energy, tower clearing, unlock rules, or save normalization. Those responsibilities remain in Engine.
-
-## Path Change
-
-Moved:
+The key idea:
 
 ```text
-engine/chronicles.json
+Save files remember world state.
+They do not save the path of questions used to reach that state.
 ```
 
-to:
+Questions are curriculum challenges. They change the world. The save file records what the world became after those changes.
+
+## Configuration vs State
+
+Configuration tells the software how to behave.
+
+Examples:
+
+- selected curriculum mode
+- Easy / Difficult learning path
+- tower-to-topic mapping
+- question pool
+- engine rules
+- curriculum config
+
+State tells the software what has already happened.
+
+Examples:
+
+- team members
+- player position
+- cleared towers
+- key fragments
+- unlocked Chronicles
+- read / witnessed Chronicles
+- central tower unlock state
+- answered / correct / wrong statistics
+- topic and tower progress
+
+## Save Shape
+
+The existing legacy-compatible `progress` object was preserved so old saves keep loading.
+
+New saves now also include:
+
+```json
+"metadata": {
+  "version": "3.0",
+  "curriculum": "easy"
+}
+```
+
+or:
+
+```json
+"metadata": {
+  "version": "3.0",
+  "curriculum": "difficult"
+}
+```
+
+This makes curriculum mode a configuration reference, not ordinary world progress.
+
+The runtime still keeps `progress.gameProgress.difficulty` for compatibility with existing app code and older save files.
+
+## Old Save Normalization
+
+Loading now checks curriculum mode in this order:
+
+1. `metadata.curriculum`
+2. `curriculum`
+3. `progress.metadata.curriculum`
+4. `progress.gameProgress.difficulty`
+5. `progress.difficulty`
+6. default to `easy`
+
+Old saves with `difficulty: "easy"` or `gameProgress.difficulty` still load safely.
+
+Old saves without difficulty / curriculum default to Easy Mode.
+
+Loading still preserves:
+
+- team data
+- player position
+- key fragments
+- cleared towers
+- tower progress
+- Chronicle progress
+- central tower unlock state
+- answered / correct / wrong statistics
+
+Loading does not restart the opening flow.
+
+## Schema Update
+
+Updated:
+
+- `save/progress-schema.json`
+
+The schema now explains:
+
+- metadata / configuration reference
+- team
+- world state
+- statistics
+- old-save normalization
+- why questions are not saved as world state
+
+Important schema note:
 
 ```text
-curriculum/chronicles.json
+Questions are not saved because questions are not world state.
+Questions are curriculum challenges. They change the world, and the save file records the result of those changes.
 ```
 
-Updated `app.js` to load:
+## Teaching Text Update
 
-```js
-loadJson("curriculum/chronicles.json")
-```
+Updated:
 
-No Chronicle data content was changed.
+- `Think clearly. Describe clearly. Build together..txt`
 
-No Time Fragment iframe paths were changed.
-
-## Updated Folder Responsibilities
-
-### Engine
-
-Question:
+Added a new section:
 
 ```text
-How does the world run?
+Configuration and State
 ```
 
-Files:
+The section explains for Grade 5-7 students:
 
-- `engine/world-map.json`
-- `engine/engine-rules.js`
+- Configuration tells software how to behave.
+- State tells software what has already happened.
+- Questions are challenges, not saved world state.
+- The save file remembers the result: towers cleared, fragments collected, records unlocked, and progress restored.
 
-Responsibilities:
-
-- world map structure
-- tower IDs and positions
-- central tower structure
-- blacksmith recipe
-- HP helpers
-- Seal Energy helpers
-- tower clear rules
-- key fragment rules
-- central tower unlock rules
-- Chronicle unlock helper logic
-- save normalization helpers
-
-### Curriculum
-
-Question:
+The original core message remains:
 
 ```text
-What does the world teach?
+Think clearly.
+Describe clearly.
+Build together.
 ```
 
-Files:
+## README Update
 
-- `curriculum/curriculum-config.json`
-- `curriculum/question-bank.json`
-- `curriculum/chronicles.json`
+Updated:
 
-Responsibilities:
+- `README.md`
 
-- Easy / Difficult curriculum modes
-- tower-to-topic mappings
-- tower display names and curriculum descriptions
-- learning questions
-- answers and explanations
-- Creation Records
-- Chronicle dialogue
-- project history content
+README now includes:
 
-### Presentation
+- Engine: how the world runs
+- Curriculum: what the world teaches
+- Presentation: how the world appears
+- Save: what the world remembers
 
-Question:
+It also explains:
 
-```text
-How does the world appear to the player?
-```
-
-Files and folders:
-
-- `index.html`
-- `app.js`
-- `style.css`
-- `history/`
-- `assets/`
-
-Responsibilities:
-
-- visible UI containers
-- browser event wiring
-- rendering map, towers, practice, Chronicles, and Time Fragments
-- visual styling
-- historical mini-site display pages
-- future visual assets
-
-## Architecture Diagram
-
-```text
-Curriculum
-    -> Engine
-    -> Presentation
-    -> Player
-```
+- curriculum choices are configuration
+- save files store state and metadata
+- questions themselves are not saved as world state
 
 ## Behavior Preserved
 
 No changes were made to:
 
 - opening flow
-- difficulty selection
-- team naming
+- Easy / Difficult selection UI
 - map gameplay
-- tower labels
-- Easy / Difficult topic mapping
+- tower clearing
 - question selection
 - HP rules
 - Seal Energy
 - key fragments
-- Chronicle unlock order
-- Chronicle Library
+- Chronicle unlocks
 - Chronicle Reader
-- Time Fragment reveal
+- Time Fragments
 - Creator's Trial
 - ending
-- save/load behavior
 
 ## Files Changed
 
 - `app.js`
+- `save/progress-schema.json`
+- `Think clearly. Describe clearly. Build together..txt`
 - `README.md`
 - `co-gpt/context-header.md`
 - `co-gpt/implementation-report.md`
 - `co-gpt/gpt-copy-paste.md`
-- `engine/chronicles.json` moved to `curriculum/chronicles.json`
 
 ## Tests Run
 
@@ -187,19 +208,27 @@ Static checks:
 - parsed `save/progress-schema.json`
 - `git diff --check`
 
+Save/load compatibility harness:
+
+- new save includes `metadata.curriculum`
+- old save with `gameProgress.difficulty` still loads as Difficult
+- old save without difficulty defaults to Easy
+- loading preserves team members
+- loading preserves cleared towers
+- loading preserves key fragments
+- loading preserves unlocked/read Chronicles
+- loading preserves answered/correct/wrong statistics
+
 Browser smoke checks:
 
-- local app loaded through HTTP
-- opening flow appeared
-- Easy Mode reached the map
-- Easy Tower 1 loaded an Addition question
-- Difficult Mode reached the map
-- Difficult Tower 1 loaded a Fractions question
-- Chronicle Library opened
-- Creation Records loaded from `curriculum/chronicles.json`
-- an individual Chronicle Reader opened
-- no console errors were found during the smoke checks
+- app opens through local HTTP
+- Easy Mode reaches map
+- Easy Tower 1 loads an Addition question
+- Difficult Mode reaches map
+- Difficult Tower 1 loads a Fractions question
+- Save button works and reports `Saved Mode: Easy`
+- no console errors were found
 
 ## Risks / Limitations
 
-`history/` remains named `history/` for now. It still serves as the Time Fragment presentation area, and renaming it was intentionally left for a later decision.
+The runtime still stores curriculum mode in `progress.gameProgress.difficulty` internally for compatibility. The architecture documentation now explains that this field should be understood as a compatibility mirror of `metadata.curriculum`, not as ordinary world progress.

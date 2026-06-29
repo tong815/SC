@@ -6,15 +6,15 @@ Exam Visualizer / SC
 
 **Current Phase:**
 
-Architecture Responsibility Cleanup
+Save / Load Architecture Language Cleanup
 
 **Current Goal:**
 
-Review the move of Chronicles from Engine into Curriculum.
+Review the distinction between configuration metadata and saved world state.
 
 **Current Issue:**
 
-The previous architecture refactor placed `chronicles.json` under `engine/`, but Chronicles are learning/story content rather than engine behavior. Codex moved the file to `curriculum/chronicles.json` and updated the documentation to teach the three-layer model: Engine, Curriculum, and Presentation.
+The game already saved and loaded progress correctly, but the architecture language treated curriculum mode too much like ordinary world progress. Codex added `metadata.curriculum` to new save files, preserved old-save compatibility, updated the save schema, and added a student-friendly teaching section explaining Configuration vs State.
 
 **Artifact:**
 

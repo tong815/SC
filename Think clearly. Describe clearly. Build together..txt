@@ -1,0 +1,228 @@
+# Building Worlds with AI
+
+## Our Goal
+
+This camp is not about learning programming languages.
+
+It is not about memorizing commands.
+
+It is not even about using AI.
+
+Our real goal is much simpler:
+
+**Learn how to turn an idea into software.**
+
+---
+
+# The Three Roles
+
+Every project has three different jobs.
+
+## 1. Human — The Creator
+
+The human decides:
+
+* What should we build?
+* Why should we build it?
+* How should it work?
+
+A clear idea is more valuable than a long piece of code.
+
+---
+
+## 2. GPT — The Designer
+
+GPT helps organize ideas.
+
+It asks questions.
+
+It finds missing details.
+
+It helps transform a rough idea into a clear design.
+
+GPT does not replace your imagination.
+
+It helps make your imagination easier to build.
+
+---
+
+## 3. Codex — The Builder
+
+Codex turns the design into software.
+
+It writes code.
+
+It creates files.
+
+It updates the project.
+
+The better the design is, the better the code becomes.
+
+---
+
+# The Most Important Skill
+
+Many people believe programming is the hardest part.
+
+Usually it is not.
+
+The hardest part is explaining what you really want.
+
+Before writing code, learn to answer:
+
+* What problem are we solving?
+* What should the user experience?
+* What is the simplest solution?
+* What can wait until later?
+
+Clear thinking creates good software.
+
+---
+
+# Software Grows Step by Step
+
+We will not build the final project all at once.
+
+Instead, we will rebuild the world one stage at a time.
+
+Stage I
+→ One Question
+
+Stage II
+→ Categories
+
+Stage III
+→ Map
+
+Stage IV
+→ Rules
+
+Stage V
+→ Memory
+
+Stage VI
+→ Journey
+
+Each stage solves one new problem.
+
+Each stage teaches one new idea.
+
+Large software is simply many small ideas connected together.
+
+---
+
+# Configuration and State
+
+Configuration tells software how to behave.
+
+State tells software what has already happened.
+
+For example, in our project:
+
+Configuration includes:
+
+* which curriculum we choose
+* which questions belong to each tower
+* which rules the engine uses
+
+State includes:
+
+* which towers are cleared
+* how many fragments we have
+* which Chronicles are unlocked
+* where the player is now
+
+Questions are not saved as world state.
+
+Questions are challenges that change the world.
+
+The save file remembers the result:
+
+* towers cleared
+* fragments collected
+* records unlocked
+* progress restored
+
+This is an important software idea:
+
+A program can use one set of content to change the world,
+but the save file only needs to remember what the world became.
+
+---
+
+# Everything Has a Reason
+
+We never add features just because they look interesting.
+
+Every new feature appears because the project needs it.
+
+One question becomes many questions.
+
+Many questions need categories.
+
+Categories become a map.
+
+A map needs rules.
+
+Rules create progress.
+
+Progress needs memory.
+
+Memory creates a complete world.
+
+This is how real software grows.
+
+---
+
+# One World, Many Creators
+
+At the beginning of the camp, everyone builds the same world.
+
+Later, everyone creates a different future.
+
+Each student will build their own version.
+
+Different worlds may have:
+
+* different stories
+* different maps
+* different subjects
+* different characters
+
+The engine stays the same.
+
+The imagination becomes different.
+
+---
+
+# AI Is Your Teammate
+
+Do not ask AI to think instead of you.
+
+Think first.
+
+Then explain your idea clearly.
+
+Ask questions.
+
+Discuss different solutions.
+
+Finally, let AI help build it.
+
+The best projects come from good communication between humans and AI.
+
+---
+
+# What Success Looks Like
+
+By the end of this camp, you should be able to:
+
+* describe your ideas clearly;
+* discuss designs with AI;
+* organize a software project step by step;
+* understand how software grows;
+* build your own learning world with AI.
+
+You are not just learning to code.
+
+You are learning how creators build software.
