@@ -6,15 +6,15 @@ Exam Visualizer / SC
 
 **Current Phase:**
 
-Save / Load Architecture Language Cleanup
+Time Fragment Curriculum Alignment
 
 **Current Goal:**
 
-Review the distinction between configuration metadata and saved world state.
+Make the historical prototype pages index the existing curriculum data instead of owning hardcoded question/topic examples.
 
 **Current Issue:**
 
-The game already saved and loaded progress correctly, but the architecture language treated curriculum mode too much like ordinary world progress. Codex added `metadata.curriculum` to new save files, preserved old-save compatibility, updated the save schema, and added a student-friendly teaching section explaining Configuration vs State.
+The main world supports Easy Mode and Difficult Mode, but the Time Fragment prototype pages still displayed fixed examples such as fractions in Record I. Codex updated the iframe URL to pass the selected curriculum mode and made the history pages read from `curriculum/curriculum-config.json`, `curriculum/question-bank.json`, and `engine/world-map.json`.
 
 **Artifact:**
 

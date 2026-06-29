@@ -35,31 +35,29 @@
 
         <aside class="panel">
           <h2>Simple Rule Demo</h2>
-          <p class="soft-text">Correct answers build combo and add Seal Energy. Wrong answers lower HP and reset combo. This small version clears at 10 energy and represents how tower rules became playable.</p>
+          <p id="rules-summary" class="soft-text">Correct answers build combo and add Seal Energy. Wrong answers lower HP and reset combo. This small version clears at 10 energy and represents how tower rules became playable.</p>
           <button id="reset-run" class="secondary" type="button">Reset Demo</button>
         </aside>
       </div>
     </section>
   </main>
 
-  <script src="../shared/history-utils.js"></script>
+  <script src="../shared/history-utils.js?v=curriculum-aware"></script>
   <script>
-    const questions = [
-      { prompt: "What is 40% of 50?", choices: ["10", "20", "25", "40"], answer: "20" },
-      { prompt: "What is 6 x 7?", choices: ["36", "42", "48", "56"], answer: "42" },
-      { prompt: "What is -5 + 9?", choices: ["-14", "-4", "4", "14"], answer: "4" }
-    ];
-
     let hp = 5;
     let combo = 0;
     let energy = 0;
     let questionIndex = 0;
+    let context = null;
+    let demoQuestions = [];
+    let activeTower = null;
 
     const hpElement = document.querySelector("#hp");
     const comboElement = document.querySelector("#combo");
     const energyElement = document.querySelector("#energy");
     const energyFill = document.querySelector("#energy-fill");
     const questionPanel = document.querySelector("#question-panel");
+    const rulesSummary = document.querySelector("#rules-summary");
 
     function updateStats() {
       hpElement.textContent = `HP: ${hp} / 5`;
@@ -87,9 +85,9 @@
         return;
       }
 
-      const question = questions[questionIndex % questions.length];
+      const question = demoQuestions[questionIndex % demoQuestions.length];
       questionPanel.innerHTML = `
-        <h2>Challenge Question</h2>
+        <h2>${activeTower.name}</h2>
         <p class="soft-text">${question.prompt}</p>
         <div class="choices">
           ${question.choices.map((choice) => `
@@ -130,7 +128,18 @@
     }
 
     document.querySelector("#reset-run").addEventListener("click", resetRun);
-    resetRun();
+
+    async function init() {
+      context = await HistoryPreview.loadCurriculumContext();
+      activeTower = context.towers[0];
+      demoQuestions = context.towers
+        .map((tower) => HistoryPreview.getSampleQuestion(context, tower.topic))
+        .filter(Boolean);
+      rulesSummary.textContent = `${context.label}: correct answers in towers like ${activeTower.name} build combo and add Seal Energy. Wrong answers lower HP and reset combo.`;
+      resetRun();
+    }
+
+    init();
   </script>
 </body>
 </html>

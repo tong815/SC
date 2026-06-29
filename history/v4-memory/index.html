@@ -24,6 +24,8 @@
         <section class="panel">
           <h2>Progress Record</h2>
           <div class="stat-row">
+            <span id="mode" class="stat">Mode: Easy</span>
+            <span id="restored-tower" class="stat">Restored: Addition Tower</span>
             <span id="answered" class="stat">Answered: 3</span>
             <span id="correct" class="stat">Correct: 2</span>
             <span id="fragments" class="stat">Fragments: 1 / 6</span>
@@ -49,16 +51,21 @@
     </section>
   </main>
 
+  <script src="../shared/history-utils.js?v=curriculum-aware"></script>
   <script>
-    const defaultProgress = {
+    let context = null;
+    let defaultProgress = {
       answered: 3,
       correct: 2,
       fragments: 1,
+      restoredTower: "Addition Tower",
       unlockedRecords: ["record-001", "record-002"]
     };
 
     let progress = { ...defaultProgress };
 
+    const mode = document.querySelector("#mode");
+    const restoredTower = document.querySelector("#restored-tower");
     const answered = document.querySelector("#answered");
     const correct = document.querySelector("#correct");
     const fragments = document.querySelector("#fragments");
@@ -66,6 +73,8 @@
     const memoryMessage = document.querySelector("#memory-message");
 
     function renderProgress() {
+      mode.textContent = `Mode: ${context?.shortLabel || "Easy"}`;
+      restoredTower.textContent = `Restored: ${progress.restoredTower || context?.towers?.[0]?.name || "First Tower"}`;
       answered.textContent = `Answered: ${progress.answered}`;
       correct.textContent = `Correct: ${progress.correct}`;
       fragments.textContent = `Fragments: ${progress.fragments} / 6`;
@@ -75,6 +84,9 @@
       saveRecord.value = JSON.stringify({
         appName: "Exam Visualizer",
         stage: "Prototype v4",
+        metadata: {
+          curriculum: context?.mode || "easy"
+        },
         progress
       }, null, 2);
       memoryMessage.textContent = "Progress saved into a JSON record.";
@@ -88,6 +100,7 @@
           answered: Number(saved.progress?.answered) || 0,
           correct: Number(saved.progress?.correct) || 0,
           fragments: Number(saved.progress?.fragments) || 0,
+          restoredTower: saved.progress?.restoredTower || context?.towers?.[0]?.name || "First Tower",
           unlockedRecords: Array.isArray(saved.progress?.unlockedRecords)
             ? saved.progress.unlockedRecords
             : []
@@ -117,7 +130,13 @@
     });
 
     document.querySelector("#reset-progress").addEventListener("click", () => {
-      progress = { answered: 0, correct: 0, fragments: 0, unlockedRecords: [] };
+      progress = {
+        answered: 0,
+        correct: 0,
+        fragments: 0,
+        restoredTower: "None yet",
+        unlockedRecords: []
+      };
       renderProgress();
       memoryMessage.textContent = "Progress changed. Load the record to restore it.";
       memoryMessage.className = "feedback bad";
@@ -126,8 +145,18 @@
     document.querySelector("#save-progress").addEventListener("click", saveProgress);
     document.querySelector("#load-progress").addEventListener("click", loadProgress);
 
-    renderProgress();
-    saveProgress();
+    async function init() {
+      context = await HistoryPreview.loadCurriculumContext();
+      defaultProgress = {
+        ...defaultProgress,
+        restoredTower: context.towers[0]?.name || defaultProgress.restoredTower
+      };
+      progress = { ...defaultProgress };
+      renderProgress();
+      saveProgress();
+    }
+
+    init();
   </script>
 </body>
 </html>

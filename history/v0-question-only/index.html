@@ -30,14 +30,19 @@
     </section>
   </main>
 
-  <script src="../shared/history-utils.js"></script>
+  <script src="../shared/history-utils.js?v=curriculum-aware"></script>
   <script>
-    HistoryPreview.makeQuestion(document.querySelector("#question-panel"), {
-      title: "One Math Question",
-      prompt: "What is 1/2 + 1/4?",
-      choices: ["2/6", "3/4", "1/8", "4/4"],
-      answer: "3/4"
-    });
+    async function init() {
+      const context = await HistoryPreview.loadCurriculumContext();
+      const tower = context.towers[0];
+      const question = HistoryPreview.getSampleQuestion(context, tower.topic);
+      HistoryPreview.makeQuestion(document.querySelector("#question-panel"), {
+        ...question,
+        title: `${context.shortLabel} ${tower.topic} Question`
+      });
+    }
+
+    init();
   </script>
 </body>
 </html>

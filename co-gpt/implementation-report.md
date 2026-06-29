@@ -1,199 +1,162 @@
 # Implementation Report
 
 **Project:** Exam Visualizer / SC
-**Build or Version:** Save / Load Architecture Language Cleanup
+**Build or Version:** Time Fragment Curriculum Alignment
 **Date:** 2026-06-29
 **Phase:** Implementation / Review
 
 ## Goal
 
-This was mainly a conceptual cleanup.
+The Time Fragment / history prototype pages should not be a second content source.
 
-The key idea:
+They should be stage viewers:
 
 ```text
-Save files remember world state.
-They do not save the path of questions used to reach that state.
+History pages decide which prototype stage is being demonstrated.
+Curriculum files decide which questions, topics, and tower names exist.
 ```
 
-Questions are curriculum challenges. They change the world. The save file records what the world became after those changes.
+This keeps Easy Mode and Difficult Mode consistent across the main game and the recovered history pages.
 
-## Configuration vs State
+## Architecture Update
 
-Configuration tells the software how to behave.
+The source of truth remains:
 
-Examples:
+- `curriculum/curriculum-config.json`
+- `curriculum/question-bank.json`
+- `engine/world-map.json`
 
-- selected curriculum mode
-- Easy / Difficult learning path
-- tower-to-topic mapping
-- question pool
-- engine rules
-- curriculum config
+The history pages now read from these existing files through the shared helper:
 
-State tells the software what has already happened.
+- `history/shared/history-utils.js`
 
-Examples:
+No new question files were created.
 
-- team members
-- player position
-- cleared towers
-- key fragments
-- unlocked Chronicles
-- read / witnessed Chronicles
-- central tower unlock state
-- answered / correct / wrong statistics
-- topic and tower progress
+No Easy / Difficult content was duplicated inside the history pages.
 
-## Save Shape
-
-The existing legacy-compatible `progress` object was preserved so old saves keep loading.
-
-New saves now also include:
-
-```json
-"metadata": {
-  "version": "3.0",
-  "curriculum": "easy"
-}
-```
-
-or:
-
-```json
-"metadata": {
-  "version": "3.0",
-  "curriculum": "difficult"
-}
-```
-
-This makes curriculum mode a configuration reference, not ordinary world progress.
-
-The runtime still keeps `progress.gameProgress.difficulty` for compatibility with existing app code and older save files.
-
-## Old Save Normalization
-
-Loading now checks curriculum mode in this order:
-
-1. `metadata.curriculum`
-2. `curriculum`
-3. `progress.metadata.curriculum`
-4. `progress.gameProgress.difficulty`
-5. `progress.difficulty`
-6. default to `easy`
-
-Old saves with `difficulty: "easy"` or `gameProgress.difficulty` still load safely.
-
-Old saves without difficulty / curriculum default to Easy Mode.
-
-Loading still preserves:
-
-- team data
-- player position
-- key fragments
-- cleared towers
-- tower progress
-- Chronicle progress
-- central tower unlock state
-- answered / correct / wrong statistics
-
-Loading does not restart the opening flow.
-
-## Schema Update
+## Passing Current Curriculum Into Time Fragments
 
 Updated:
 
-- `save/progress-schema.json`
+- `app.js`
 
-The schema now explains:
-
-- metadata / configuration reference
-- team
-- world state
-- statistics
-- old-save normalization
-- why questions are not saved as world state
-
-Important schema note:
+Chronicle iframe previews now append the selected curriculum mode:
 
 ```text
-Questions are not saved because questions are not world state.
-Questions are curriculum challenges. They change the world, and the save file records the result of those changes.
+history/v0-question-only/?curriculum=easy
+history/v0-question-only/?curriculum=difficult
 ```
 
-## Teaching Text Update
+The same pattern is used for all Time Fragment pages.
+
+## Shared History Loader
 
 Updated:
 
-- `Think clearly. Describe clearly. Build together..txt`
+- `history/shared/history-utils.js`
 
-Added a new section:
+The shared helper now:
 
-```text
-Configuration and State
-```
+- reads `curriculum` or `mode` from the URL
+- defaults invalid or missing values to Easy Mode
+- fetches curriculum config
+- fetches the question bank
+- fetches the world map for tower positions
+- builds current tower labels, topics, descriptions, and sample questions
+- provides a safe Easy fallback if loading fails
 
-The section explains for Grade 5-7 students:
-
-- Configuration tells software how to behave.
-- State tells software what has already happened.
-- Questions are challenges, not saved world state.
-- The save file remembers the result: towers cleared, fragments collected, records unlocked, and progress restored.
-
-The original core message remains:
-
-```text
-Think clearly.
-Describe clearly.
-Build together.
-```
-
-## README Update
+## History Pages Updated
 
 Updated:
 
-- `README.md`
+- `history/v0-question-only/index.html`
+- `history/v1-topic-structure/index.html`
+- `history/v2-first-map/index.html`
+- `history/v3-rules/index.html`
+- `history/v4-memory/index.html`
+- `history/v5-complete-prototype/index.html`
 
-README now includes:
+Record I now shows one question from the active curriculum.
 
-- Engine: how the world runs
-- Curriculum: what the world teaches
-- Presentation: how the world appears
-- Save: what the world remembers
+Record II now shows the active curriculum categories.
 
-It also explains:
+Record III now shows the active curriculum tower names and topics.
 
-- curriculum choices are configuration
-- save files store state and metadata
-- questions themselves are not saved as world state
+Record IV now uses active curriculum tower labels and questions in the rules demo.
+
+Record V now shows the active mode and restored tower label in the save/load demo.
+
+Record VI now names the active learning path without hardcoding subject labels.
+
+The history pages use a cache-busted shared script URL so browsers reliably load the updated helper.
+
+## Expected Easy Mode Result
+
+Easy Mode Time Fragments now show:
+
+- Addition
+- Subtraction
+- Multiplication
+- Division
+- Mixed Basic Operations
+- Mixed Advanced Operations
+
+Record I shows an Easy arithmetic question from `question-bank.json`.
+
+Record III shows:
+
+- Addition Tower
+- Subtraction Tower
+- Multiplication Tower
+- Division Tower
+- Mixed Basic Tower
+- Mixed Advanced Tower
+
+## Expected Difficult Mode Result
+
+Difficult Mode Time Fragments now show:
+
+- Fractions
+- Integers
+- Percent
+- Algebra
+- Geometry
+- Ratios
+
+Record I shows a Difficult / Grade 7-style question from `question-bank.json`.
+
+Record III shows:
+
+- Fractions Tower
+- Integers Tower
+- Percent Tower
+- Algebra Tower
+- Geometry Tower
+- Ratios Tower
 
 ## Behavior Preserved
 
 No changes were made to:
 
-- opening flow
-- Easy / Difficult selection UI
-- map gameplay
-- tower clearing
-- question selection
-- HP rules
-- Seal Energy
-- key fragments
-- Chronicle unlocks
-- Chronicle Reader
-- Time Fragments
+- main map gameplay
+- difficulty selection UI
+- question selection in the main game
+- save/load logic
+- Chronicle unlock logic
+- Time Fragment reveal timing
 - Creator's Trial
 - ending
 
-## Files Changed
+## Fallback Behavior
 
-- `app.js`
-- `save/progress-schema.json`
-- `Think clearly. Describe clearly. Build together..txt`
-- `README.md`
-- `co-gpt/context-header.md`
-- `co-gpt/implementation-report.md`
-- `co-gpt/gpt-copy-paste.md`
+If the query parameter is missing or invalid:
+
+- the history page defaults to Easy Mode
+
+If curriculum fetching fails:
+
+- the history page uses a small safe Easy fallback question and tower list
+- the page does not crash
 
 ## Tests Run
 
@@ -201,34 +164,32 @@ Static checks:
 
 - `node --check app.js`
 - `node --check engine/engine-rules.js`
-- parsed `engine/world-map.json`
 - parsed `curriculum/curriculum-config.json`
 - parsed `curriculum/question-bank.json`
 - parsed `curriculum/chronicles.json`
-- parsed `save/progress-schema.json`
+- parsed `engine/world-map.json`
 - `git diff --check`
 
-Save/load compatibility harness:
+Search check:
 
-- new save includes `metadata.curriculum`
-- old save with `gameProgress.difficulty` still loads as Difficult
-- old save without difficulty defaults to Easy
-- loading preserves team members
-- loading preserves cleared towers
-- loading preserves key fragments
-- loading preserves unlocked/read Chronicles
-- loading preserves answered/correct/wrong statistics
+- verified old hardcoded history examples like `What is 1/2 + 1/4?` no longer appear in `history/`
 
-Browser smoke checks:
+Browser checks through local HTTP:
 
-- app opens through local HTTP
-- Easy Mode reaches map
-- Easy Tower 1 loads an Addition question
-- Difficult Mode reaches map
-- Difficult Tower 1 loads a Fractions question
-- Save button works and reports `Saved Mode: Easy`
-- no console errors were found
+- Record I Easy shows an Addition question from `question-bank.json`
+- Record I Difficult shows a Fractions question from `question-bank.json`
+- Record II Easy shows Easy categories
+- Record II Difficult shows Difficult categories
+- Record III Easy shows Easy tower labels
+- Record III Difficult shows Difficult tower labels
+- Record IV Easy shows Addition Tower and an Easy question
+- Record IV Difficult shows Fractions Tower and a Difficult question
+- Record V Easy shows `Mode: Easy` and `Restored: Addition Tower`
+- Record V Difficult shows `Mode: Difficult` and `Restored: Fractions Tower`
+- Record VI Easy says Easy Mode is the current learning path
+- Record VI Difficult says Difficult Mode is the current learning path
+- no browser console errors were found
 
-## Risks / Limitations
+## Risks / Notes
 
-The runtime still stores curriculum mode in `progress.gameProgress.difficulty` internally for compatibility. The architecture documentation now explains that this field should be understood as a compatibility mirror of `metadata.curriculum`, not as ordinary world progress.
+The history pages remain intentionally small prototype viewers. They now index curriculum data, but they do not try to reproduce the full main game engine.

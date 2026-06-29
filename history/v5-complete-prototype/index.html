@@ -23,19 +23,26 @@
       <div class="stage-grid">
         <section class="panel">
           <h2>Complete Journey</h2>
-          <p class="soft-text">This time fragment points back to the main game instead of embedding it here. That keeps the Chronicle page from opening another Chronicle page inside itself.</p>
+          <p id="journey-mode" class="soft-text">This time fragment points back to the main game instead of embedding it here. That keeps the Chronicle page from opening another Chronicle page inside itself.</p>
           <button id="return-world" class="open-world" type="button">Return to World</button>
         </section>
 
         <aside class="panel">
           <h2>What changed?</h2>
-          <p class="soft-text">The prototype is no longer only a question page. It is now a small educational RPG with a beginning, characters, records, fragments, a final trial, and an ending.</p>
+          <p id="complete-summary" class="soft-text">The prototype is no longer only a question page. It is now a small educational RPG with a beginning, characters, records, fragments, a final trial, and an ending.</p>
           <p class="soft-text">This record shows the complete demo journey before students begin creating their own worlds outside the game.</p>
         </aside>
       </div>
     </section>
   </main>
+  <script src="../shared/history-utils.js?v=curriculum-aware"></script>
   <script>
+    async function init() {
+      const context = await HistoryPreview.loadCurriculumContext();
+      document.querySelector("#journey-mode").textContent = `${context.label} is the current learning path. This time fragment points back to the main game instead of embedding it here.`;
+      document.querySelector("#complete-summary").textContent = `The prototype is no longer only a question page. It is now a small ${context.shortLabel} educational RPG with towers, records, fragments, a final trial, and an ending.`;
+    }
+
     document.querySelector("#return-world").addEventListener("click", () => {
       if (window.parent && window.parent !== window) {
         window.parent.postMessage({ type: "exam-visualizer:return-to-world" }, window.location.origin);
@@ -44,6 +51,8 @@
 
       window.location.href = "../../index.html";
     });
+
+    init();
   </script>
 </body>
 </html>

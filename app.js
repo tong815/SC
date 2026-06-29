@@ -1522,7 +1522,7 @@ function renderChroniclePreview(preview) {
     return `
       <iframe
         class="chronicle-preview-frame"
-        src="${preview.previewPath}"
+        src="${getChroniclePreviewPath(preview.previewPath)}"
         title="${preview.title || "Time Fragment Window"}"
         loading="lazy"
       ></iframe>
@@ -1539,6 +1539,11 @@ function renderChroniclePreview(preview) {
       <small>${preview.previewPath || "A fragment of this era has not fully awakened yet."}</small>
     </div>
   `;
+}
+
+function getChroniclePreviewPath(previewPath) {
+  const separator = previewPath.includes("?") ? "&" : "?";
+  return `${previewPath}${separator}curriculum=${encodeURIComponent(getCurrentDifficulty())}`;
 }
 
 function renderEmptyChronicleReader() {
