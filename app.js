@@ -892,7 +892,11 @@ function showCreatorEnding() {
     <h3>The Next World</h3>
     <div class="ending-dialogue" aria-label="Ending dialogue">
       <p><strong>Tong:</strong> "You have recovered our history."</p>
-      <p><strong>G:</strong> "You now understand how this world was created."</p>
+      <p><strong>G:</strong> "These were not relics of an ancient civilization."</p>
+      <p><strong>Tong:</strong> "They were memories."</p>
+      <p><strong>G:</strong> "Every fragment you restored was a step in this world's creation."</p>
+      <p><strong>Tong:</strong> "You did not merely discover history."</p>
+      <p><strong>G:</strong> "You reconstructed it."</p>
       <p><strong>Tong:</strong> "But understanding a world..."</p>
       <p><strong>Tong:</strong> "...is only the beginning."</p>
       <p><strong>G:</strong> "Every creator once stood where you stand today."</p>

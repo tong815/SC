@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prototype v5: Complete Narrative Demo</title>
+  <title>Record VI: The Complete World</title>
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="../shared/history.css">
 </head>
@@ -16,21 +16,21 @@
           <strong>Age VI - The First Journey</strong>
           <span>This is not the current world. This is a recovered fragment of how the world once looked.</span>
         </div>
-        <h1>Prototype v5: Complete Narrative Demo</h1>
-        <p class="subtitle">The current world has opening, team names, Sage Tong, Chronicles, Time Fragments, Creator's Trial, and an ending.</p>
+        <h1>Record VI: The Complete World</h1>
+        <p class="subtitle">The scattered fragments became a complete world with an opening path, guides, Chronicles, Time Fragments, a final trial, and an ending.</p>
       </header>
 
       <div class="stage-grid">
         <section class="panel">
           <h2>Complete Journey</h2>
-          <p id="journey-mode" class="soft-text">This time fragment points back to the main game instead of embedding it here. That keeps the Chronicle page from opening another Chronicle page inside itself.</p>
+          <p id="journey-mode" class="soft-text">This Time Fragment points back to the living world instead of opening another record inside itself.</p>
           <button id="return-world" class="open-world" type="button">Return to World</button>
         </section>
 
         <aside class="panel">
-          <h2>What changed?</h2>
-          <p id="complete-summary" class="soft-text">The prototype is no longer only a question page. It is now a small educational RPG with a beginning, characters, records, fragments, a final trial, and an ending.</p>
-          <p class="soft-text">This record shows the complete demo journey before students begin creating their own worlds outside the game.</p>
+          <h2>What awakened?</h2>
+          <p id="complete-summary" class="soft-text">The world was no longer only a lone question. It had towers, records, fragments, a final trial, and an ending.</p>
+          <p class="soft-text">This record shows the complete journey before the center path is walked.</p>
         </aside>
       </div>
     </section>
@@ -39,8 +39,8 @@
   <script>
     async function init() {
       const context = await HistoryPreview.loadCurriculumContext();
-      document.querySelector("#journey-mode").textContent = `${context.label} is the current learning path. This time fragment points back to the main game instead of embedding it here.`;
-      document.querySelector("#complete-summary").textContent = `The prototype is no longer only a question page. It is now a small ${context.shortLabel} educational RPG with towers, records, fragments, a final trial, and an ending.`;
+      document.querySelector("#journey-mode").textContent = `${context.label} is the current learning path. This Time Fragment points back to the living world instead of opening another record inside itself.`;
+      document.querySelector("#complete-summary").textContent = `The world was no longer only a lone question. The ${context.shortLabel} path now had towers, records, fragments, a final trial, and an ending.`;
     }
 
     document.querySelector("#return-world").addEventListener("click", () => {

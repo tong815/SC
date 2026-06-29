@@ -162,7 +162,7 @@ window.HistoryPreview = {
           button,
           isCorrect,
           feedback,
-          "Correct. The old prototype lights up.",
+          "Correct. The ancient record lights up.",
           `Not yet. The answer is ${question.answer}.`
         );
       });

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prototype v4: Save and Load Memory</title>
+  <title>Record V: The Preserved Memory</title>
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="../shared/history.css">
 </head>
@@ -16,8 +16,8 @@
           <strong>Age V - The First Memory</strong>
           <span>This is not the current world. This is a recovered fragment of how the world once looked.</span>
         </div>
-        <h1>Prototype v4: Save and Load Memory</h1>
-        <p class="subtitle">The world learned to save progress as a record and load that record later.</p>
+        <h1>Record V: The Preserved Memory</h1>
+        <p class="subtitle">The world learned to preserve progress as a record and restore a remembered path.</p>
       </header>
 
       <div class="stage-grid">
@@ -39,11 +39,11 @@
         </section>
 
         <section class="panel">
-          <h2>Save / Load JSON</h2>
+          <h2>Memory Record</h2>
           <textarea id="save-record" class="memory-record" rows="9" aria-label="Saved progress JSON"></textarea>
           <div class="choices">
-            <button id="save-progress" class="choice" type="button">Save Progress</button>
-            <button id="load-progress" class="choice" type="button">Load Progress</button>
+            <button id="save-progress" class="choice" type="button">Preserve Memory</button>
+            <button id="load-progress" class="choice" type="button">Restore Memory</button>
           </div>
           <p id="memory-message" class="feedback good" aria-live="polite">The world is ready to remember.</p>
         </section>
@@ -82,14 +82,14 @@
 
     function saveProgress() {
       saveRecord.value = JSON.stringify({
-        appName: "Exam Visualizer",
-        stage: "Prototype v4",
+        archiveName: "Ancient Archive",
+        record: "Record V",
         metadata: {
           curriculum: context?.mode || "easy"
         },
         progress
       }, null, 2);
-      memoryMessage.textContent = "Progress saved into a JSON record.";
+      memoryMessage.textContent = "Progress preserved inside a memory record.";
       memoryMessage.className = "feedback good";
     }
 
@@ -118,14 +118,14 @@
       progress.answered += 1;
       progress.correct += 1;
       renderProgress();
-      memoryMessage.textContent = "The current progress changed. Save it to remember.";
+      memoryMessage.textContent = "The current progress changed. Preserve it to remember.";
       memoryMessage.className = "feedback good";
     });
 
     document.querySelector("#collect-fragment").addEventListener("click", () => {
       progress.fragments = Math.min(6, progress.fragments + 1);
       renderProgress();
-      memoryMessage.textContent = "A fragment was collected. Save the new state.";
+      memoryMessage.textContent = "A fragment was collected. Preserve the new state.";
       memoryMessage.className = "feedback good";
     });
 

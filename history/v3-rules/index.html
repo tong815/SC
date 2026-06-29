@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prototype v3: Game Rules</title>
+  <title>Record IV: The Forging of Rules</title>
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="../shared/history.css">
 </head>
@@ -16,8 +16,8 @@
           <strong>Age IV - The First Rules</strong>
           <span>This is not the current world. This is a recovered fragment of how the world once looked.</span>
         </div>
-        <h1>Prototype v3: Game Rules</h1>
-        <p class="subtitle">The world gained challenges, HP, combo, Seal Energy, key fragments, and consequences.</p>
+        <h1>Record IV: The Forging of Rules</h1>
+        <p class="subtitle">The towers gained challenge, health, combo, Seal Energy, key fragments, and consequences.</p>
       </header>
 
       <div class="stage-grid">
@@ -34,9 +34,9 @@
         </section>
 
         <aside class="panel">
-          <h2>Simple Rule Demo</h2>
-          <p id="rules-summary" class="soft-text">Correct answers build combo and add Seal Energy. Wrong answers lower HP and reset combo. This small version clears at 10 energy and represents how tower rules became playable.</p>
-          <button id="reset-run" class="secondary" type="button">Reset Demo</button>
+          <h2>Rule Trial</h2>
+          <p id="rules-summary" class="soft-text">Correct answers build combo and add Seal Energy. Wrong answers lower HP and reset combo. The tower clears when enough energy is restored.</p>
+          <button id="reset-run" class="secondary" type="button">Reset Trial</button>
         </aside>
       </div>
     </section>
@@ -49,7 +49,7 @@
     let energy = 0;
     let questionIndex = 0;
     let context = null;
-    let demoQuestions = [];
+    let trialQuestions = [];
     let activeTower = null;
 
     const hpElement = document.querySelector("#hp");
@@ -70,7 +70,7 @@
       if (energy >= 10) {
         questionPanel.innerHTML = `
           <h2>Tower Cleared</h2>
-          <p class="feedback good">The first rule system worked. A tower can now be restored.</p>
+          <p class="feedback good">The first laws awakened. A tower can now be restored.</p>
         `;
         updateStats();
         return;
@@ -85,7 +85,7 @@
         return;
       }
 
-      const question = demoQuestions[questionIndex % demoQuestions.length];
+      const question = trialQuestions[questionIndex % trialQuestions.length];
       questionPanel.innerHTML = `
         <h2>${activeTower.name}</h2>
         <p class="soft-text">${question.prompt}</p>
@@ -132,7 +132,7 @@
     async function init() {
       context = await HistoryPreview.loadCurriculumContext();
       activeTower = context.towers[0];
-      demoQuestions = context.towers
+      trialQuestions = context.towers
         .map((tower) => HistoryPreview.getSampleQuestion(context, tower.topic))
         .filter(Boolean);
       rulesSummary.textContent = `${context.label}: correct answers in towers like ${activeTower.name} build combo and add Seal Energy. Wrong answers lower HP and reset combo.`;
