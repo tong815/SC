@@ -4,34 +4,45 @@ Exam Visualizer is an educational math RPG. Students explore a map, enter towers
 answer curriculum questions, recover Chronicles, and eventually reach the
 Creator's Trial.
 
-The project is organized by long-term responsibility:
+The project is organized around three teaching questions:
 
-1. **Engine** - how the world works.
-2. **Curriculum** - what students learn.
-3. **History** - how the project explains its own development.
-4. **UI** - how students see and control the experience.
-5. **Assets** - future images, icons, and visual resources.
-6. **Save** - documentation for permanent player progress.
+1. **Engine** - how does the world run?
+2. **Curriculum** - what does the world teach?
+3. **Presentation** - how does the world appear to the player?
+
+Questions and Chronicles belong to Curriculum because they are learning and
+story content. Tower rules belong to Engine because they decide how the world
+behaves. Time Fragment webpages belong to the Presentation / History display
+because they show recovered project stages to the student.
 
 ## File Structure
 
 ```text
 Exam-Visualizer/
-├── engine/                 # World structure, Chronicles, and progression rules
-│   ├── world-map.json
-│   ├── chronicles.json
-│   └── engine-rules.js
-├── curriculum/             # Learning content and curriculum mappings
-│   ├── curriculum-config.json
-│   └── question-bank.json
-├── history/                # Historical Time Fragment mini-sites
-├── save/                   # Save structure documentation
-├── assets/                 # Future visual assets
-├── co-gpt/                 # GPT handoff reports
-├── index.html              # Static UI containers
-├── app.js                  # Data loading, rendering, and browser events
-├── style.css               # Presentation and responsive styling
-└── README.md
+|-- engine/                 # World structure and progression logic
+|   |-- world-map.json
+|   `-- engine-rules.js
+|-- curriculum/             # Learning content and recovered story content
+|   |-- curriculum-config.json
+|   |-- question-bank.json
+|   `-- chronicles.json
+|-- history/                # Time Fragment stage pages
+|-- save/                   # Save structure documentation
+|-- assets/                 # Future avatars, icons, backgrounds, and images
+|-- co-gpt/                 # GPT handoff reports
+|-- index.html              # Static UI containers
+|-- app.js                  # Data loading, rendering, and browser events
+|-- style.css               # Presentation and responsive styling
+`-- README.md
+```
+
+## Architecture Flow
+
+```text
+Curriculum
+    -> Engine
+    -> Presentation
+    -> Player
 ```
 
 ## How To Run
@@ -52,6 +63,7 @@ http://localhost:8000
 ## Student Editing Guide
 
 - Add or edit learning questions in `curriculum/question-bank.json`.
+- Edit recovered Creation Records in `curriculum/chronicles.json`.
 - Change curriculum-to-tower mappings in `curriculum/curriculum-config.json`.
 - Change map objects and tower positions in `engine/world-map.json`.
 - Change progression rules in `engine/engine-rules.js`.

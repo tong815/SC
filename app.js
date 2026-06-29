@@ -1598,7 +1598,7 @@ async function initializeExam() {
     [allQuestions, mapData, allChronicles, difficultyConfig] = await Promise.all([
       loadJson("curriculum/question-bank.json"),
       loadJson("engine/world-map.json"),
-      loadJson("engine/chronicles.json"),
+      loadJson("curriculum/chronicles.json"),
       loadJson("curriculum/curriculum-config.json"),
     ]);
     progress = createEmptyProgress();

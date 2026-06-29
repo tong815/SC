@@ -6,15 +6,15 @@ Exam Visualizer / SC
 
 **Current Phase:**
 
-Architecture Naming Refactor
+Architecture Responsibility Cleanup
 
 **Current Goal:**
 
-Review the responsibility-based Engine / Curriculum / History folder structure.
+Review the move of Chronicles from Engine into Curriculum.
 
 **Current Issue:**
 
-The project previously used file names based on current implementation details, such as `map.json`, `questions.json`, `difficulty-config.json`, and `gameRules.js`. Codex renamed and reorganized these into responsibility-based folders so students can understand what each part owns over the long term.
+The previous architecture refactor placed `chronicles.json` under `engine/`, but Chronicles are learning/story content rather than engine behavior. Codex moved the file to `curriculum/chronicles.json` and updated the documentation to teach the three-layer model: Engine, Curriculum, and Presentation.
 
 **Artifact:**
 

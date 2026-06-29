@@ -1,178 +1,178 @@
 # Implementation Report
 
 **Project:** Exam Visualizer / SC
-**Build or Version:** Architecture Naming Refactor
-**Date:** 2026-06-28
+**Build or Version:** Chronicle Curriculum Responsibility Cleanup
+**Date:** 2026-06-29
 **Phase:** Implementation / Review
 
 ## Goal
 
-This was a naming and structure refactor only.
+This was a naming and responsibility cleanup only.
 
-The purpose was to organize files by long-term responsibility:
+The purpose was to correct one conceptual boundary from the previous architecture refactor:
 
-- `engine/` defines how the world works.
-- `curriculum/` defines what students learn.
-- `history/` shows the historical development of the project.
-- `assets/` prepares a home for future visual assets.
-- `save/` documents permanent progress structure.
-- `co-gpt/` stores GPT handoff reports.
+```text
+Chronicles are curriculum content, not engine behavior.
+```
 
-No new gameplay mechanics were added.
+No gameplay behavior was changed.
 
-## Folder Restructuring
+## Why Chronicles Moved
 
-Created or formalized:
+`chronicles.json` stores:
 
-- `engine/`
-- `curriculum/`
-- `history/`
-- `assets/`
-- `save/`
-- `co-gpt/`
+- Creation Record titles
+- descriptions
+- dialogue
+- Time Fragment mappings
+- stage history text
 
-The UI files stayed at the project root for now:
+These records teach students how the project and world were built. They are read and learned by the player, so they belong in Curriculum.
+
+They do not define HP, Seal Energy, tower clearing, unlock rules, or save normalization. Those responsibilities remain in Engine.
+
+## Path Change
+
+Moved:
+
+```text
+engine/chronicles.json
+```
+
+to:
+
+```text
+curriculum/chronicles.json
+```
+
+Updated `app.js` to load:
+
+```js
+loadJson("curriculum/chronicles.json")
+```
+
+No Chronicle data content was changed.
+
+No Time Fragment iframe paths were changed.
+
+## Updated Folder Responsibilities
+
+### Engine
+
+Question:
+
+```text
+How does the world run?
+```
+
+Files:
+
+- `engine/world-map.json`
+- `engine/engine-rules.js`
+
+Responsibilities:
+
+- world map structure
+- tower IDs and positions
+- central tower structure
+- blacksmith recipe
+- HP helpers
+- Seal Energy helpers
+- tower clear rules
+- key fragment rules
+- central tower unlock rules
+- Chronicle unlock helper logic
+- save normalization helpers
+
+### Curriculum
+
+Question:
+
+```text
+What does the world teach?
+```
+
+Files:
+
+- `curriculum/curriculum-config.json`
+- `curriculum/question-bank.json`
+- `curriculum/chronicles.json`
+
+Responsibilities:
+
+- Easy / Difficult curriculum modes
+- tower-to-topic mappings
+- tower display names and curriculum descriptions
+- learning questions
+- answers and explanations
+- Creation Records
+- Chronicle dialogue
+- project history content
+
+### Presentation
+
+Question:
+
+```text
+How does the world appear to the player?
+```
+
+Files and folders:
 
 - `index.html`
 - `app.js`
 - `style.css`
+- `history/`
+- `assets/`
 
-This avoids unnecessary path churn while the students are still learning the basic website shell.
+Responsibilities:
 
-## Old Names To New Names
+- visible UI containers
+- browser event wiring
+- rendering map, towers, practice, Chronicles, and Time Fragments
+- visual styling
+- historical mini-site display pages
+- future visual assets
 
-| Old name | New name | Reason |
-| --- | --- | --- |
-| `map.json` | `engine/world-map.json` | Describes world structure, map objects, tower positions, and navigation context. |
-| `chronicles.json` | `engine/chronicles.json` | Chronicles are part of the world's recovered history and belong with world engine data. |
-| `gameRules.js` | `engine/engine-rules.js` | The file now represents world progression rules, not only generic game rules. |
-| `difficulty-config.json` | `curriculum/curriculum-config.json` | The config now represents curricula and tower-to-topic mappings, not only difficulty. |
-| `questions.json` | `curriculum/question-bank.json` | The file is a learning-content bank, not just a temporary question list. |
-| `history/v4-travelers/` | `history/v4-memory/` | The visible stage now teaches Save/Load memory, so the folder name was aligned. |
-
-## Engine Responsibilities
-
-`engine/world-map.json`
-
-- world layout
-- tower IDs
-- tower positions
-- central tower requirements
-- blacksmith recipe
-
-`engine/chronicles.json`
-
-- recovered Creation Records
-- dialogue
-- project stage preview paths
-- Time Fragment iframe paths
-
-`engine/engine-rules.js`
-
-- HP and Seal Energy helper rules
-- tower clear state
-- key fragment rewards
-- central tower unlock rules
-- Chronicle progress helpers
-- save-state normalization helpers
-
-The rule-layer global was renamed from `GameRules` to `EngineRules`.
-
-## Curriculum Responsibilities
-
-`curriculum/curriculum-config.json`
-
-- available curriculum modes
-- Easy / Difficult labels
-- tower-to-topic mappings
-- tower display names
-- curriculum-specific tower descriptions
-
-`curriculum/question-bank.json`
-
-- question IDs
-- topics
-- difficulty values
-- prompts
-- answer choices
-- correct answers
-- explanations
-
-## History Responsibilities
-
-`history/` still stores Time Fragment mini-sites.
-
-The folder `history/v4-travelers/` was renamed to `history/v4-memory/` because that stage now represents Save/Load memory.
-
-The Chronicle preview path was updated:
+## Architecture Diagram
 
 ```text
-history/v4-memory/
+Curriculum
+    -> Engine
+    -> Presentation
+    -> Player
 ```
-
-## Save Responsibilities
-
-Added:
-
-- `save/progress-schema.json`
-
-This documents the permanent save structure only. It does not store user save files.
-
-Temporary tower-run state remains unsaved:
-
-- current HP
-- current streak
-- current Seal Energy
-- current shuffled deck
-- current open Chronicle screen
-
-## Assets Responsibilities
-
-Added:
-
-- `assets/.gitkeep`
-
-This creates a stable folder for future avatars, icons, backgrounds, and other visual assets.
-
-## Path Updates
-
-Updated `index.html`:
-
-- loads `engine/engine-rules.js`
-
-Updated `app.js`:
-
-- loads `curriculum/question-bank.json`
-- loads `engine/world-map.json`
-- loads `engine/chronicles.json`
-- loads `curriculum/curriculum-config.json`
-- uses `EngineRules` instead of `GameRules`
-
-Updated `engine/chronicles.json`:
-
-- Record V preview path now points to `history/v4-memory/`
-
-Updated `README.md`:
-
-- documents the new responsibility-based architecture.
 
 ## Behavior Preserved
 
-The application should behave the same after this refactor.
-
 No changes were made to:
 
+- opening flow
+- difficulty selection
+- team naming
 - map gameplay
-- tower objects
+- tower labels
+- Easy / Difficult topic mapping
+- question selection
 - HP rules
-- Seal Energy rules
-- combo rules
+- Seal Energy
+- key fragments
 - Chronicle unlock order
-- Chronicle Reader behavior
+- Chronicle Library
+- Chronicle Reader
+- Time Fragment reveal
 - Creator's Trial
 - ending
 - save/load behavior
-- Easy / Difficult curriculum behavior
+
+## Files Changed
+
+- `app.js`
+- `README.md`
+- `co-gpt/context-header.md`
+- `co-gpt/implementation-report.md`
+- `co-gpt/gpt-copy-paste.md`
+- `engine/chronicles.json` moved to `curriculum/chronicles.json`
 
 ## Tests Run
 
@@ -180,41 +180,26 @@ Static checks:
 
 - `node --check app.js`
 - `node --check engine/engine-rules.js`
-- parsed `curriculum/question-bank.json`
-- parsed `curriculum/curriculum-config.json`
 - parsed `engine/world-map.json`
-- parsed `engine/chronicles.json`
+- parsed `curriculum/curriculum-config.json`
+- parsed `curriculum/question-bank.json`
+- parsed `curriculum/chronicles.json`
 - parsed `save/progress-schema.json`
-- verified every configured curriculum tower topic has questions
-- verified all question IDs are unique
 - `git diff --check`
 
-Browser checks:
+Browser smoke checks:
 
 - local app loaded through HTTP
-- opening screen appeared
-- Easy Mode reached map
-- Easy Tower 1 opened Addition Tower
+- opening flow appeared
+- Easy Mode reached the map
 - Easy Tower 1 loaded an Addition question
-- Difficult Mode reached map
-- Difficult Tower 1 opened Fractions Tower
+- Difficult Mode reached the map
 - Difficult Tower 1 loaded a Fractions question
+- Chronicle Library opened
+- Creation Records loaded from `curriculum/chronicles.json`
+- an individual Chronicle Reader opened
 - no console errors were found during the smoke checks
 
-## Architecture Diagram
+## Risks / Limitations
 
-```text
-Engine
-  ↓
-Curriculum
-  ↓
-History
-  ↓
-UI
-  ↓
-Assets
-```
-
-## Remaining Notes
-
-`index.html`, `app.js`, and `style.css` stayed at the root intentionally. Moving them into `ui/` can happen later, but this pass prioritized low-risk responsibility naming.
+`history/` remains named `history/` for now. It still serves as the Time Fragment presentation area, and renaming it was intentionally left for a later decision.
