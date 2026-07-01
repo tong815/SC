@@ -1,71 +1,68 @@
 # Implementation Report
 
 **Project:** Exam Visualizer / SC
-**Build or Version:** Time Fragment Curriculum Alignment
+**Build or Version:** Chronicle / Time Fragment Narrative Reveal Protection
 **Date:** 2026-06-29
 **Phase:** Implementation / Review
 
 ## Goal
 
-The Time Fragment / history prototype pages should not be a second content source.
+This was a narrative wording update, not a gameplay or architecture change.
 
-They should be stage viewers:
+The main goal was to preserve the final reveal:
 
 ```text
-History pages decide which prototype stage is being demonstrated.
-Curriculum files decide which questions, topics, and tower names exist.
+Before the Creator's Trial ending, Time Fragments should feel like ancient records.
+Only after the Creator's Trial should players understand that the records were memories of how the world was created.
 ```
 
-This keeps Easy Mode and Difficult Mode consistent across the main game and the recovered history pages.
+## What Changed
 
-## Architecture Update
+Updated the player-facing Chronicle and Time Fragment text so it no longer openly calls the recovered records:
 
-The source of truth remains:
+- prototypes
+- versions
+- project history
+- development history
+- earlier builds
+- demo stages
+- old UI
 
-- `curriculum/curriculum-config.json`
-- `curriculum/question-bank.json`
-- `engine/world-map.json`
+The replacement language is in-world:
 
-The history pages now read from these existing files through the shared helper:
+- Record I, Record II, etc.
+- Time Fragment
+- recovered memory
+- lost record
+- knowledge families
+- the world before towers
+- the first ordering of knowledge
+- the first map
+- the forging of rules
+- preserved memory
+- complete world
 
-- `history/shared/history-utils.js`
-
-No new question files were created.
-
-No Easy / Difficult content was duplicated inside the history pages.
-
-## Passing Current Curriculum Into Time Fragments
+## Chronicle Data Updated
 
 Updated:
 
-- `app.js`
+- `curriculum/chronicles.json`
 
-Chronicle iframe previews now append the selected curriculum mode:
+Record I now describes isolated knowledge: one question standing alone.
 
-```text
-history/v0-question-only/?curriculum=easy
-history/v0-question-only/?curriculum=difficult
-```
+Record II now describes knowledge gathering into families.
 
-The same pattern is used for all Time Fragment pages.
+Record III now describes towers rising across the island.
 
-## Shared History Loader
+Record IV now describes the forging of rules.
 
-Updated:
+Record V now describes preserved memory and remembered paths.
 
-- `history/shared/history-utils.js`
+Record VI now describes the scattered pieces becoming one complete world.
 
-The shared helper now:
+The `projectStage` field name remains unchanged because it is an internal data field used by the app. It is not shown directly to players.
 
-- reads `curriculum` or `mode` from the URL
-- defaults invalid or missing values to Easy Mode
-- fetches curriculum config
-- fetches the question bank
-- fetches the world map for tower positions
-- builds current tower labels, topics, descriptions, and sample questions
-- provides a safe Easy fallback if loading fails
-
-## History Pages Updated
+## Time Fragment Pages Updated
 
 Updated:
 
@@ -76,91 +73,91 @@ Updated:
 - `history/v4-memory/index.html`
 - `history/v5-complete-prototype/index.html`
 
-Record I now shows one question from the active curriculum.
+The pages still function the same way and still read curriculum data through:
 
-Record II now shows the active curriculum categories.
+- `history/shared/history-utils.js`
+- `curriculum/curriculum-config.json`
+- `curriculum/question-bank.json`
+- `engine/world-map.json`
 
-Record III now shows the active curriculum tower names and topics.
+Only visible wording changed.
 
-Record IV now uses active curriculum tower labels and questions in the rules demo.
+Examples:
 
-Record V now shows the active mode and restored tower label in the save/load demo.
+- `Prototype v0: Single-Question Website` became `Record I: The Lone Question`
+- `Prototype v1: Topic Categories` became `Record II: The First Ordering`
+- `Prototype v3: Game Rules` became `Record IV: The Forging of Rules`
+- `Prototype v4: Save and Load Memory` became `Record V: The Preserved Memory`
+- `Prototype v5: Complete Narrative Demo` became `Record VI: The Complete World`
 
-Record VI now names the active learning path without hardcoding subject labels.
+## Shared History Text Updated
 
-The history pages use a cache-busted shared script URL so browsers reliably load the updated helper.
+Updated:
 
-## Expected Easy Mode Result
+- `history/shared/history-utils.js`
 
-Easy Mode Time Fragments now show:
+The answer feedback now says:
 
-- Addition
-- Subtraction
-- Multiplication
-- Division
-- Mixed Basic Operations
-- Mixed Advanced Operations
+```text
+Correct. The ancient record lights up.
+```
 
-Record I shows an Easy arithmetic question from `question-bank.json`.
+instead of revealing that the page is an old prototype.
 
-Record III shows:
+## Ending Reveal Updated
 
-- Addition Tower
-- Subtraction Tower
-- Multiplication Tower
-- Division Tower
-- Mixed Basic Tower
-- Mixed Advanced Tower
+Updated:
 
-## Expected Difficult Mode Result
+- `app.js`
 
-Difficult Mode Time Fragments now show:
+The ending still happens only after the Creator's Trial.
 
-- Fractions
-- Integers
-- Percent
-- Algebra
-- Geometry
-- Ratios
+The final reveal now makes the twist clearer:
 
-Record I shows a Difficult / Grade 7-style question from `question-bank.json`.
+```text
+These were not relics of an ancient civilization.
+They were memories.
+Every fragment you restored was a step in this world's creation.
+You did not merely discover history.
+You reconstructed it.
+```
 
-Record III shows:
-
-- Fractions Tower
-- Integers Tower
-- Percent Tower
-- Algebra Tower
-- Geometry Tower
-- Ratios Tower
+This keeps the reveal in the correct place: after the Creator's Trial, not during the Chronicles.
 
 ## Behavior Preserved
 
 No changes were made to:
 
 - main map gameplay
-- difficulty selection UI
-- question selection in the main game
-- save/load logic
-- Chronicle unlock logic
+- tower practice flow
+- HP
+- Seal Energy
+- combo logic
+- curriculum loading
+- question loading
+- save/load behavior
+- Chronicle unlocking
 - Time Fragment reveal timing
-- Creator's Trial
-- ending
+- Creator's Trial mechanics
+- ending timing
 
-## Fallback Behavior
+## Search / Wording Review
 
-If the query parameter is missing or invalid:
+Codex searched `curriculum/chronicles.json`, `history/`, and `app.js` for early-reveal wording.
 
-- the history page defaults to Easy Mode
+Player-facing forbidden terms were removed from Chronicle and Time Fragment visible text.
 
-If curriculum fetching fails:
+Remaining matches are internal compatibility names only:
 
-- the history page uses a small safe Easy fallback question and tower list
-- the page does not crash
+- `projectStage` JSON field
+- `history/v5-complete-prototype/` folder path
+- save/data version constants in `app.js`
+
+These are not shown to players during normal gameplay.
 
 ## Tests Run
 
-Static checks:
+Required static checks:
 
 - `node --check app.js`
 - `node --check engine/engine-rules.js`
@@ -170,26 +167,33 @@ Static checks:
 - parsed `engine/world-map.json`
 - `git diff --check`
 
-Search check:
+Additional wording check:
 
-- verified old hardcoded history examples like `What is 1/2 + 1/4?` no longer appear in `history/`
+- scanned visible Chronicle fields and history page body text
+- confirmed forbidden early-reveal terms are gone from player-facing text
 
-Browser checks through local HTTP:
+## Files Changed
 
-- Record I Easy shows an Addition question from `question-bank.json`
-- Record I Difficult shows a Fractions question from `question-bank.json`
-- Record II Easy shows Easy categories
-- Record II Difficult shows Difficult categories
-- Record III Easy shows Easy tower labels
-- Record III Difficult shows Difficult tower labels
-- Record IV Easy shows Addition Tower and an Easy question
-- Record IV Difficult shows Fractions Tower and a Difficult question
-- Record V Easy shows `Mode: Easy` and `Restored: Addition Tower`
-- Record V Difficult shows `Mode: Difficult` and `Restored: Fractions Tower`
-- Record VI Easy says Easy Mode is the current learning path
-- Record VI Difficult says Difficult Mode is the current learning path
-- no browser console errors were found
+- `app.js`
+- `curriculum/chronicles.json`
+- `history/shared/history-utils.js`
+- `history/v0-question-only/index.html`
+- `history/v1-topic-structure/index.html`
+- `history/v2-first-map/index.html`
+- `history/v3-rules/index.html`
+- `history/v4-memory/index.html`
+- `history/v5-complete-prototype/index.html`
 
-## Risks / Notes
+## Git Status
 
-The history pages remain intentionally small prototype viewers. They now index curriculum data, but they do not try to reproduce the full main game engine.
+This update was committed and pushed:
+
+```text
+b6b523d Hide creation reveal until ending
+```
+
+The current report files were updated afterward for GPT handoff.
+
+## Risk / Note
+
+The folder name `history/v5-complete-prototype/` still contains the word `prototype`, but this is an internal path and changing it would require path migration. The visible text now hides the creation-history twist until the intended ending.

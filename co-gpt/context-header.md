@@ -6,15 +6,15 @@ Exam Visualizer / SC
 
 **Current Phase:**
 
-Time Fragment Curriculum Alignment
+Chronicle / Time Fragment Narrative Reveal Protection
 
 **Current Goal:**
 
-Make the historical prototype pages index the existing curriculum data instead of owning hardcoded question/topic examples.
+Prevent the creation-history twist from being revealed before the Creator's Trial ending.
 
 **Current Issue:**
 
-The main world supports Easy Mode and Difficult Mode, but the Time Fragment prototype pages still displayed fixed examples such as fractions in Record I. Codex updated the iframe URL to pass the selected curriculum mode and made the history pages read from `curriculum/curriculum-config.json`, `curriculum/question-bank.json`, and `engine/world-map.json`.
+The Time Fragment pages still used explicit development language such as prototype, demo, and project wording. Codex revised the player-facing Chronicle and Time Fragment text so players see mysterious ancient records, recovered memories, and world-history fragments during normal gameplay. The truth is now revealed only after the Creator's Trial.
 
 **Artifact:**
 
